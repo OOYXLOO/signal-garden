@@ -20,9 +20,14 @@ Generated: 2026-06-20
    - Silent local demo clip.
    - Shows completion, proposal save, clear, top proposal apply, and archive state.
 
+5. `docs/demo-captioned.webm`
+   - Captioned local walkthrough draft.
+   - 1366x900, approximately 24 seconds.
+   - Shows the core loop with readable on-video captions.
+
 ## Caption
 
-Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, completion feedback, and a compact briefing export.
+Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, completion feedback, a compact briefing export, and a captioned walkthrough draft.
 
 ## Guardrails
 

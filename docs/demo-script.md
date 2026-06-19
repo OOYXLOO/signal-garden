@@ -2,6 +2,8 @@
 
 Target length: 60-90 seconds.
 
+Current local assets include a shorter captioned walkthrough draft at `docs/demo-captioned.webm`. Use this draft for quick review, then expand it with voiceover or longer captions before final submission.
+
 ## Core Message
 
 Signal Garden is a daily community relay puzzle. Each player proposes a route by placing mirrors. The app ranks saved proposals, lets the community apply the current top plan, and preserves a small local archive so the puzzle has a reason to return tomorrow.

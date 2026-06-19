@@ -27,6 +27,7 @@ const required = [
   "tests/redisProposalStore.test.mjs",
   "tests/devvitServerShell.test.mjs",
   "docs/design.md",
+  "docs/demo-captioned.webm",
   "docs/demo-script.md",
   "docs/demo.webm",
   "docs/devvit-adapter-plan.md",

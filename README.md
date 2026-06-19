@@ -35,7 +35,7 @@ npm run record:demo
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Recent local archive and streak state for the daily return loop.
 - Completion pulse feedback for solved boards.
-- Demo script, submission field pack, and a local recorded WebM demo.
+- Demo script, submission field pack, local silent WebM demo, and captioned walkthrough draft.
 - Server-shaped adapter for init, proposal submission, and archive reads.
 - Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 
@@ -45,4 +45,4 @@ No production account setup, hosting configuration, or platform submission is pe
 
 The repository intentionally keeps official Devvit CLI packages out of normal dependencies until a live platform playtest is performed in an isolated, user-approved environment. The local shell is designed to keep the app buildable and testable without storing account tokens or platform credentials.
 
-`npm run record:demo` is optional and requires Playwright to be available in the local Node environment. It records only the local app at `127.0.0.1`; it does not access platform accounts.
+`npm run record:demo` and `npm run record:demo:captioned` are optional and require Playwright to be available in the local Node environment. They record only the local app at `127.0.0.1`; they do not access platform accounts.

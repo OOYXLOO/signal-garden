@@ -38,3 +38,8 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 - Clear the board and apply the top proposal.
 - Show daily seed, streak, archive, and briefing output.
 - Avoid account pages and private consoles.
+
+## Current Local Video Assets
+
+- `docs/demo.webm`: silent interaction clip.
+- `docs/demo-captioned.webm`: captioned walkthrough draft for quick review.
