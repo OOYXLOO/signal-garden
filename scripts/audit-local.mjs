@@ -4,9 +4,16 @@ import { join, relative } from "node:path";
 const root = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const required = [
   "README.md",
+  "devvit.json",
   "index.html",
+  "vite.devvit.client.config.js",
+  "vite.devvit.server.config.js",
   "src/main.js",
   "src/client/communityClient.js",
+  "src/devvit/client/splash.html",
+  "src/devvit/client/game.html",
+  "src/devvit/client/game-entry.js",
+  "src/devvit/server/index.js",
   "src/game/puzzle.js",
   "src/game/proposals.js",
   "src/game/SignalGardenScene.js",

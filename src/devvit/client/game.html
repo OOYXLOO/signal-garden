@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal Garden</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="play-surface" aria-label="Signal Garden board">
+        <div class="game-topbar">
+          <div>
+            <p class="eyebrow">Daily relay</p>
+            <h1>Signal Garden</h1>
+          </div>
+          <div class="day-chip" id="day-chip">Loading</div>
+        </div>
+        <div id="game-root" class="game-root"></div>
+      </section>
+
+      <aside class="control-panel" aria-label="Daily puzzle controls">
+        <section class="panel">
+          <p class="eyebrow">Today</p>
+          <h2 id="puzzle-title">Relay board</h2>
+          <p id="puzzle-brief" class="muted"></p>
+          <div class="score-grid">
+            <div>
+              <span>Score</span>
+              <strong id="score-value">0</strong>
+            </div>
+            <div>
+              <span>Beacons</span>
+              <strong id="beacon-value">0/3</strong>
+            </div>
+            <div>
+              <span>Moves</span>
+              <strong id="move-value">0/5</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Plan</p>
+          <div class="button-row">
+            <button id="apply-plan" type="button">Apply community plan</button>
+            <button id="clear-plan" class="secondary" type="button">Clear</button>
+          </div>
+          <ol id="move-list" class="move-list"></ol>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Loop</p>
+          <div class="loop-list">
+            <div>
+              <span>Daily seed</span>
+              <strong id="seed-value"></strong>
+            </div>
+            <div>
+              <span>Local streak</span>
+              <strong id="streak-value">0</strong>
+            </div>
+            <div>
+              <span>Status</span>
+              <strong id="status-value">Drafting</strong>
+            </div>
+          </div>
+          <button id="copy-briefing" class="wide" type="button">Copy briefing</button>
+          <textarea id="briefing-output" readonly aria-label="Briefing output"></textarea>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Community</p>
+          <button id="save-proposal" class="wide" type="button">Save local proposal</button>
+          <p id="proposal-summary" class="muted"></p>
+          <ol id="proposal-list" class="move-list consensus-list"></ol>
+        </section>
+      </aside>
+    </main>
+
+    <script type="module" src="./game-entry.js"></script>
+  </body>
+</html>
+

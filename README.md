@@ -19,7 +19,9 @@ Open `http://127.0.0.1:8796/`.
 npm test
 npm run check
 npm run build
+npm run build:devvit
 npm run audit:local
+npm run audit:devvit
 ```
 
 ## Scope
@@ -28,6 +30,6 @@ npm run audit:local
 - Deterministic daily puzzle seed.
 - Local-only persistence with no credentials or private account data.
 - Adapter boundary notes for a community platform surface.
+- Local Devvit shell build outputs for pre-account validation.
 
 No production account setup, hosting configuration, or platform submission is performed by this repository.
-

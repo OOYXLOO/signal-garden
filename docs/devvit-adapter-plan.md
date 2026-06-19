@@ -39,6 +39,14 @@ The browser prototype now has a storage-neutral consensus layer:
 
 It also has a local server adapter that mirrors the future Devvit API shape:
 
+- `devvit.json`
+  - post entrypoints for `splash.html` and `game.html`
+  - server entrypoint for `dist/devvit-server/index.cjs`
+- `vite.devvit.client.config.js`
+  - builds `dist/devvit-client/splash.html`
+  - builds `dist/devvit-client/game.html`
+- `vite.devvit.server.config.js`
+  - builds `dist/devvit-server/index.cjs`
 - `src/server/signalGardenApi.js`
   - `init`
   - `submitProposal`
