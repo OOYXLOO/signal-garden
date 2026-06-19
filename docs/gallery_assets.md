@@ -16,6 +16,10 @@ Generated: 2026-06-20
    - 390x2138
    - Narrow viewport check for the full interaction surface, archive, and proposal list.
 
+4. `docs/demo.webm`
+   - Silent local demo clip.
+   - Shows completion, proposal save, clear, top proposal apply, and archive state.
+
 ## Caption
 
 Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, completion feedback, and a compact briefing export.

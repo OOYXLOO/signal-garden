@@ -27,8 +27,12 @@ const required = [
   "tests/redisProposalStore.test.mjs",
   "tests/devvitServerShell.test.mjs",
   "docs/design.md",
+  "docs/demo-script.md",
+  "docs/demo.webm",
   "docs/devvit-adapter-plan.md",
   "docs/devvit_shell_readiness.md",
+  "docs/submission-field-pack.md",
+  "scripts/record-demo.mjs",
 ];
 
 const forbidden = [
