@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createProposal, rankProposals, summarizeConsensus, toCommunityPayload } from "../src/game/proposals.js";
-import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, traceSignal } from "../src/game/puzzle.js";
+import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, describeResult, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const solved = traceSignal(puzzle, puzzle.solution);
@@ -13,6 +13,8 @@ assert.equal(solved.complete, true);
 assert.equal(solved.hitBeacons.length, 3);
 assert.ok(solved.score > empty.score);
 assert.match(createBriefing(puzzle, solved), /Signal Garden 2026-06-19/);
+assert.match(describeResult(puzzle, solved), /All beacons/);
+assert.match(describeResult(puzzle, empty), /row|Place mirrors|Receiver reached|left the garden/);
 
 const weakProposal = createProposal({
   puzzle,

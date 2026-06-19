@@ -108,6 +108,7 @@ export class SignalGardenScene extends Phaser.Scene {
     this.layers = {
       board: this.add.graphics(),
       path: this.add.graphics(),
+      feedback: this.add.graphics(),
       labels: this.add.container(0, 0),
     };
 
@@ -145,6 +146,7 @@ export class SignalGardenScene extends Phaser.Scene {
     this.drawSpecialCells(layout, result);
     this.drawPath(layout, result);
     this.drawMirrors(layout);
+    this.drawResultFeedback(layout, result);
   }
 
   drawSpecialCells(layout, result) {
@@ -235,6 +237,46 @@ export class SignalGardenScene extends Phaser.Scene {
       graphics.lineBetween(center.x + pad, center.y - pad, center.x - pad, center.y + pad);
     } else {
       graphics.lineBetween(center.x - pad, center.y - pad, center.x + pad, center.y + pad);
+    }
+  }
+
+  drawResultFeedback(layout, result) {
+    if (result.complete || result.status === "drafting" || !result.visited.length) {
+      return;
+    }
+
+    const graphics = this.layers.feedback;
+    const last = result.visited.at(-1);
+    const center = this.cellCenter(layout, last.x, last.y);
+    const radius = layout.cell * 0.34;
+
+    if (result.status === "partial") {
+      const target = this.cellCenter(layout, this.puzzle.target.x, this.puzzle.target.y);
+      graphics.lineStyle(5, COLORS.amber, 0.82);
+      graphics.strokeCircle(target.x, target.y, layout.cell * 0.38);
+
+      const hit = new Set(result.hitBeacons);
+      for (const beacon of this.puzzle.beacons) {
+        if (!hit.has(cellKey(beacon.x, beacon.y))) {
+          const missing = this.cellCenter(layout, beacon.x, beacon.y);
+          graphics.lineStyle(4, COLORS.coral, 0.72);
+          graphics.strokeCircle(missing.x, missing.y, layout.cell * 0.28);
+        }
+      }
+      return;
+    }
+
+    graphics.lineStyle(5, COLORS.coral, 0.84);
+    if (result.status === "blocked") {
+      graphics.strokeRoundedRect(center.x - radius, center.y - radius, radius * 2, radius * 2, 8);
+      return;
+    }
+
+    if (result.status === "lost") {
+      graphics.strokeCircle(center.x, center.y, radius);
+      graphics.lineStyle(4, COLORS.coral, 0.82);
+      graphics.lineBetween(center.x - radius * 0.55, center.y - radius * 0.55, center.x + radius * 0.55, center.y + radius * 0.55);
+      graphics.lineBetween(center.x + radius * 0.55, center.y - radius * 0.55, center.x - radius * 0.55, center.y + radius * 0.55);
     }
   }
 

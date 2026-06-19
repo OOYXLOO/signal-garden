@@ -1,4 +1,5 @@
 import { createCommunityClient } from "./client/communityClient.js";
+import { describeResult } from "./game/puzzle.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -26,6 +27,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     seed: document.querySelector("#seed-value"),
     streak: document.querySelector("#streak-value"),
     status: document.querySelector("#status-value"),
+    statusHint: document.querySelector("#status-hint"),
     archiveList: document.querySelector("#archive-list"),
     briefing: document.querySelector("#briefing-output"),
     applyPlan: document.querySelector("#apply-plan"),
@@ -92,6 +94,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     refs.seed.textContent = puzzle.id.replaceAll("-", "");
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";
+    refs.statusHint.textContent = describeResult(puzzle, result);
     refs.briefing.value = briefing;
     refs.moveList.replaceChildren(
       ...(plan.length

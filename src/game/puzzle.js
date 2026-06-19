@@ -292,3 +292,28 @@ export function createBriefing(puzzle, result) {
     `Plan: ${moves}`,
   ].join("\n");
 }
+
+export function describeResult(puzzle, result) {
+  if (result.complete) {
+    return "All beacons are connected before the receiver.";
+  }
+
+  if (result.status === "drafting") {
+    return "Place mirrors to guide the signal through every beacon.";
+  }
+
+  if (result.status === "partial") {
+    return `Receiver reached early: ${result.hitBeacons.length}/${puzzle.beacons.length} beacons connected.`;
+  }
+
+  const last = result.visited.at(-1);
+  if (result.status === "blocked" && last) {
+    return `Blocked at row ${last.y + 1}, column ${last.x + 1}. Try bending the route earlier.`;
+  }
+
+  if (result.status === "lost" && last) {
+    return `Signal left the garden after row ${last.y + 1}, column ${last.x + 1}. Add a mirror before the edge.`;
+  }
+
+  return "Keep adjusting mirrors until the route reaches every beacon.";
+}

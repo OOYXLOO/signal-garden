@@ -25,6 +25,7 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 
 - Phaser + Vite browser game.
 - Shared deterministic puzzle engine.
+- Status hints and board markers for complete, blocked, lost, and partial paths.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
 - Score recomputation on proposal submission.
 - Redis-shaped proposal store with tests.
