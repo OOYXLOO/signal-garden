@@ -25,3 +25,24 @@ The browser prototype keeps the game rules separate from the renderer so the sam
 - Render the current consensus and next prompt.
 - Avoid collecting private user data beyond platform-provided public interaction metadata.
 
+## Current Local Adapter Boundary
+
+The browser prototype now has a storage-neutral consensus layer:
+
+- `src/game/proposals.js`
+  - `createProposal`
+  - `rankProposals`
+  - `summarizeConsensus`
+  - `toCommunityPayload`
+- `src/state/store.js`
+  - local-only proposal persistence that can be replaced by a Devvit server route later.
+
+## Candidate Devvit Routes
+
+| Route | Method | Purpose |
+|---|---|---|
+| `/api/init` | GET | Return today's board, current consensus, and viewer-safe display state. |
+| `/api/proposal` | POST | Accept a bounded mirror plan, recompute the score server-side, and store one proposal. |
+| `/api/archive/:day` | GET | Return a read-only summary for a previous board. |
+
+The server route should never trust a client-provided score. It should recompute through `traceSignal` and `createProposal`.

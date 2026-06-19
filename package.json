@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 8797",
     "test": "node tests/puzzle.test.mjs",
-    "check": "node --check vite.config.js && node --check src/game/seeded.js && node --check src/game/puzzle.js && node --check src/game/SignalGardenScene.js && node --check src/state/store.js && node --check src/ui.js && node --check src/main.js && node --check scripts/audit-local.mjs && node --check tests/puzzle.test.mjs",
+    "check": "node --check vite.config.js && node --check src/game/seeded.js && node --check src/game/puzzle.js && node --check src/game/proposals.js && node --check src/game/SignalGardenScene.js && node --check src/state/store.js && node --check src/ui.js && node --check src/main.js && node --check scripts/audit-local.mjs && node --check tests/puzzle.test.mjs",
     "audit:local": "node scripts/audit-local.mjs"
   },
   "dependencies": {

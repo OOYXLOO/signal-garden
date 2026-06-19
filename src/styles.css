@@ -199,6 +199,14 @@ h2 {
   font-weight: 900;
 }
 
+.consensus-list {
+  padding-left: 24px;
+}
+
+.consensus-list li {
+  overflow-wrap: anywhere;
+}
+
 .loop-list {
   display: grid;
   gap: 10px;
@@ -223,7 +231,7 @@ textarea {
   }
 
   .control-panel {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

@@ -1,4 +1,5 @@
 const STORAGE_KEY = "signal-garden-state";
+const PROPOSAL_KEY = "signal-garden-proposals";
 
 function safeRead() {
   try {
@@ -38,3 +39,28 @@ export function getLocalStreak(currentPuzzleId) {
     }, 0);
 }
 
+function readProposals() {
+  try {
+    return JSON.parse(window.localStorage.getItem(PROPOSAL_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function writeProposals(state) {
+  window.localStorage.setItem(PROPOSAL_KEY, JSON.stringify(state));
+}
+
+export function loadProposals(puzzleId) {
+  const state = readProposals();
+  return state[puzzleId] || [];
+}
+
+export function saveProposal(proposal) {
+  const state = readProposals();
+  const existing = state[proposal.puzzleId] || [];
+  const withoutDuplicate = existing.filter((item) => item.id !== proposal.id);
+  state[proposal.puzzleId] = [proposal, ...withoutDuplicate].slice(0, 24);
+  writeProposals(state);
+  return state[proposal.puzzleId];
+}

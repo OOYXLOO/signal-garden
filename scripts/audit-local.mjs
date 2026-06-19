@@ -7,6 +7,7 @@ const required = [
   "index.html",
   "src/main.js",
   "src/game/puzzle.js",
+  "src/game/proposals.js",
   "src/game/SignalGardenScene.js",
   "tests/puzzle.test.mjs",
   "docs/design.md",
