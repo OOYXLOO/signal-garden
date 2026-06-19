@@ -24,14 +24,14 @@ async function readJson(request) {
   }
 }
 
-function sanitizePlan(plan) {
+function sanitizePlan(plan, moveLimit) {
   if (!Array.isArray(plan)) {
     return [];
   }
   return plan
     .filter((move) => Number.isInteger(move.x) && Number.isInteger(move.y))
     .filter((move) => move.mirror === "slash" || move.mirror === "backslash")
-    .slice(0, 5)
+    .slice(0, moveLimit)
     .map((move) => ({ x: move.x, y: move.y, mirror: move.mirror }));
 }
 
@@ -60,7 +60,7 @@ export function createSignalGardenApi({ store, today = () => new Date().toISOStr
     const puzzle = createPuzzleForDay(day);
     const proposal = createProposal({
       puzzle,
-      plan: sanitizePlan(plan),
+      plan: sanitizePlan(plan, puzzle.moveLimit),
       author,
       createdAt: now(),
     });
@@ -124,4 +124,3 @@ export function createSignalGardenApi({ store, today = () => new Date().toISOStr
     handleRequest,
   };
 }
-

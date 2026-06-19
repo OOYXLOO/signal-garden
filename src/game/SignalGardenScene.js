@@ -33,8 +33,8 @@ export class SignalGardenScene extends Phaser.Scene {
     this.redraw();
   }
 
-  applyCommunityPlan() {
-    this.placements = planToMap(this.puzzle.solution);
+  applyPlan(plan = []) {
+    this.placements = planToMap(plan);
     this.redraw();
   }
 

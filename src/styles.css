@@ -212,6 +212,32 @@ h2 {
   gap: 10px;
 }
 
+.archive-list {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.archive-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: var(--charcoal);
+  background: #fffdf8;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.archive-list strong {
+  color: var(--teal);
+  white-space: nowrap;
+}
+
 textarea {
   width: 100%;
   min-height: 132px;

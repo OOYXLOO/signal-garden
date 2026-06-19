@@ -1,5 +1,5 @@
 import { createCommunityClient } from "./client/communityClient.js";
-import { getLocalStreak, savePlan } from "./state/store.js";
+import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
   complete: "Complete",
@@ -26,6 +26,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     seed: document.querySelector("#seed-value"),
     streak: document.querySelector("#streak-value"),
     status: document.querySelector("#status-value"),
+    archiveList: document.querySelector("#archive-list"),
     briefing: document.querySelector("#briefing-output"),
     applyPlan: document.querySelector("#apply-plan"),
     clearPlan: document.querySelector("#clear-plan"),
@@ -36,8 +37,16 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
   };
   let latest = null;
   let latestDay = null;
+  let latestConsensus = null;
 
-  refs.applyPlan.addEventListener("click", () => scene.applyCommunityPlan());
+  refs.applyPlan.disabled = true;
+  refs.applyPlan.addEventListener("click", () => {
+    if (!latestConsensus?.best?.plan) {
+      refs.proposalSummary.textContent = "Save or load a community proposal before applying one.";
+      return;
+    }
+    scene.applyPlan(latestConsensus.best.plan);
+  });
   refs.clearPlan.addEventListener("click", () => scene.clearPlan());
   refs.copyBriefing.addEventListener("click", async () => {
     refs.briefing.select();
@@ -63,7 +72,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
         plan: latest.plan,
         author: "local-player",
       });
-      renderConsensus(refs, response.consensus);
+      latestConsensus = renderConsensus(refs, response.consensus);
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
@@ -96,25 +105,53 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     if (!plan.length) {
       refs.moveList.firstChild.textContent = "Tap a cell to propose a mirror.";
     }
-    savePlan(puzzle.id, plan, result.complete);
+    savePlan(puzzle.id, plan, result);
+    renderArchive(refs, puzzle.id);
     if (latestDay !== puzzle.id) {
       latestDay = puzzle.id;
-      refreshConsensus(refs, communityClient, puzzle.id);
+      refreshConsensus(refs, communityClient, puzzle.id).then((consensus) => {
+        latestConsensus = consensus;
+      });
     }
   });
+}
+
+function renderArchive(refs, currentPuzzleId) {
+  const archive = getLocalArchive(currentPuzzleId);
+  refs.archiveList.replaceChildren(
+    ...(archive.length
+      ? archive.map((entry) => {
+          const item = document.createElement("li");
+          const label = document.createElement("span");
+          const score = document.createElement("strong");
+          label.textContent = `${entry.id.slice(5)} · ${entry.complete ? "complete" : entry.status}`;
+          score.textContent = `${entry.score} pts`;
+          item.setAttribute("aria-label", `${label.textContent}, ${score.textContent}`);
+          item.append(label, score);
+          return item;
+        })
+      : [document.createElement("li")]),
+  );
+  if (!archive.length) {
+    refs.archiveList.firstChild.textContent = "Play a daily board to start the local archive.";
+  }
 }
 
 async function refreshConsensus(refs, communityClient, day) {
   refs.proposalSummary.textContent = "Loading local consensus...";
   try {
     const response = await communityClient.init(day);
-    renderConsensus(refs, response.consensus);
+    return renderConsensus(refs, response.consensus);
   } catch (error) {
     refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not load consensus.";
+    return null;
   }
 }
 
 function renderConsensus(refs, consensus) {
+  const best = consensus.best || null;
+  refs.applyPlan.disabled = !best;
+  refs.applyPlan.textContent = best ? "Apply top proposal" : "No proposal yet";
   refs.proposalSummary.textContent = consensus.proposalCount
     ? `${consensus.completed}/${consensus.proposalCount} saved proposals complete. Best score ${consensus.best.score}.`
     : "No saved proposals yet.";
@@ -131,4 +168,5 @@ function renderConsensus(refs, consensus) {
   if (!consensus.top.length) {
     refs.proposalList.firstChild.textContent = "Save a plan to start the local consensus list.";
   }
+  return consensus;
 }

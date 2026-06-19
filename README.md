@@ -29,7 +29,14 @@ npm run audit:devvit
 - Browser-first Phaser game loop.
 - Deterministic daily puzzle seed.
 - Local-only persistence with no credentials or private account data.
-- Adapter boundary notes for a community platform surface.
-- Local Devvit shell build outputs for pre-account validation.
+- Local proposal consensus that ranks saved player plans.
+- A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
+- Recent local archive and streak state for the daily return loop.
+- Server-shaped adapter for init, proposal submission, and archive reads.
+- Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 
 No production account setup, hosting configuration, or platform submission is performed by this repository.
+
+## Dependency Note
+
+The repository intentionally keeps official Devvit CLI packages out of normal dependencies until a live platform playtest is performed in an isolated, user-approved environment. The local shell is designed to keep the app buildable and testable without storing account tokens or platform credentials.

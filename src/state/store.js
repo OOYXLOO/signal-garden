@@ -13,16 +13,41 @@ export function loadPlan(puzzleId) {
   return state[puzzleId]?.plan || [];
 }
 
-export function savePlan(puzzleId, plan, complete) {
+export function savePlan(puzzleId, plan, resultOrComplete) {
   const state = safeRead();
   const today = state[puzzleId] || {};
+  const result =
+    typeof resultOrComplete === "boolean"
+      ? { complete: resultOrComplete }
+      : resultOrComplete || {};
   state[puzzleId] = {
     ...today,
     plan,
-    complete,
+    complete: Boolean(result.complete),
+    status: result.status || today.status || "drafting",
+    score: Number.isFinite(result.score) ? result.score : today.score || 0,
+    beacons: Array.isArray(result.hitBeacons) ? result.hitBeacons.length : today.beacons || 0,
+    moves: plan.length,
     updatedAt: new Date().toISOString(),
   };
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+export function getLocalArchive(currentPuzzleId, limit = 7) {
+  const state = safeRead();
+  return Object.entries(state)
+    .filter(([key]) => key <= currentPuzzleId)
+    .sort(([left], [right]) => right.localeCompare(left))
+    .slice(0, limit)
+    .map(([id, value]) => ({
+      id,
+      complete: Boolean(value.complete),
+      status: value.status || "drafting",
+      score: value.score || 0,
+      beacons: value.beacons || 0,
+      moves: value.moves || 0,
+      updatedAt: value.updatedAt || "",
+    }));
 }
 
 export function getLocalStreak(currentPuzzleId) {
