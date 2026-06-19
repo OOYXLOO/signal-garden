@@ -9,9 +9,13 @@ const required = [
   "src/game/puzzle.js",
   "src/game/proposals.js",
   "src/game/SignalGardenScene.js",
+  "src/server/memoryProposalStore.js",
+  "src/server/signalGardenApi.js",
   "tests/puzzle.test.mjs",
+  "tests/serverAdapter.test.mjs",
   "docs/design.md",
   "docs/devvit-adapter-plan.md",
+  "docs/devvit_shell_readiness.md",
 ];
 
 const forbidden = [

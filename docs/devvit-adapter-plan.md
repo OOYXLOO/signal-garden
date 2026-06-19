@@ -37,6 +37,16 @@ The browser prototype now has a storage-neutral consensus layer:
 - `src/state/store.js`
   - local-only proposal persistence that can be replaced by a Devvit server route later.
 
+It also has a local server adapter that mirrors the future Devvit API shape:
+
+- `src/server/signalGardenApi.js`
+  - `init`
+  - `submitProposal`
+  - `archive`
+  - `handleRequest`
+- `src/server/memoryProposalStore.js`
+  - local in-memory store used only for tests and pre-Devvit development.
+
 ## Candidate Devvit Routes
 
 | Route | Method | Purpose |
@@ -46,3 +56,5 @@ The browser prototype now has a storage-neutral consensus layer:
 | `/api/archive/:day` | GET | Return a read-only summary for a previous board. |
 
 The server route should never trust a client-provided score. It should recompute through `traceSignal` and `createProposal`.
+
+`tests/serverAdapter.test.mjs` verifies this by sending a forged client score and confirming the adapter ignores it.
