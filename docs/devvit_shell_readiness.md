@@ -21,14 +21,16 @@ Generated: 2026-06-20
 - No Devvit app has been created or uploaded.
 - No Reddit account page has been opened by automation.
 - No playtest, install, post creation, publishing, or Devpost submission has been performed.
-- The Devvit server shell still uses `MemoryProposalStore`; it must be replaced by platform storage before a real playtest.
+- The Devvit server shell can accept `globalThis.signalGardenRedis`; without it, it falls back to `MemoryProposalStore` for local build validation.
+- A Redis-shaped proposal store exists and is tested with a fake Redis implementation.
+- The Devvit server shell test injects a Redis-shaped object and verifies proposals persist through that path.
 - The default browser client still uses the local adapter. Switching to hosted Devvit routes should use `createFetchCommunityClient`.
 
 ## Next Engineering Step
 
 Use the official Phaser starter structure as the migration shell:
 
-1. Replace `MemoryProposalStore` with a storage adapter backed by the platform storage API.
+1. Inject the platform Redis object as `globalThis.signalGardenRedis` or replace `createStore` with the official Devvit Redis import pattern.
 2. Point `createFetchCommunityClient` at the hosted route root inside the Devvit client build.
 3. Add post creation flow through the official menu endpoint shape.
 4. Keep `tests/serverAdapter.test.mjs` and `tests/communityClient.test.mjs` as contract tests while the storage implementation changes.

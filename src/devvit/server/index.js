@@ -1,8 +1,16 @@
 import { MemoryProposalStore } from "../../server/memoryProposalStore.js";
+import { createRedisProposalStore } from "../../server/redisProposalStore.js";
 import { createSignalGardenApi } from "../../server/signalGardenApi.js";
 
+function createStore() {
+  if (globalThis.signalGardenRedis) {
+    return createRedisProposalStore(globalThis.signalGardenRedis);
+  }
+  return new MemoryProposalStore();
+}
+
 const api = createSignalGardenApi({
-  store: new MemoryProposalStore(),
+  store: createStore(),
 });
 
 export function fetch(request) {
@@ -12,4 +20,3 @@ export function fetch(request) {
 export default {
   fetch,
 };
-

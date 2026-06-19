@@ -54,6 +54,9 @@ It also has a local server adapter that mirrors the future Devvit API shape:
   - `handleRequest`
 - `src/server/memoryProposalStore.js`
   - local in-memory store used only for tests and pre-Devvit development.
+- `src/server/redisProposalStore.js`
+  - Redis-shaped proposal store using hashes and sorted sets.
+  - accepts an injected Redis object so the source remains buildable before account setup.
 - `src/client/communityClient.js`
   - local client adapter used by the browser UI.
   - fetch client adapter for future hosted Devvit routes.
@@ -73,3 +76,7 @@ The server route should never trust a client-provided score. It should recompute
 `tests/serverAdapter.test.mjs` verifies this by sending a forged client score and confirming the adapter ignores it.
 
 `tests/communityClient.test.mjs` verifies both the local client adapter and a hosted fetch-shaped adapter.
+
+`tests/redisProposalStore.test.mjs` verifies save, list, duplicate replacement, and bounded trimming against a fake Redis implementation.
+
+`tests/devvitServerShell.test.mjs` verifies the Devvit server shell can use an injected Redis-shaped object.
