@@ -1,5 +1,5 @@
-import { createProposal, summarizeConsensus } from "./game/proposals.js";
-import { getLocalStreak, loadProposals, savePlan, saveProposal } from "./state/store.js";
+import { createCommunityClient } from "./client/communityClient.js";
+import { getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
   complete: "Complete",
@@ -14,7 +14,7 @@ function mirrorLabel(move) {
   return `${symbol} mirror at row ${move.y + 1}, column ${move.x + 1}`;
 }
 
-export function bindUi(scene) {
+export function bindUi(scene, { communityClient = createCommunityClient() } = {}) {
   const refs = {
     dayChip: document.querySelector("#day-chip"),
     title: document.querySelector("#puzzle-title"),
@@ -35,6 +35,7 @@ export function bindUi(scene) {
     proposalList: document.querySelector("#proposal-list"),
   };
   let latest = null;
+  let latestDay = null;
 
   refs.applyPlan.addEventListener("click", () => scene.applyCommunityPlan());
   refs.clearPlan.addEventListener("click", () => scene.clearPlan());
@@ -51,17 +52,23 @@ export function bindUi(scene) {
     }
   });
 
-  refs.saveProposal.addEventListener("click", () => {
+  refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
       return;
     }
-    const proposal = createProposal({
-      puzzle: latest.puzzle,
-      plan: latest.plan,
-      author: "local-player",
-    });
-    saveProposal(proposal);
-    renderConsensus(refs, latest.puzzle);
+    refs.saveProposal.disabled = true;
+    try {
+      const response = await communityClient.submitProposal({
+        day: latest.puzzle.id,
+        plan: latest.plan,
+        author: "local-player",
+      });
+      renderConsensus(refs, response.consensus);
+    } catch (error) {
+      refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
+    } finally {
+      refs.saveProposal.disabled = false;
+    }
   });
 
   window.addEventListener("signal-garden:update", (event) => {
@@ -90,13 +97,24 @@ export function bindUi(scene) {
       refs.moveList.firstChild.textContent = "Tap a cell to propose a mirror.";
     }
     savePlan(puzzle.id, plan, result.complete);
-    renderConsensus(refs, puzzle);
+    if (latestDay !== puzzle.id) {
+      latestDay = puzzle.id;
+      refreshConsensus(refs, communityClient, puzzle.id);
+    }
   });
 }
 
-function renderConsensus(refs, puzzle) {
-  const proposals = loadProposals(puzzle.id);
-  const consensus = summarizeConsensus(puzzle, proposals);
+async function refreshConsensus(refs, communityClient, day) {
+  refs.proposalSummary.textContent = "Loading local consensus...";
+  try {
+    const response = await communityClient.init(day);
+    renderConsensus(refs, response.consensus);
+  } catch (error) {
+    refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not load consensus.";
+  }
+}
+
+function renderConsensus(refs, consensus) {
   refs.proposalSummary.textContent = consensus.proposalCount
     ? `${consensus.completed}/${consensus.proposalCount} saved proposals complete. Best score ${consensus.best.score}.`
     : "No saved proposals yet.";

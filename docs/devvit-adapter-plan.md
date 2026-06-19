@@ -46,6 +46,11 @@ It also has a local server adapter that mirrors the future Devvit API shape:
   - `handleRequest`
 - `src/server/memoryProposalStore.js`
   - local in-memory store used only for tests and pre-Devvit development.
+- `src/client/communityClient.js`
+  - local client adapter used by the browser UI.
+  - fetch client adapter for future hosted Devvit routes.
+- `src/state/browserProposalStore.js`
+  - browser-backed local store used only by the local adapter.
 
 ## Candidate Devvit Routes
 
@@ -58,3 +63,5 @@ It also has a local server adapter that mirrors the future Devvit API shape:
 The server route should never trust a client-provided score. It should recompute through `traceSignal` and `createProposal`.
 
 `tests/serverAdapter.test.mjs` verifies this by sending a forged client score and confirming the adapter ignores it.
+
+`tests/communityClient.test.mjs` verifies both the local client adapter and a hosted fetch-shaped adapter.

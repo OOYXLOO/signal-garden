@@ -12,6 +12,8 @@ Generated: 2026-06-20
   - `GET /api/archive/:day`
 - A memory store exists for tests and local pre-Devvit development.
 - Tests prove a forged client score is ignored.
+- The browser UI now submits proposals through a `communityClient` boundary instead of directly writing the consensus list.
+- Browser validation confirms saved proposals reload through the local adapter store.
 
 ## Not Yet Done
 
@@ -19,7 +21,7 @@ Generated: 2026-06-20
 - No Reddit account page has been opened by automation.
 - No playtest, install, post creation, publishing, or Devpost submission has been performed.
 - The local memory store still needs to be replaced by the platform storage layer.
-- The Phaser client still talks to local storage; it has not been wired to a Devvit-hosted API.
+- The default browser client still uses the local adapter. Switching to hosted Devvit routes should use `createFetchCommunityClient`.
 
 ## Next Engineering Step
 
@@ -28,7 +30,8 @@ Use the official Phaser starter structure as the migration shell:
 1. Move the existing browser game into the starter client entrypoint.
 2. Wrap `createSignalGardenApi` inside the Devvit server route layer.
 3. Replace `MemoryProposalStore` with a storage adapter backed by the platform storage API.
-4. Keep `tests/serverAdapter.test.mjs` as the contract test while the storage implementation changes.
+4. Point `createFetchCommunityClient` at the hosted route root.
+5. Keep `tests/serverAdapter.test.mjs` and `tests/communityClient.test.mjs` as contract tests while the storage implementation changes.
 
 ## Account Gate
 
@@ -40,4 +43,3 @@ The following actions require the account owner to be present:
 - creating a demo post
 - uploading media
 - submitting to Devpost
-
