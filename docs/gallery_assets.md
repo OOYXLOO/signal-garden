@@ -18,7 +18,7 @@ Generated: 2026-06-20
 
 ## Caption
 
-Daily browser puzzle prototype with deterministic board generation, adapter-backed local proposal consensus, recent archive state, and a compact briefing export.
+Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, completion feedback, and a compact briefing export.
 
 ## Guardrails
 

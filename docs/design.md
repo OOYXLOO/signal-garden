@@ -12,6 +12,7 @@
 ## Differentiators
 
 - The puzzle is readable in seconds but has a visible optimization target.
+- Seven verified templates broaden the daily rotation without changing the core rules.
 - The board can represent individual proposals or community consensus.
 - The briefing format is small enough to fit inside a post, comment, or chat surface.
 - The renderer is independent of the puzzle rules, so the rules can move to a server or platform adapter later.
@@ -27,3 +28,4 @@ Future server routes should recompute every proposal score from the shared puzzl
 - Warm paper background for a puzzle-table feel.
 - Teal signal path, coral receiver, amber beacons, violet mirrors.
 - Ghost mirrors show the suggested community plan without solving the board automatically.
+- A solved board flashes a short amber/coral pulse across the route, beacons, and receiver.

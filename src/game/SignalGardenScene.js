@@ -24,6 +24,8 @@ export class SignalGardenScene extends Phaser.Scene {
     this.puzzle = options.puzzle;
     this.placements = planToMap(options.initialPlan || []);
     this.layers = {};
+    this.wasComplete = false;
+    this.completionFx = null;
   }
 
   create() {
@@ -96,6 +98,10 @@ export class SignalGardenScene extends Phaser.Scene {
   }
 
   redraw() {
+    if (this.completionFx) {
+      this.completionFx.destroy();
+      this.completionFx = null;
+    }
     for (const layer of Object.values(this.layers)) {
       layer.destroy();
     }
@@ -107,6 +113,10 @@ export class SignalGardenScene extends Phaser.Scene {
 
     const result = traceSignal(this.puzzle, mapToPlan(this.placements));
     this.drawBoard(result);
+    if (result.complete && !this.wasComplete) {
+      this.playCompletionPulse(this.getLayout(), result);
+    }
+    this.wasComplete = result.complete;
     this.emitState(result);
   }
 
@@ -226,6 +236,49 @@ export class SignalGardenScene extends Phaser.Scene {
     } else {
       graphics.lineBetween(center.x - pad, center.y - pad, center.x + pad, center.y + pad);
     }
+  }
+
+  playCompletionPulse(layout, result) {
+    const graphics = this.add.graphics();
+    this.completionFx = graphics;
+    graphics.setDepth(10);
+    graphics.lineStyle(Math.max(10, layout.cell * 0.16), COLORS.amber, 0.72);
+
+    const first = this.cellCenter(layout, result.visited[0].x, result.visited[0].y);
+    graphics.beginPath();
+    graphics.moveTo(first.x, first.y);
+    for (const step of result.visited.slice(1)) {
+      const point = this.cellCenter(layout, step.x, step.y);
+      graphics.lineTo(point.x, point.y);
+    }
+    graphics.strokePath();
+
+    graphics.lineStyle(4, COLORS.coral, 0.92);
+    for (const key of result.hitBeacons) {
+      const [x, y] = key.split(",").map(Number);
+      const center = this.cellCenter(layout, x, y);
+      graphics.strokeCircle(center.x, center.y, layout.cell * 0.32);
+    }
+
+    const receiver = this.cellCenter(layout, this.puzzle.target.x, this.puzzle.target.y);
+    graphics.lineStyle(5, COLORS.coral, 0.94);
+    graphics.strokeCircle(receiver.x, receiver.y, layout.cell * 0.42);
+
+    this.cameras.main.flash(160, 255, 250, 241, false);
+    this.tweens.add({
+      targets: graphics,
+      alpha: 0,
+      scaleX: 1.03,
+      scaleY: 1.03,
+      duration: 900,
+      ease: "Sine.easeOut",
+      onComplete: () => {
+        if (this.completionFx === graphics) {
+          this.completionFx = null;
+        }
+        graphics.destroy();
+      },
+    });
   }
 
   cellCenter(layout, x, y) {

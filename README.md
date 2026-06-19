@@ -28,10 +28,12 @@ npm run audit:devvit
 
 - Browser-first Phaser game loop.
 - Deterministic daily puzzle seed.
+- Seven verified puzzle templates for a broader daily rotation.
 - Local-only persistence with no credentials or private account data.
 - Local proposal consensus that ranks saved player plans.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Recent local archive and streak state for the daily return loop.
+- Completion pulse feedback for solved boards.
 - Server-shaped adapter for init, proposal submission, and archive reads.
 - Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 

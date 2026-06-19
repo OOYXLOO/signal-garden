@@ -15,7 +15,7 @@ const TURN = {
   backslash: { N: "W", W: "N", S: "E", E: "S" },
 };
 
-const TEMPLATES = [
+export const PUZZLE_TEMPLATES = [
   {
     title: "North arcade",
     source: { x: 0, y: 4, dir: "E" },
@@ -79,6 +79,92 @@ const TEMPLATES = [
       { x: 5, y: 1, mirror: "backslash" },
     ],
   },
+  {
+    title: "East orchard",
+    source: { x: 0, y: 6, dir: "E" },
+    target: { x: 7, y: 2 },
+    beacons: [
+      { x: 2, y: 6 },
+      { x: 4, y: 2 },
+      { x: 6, y: 2 },
+    ],
+    blockers: [
+      { x: 1, y: 1 },
+      { x: 2, y: 2 },
+      { x: 3, y: 4 },
+      { x: 5, y: 5 },
+      { x: 6, y: 6 },
+    ],
+    solution: [
+      { x: 4, y: 6, mirror: "slash" },
+      { x: 4, y: 2, mirror: "slash" },
+    ],
+  },
+  {
+    title: "South lantern",
+    source: { x: 6, y: 0, dir: "S" },
+    target: { x: 1, y: 7 },
+    beacons: [
+      { x: 6, y: 3 },
+      { x: 3, y: 3 },
+      { x: 1, y: 6 },
+    ],
+    blockers: [
+      { x: 2, y: 1 },
+      { x: 4, y: 2 },
+      { x: 5, y: 5 },
+      { x: 7, y: 6 },
+      { x: 3, y: 7 },
+    ],
+    solution: [
+      { x: 6, y: 3, mirror: "slash" },
+      { x: 1, y: 3, mirror: "slash" },
+    ],
+  },
+  {
+    title: "Central ferry",
+    source: { x: 7, y: 0, dir: "S" },
+    target: { x: 0, y: 1 },
+    beacons: [
+      { x: 7, y: 5 },
+      { x: 4, y: 5 },
+      { x: 2, y: 1 },
+    ],
+    blockers: [
+      { x: 1, y: 3 },
+      { x: 3, y: 3 },
+      { x: 5, y: 2 },
+      { x: 6, y: 6 },
+      { x: 0, y: 7 },
+    ],
+    solution: [
+      { x: 7, y: 5, mirror: "slash" },
+      { x: 2, y: 5, mirror: "backslash" },
+      { x: 2, y: 1, mirror: "backslash" },
+    ],
+  },
+  {
+    title: "Quiet relay",
+    source: { x: 0, y: 1, dir: "E" },
+    target: { x: 2, y: 7 },
+    beacons: [
+      { x: 3, y: 1 },
+      { x: 5, y: 4 },
+      { x: 2, y: 6 },
+    ],
+    blockers: [
+      { x: 1, y: 4 },
+      { x: 3, y: 3 },
+      { x: 4, y: 7 },
+      { x: 6, y: 2 },
+      { x: 7, y: 5 },
+    ],
+    solution: [
+      { x: 5, y: 1, mirror: "backslash" },
+      { x: 5, y: 6, mirror: "slash" },
+      { x: 2, y: 6, mirror: "slash" },
+    ],
+  },
 ];
 
 function keyOf(cell) {
@@ -96,7 +182,7 @@ function normalizePlan(plan = []) {
 export function createDailyPuzzle(date = new Date()) {
   const key = dayKey(date);
   const random = mulberry32(hashSeed(`signal-garden:${key}`));
-  const template = pick(random, TEMPLATES);
+  const template = pick(random, PUZZLE_TEMPLATES);
   const accents = ["teal", "coral", "violet", "amber"];
 
   return {
