@@ -43,3 +43,4 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 
 - `docs/demo.webm`: silent interaction clip.
 - `docs/demo-captioned.webm`: captioned walkthrough draft for quick review.
+- `docs/demo-final-captioned.webm`: 70-second captioned final candidate for submission review.

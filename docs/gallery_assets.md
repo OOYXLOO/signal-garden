@@ -25,9 +25,14 @@ Generated: 2026-06-20
    - 1366x900, approximately 24 seconds.
    - Shows the core loop with readable on-video captions.
 
+6. `docs/demo-final-captioned.webm`
+   - Final captioned demo candidate.
+   - 1366x900, approximately 71 seconds.
+   - Covers the daily hook, board constraints, completion, proposal save, top proposal apply, archive loop, and adapter boundary.
+
 ## Caption
 
-Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, completion feedback, a compact briefing export, and a captioned walkthrough draft.
+Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, completion feedback, a compact briefing export, and a 70-second captioned demo candidate.
 
 ## Guardrails
 

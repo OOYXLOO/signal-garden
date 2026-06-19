@@ -5,11 +5,35 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = new Set(process.argv.slice(2));
-const captioned = args.has("--captioned") || process.env.DEMO_CAPTIONED === "1";
+const final = args.has("--final") || process.env.DEMO_FINAL === "1";
+const captioned = final || args.has("--captioned") || process.env.DEMO_CAPTIONED === "1";
 const baseUrl = process.env.DEMO_BASE_URL || "http://127.0.0.1:8796/";
 const chromePath = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
-const output = resolve(root, process.env.DEMO_OUTPUT || (captioned ? "docs/demo-captioned.webm" : "docs/demo.webm"));
+const defaultOutput = final ? "docs/demo-final-captioned.webm" : captioned ? "docs/demo-captioned.webm" : "docs/demo.webm";
+const output = resolve(root, process.env.DEMO_OUTPUT || defaultOutput);
 const tempDir = process.env.DEMO_TEMP_DIR || join(tmpdir(), "signal-garden-demo-video");
+
+const shortDurations = {
+  intro: 3200,
+  route: 2800,
+  proposal: 3200,
+  clear: 2400,
+  apply: 3000,
+  archive: 3000,
+  adapter: 3200,
+};
+
+const finalDurations = {
+  intro: 8200,
+  board: 7200,
+  route: 7600,
+  proposal: 8200,
+  clear: 6200,
+  apply: 7600,
+  archive: 8200,
+  adapter: 7600,
+  close: 6800,
+};
 
 async function loadPlaywright() {
   try {
@@ -50,23 +74,30 @@ async function main() {
   await page.evaluate(() => window.localStorage.clear());
   await page.reload({ waitUntil: "networkidle" });
   await installCaptionLayer(page);
+  const durations = final ? finalDurations : shortDurations;
   await showCaption(
     page,
     "Signal Garden is a daily Phaser relay puzzle: place mirrors, route the signal, and return for a new board.",
-    3200,
+    durations.intro,
   );
+  if (final) {
+    await showCaption(page, "The first screen shows the daily seed, board title, three beacons, and the five-move limit.", durations.board);
+  }
 
   await page.evaluate(() => window.signalGarden.scene.applyPlan(window.signalGarden.scene.puzzle.solution));
-  await showCaption(page, "A complete route must reach all three beacons before the receiver.", 2800);
+  await showCaption(page, "A complete route must reach all three beacons before the receiver.", durations.route);
   await page.locator("#save-proposal").click();
   await page.waitForFunction(() => !document.querySelector("#apply-plan").disabled);
-  await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", 3200);
+  await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", durations.proposal);
   await page.locator("#clear-plan").click();
-  await showCaption(page, "Clear the board: the community plan is now stored separately from the local draft.", 2400);
+  await showCaption(page, "Clear the board: the community plan is now stored separately from the local draft.", durations.clear);
   await page.locator("#apply-plan").click();
-  await showCaption(page, "Apply top proposal restores the best saved plan, not a hidden answer.", 3000);
-  await showCaption(page, "The archive and streak panel make the daily board feel persistent.", 3000);
-  await showCaption(page, "The Devvit shell keeps the client/server adapter ready for a Reddit surface.", 3200);
+  await showCaption(page, "Apply top proposal restores the best saved plan, not a hidden answer.", durations.apply);
+  await showCaption(page, "The archive and streak panel make the daily board feel persistent.", durations.archive);
+  await showCaption(page, "The Devvit shell keeps the client/server adapter ready for a Reddit surface.", durations.adapter);
+  if (final) {
+    await showCaption(page, "Submission assets include screenshots, a silent clip, this captioned walkthrough, and a server-shaped adapter boundary.", durations.close);
+  }
 
   const state = await page.evaluate(() => ({
     title: document.querySelector("#puzzle-title")?.textContent,

@@ -28,6 +28,7 @@ const required = [
   "tests/devvitServerShell.test.mjs",
   "docs/design.md",
   "docs/demo-captioned.webm",
+  "docs/demo-final-captioned.webm",
   "docs/demo-script.md",
   "docs/demo.webm",
   "docs/devvit-adapter-plan.md",

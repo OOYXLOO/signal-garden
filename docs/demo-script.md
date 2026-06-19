@@ -2,7 +2,7 @@
 
 Target length: 60-90 seconds.
 
-Current local assets include a shorter captioned walkthrough draft at `docs/demo-captioned.webm`. Use this draft for quick review, then expand it with voiceover or longer captions before final submission.
+Current local assets include a shorter captioned walkthrough draft at `docs/demo-captioned.webm` and a 70-second captioned final candidate at `docs/demo-final-captioned.webm`. Use the final candidate for submission review, then add voiceover only if the platform strongly benefits from audio.
 
 ## Core Message
 
