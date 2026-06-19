@@ -1,0 +1,26 @@
+{
+  "name": "signal-garden",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Daily community relay puzzle prototype built with Phaser.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 8796",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 8797",
+    "test": "node tests/puzzle.test.mjs",
+    "check": "node --check vite.config.js && node --check src/game/seeded.js && node --check src/game/puzzle.js && node --check src/game/SignalGardenScene.js && node --check src/state/store.js && node --check src/ui.js && node --check src/main.js && node --check scripts/audit-local.mjs && node --check tests/puzzle.test.mjs",
+    "audit:local": "node scripts/audit-local.mjs"
+  },
+  "dependencies": {
+    "vite": "^7.1.5",
+    "phaser": "^3.90.0"
+  },
+  "keywords": [
+    "phaser",
+    "daily-game",
+    "community-puzzle",
+    "web-game"
+  ],
+  "license": "UNLICENSED"
+}
