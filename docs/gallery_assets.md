@@ -9,16 +9,16 @@ Generated: 2026-06-20
    - First gallery image or social preview.
 
 2. `docs/desktop-preview.png`
-   - 1440x1239
-   - Desktop play surface with side controls and local consensus panel.
+   - 1366x1290
+   - Desktop play surface with side controls, authentic top proposal flow, local archive, and consensus panel.
 
 3. `docs/mobile-preview.png`
-   - 390x2352
-   - Narrow viewport check for the full interaction surface and proposal list.
+   - 390x2138
+   - Narrow viewport check for the full interaction surface, archive, and proposal list.
 
 ## Caption
 
-Daily browser puzzle prototype with deterministic board generation, adapter-backed local proposal consensus, and a compact briefing export.
+Daily browser puzzle prototype with deterministic board generation, adapter-backed local proposal consensus, recent archive state, and a compact briefing export.
 
 ## Guardrails
 
