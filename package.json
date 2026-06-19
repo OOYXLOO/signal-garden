@@ -13,8 +13,8 @@
     "audit:local": "node scripts/audit-local.mjs"
   },
   "dependencies": {
-    "vite": "^7.1.5",
-    "phaser": "^3.90.0"
+    "phaser": "^3.90.0",
+    "vite": "^8.0.16"
   },
   "keywords": [
     "phaser",
