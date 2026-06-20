@@ -32,3 +32,4 @@ Future server routes should recompute every proposal score from the shared puzzl
 - A solved board flashes a short amber/coral pulse across the route, beacons, and receiver.
 - Short generated audio cues reinforce solved, blocked, and replay moments, with a persistent mute toggle.
 - Blocked, lost, and partial routes get an explicit status hint plus a board marker so the player knows where to revise the route.
+- Route insight cards translate the current trace into short labels such as Next, Exit, Progress, Missing, and Last safe.

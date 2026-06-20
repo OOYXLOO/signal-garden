@@ -39,6 +39,7 @@ npm run record:demo
 - Short Web Audio cues with a persistent mute toggle.
 - Replay route animation for the current plan.
 - Status hints and board markers for blocked, lost, and partial routes.
+- Route insight cards that explain the next useful adjustment after drafting, early receiver hits, blocked paths, or escaped signals.
 - Optional progressive hints that reveal solution mirrors only when the player asks.
 - Demo script, submission field pack, local silent WebM demo, captioned walkthrough draft, and final captioned demo candidate with explainable route feedback.
 - Server-shaped adapter for init, proposal submission, and archive reads.

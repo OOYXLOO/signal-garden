@@ -171,6 +171,21 @@ function keyOf(cell) {
   return `${cell.x},${cell.y}`;
 }
 
+function labelCell(cell) {
+  return `row ${cell.y + 1}, column ${cell.x + 1}`;
+}
+
+function labelDirection(direction) {
+  return (
+    {
+      N: "north",
+      E: "east",
+      S: "south",
+      W: "west",
+    }[direction] || "forward"
+  );
+}
+
 function normalizePlan(plan = []) {
   return plan
     .filter((move) => Number.isInteger(move.x) && Number.isInteger(move.y))
@@ -355,4 +370,56 @@ export function describeResult(puzzle, result) {
   }
 
   return "Keep adjusting mirrors until the route reaches every beacon.";
+}
+
+export function createRouteInsight(puzzle, result) {
+  const routeLine = `${result.visited.length} cells traced, ${result.moves.length}/${puzzle.moveLimit} mirrors placed.`;
+
+  if (result.complete) {
+    return [
+      { label: "Result", value: "All three beacons are connected before the receiver." },
+      { label: "Route", value: routeLine },
+    ];
+  }
+
+  if (result.status === "drafting") {
+    return [
+      { label: "Next", value: `Aim for the first beacon at ${labelCell(puzzle.beacons[0])}.` },
+      { label: "Rule", value: "Every beacon must be crossed before the receiver counts." },
+    ];
+  }
+
+  const hit = new Set(result.hitBeacons);
+  const missing = puzzle.beacons.filter((beacon) => !hit.has(keyOf(beacon)));
+  const last = result.visited.at(-1);
+  const previous = result.visited.at(-2);
+
+  if (result.status === "partial") {
+    return [
+      { label: "Reached early", value: `${result.hitBeacons.length}/${puzzle.beacons.length} beacons connected before the receiver.` },
+      { label: "Missing", value: missing.map(labelCell).join("; ") || "No missing beacons." },
+      { label: "Next", value: "Bend the route through the missing beacon before letting it reach the receiver." },
+    ];
+  }
+
+  if (result.status === "blocked" && last) {
+    return [
+      { label: "Blocked", value: `The route hits an obstacle at ${labelCell(last)}.` },
+      { label: "Last safe", value: previous ? labelCell(previous) : "The source cell." },
+      { label: "Next", value: "Rotate a mirror before the blocker to send the signal around it." },
+    ];
+  }
+
+  if (result.status === "lost" && last) {
+    return [
+      { label: "Exit", value: `The signal leaves after ${labelCell(last)} heading ${labelDirection(last.dir)}.` },
+      { label: "Progress", value: `${result.hitBeacons.length}/${puzzle.beacons.length} beacons connected so far.` },
+      { label: "Next", value: "Add or rotate a mirror at the exit cell or one cell earlier." },
+    ];
+  }
+
+  return [
+    { label: "Route", value: routeLine },
+    { label: "Next", value: "Keep adjusting mirrors until every beacon lights before the receiver." },
+  ];
 }

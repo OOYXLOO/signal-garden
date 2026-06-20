@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createProposal, rankProposals, summarizeConsensus, toCommunityPayload } from "../src/game/proposals.js";
-import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
+import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const solved = traceSignal(puzzle, puzzle.solution);
@@ -15,8 +15,29 @@ assert.ok(solved.score > empty.score);
 assert.match(createBriefing(puzzle, solved), /Signal Garden 2026-06-19/);
 assert.match(describeResult(puzzle, solved), /All beacons/);
 assert.match(describeResult(puzzle, empty), /row|Place mirrors|Receiver reached|left the garden/);
+assert.match(createRouteInsight(puzzle, solved).map((insight) => insight.value).join(" "), /beacons are connected/);
+assert.match(createRouteInsight(puzzle, empty).map((insight) => insight.value).join(" "), /first beacon|leaves after/);
 assert.deepEqual(decodePlanToken(encodePlanToken(puzzle.solution), puzzle), puzzle.solution);
 assert.deepEqual(decodePlanToken(`0-0-s.99-1-b.bad.${puzzle.blockers[0].x}-${puzzle.blockers[0].y}-b`, puzzle), [{ x: 0, y: 0, mirror: "slash" }]);
+
+const partialPuzzle = {
+  id: "partial-check",
+  title: "Partial check",
+  size: 8,
+  moveLimit: 5,
+  source: { x: 0, y: 0, dir: "E" },
+  target: { x: 3, y: 0 },
+  beacons: [
+    { x: 1, y: 0 },
+    { x: 2, y: 2 },
+    { x: 4, y: 4 },
+  ],
+  blockers: [],
+  solution: [],
+};
+const partial = traceSignal(partialPuzzle, [{ x: 7, y: 7, mirror: "slash" }]);
+assert.equal(partial.status, "partial");
+assert.match(createRouteInsight(partialPuzzle, partial).map((insight) => insight.value).join(" "), /Missing|row 3, column 3/);
 
 const weakProposal = createProposal({
   puzzle,

@@ -1,6 +1,6 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
-import { describeResult, encodePlanToken } from "./game/puzzle.js";
+import { createRouteInsight, describeResult, encodePlanToken } from "./game/puzzle.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -29,6 +29,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     streak: document.querySelector("#streak-value"),
     status: document.querySelector("#status-value"),
     statusHint: document.querySelector("#status-hint"),
+    routeInsight: document.querySelector("#route-insight"),
     archiveList: document.querySelector("#archive-list"),
     briefing: document.querySelector("#briefing-output"),
     copyLink: document.querySelector("#copy-link"),
@@ -139,6 +140,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";
     refs.statusHint.textContent = describeResult(puzzle, result);
+    renderRouteInsight(refs, createRouteInsight(puzzle, result));
     if (hasRenderedState && lastSoundStatus !== result.status) {
       if (result.complete) {
         audio.play("complete");
@@ -232,4 +234,18 @@ function renderConsensus(refs, consensus) {
     refs.proposalList.firstChild.textContent = "Save a plan to start the local consensus list.";
   }
   return consensus;
+}
+
+function renderRouteInsight(refs, insights) {
+  refs.routeInsight.replaceChildren(
+    ...insights.map((insight) => {
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      label.textContent = insight.label;
+      value.textContent = insight.value;
+      item.append(label, value);
+      return item;
+    }),
+  );
 }
