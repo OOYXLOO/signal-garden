@@ -10,7 +10,7 @@ Signal Garden is a daily Phaser relay puzzle where players place mirrors, guide 
 
 Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. A deterministic board appears each day with a source, receiver, blockers, three beacons, and a five-move limit. Players place mirrors to route the signal, then save the route as a proposal.
 
-The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, and the player can apply the current top proposal back onto the board. Share links reopen a specific route on the same daily board, while a compact archive and streak panel give the experience a reason to return on the next daily board.
+The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, and the player can apply the current top proposal back onto the board. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
 The current build includes seven verified puzzle templates, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
 
@@ -18,6 +18,7 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 
 - Each mirror route is a proposal.
 - Each route can be shared as a link that reopens the same plan.
+- Briefings include the exact review link for the current route.
 - The top route can be applied by the community.
 - The briefing output is short enough to fit in a post or comment.
 - Daily boards and archive rows support recurring discussion.
@@ -30,6 +31,7 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.
 - Compact route encoding for share links.
+- Briefing export with exact review link.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
 - Score recomputation on proposal submission.
 - Redis-shaped proposal store with tests.
@@ -41,7 +43,7 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 - Complete a route through all three beacons.
 - Replay the completed route.
 - Save the proposal and show the consensus summary.
-- Copy a share link for the exact route.
+- Copy a share link and briefing for the exact route.
 - Clear the board and apply the top proposal.
 - Show daily seed, streak, archive, and briefing output.
 - Avoid account pages and private consoles.

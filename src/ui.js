@@ -1,6 +1,7 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
-import { createRouteInsight, describeResult, encodePlanToken } from "./game/puzzle.js";
+import { createRouteInsight, describeResult } from "./game/puzzle.js";
+import { buildShareUrl, createShareBriefing } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -90,17 +91,15 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     if (!latest?.plan?.length) {
       return;
     }
-    const url = new URL(window.location.href);
-    url.searchParams.set("day", latest.puzzle.id);
-    url.searchParams.set("plan", encodePlanToken(latest.plan));
+    const shareUrl = buildShareUrl(window.location.href, latest.puzzle, latest.plan);
     try {
-      await navigator.clipboard.writeText(url.toString());
+      await navigator.clipboard.writeText(shareUrl);
       refs.copyLink.textContent = "Link copied";
       window.setTimeout(() => {
         refs.copyLink.textContent = "Copy share link";
       }, 1200);
     } catch {
-      refs.briefing.value = `${refs.briefing.value}\nShare link: ${url.toString()}`;
+      refs.briefing.value = createShareBriefing({ briefing: refs.briefing.value, shareUrl });
       refs.briefing.select();
       document.execCommand("copy");
     }
@@ -157,7 +156,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       : hints.revealed >= hints.total
         ? `Hints ${hints.revealed}/${hints.total}`
         : `Hint ${hints.revealed}/${hints.total}`;
-    refs.briefing.value = briefing;
+    const shareUrl = buildShareUrl(window.location.href, puzzle, plan);
+    refs.briefing.value = createShareBriefing({ briefing, shareUrl });
     refs.moveList.replaceChildren(
       ...(plan.length
         ? plan.map((move) => {
@@ -197,10 +197,7 @@ function renderArchive(refs, currentPuzzleId) {
           item.append(summary);
           if (entry.plan.length) {
             const review = document.createElement("a");
-            const url = new URL(window.location.href);
-            url.searchParams.set("day", entry.id);
-            url.searchParams.set("plan", encodePlanToken(entry.plan));
-            review.href = url.toString();
+            review.href = buildShareUrl(window.location.href, { id: entry.id }, entry.plan);
             review.textContent = "Review";
             review.setAttribute("aria-label", `Review ${entry.id} route`);
             item.append(review);

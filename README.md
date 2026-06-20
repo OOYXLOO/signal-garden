@@ -35,6 +35,7 @@ npm run record:demo
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
+- Briefing output that includes an exact review link whenever a route is present.
 - Completion pulse feedback for solved boards.
 - Short Web Audio cues with a persistent mute toggle.
 - Replay route animation for the current plan.

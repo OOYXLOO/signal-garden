@@ -32,7 +32,7 @@ Generated: 2026-06-20
 
 ## Caption
 
-Daily browser puzzle prototype with seven verified board templates, route replay, adapter-backed local proposal consensus, shareable route links, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export, and a captioned demo candidate.
+Daily browser puzzle prototype with seven verified board templates, route replay, adapter-backed local proposal consensus, shareable route links, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export with an exact review link, and a captioned demo candidate.
 
 ## Guardrails
 

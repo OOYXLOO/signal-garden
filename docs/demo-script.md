@@ -30,9 +30,9 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
    - Say: "Each route becomes a proposal. The app recomputes the score and ranks the best plan."
    - Show the consensus summary changing to `1/1 saved proposals complete`.
 
-6. Copy the share link.
-   - Say: "A share link carries the exact route into a post, comment, or review thread."
-   - Show the copy button changing to `Link copied`.
+6. Copy the share link and briefing.
+   - Say: "A share link and briefing carry the exact route into a post, comment, or review thread."
+   - Show the review link inside the briefing output and the copy button changing to `Link copied`.
 
 7. Clear and apply the top proposal.
    - Say: "The top proposal is not a hidden answer. It is the best saved community plan."
@@ -47,7 +47,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, route replay, local proposal consensus, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, route replay, local proposal consensus, shareable route links, review-link briefing export, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 
