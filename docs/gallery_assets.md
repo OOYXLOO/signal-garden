@@ -39,3 +39,4 @@ Daily browser puzzle prototype with seven verified board templates, objective pr
 - Do not upload screenshots that contain private account data.
 - Do not claim platform deployment until an account owner completes the relevant setup.
 - Do not include credentials, tokens, billing pages, or private console screenshots.
+- Use `docs/launch-readiness.md` before a user-approved public submission pass.

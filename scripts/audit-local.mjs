@@ -37,6 +37,7 @@ const required = [
   "docs/demo.webm",
   "docs/devvit-adapter-plan.md",
   "docs/devvit_shell_readiness.md",
+  "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "scripts/record-demo.mjs",
 ];

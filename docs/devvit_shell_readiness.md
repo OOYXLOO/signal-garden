@@ -45,3 +45,5 @@ The following actions require the account owner to be present:
 - creating a demo post
 - uploading media
 - submitting to Devpost
+
+See `docs/launch-readiness.md` for the full user-approved launch checklist and submission field mapping.

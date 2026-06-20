@@ -44,6 +44,7 @@ npm run record:demo
 - Route insight cards that explain the next useful adjustment after drafting, early receiver hits, blocked paths, or escaped signals.
 - Optional progressive hints that reveal solution mirrors only when the player asks.
 - Demo script, submission field pack, local silent WebM demo, captioned walkthrough draft, and final captioned demo candidate with explainable route feedback.
+- Launch readiness checklist for user-approved platform submission gates.
 - Server-shaped adapter for init, proposal submission, and archive reads.
 - Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 
