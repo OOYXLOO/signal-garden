@@ -52,6 +52,10 @@ It also has a local server adapter that mirrors the future Devvit API shape:
   - `submitProposal`
   - `archive`
   - `handleRequest`
+- `src/devvit/server/index.js`
+  - routes `/internal/menu/post-create`
+  - returns a Devvit-style `navigateTo` response when a platform post helper is injected
+  - returns a local `showToast` response when the platform helper is absent
 - `src/server/memoryProposalStore.js`
   - local in-memory store used only for tests and pre-Devvit development.
 - `src/server/redisProposalStore.js`
@@ -70,6 +74,7 @@ It also has a local server adapter that mirrors the future Devvit API shape:
 | `/api/init` | GET | Return today's board, current consensus, and viewer-safe display state. |
 | `/api/proposal` | POST | Accept a bounded mirror plan, recompute the score server-side, and store one proposal. |
 | `/api/archive/:day` | GET | Return a read-only summary for a previous board. |
+| `/internal/menu/post-create` | POST | Create a daily relay custom post through the platform helper when running in Devvit. |
 
 The server route should never trust a client-provided score. It should recompute through `traceSignal` and `createProposal`.
 

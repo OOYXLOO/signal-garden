@@ -49,6 +49,7 @@ npm run record:demo
 - Demo script, submission field pack, local silent WebM demo, captioned walkthrough draft, and final captioned demo candidate with explainable route feedback.
 - Launch readiness checklist for user-approved platform submission gates.
 - Server-shaped adapter for init, proposal submission, and archive reads.
+- Devvit-style subreddit menu route for creating a daily relay post when a platform post helper is available.
 - Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 
 No production account setup, hosting configuration, or platform submission is performed by this repository.

@@ -76,7 +76,34 @@ const archiveResponse = await shell.fetch(new Request("http://local.test/api/arc
 const archive = await archiveResponse.json();
 assert.equal(archive.consensus.proposalCount, 1);
 
+let createdPostTitle = "";
+globalThis.signalGardenContext = { subredditName: "signal-garden-test" };
+globalThis.signalGardenReddit = {
+  async submitCustomPost(input) {
+    createdPostTitle = input.title;
+    return { id: "abc123" };
+  },
+};
+const menuResponse = await shell.fetch(
+  new Request("http://local.test/internal/menu/post-create", {
+    method: "POST",
+  }),
+);
+assert.equal(menuResponse.status, 200);
+const menu = await menuResponse.json();
+assert.equal(createdPostTitle, "Signal Garden daily relay");
+assert.equal(menu.navigateTo, "https://reddit.com/r/signal-garden-test/comments/abc123");
+
+delete globalThis.signalGardenReddit;
+const missingPlatformResponse = await shell.fetch(
+  new Request("http://local.test/internal/menu/post-create", {
+    method: "POST",
+  }),
+);
+assert.equal(missingPlatformResponse.status, 501);
+assert.match((await missingPlatformResponse.json()).showToast, /not available/);
+
 delete globalThis.signalGardenRedis;
+delete globalThis.signalGardenContext;
 
 console.log("signal garden devvit server shell tests passed");
-

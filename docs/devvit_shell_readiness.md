@@ -10,6 +10,10 @@ Generated: 2026-06-20
   - `GET /api/init`
   - `POST /api/proposal`
   - `GET /api/archive/:day`
+- A local menu adapter mirrors the official subreddit menu endpoint shape:
+  - `POST /internal/menu/post-create`
+  - returns `navigateTo` when a platform post helper is injected
+  - returns a clear `showToast` in the local shell when the platform helper is absent
 - A memory store exists for tests and local pre-Devvit development.
 - Tests prove a forged client score is ignored.
 - The browser UI now submits proposals through a `communityClient` boundary instead of directly writing the consensus list.
@@ -18,13 +22,13 @@ Generated: 2026-06-20
 - Devvit build outputs now follow the official Phaser starter shape:
   - `dist/client`
   - `dist/server/index.cjs`
-- `npm run audit:devvit` verifies the configured entrypoint paths and built output paths stay in sync.
+- `npm run audit:devvit` verifies the configured entrypoint paths, built output paths, and menu endpoint stay in sync.
 
 ## Not Yet Done
 
 - No Devvit app has been created or uploaded.
 - No Reddit account page has been opened by automation.
-- No playtest, install, post creation, publishing, or Devpost submission has been performed.
+- No playtest, install, real post creation, publishing, or Devpost submission has been performed.
 - The Devvit server shell can accept `globalThis.signalGardenRedis`; without it, it falls back to `MemoryProposalStore` for local build validation.
 - A Redis-shaped proposal store exists and is tested with a fake Redis implementation.
 - The Devvit server shell test injects a Redis-shaped object and verifies proposals persist through that path.
@@ -36,7 +40,7 @@ Use the official Phaser starter structure as the migration shell:
 
 1. Inject the platform Redis object as `globalThis.signalGardenRedis` or replace `createStore` with the official Devvit Redis import pattern.
 2. Point `createFetchCommunityClient` at the hosted route root inside the Devvit client build.
-3. Replace the local menu placeholder with the official post creation helper when the account owner runs a real playtest.
+3. Bind the local menu route to the official post creation helper when the account owner runs a real playtest.
 4. Keep `tests/serverAdapter.test.mjs` and `tests/communityClient.test.mjs` as contract tests while the storage implementation changes.
 
 ## Account Gate

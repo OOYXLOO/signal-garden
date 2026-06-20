@@ -45,6 +45,17 @@ if (config.post?.entrypoints?.game?.entry !== "game.html") {
 if (config.server?.dir !== "dist/server" || config.server?.entry !== "index.cjs") {
   failures.push("server output must be dist/server/index.cjs");
 }
+const createPostMenu = config.menu?.items?.find((item) => item.endpoint === "/internal/menu/post-create");
+if (!createPostMenu) {
+  failures.push("devvit menu must expose /internal/menu/post-create");
+} else {
+  if (createPostMenu.location !== "subreddit") {
+    failures.push("post create menu must be a subreddit menu item");
+  }
+  if (createPostMenu.forUserType !== "moderator") {
+    failures.push("post create menu must be moderator scoped");
+  }
+}
 const serialized = JSON.stringify(config);
 if (serialized.includes("<%") || serialized.includes("%>")) {
   failures.push("devvit.json still contains template placeholders");
