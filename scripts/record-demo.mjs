@@ -94,11 +94,11 @@ async function main() {
   const durations = final ? finalDurations : shortDurations;
   await showCaption(
     page,
-    "Signal Garden is a daily Phaser relay puzzle: place mirrors, route the signal, and return for a new board.",
+    "Signal Garden is a daily Phaser relay puzzle: place mirrors, route the signal, and track each objective.",
     durations.intro,
   );
   if (final) {
-    await showCaption(page, "The first screen shows the daily seed, board title, three beacons, and the five-move limit.", durations.board);
+    await showCaption(page, "The first screen shows the daily seed, objective progress, three beacons, and the five-move limit.", durations.board);
   }
 
   const puzzle = await page.evaluate(() => window.signalGarden.scene.puzzle);
@@ -109,28 +109,30 @@ async function main() {
   }
 
   await page.evaluate(() => window.signalGarden.scene.applyPlan(window.signalGarden.scene.puzzle.solution));
-  await showCaption(page, "A complete route must reach all three beacons before the receiver.", durations.route);
+  await showCaption(page, "A complete route turns every objective chip on before the receiver.", durations.route);
   await page.locator("#replay-plan").click();
   await showCaption(page, "Replay route animates the signal path so the solution is readable during review.", durations.replay);
   await page.locator("#save-proposal").click();
   await page.waitForFunction(() => !document.querySelector("#apply-plan").disabled);
   await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", durations.proposal);
   await page.locator("#copy-link").click();
-  await showCaption(page, "A share link carries the exact route so a post or review thread can reopen the same plan.", durations.share);
+  await showCaption(page, "The briefing includes an exact review link, so a post or review thread can reopen the same plan.", durations.share);
   await page.locator("#clear-plan").click();
   await showCaption(page, "Clear the board: the community plan is now stored separately from the local draft.", durations.clear);
   await page.locator("#apply-plan").click();
   await showCaption(page, "Apply top proposal restores the best saved plan, not a hidden answer.", durations.apply);
-  await showCaption(page, "The archive and streak panel make the daily board feel persistent.", durations.archive);
+  await showCaption(page, "Archive review links reopen saved routes, making the daily board feel persistent.", durations.archive);
   await showCaption(page, "The Devvit shell keeps the client/server adapter ready for a Reddit surface.", durations.adapter);
   if (final) {
-    await showCaption(page, "Submission assets include screenshots, a silent clip, this captioned walkthrough, and a server-shaped adapter boundary.", durations.close);
+    await showCaption(page, "Submission assets include screenshots, this captioned walkthrough, review links, and a server-shaped adapter boundary.", durations.close);
   }
 
   const state = await page.evaluate(() => ({
     title: document.querySelector("#puzzle-title")?.textContent,
     status: document.querySelector("#status-value")?.textContent,
     summary: document.querySelector("#proposal-summary")?.textContent,
+    briefing: document.querySelector("#briefing-output")?.value,
+    objectives: [...document.querySelectorAll("#objective-list li")].map((item) => item.getAttribute("aria-label")),
     archive: [...document.querySelectorAll("#archive-list li")].map((item) => item.getAttribute("aria-label") || item.textContent),
   }));
 
@@ -143,6 +145,9 @@ async function main() {
   }
   if (state.status !== "Complete" || !state.summary?.includes("1/1 saved proposals complete")) {
     throw new Error(`Unexpected demo state: ${JSON.stringify(state)}`);
+  }
+  if (!state.briefing?.includes("Review link:") || !state.objectives.every((objective) => objective?.includes("complete"))) {
+    throw new Error(`Incomplete share or objective state: ${JSON.stringify(state)}`);
   }
 
   const videoPath = await video.path();

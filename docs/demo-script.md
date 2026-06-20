@@ -16,7 +16,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 2. Place or apply a complete plan.
    - Say: "Players guide one signal through all three beacons before it reaches the receiver."
-   - Show the path updating instantly.
+   - Show the path updating instantly and the objective chips turning complete.
 
 3. Replay the route.
    - Say: "Replay makes the path readable during review."
@@ -40,7 +40,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 8. Show the loop panel.
    - Say: "The local archive and streak make the daily board feel persistent."
-   - Point out daily seed, local streak, status, and archive row.
+   - Point out daily seed, local streak, status, and the archive Review link.
 
 9. Close on the platform path.
    - Say: "The browser version is testable today, and the Devvit shell keeps the client and server adapter ready for a Reddit surface."

@@ -28,7 +28,7 @@ Generated: 2026-06-20
 6. `docs/demo-final-captioned.webm`
    - Final captioned demo candidate.
    - 1366x900, approximately 78 seconds.
-   - Covers the daily hook, board constraints, explainable route feedback, completion, proposal save, top proposal apply, archive loop, and adapter boundary.
+   - Covers the daily hook, objective progress, board constraints, explainable route feedback, completion, proposal save, review-link briefing, top proposal apply, archive review, and adapter boundary.
 
 ## Caption
 
