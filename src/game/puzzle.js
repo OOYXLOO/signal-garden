@@ -179,6 +179,19 @@ function normalizePlan(plan = []) {
     .map((move) => ({ x: move.x, y: move.y, mirror: move.mirror }));
 }
 
+function isPlayableCell(puzzle, x, y) {
+  if (x < 0 || y < 0 || x >= puzzle.size || y >= puzzle.size) {
+    return false;
+  }
+  if (x === puzzle.source.x && y === puzzle.source.y) {
+    return false;
+  }
+  if (x === puzzle.target.x && y === puzzle.target.y) {
+    return false;
+  }
+  return !puzzle.blockers.some((cell) => cell.x === x && cell.y === y);
+}
+
 export function createDailyPuzzle(date = new Date()) {
   const key = dayKey(date);
   const random = mulberry32(hashSeed(`signal-garden:${key}`));
@@ -214,6 +227,32 @@ export function mapToPlan(placements) {
     const [x, y] = key.split(",").map(Number);
     return { x, y, mirror };
   });
+}
+
+export function encodePlanToken(plan = []) {
+  return normalizePlan(plan)
+    .map((move) => `${move.x}-${move.y}-${move.mirror === "slash" ? "s" : "b"}`)
+    .join(".");
+}
+
+export function decodePlanToken(token, puzzle) {
+  if (!token || typeof token !== "string") {
+    return [];
+  }
+
+  return token
+    .split(".")
+    .map((part) => {
+      const [rawX, rawY, rawMirror] = part.split("-");
+      const x = Number(rawX);
+      const y = Number(rawY);
+      const mirror = rawMirror === "s" ? "slash" : rawMirror === "b" ? "backslash" : "";
+      return { x, y, mirror };
+    })
+    .filter((move) => Number.isInteger(move.x) && Number.isInteger(move.y))
+    .filter((move) => move.mirror === "slash" || move.mirror === "backslash")
+    .filter((move) => isPlayableCell(puzzle, move.x, move.y))
+    .slice(0, puzzle.moveLimit || MOVE_LIMIT);
 }
 
 export function traceSignal(puzzle, plan = []) {

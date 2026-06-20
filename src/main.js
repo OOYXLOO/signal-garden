@@ -1,14 +1,17 @@
 import Phaser from "phaser";
 import "./styles.css";
 import { SignalGardenScene } from "./game/SignalGardenScene.js";
-import { createDailyPuzzle } from "./game/puzzle.js";
+import { createDailyPuzzle, decodePlanToken } from "./game/puzzle.js";
 import { loadPlan } from "./state/store.js";
 import { bindUi } from "./ui.js";
 
 const puzzle = createDailyPuzzle();
+const params = new URLSearchParams(window.location.search);
+const sharedDay = params.get("day");
+const sharedPlan = sharedDay === puzzle.id ? decodePlanToken(params.get("plan"), puzzle) : [];
 const scene = new SignalGardenScene({
   puzzle,
-  initialPlan: loadPlan(puzzle.id),
+  initialPlan: sharedPlan.length ? sharedPlan : loadPlan(puzzle.id),
 });
 
 const game = new Phaser.Game({
@@ -32,4 +35,3 @@ window.signalGarden = {
   game,
   scene,
 };
-

@@ -21,6 +21,7 @@ const shortDurations = {
   feedback: 2800,
   route: 2800,
   proposal: 3200,
+  share: 2600,
   clear: 2400,
   apply: 3000,
   archive: 3000,
@@ -33,6 +34,7 @@ const finalDurations = {
   feedback: 6800,
   route: 7600,
   proposal: 8200,
+  share: 6200,
   clear: 6200,
   apply: 7600,
   archive: 8200,
@@ -109,6 +111,8 @@ async function main() {
   await page.locator("#save-proposal").click();
   await page.waitForFunction(() => !document.querySelector("#apply-plan").disabled);
   await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", durations.proposal);
+  await page.locator("#copy-link").click();
+  await showCaption(page, "A share link carries the exact route so a post or review thread can reopen the same plan.", durations.share);
   await page.locator("#clear-plan").click();
   await showCaption(page, "Clear the board: the community plan is now stored separately from the local draft.", durations.clear);
   await page.locator("#apply-plan").click();

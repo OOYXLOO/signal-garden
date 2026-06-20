@@ -9,11 +9,11 @@ Generated: 2026-06-20
    - First gallery image or social preview.
 
 2. `docs/desktop-preview.png`
-   - 1366x1378
+   - 1366x1434
    - Desktop play surface with side controls, authentic top proposal flow, local archive, and consensus panel.
 
 3. `docs/mobile-preview.png`
-   - 390x2260
+   - 390x2316
    - Narrow viewport check for the full interaction surface, archive, and proposal list.
 
 4. `docs/demo.webm`
@@ -32,7 +32,7 @@ Generated: 2026-06-20
 
 ## Caption
 
-Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export, and a captioned demo candidate.
+Daily browser puzzle prototype with seven verified board templates, adapter-backed local proposal consensus, shareable route links, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export, and a captioned demo candidate.
 
 ## Guardrails
 

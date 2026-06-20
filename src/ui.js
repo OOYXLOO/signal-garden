@@ -1,5 +1,5 @@
 import { createCommunityClient } from "./client/communityClient.js";
-import { describeResult } from "./game/puzzle.js";
+import { describeResult, encodePlanToken } from "./game/puzzle.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -30,6 +30,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     statusHint: document.querySelector("#status-hint"),
     archiveList: document.querySelector("#archive-list"),
     briefing: document.querySelector("#briefing-output"),
+    copyLink: document.querySelector("#copy-link"),
     applyPlan: document.querySelector("#apply-plan"),
     hintPlan: document.querySelector("#hint-plan"),
     clearPlan: document.querySelector("#clear-plan"),
@@ -64,6 +65,25 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
       document.execCommand("copy");
     }
   });
+  refs.copyLink.addEventListener("click", async () => {
+    if (!latest?.plan?.length) {
+      return;
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set("day", latest.puzzle.id);
+    url.searchParams.set("plan", encodePlanToken(latest.plan));
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      refs.copyLink.textContent = "Link copied";
+      window.setTimeout(() => {
+        refs.copyLink.textContent = "Copy share link";
+      }, 1200);
+    } catch {
+      refs.briefing.value = `${refs.briefing.value}\nShare link: ${url.toString()}`;
+      refs.briefing.select();
+      document.execCommand("copy");
+    }
+  });
 
   refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
@@ -93,6 +113,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     refs.score.textContent = String(result.score);
     refs.beacons.textContent = `${result.hitBeacons.length}/${puzzle.beacons.length}`;
     refs.moves.textContent = `${plan.length}/${puzzle.moveLimit}`;
+    refs.copyLink.disabled = plan.length === 0;
     refs.seed.textContent = puzzle.id.replaceAll("-", "");
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";

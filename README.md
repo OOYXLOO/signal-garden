@@ -33,6 +33,7 @@ npm run record:demo
 - Local-only persistence with no credentials or private account data.
 - Local proposal consensus that ranks saved player plans.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
+- Share links that reopen the same daily route for review or discussion.
 - Recent local archive and streak state for the daily return loop.
 - Completion pulse feedback for solved boards.
 - Status hints and board markers for blocked, lost, and partial routes.
