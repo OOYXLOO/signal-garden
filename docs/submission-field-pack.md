@@ -12,13 +12,14 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, and the player can apply the current top proposal back onto the board. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, comment route import, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
 
 ## What Makes It Social
 
 - Each mirror route is a proposal.
 - Each route can be shared as a link that reopens the same plan.
 - Briefings include the exact review link for the current route.
+- Routes pasted from comments or briefings can be imported into the consensus list.
 - The top route can be applied by the community.
 - The briefing output is short enough to fit in a post or comment.
 - Daily boards and archive rows support recurring discussion.
@@ -32,6 +33,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.
 - Compact route encoding for share links.
+- Review link and briefing parser for community route import.
 - Briefing export with exact review link.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
 - Score recomputation on proposal submission.
@@ -45,6 +47,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Replay the completed route.
 - Save the proposal and show the consensus summary.
 - Copy a share link and briefing for the exact route.
+- Paste the route back as a comment route and show it in consensus.
 - Clear the board and apply the top proposal.
 - Show daily seed, streak, archive, and briefing output.
 - Avoid account pages and private consoles.

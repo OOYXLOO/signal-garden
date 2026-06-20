@@ -86,6 +86,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The first screen shows the daily board, objective chips, and move limit.
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
+- A pasted review link or briefing can be imported as a community proposal.
 - Archive rows with saved routes include Review links.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text does not mention private goal tracking or financial intent.

@@ -35,6 +35,7 @@ npm run record:demo
 - Local proposal consensus that ranks saved player plans.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
+- Comment route import that turns a pasted review link or briefing into a ranked community proposal.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
 - Briefing output that includes an exact review link whenever a route is present.
 - Completion pulse feedback for solved boards.

@@ -23,6 +23,7 @@
           <p class="eyebrow">Today</p>
           <h2 id="puzzle-title">Relay board</h2>
           <p id="puzzle-brief" class="muted"></p>
+          <ol id="objective-list" class="objective-list" aria-label="Daily objectives"></ol>
           <div class="score-grid">
             <div>
               <span>Score</span>
@@ -40,12 +41,17 @@
         </section>
 
         <section class="panel">
-          <p class="eyebrow">Plan</p>
+          <div class="panel-title-row">
+            <p class="eyebrow">Plan</p>
+            <button id="sound-toggle" class="secondary compact" type="button" aria-pressed="false">Sound on</button>
+          </div>
           <div class="button-row">
             <button id="apply-plan" type="button">Apply community plan</button>
+            <button id="hint-plan" class="secondary" type="button">Hint</button>
             <button id="clear-plan" class="secondary" type="button">Clear</button>
           </div>
           <ol id="move-list" class="move-list"></ol>
+          <button id="replay-plan" class="wide secondary" type="button">Replay route</button>
         </section>
 
         <section class="panel">
@@ -64,12 +70,23 @@
               <strong id="status-value">Drafting</strong>
             </div>
           </div>
+          <p id="status-hint" class="status-hint" aria-live="polite"></p>
+          <ol id="route-insight" class="route-insight" aria-label="Route insight"></ol>
+          <ol id="archive-list" class="archive-list" aria-label="Recent garden archive"></ol>
+          <button id="copy-link" class="wide secondary" type="button">Copy share link</button>
           <button id="copy-briefing" class="wide" type="button">Copy briefing</button>
           <textarea id="briefing-output" readonly aria-label="Briefing output"></textarea>
         </section>
 
         <section class="panel">
           <p class="eyebrow">Community</p>
+          <textarea
+            id="comment-route"
+            class="compact-textarea"
+            aria-label="Comment route import"
+            placeholder="Paste review link or briefing"
+          ></textarea>
+          <button id="import-route" class="wide secondary" type="button">Import comment route</button>
           <button id="save-proposal" class="wide" type="button">Save local proposal</button>
           <p id="proposal-summary" class="muted"></p>
           <ol id="proposal-list" class="move-list consensus-list"></ol>
@@ -80,4 +97,3 @@
     <script type="module" src="./game-entry.js"></script>
   </body>
 </html>
-

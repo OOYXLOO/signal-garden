@@ -366,6 +366,12 @@ textarea {
   line-height: 1.45;
 }
 
+textarea.compact-textarea {
+  min-height: 82px;
+  margin-top: 0;
+  font-size: 13px;
+}
+
 @media (max-width: 980px) {
   .app-shell {
     grid-template-columns: 1fr;

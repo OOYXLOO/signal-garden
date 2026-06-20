@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createDailyPuzzle } from "../src/game/puzzle.js";
-import { buildShareUrl, createShareBriefing } from "../src/share.js";
+import { buildShareUrl, createShareBriefing, parseSharedRoute } from "../src/share.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const shareUrl = buildShareUrl("https://example.test/play?old=1", puzzle, puzzle.solution);
@@ -10,5 +10,25 @@ assert.equal(buildShareUrl("https://example.test/play", puzzle, []), "");
 assert.equal(createShareBriefing({ briefing: "Signal Garden", shareUrl }), `Signal Garden\nReview link: ${shareUrl}`);
 assert.equal(createShareBriefing({ briefing: "Signal Garden", shareUrl: "" }), "Signal Garden");
 
-console.log("signal garden share tests passed");
+const parsedLink = parseSharedRoute(`Try this path: ${shareUrl}`, puzzle);
+assert.equal(parsedLink.ok, true);
+assert.equal(parsedLink.source, "review-link");
+assert.deepEqual(parsedLink.plan, puzzle.solution);
 
+const parsedBriefing = parseSharedRoute(
+  [
+    "Signal Garden 2026-06-19",
+    "Plan: backslash at 3,3; backslash at 3,7",
+  ].join("\n"),
+  puzzle,
+);
+assert.equal(parsedBriefing.ok, true);
+assert.equal(parsedBriefing.source, "briefing");
+assert.deepEqual(parsedBriefing.plan, puzzle.solution);
+
+const wrongDay = parseSharedRoute("https://example.test/play?day=2026-06-18&plan=2-2-b", puzzle);
+assert.equal(wrongDay.ok, false);
+assert.match(wrongDay.error, /2026-06-18/);
+assert.equal(parseSharedRoute("No route here", puzzle).ok, false);
+
+console.log("signal garden share tests passed");

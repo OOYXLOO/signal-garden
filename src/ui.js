@@ -1,7 +1,7 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
-import { buildShareUrl, createShareBriefing } from "./share.js";
+import { buildShareUrl, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -41,6 +41,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     clearPlan: document.querySelector("#clear-plan"),
     replayPlan: document.querySelector("#replay-plan"),
     copyBriefing: document.querySelector("#copy-briefing"),
+    commentRoute: document.querySelector("#comment-route"),
+    importRoute: document.querySelector("#import-route"),
     saveProposal: document.querySelector("#save-proposal"),
     proposalSummary: document.querySelector("#proposal-summary"),
     proposalList: document.querySelector("#proposal-list"),
@@ -122,6 +124,33 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
       refs.saveProposal.disabled = false;
+    }
+  });
+
+  refs.importRoute.addEventListener("click", async () => {
+    if (!latest) {
+      return;
+    }
+    const parsed = parseSharedRoute(refs.commentRoute.value, latest.puzzle);
+    if (!parsed.ok) {
+      refs.proposalSummary.textContent = parsed.error;
+      return;
+    }
+    refs.importRoute.disabled = true;
+    try {
+      const response = await communityClient.submitProposal({
+        day: latest.puzzle.id,
+        plan: parsed.plan,
+        author: "comment-route",
+      });
+      latestConsensus = renderConsensus(refs, response.consensus);
+      const summary = refs.proposalSummary.textContent;
+      refs.proposalSummary.textContent = `Imported ${parsed.plan.length} move ${parsed.source}. ${summary}`;
+      refs.commentRoute.value = "";
+    } catch (error) {
+      refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not import route.";
+    } finally {
+      refs.importRoute.disabled = false;
     }
   });
 
