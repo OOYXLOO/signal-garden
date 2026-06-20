@@ -87,6 +87,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
 - A pasted review link or briefing can be imported as a community proposal.
+- The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text does not mention private goal tracking or financial intent.

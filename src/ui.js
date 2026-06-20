@@ -1,6 +1,7 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
+import { createDailyRecap } from "./game/proposals.js";
 import { buildShareUrl, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
@@ -46,6 +47,9 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     saveProposal: document.querySelector("#save-proposal"),
     proposalSummary: document.querySelector("#proposal-summary"),
     proposalList: document.querySelector("#proposal-list"),
+    contributorList: document.querySelector("#contributor-list"),
+    dailyRecap: document.querySelector("#daily-recap"),
+    copyRecap: document.querySelector("#copy-recap"),
   };
   let latest = null;
   let latestDay = null;
@@ -107,6 +111,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyRecap.addEventListener("click", async () => {
+    refs.dailyRecap.select();
+    try {
+      await navigator.clipboard.writeText(refs.dailyRecap.value);
+      refs.copyRecap.textContent = "Recap copied";
+      window.setTimeout(() => {
+        refs.copyRecap.textContent = "Copy daily recap";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
 
   refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
@@ -119,7 +135,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         plan: latest.plan,
         author: "local-player",
       });
-      latestConsensus = renderConsensus(refs, response.consensus);
+      latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
@@ -143,7 +159,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         plan: parsed.plan,
         author: "comment-route",
       });
-      latestConsensus = renderConsensus(refs, response.consensus);
+      latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       const summary = refs.proposalSummary.textContent;
       refs.proposalSummary.textContent = `Imported ${parsed.plan.length} move ${parsed.source}. ${summary}`;
       refs.commentRoute.value = "";
@@ -250,14 +266,14 @@ async function refreshConsensus(refs, communityClient, day) {
   refs.proposalSummary.textContent = "Loading local consensus...";
   try {
     const response = await communityClient.init(day);
-    return renderConsensus(refs, response.consensus);
+    return renderConsensus(refs, response.consensus, response.puzzle);
   } catch (error) {
     refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not load consensus.";
     return null;
   }
 }
 
-function renderConsensus(refs, consensus) {
+function renderConsensus(refs, consensus, puzzle) {
   const best = consensus.best || null;
   refs.applyPlan.disabled = !best;
   refs.applyPlan.textContent = best ? "Apply top proposal" : "No proposal yet";
@@ -277,7 +293,24 @@ function renderConsensus(refs, consensus) {
   if (!consensus.top.length) {
     refs.proposalList.firstChild.textContent = "Save a plan to start the local consensus list.";
   }
+  renderContributors(refs, consensus.contributors || []);
+  refs.dailyRecap.value = puzzle ? createDailyRecap(puzzle, consensus) : "";
   return consensus;
+}
+
+function renderContributors(refs, contributors) {
+  refs.contributorList.replaceChildren(
+    ...(contributors.length
+      ? contributors.map((contributor) => {
+          const item = document.createElement("li");
+          item.textContent = `${contributor.author}: ${contributor.completed}/${contributor.proposals} complete, best ${contributor.bestScore} pts`;
+          return item;
+        })
+      : [document.createElement("li")]),
+  );
+  if (!contributors.length) {
+    refs.contributorList.firstChild.textContent = "Import or save routes to start the contributor board.";
+  }
 }
 
 function renderRouteInsight(refs, insights) {

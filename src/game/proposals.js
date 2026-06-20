@@ -53,6 +53,7 @@ export function summarizeConsensus(puzzle, proposals = []) {
     completed,
     best,
     top: ranked.slice(0, 5),
+    contributors: summarizeContributors(ranked),
   };
 }
 
@@ -66,6 +67,7 @@ export function toCommunityPayload(puzzle, proposals = []) {
     beacons: puzzle.beacons.length,
     proposalCount: consensus.proposalCount,
     completed: consensus.completed,
+    contributors: consensus.contributors.length,
     best: consensus.best
       ? {
           score: consensus.best.score,
@@ -77,3 +79,68 @@ export function toCommunityPayload(puzzle, proposals = []) {
   };
 }
 
+export function summarizeContributors(proposals = []) {
+  const byAuthor = new Map();
+  for (const proposal of proposals) {
+    const author = normalizeAuthor(proposal.author);
+    const current =
+      byAuthor.get(author) || {
+        author,
+        proposals: 0,
+        completed: 0,
+        bestScore: 0,
+        bestMoves: null,
+        latestAt: "",
+      };
+    current.proposals += 1;
+    current.completed += proposal.complete ? 1 : 0;
+    if (proposal.score > current.bestScore) {
+      current.bestScore = proposal.score;
+      current.bestMoves = proposal.moves;
+    }
+    if (String(proposal.createdAt || "") > current.latestAt) {
+      current.latestAt = proposal.createdAt;
+    }
+    byAuthor.set(author, current);
+  }
+
+  return Array.from(byAuthor.values())
+    .sort((left, right) => {
+      if (left.completed !== right.completed) {
+        return right.completed - left.completed;
+      }
+      if (left.bestScore !== right.bestScore) {
+        return right.bestScore - left.bestScore;
+      }
+      if (left.proposals !== right.proposals) {
+        return right.proposals - left.proposals;
+      }
+      return String(right.latestAt).localeCompare(String(left.latestAt));
+    })
+    .slice(0, 5);
+}
+
+export function createDailyRecap(puzzle, consensus) {
+  const leader = consensus.contributors?.[0] || null;
+  const best = consensus.best || null;
+  const lines = [
+    `Signal Garden ${puzzle.id} recap`,
+    `Board: ${puzzle.title}`,
+    `Routes: ${consensus.completed}/${consensus.proposalCount} complete`,
+  ];
+
+  if (best) {
+    lines.push(`Top route: ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves`);
+  } else {
+    lines.push("Top route: open");
+  }
+
+  if (leader) {
+    lines.push(`Contributor lead: ${leader.author} with ${leader.completed}/${leader.proposals} complete routes`);
+  } else {
+    lines.push("Contributor lead: open");
+  }
+
+  lines.push("Try a route, paste a review link, and help the garden choose today's best signal.");
+  return lines.join("\n");
+}

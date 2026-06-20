@@ -108,6 +108,10 @@ h2 {
   text-transform: uppercase;
 }
 
+.section-eyebrow {
+  margin-top: 16px;
+}
+
 .day-chip {
   border: 1px solid var(--line);
   border-radius: 999px;

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createProposal, rankProposals, summarizeConsensus, toCommunityPayload } from "../src/game/proposals.js";
+import { createDailyRecap, createProposal, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
 import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
@@ -66,7 +66,12 @@ const consensus = summarizeConsensus(puzzle, [weakProposal, solvedProposal]);
 assert.equal(consensus.proposalCount, 2);
 assert.equal(consensus.completed, 1);
 assert.equal(consensus.best.id, solvedProposal.id);
+assert.equal(consensus.contributors[0].author, "reader-b");
+assert.equal(consensus.contributors[0].completed, 1);
+assert.equal(summarizeContributors([weakProposal, solvedProposal]).length, 2);
+assert.match(createDailyRecap(puzzle, consensus), /Contributor lead: reader-b/);
 assert.equal(toCommunityPayload(puzzle, [solvedProposal]).best.complete, true);
+assert.equal(toCommunityPayload(puzzle, [solvedProposal]).contributors, 1);
 
 for (const template of PUZZLE_TEMPLATES) {
   const templatePuzzle = {
