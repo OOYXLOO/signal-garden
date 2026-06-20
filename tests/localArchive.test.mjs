@@ -36,8 +36,10 @@ const archive = getLocalArchive("2026-06-19");
 assert.equal(archive.length, 2);
 assert.equal(archive[0].id, "2026-06-19");
 assert.equal(archive[0].status, "blocked");
+assert.deepEqual(archive[0].plan, []);
 assert.equal(archive[1].complete, true);
 assert.equal(archive[1].score, 140);
+assert.deepEqual(archive[1].plan, [{ x: 1, y: 2, mirror: "slash" }]);
 assert.equal(getLocalStreak("2026-06-18"), 1);
 
 console.log("signal garden local archive tests passed");

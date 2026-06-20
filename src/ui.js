@@ -187,12 +187,28 @@ function renderArchive(refs, currentPuzzleId) {
     ...(archive.length
       ? archive.map((entry) => {
           const item = document.createElement("li");
+          const summary = document.createElement("span");
           const label = document.createElement("span");
           const score = document.createElement("strong");
           label.textContent = `${entry.id.slice(5)} · ${entry.complete ? "complete" : entry.status}`;
           score.textContent = `${entry.score} pts`;
           item.setAttribute("aria-label", `${label.textContent}, ${score.textContent}`);
-          item.append(label, score);
+          summary.append(label, score);
+          item.append(summary);
+          if (entry.plan.length) {
+            const review = document.createElement("a");
+            const url = new URL(window.location.href);
+            url.searchParams.set("day", entry.id);
+            url.searchParams.set("plan", encodePlanToken(entry.plan));
+            review.href = url.toString();
+            review.textContent = "Review";
+            review.setAttribute("aria-label", `Review ${entry.id} route`);
+            item.append(review);
+          } else {
+            const empty = document.createElement("em");
+            empty.textContent = "No route";
+            item.append(empty);
+          }
           return item;
         })
       : [document.createElement("li")]),

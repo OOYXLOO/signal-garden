@@ -28,7 +28,8 @@ body {
 }
 
 button,
-textarea {
+textarea,
+a {
   font: inherit;
 }
 
@@ -256,6 +257,7 @@ h2 {
 .archive-list li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -264,6 +266,12 @@ h2 {
   background: #fffdf8;
   font-size: 13px;
   line-height: 1.3;
+}
+
+.archive-list li > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
 }
 
 .route-insight li {
@@ -294,6 +302,27 @@ h2 {
 .archive-list strong {
   color: var(--teal);
   white-space: nowrap;
+}
+
+.archive-list a,
+.archive-list em {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 6px 9px;
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.archive-list a {
+  color: #fffdf8;
+  background: var(--teal);
+}
+
+.archive-list em {
+  color: var(--muted);
+  background: #f7efe4;
+  font-style: normal;
 }
 
 textarea {

@@ -46,6 +46,7 @@ export function getLocalArchive(currentPuzzleId, limit = 7) {
       score: value.score || 0,
       beacons: value.beacons || 0,
       moves: value.moves || 0,
+      plan: Array.isArray(value.plan) ? value.plan : [],
       updatedAt: value.updatedAt || "",
     }));
 }
