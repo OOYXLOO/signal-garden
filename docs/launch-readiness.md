@@ -38,6 +38,7 @@ npm run check
 npm run build:all
 npm run audit:local
 npm run audit:devvit
+npm run audit:submission
 npm audit --audit-level=moderate
 ```
 
@@ -88,4 +89,3 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - Archive rows with saved routes include Review links.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text does not mention private goal tracking or financial intent.
-

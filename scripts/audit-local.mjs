@@ -40,6 +40,7 @@ const required = [
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "scripts/record-demo.mjs",
+  "scripts/audit-submission-assets.mjs",
 ];
 
 const forbidden = [

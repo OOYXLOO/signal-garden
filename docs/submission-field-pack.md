@@ -54,3 +54,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - `docs/demo.webm`: silent interaction clip.
 - `docs/demo-captioned.webm`: captioned walkthrough draft for quick review.
 - `docs/demo-final-captioned.webm`: 70-second captioned final candidate for submission review.
+
+## Local Asset Check
+
+Run `npm run audit:submission` before a user-approved submission pass to verify gallery image dimensions, final demo presence, and required submission text sections.
