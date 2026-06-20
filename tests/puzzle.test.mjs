@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createProposal, rankProposals, summarizeConsensus, toCommunityPayload } from "../src/game/proposals.js";
-import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createPuzzleForDayKey, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
+import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const linkedPuzzle = createPuzzleForDayKey("2026-06-19");
@@ -21,6 +21,9 @@ assert.match(describeResult(puzzle, solved), /All beacons/);
 assert.match(describeResult(puzzle, empty), /row|Place mirrors|Receiver reached|left the garden/);
 assert.match(createRouteInsight(puzzle, solved).map((insight) => insight.value).join(" "), /beacons are connected/);
 assert.match(createRouteInsight(puzzle, empty).map((insight) => insight.value).join(" "), /first beacon|leaves after/);
+assert.deepEqual(createObjectiveList(puzzle, solved).map((objective) => objective.complete), [true, true, true, true]);
+assert.equal(createObjectiveList(puzzle, empty).filter((objective) => objective.complete).length, empty.hitBeacons.length);
+assert.equal(createObjectiveList(puzzle, empty).at(-1).complete, false);
 assert.deepEqual(decodePlanToken(encodePlanToken(puzzle.solution), puzzle), puzzle.solution);
 assert.deepEqual(decodePlanToken(encodePlanToken(linkedPuzzle.solution), linkedPuzzle), linkedPuzzle.solution);
 assert.deepEqual(decodePlanToken(`0-0-s.99-1-b.bad.${puzzle.blockers[0].x}-${puzzle.blockers[0].y}-b`, puzzle), [{ x: 0, y: 0, mirror: "slash" }]);

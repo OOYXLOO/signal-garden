@@ -167,6 +167,34 @@ h2 {
   margin-top: 16px;
 }
 
+.objective-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.objective-list li {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 7px;
+  color: var(--muted);
+  background: #fffdf8;
+  font-size: 12px;
+  font-weight: 850;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.objective-list li.complete {
+  border-color: rgba(31, 122, 115, 0.4);
+  color: var(--teal);
+  background: var(--teal-soft);
+}
+
 .score-grid div,
 .loop-list div {
   min-width: 0;
@@ -373,6 +401,7 @@ textarea {
   }
 
   .score-grid,
+  .objective-list,
   .button-row {
     grid-template-columns: 1fr;
   }

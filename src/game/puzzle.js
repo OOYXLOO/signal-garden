@@ -434,3 +434,17 @@ export function createRouteInsight(puzzle, result) {
     { label: "Next", value: "Keep adjusting mirrors until every beacon lights before the receiver." },
   ];
 }
+
+export function createObjectiveList(puzzle, result) {
+  const hit = new Set(result.hitBeacons);
+  return [
+    ...puzzle.beacons.map((beacon, index) => ({
+      label: `Beacon ${index + 1}`,
+      complete: hit.has(keyOf(beacon)),
+    })),
+    {
+      label: "Receiver",
+      complete: result.complete,
+    },
+  ];
+}

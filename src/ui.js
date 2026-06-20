@@ -1,6 +1,6 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
-import { createRouteInsight, describeResult } from "./game/puzzle.js";
+import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { buildShareUrl, createShareBriefing } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
@@ -22,6 +22,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     dayChip: document.querySelector("#day-chip"),
     title: document.querySelector("#puzzle-title"),
     brief: document.querySelector("#puzzle-brief"),
+    objectives: document.querySelector("#objective-list"),
     score: document.querySelector("#score-value"),
     beacons: document.querySelector("#beacon-value"),
     moves: document.querySelector("#move-value"),
@@ -130,6 +131,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     refs.dayChip.textContent = puzzle.id;
     refs.title.textContent = puzzle.title;
     refs.brief.textContent = puzzle.brief;
+    renderObjectives(refs, createObjectiveList(puzzle, result));
     refs.score.textContent = String(result.score);
     refs.beacons.textContent = `${result.hitBeacons.length}/${puzzle.beacons.length}`;
     refs.moves.textContent = `${plan.length}/${puzzle.moveLimit}`;
@@ -258,6 +260,18 @@ function renderRouteInsight(refs, insights) {
       label.textContent = insight.label;
       value.textContent = insight.value;
       item.append(label, value);
+      return item;
+    }),
+  );
+}
+
+function renderObjectives(refs, objectives) {
+  refs.objectives.replaceChildren(
+    ...objectives.map((objective) => {
+      const item = document.createElement("li");
+      item.className = objective.complete ? "complete" : "";
+      item.textContent = objective.label;
+      item.setAttribute("aria-label", `${objective.label}: ${objective.complete ? "complete" : "open"}`);
       return item;
     }),
   );

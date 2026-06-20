@@ -30,6 +30,7 @@ npm run record:demo
 - Browser-first Phaser game loop.
 - Deterministic daily puzzle seed.
 - Seven verified puzzle templates for a broader daily rotation.
+- Objective progress chips for the three beacons and receiver.
 - Local-only persistence with no credentials or private account data.
 - Local proposal consensus that ranks saved player plans.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
