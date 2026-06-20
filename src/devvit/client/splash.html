@@ -46,15 +46,17 @@
         line-height: 1.5;
       }
 
-      a {
+      button {
+        border: 0;
         display: inline-flex;
         margin-top: 18px;
         border-radius: 8px;
         padding: 11px 14px;
         color: #fffdf8;
         background: #1f7a73;
+        cursor: pointer;
+        font: inherit;
         font-weight: 850;
-        text-decoration: none;
       }
     </style>
   </head>
@@ -63,9 +65,9 @@
       <section>
         <h1>Signal Garden</h1>
         <p>Guide today's signal through three beacons, then compare the community proposal.</p>
-        <a href="game.html">Open relay board</a>
+        <button id="open-game" type="button">Open relay board</button>
       </section>
     </main>
+    <script type="module" src="./splash.js"></script>
   </body>
 </html>
-

@@ -18,11 +18,13 @@ Generated: 2026-06-20
 - Tests prove a forged client score is ignored.
 - The browser UI now submits proposals through a `communityClient` boundary instead of directly writing the consensus list.
 - The Devvit client entry starts the app manually with `createFetchCommunityClient({ baseUrl: window.location.origin })`.
+- The Devvit splash entry now uses a lightweight expanded-mode shim: it posts the official-shaped `devvit-internal` immersive-mode message for the configured `game` entrypoint, injects the Devvit token into the game URL, and falls back to `game.html` in a normal browser.
 - Browser validation confirms saved proposals reload through the local adapter store.
 - A local `devvit.json` shell and Vite Devvit client/server builds exist for pre-account validation.
 - Devvit build outputs now follow the official Phaser starter shape:
   - `dist/client`
   - `dist/server/index.cjs`
+- The Devvit client build uses relative asset paths (`base: "./"`) so `splash.html` and `game.html` can be served from a static WebView directory without depending on root-level `/assets`.
 - `npm run audit:devvit` verifies the configured entrypoint paths, built output paths, and menu endpoint stay in sync.
 
 ## Not Yet Done
@@ -37,12 +39,12 @@ Generated: 2026-06-20
 
 ## Next Engineering Step
 
-Use the official Phaser starter structure as the migration shell:
+Use the current shell as the real playtest migration surface:
 
 1. Inject the platform Redis object as `globalThis.signalGardenRedis` or replace `createStore` with the official Devvit Redis import pattern.
-2. Point `createFetchCommunityClient` at the hosted route root inside the Devvit client build.
+2. Run the splash-to-game transition inside a real Devvit playtest and compare it with the local expanded-mode message test.
 3. Bind the local menu route to the official post creation helper when the account owner runs a real playtest.
-4. Keep `tests/serverAdapter.test.mjs` and `tests/communityClient.test.mjs` as contract tests while the storage implementation changes.
+4. Keep `tests/serverAdapter.test.mjs`, `tests/communityClient.test.mjs`, and `tests/devvitSplash.test.mjs` as contract tests while the platform integration changes.
 
 ## Account Gate
 

@@ -8,6 +8,7 @@ const requiredFiles = [
   "vite.devvit.client.config.js",
   "vite.devvit.server.config.js",
   "src/devvit/client/splash.html",
+  "src/devvit/client/splash.js",
   "src/devvit/client/game.html",
   "src/devvit/client/game-entry.js",
   "src/devvit/server/index.js",
@@ -72,6 +73,28 @@ if (!gameEntry.includes("window.location.origin")) {
   failures.push("devvit game entry must point fetch client at the hosted origin");
 }
 
+const splash = await readFile(join(root, "src/devvit/client/splash.html"), "utf8");
+if (!splash.includes("./splash.js")) {
+  failures.push("devvit splash must load its entry shim");
+}
+if (!splash.includes('id="open-game"')) {
+  failures.push("devvit splash must expose an explicit open-game control");
+}
+
+const splashEntry = await readFile(join(root, "src/devvit/client/splash.js"), "utf8");
+if (!splashEntry.includes("devvit-internal")) {
+  failures.push("devvit splash shim must emit Devvit internal messages");
+}
+if (!splashEntry.includes("immersiveMode")) {
+  failures.push("devvit splash shim must request immersive mode");
+}
+if (!splashEntry.includes("entrypoints") || !splashEntry.includes("game")) {
+  failures.push("devvit splash shim must use the configured game entrypoint");
+}
+if (!splashEntry.includes("game.html")) {
+  failures.push("devvit splash shim must keep a local game.html fallback");
+}
+
 async function fileExists(path) {
   try {
     return (await stat(path)).isFile();
@@ -80,10 +103,29 @@ async function fileExists(path) {
   }
 }
 
+async function dirExists(path) {
+  try {
+    return (await stat(path)).isDirectory();
+  } catch {
+    return false;
+  }
+}
+
 const builtClientDir = join(root, "dist/client");
 if (await fileExists(join(builtClientDir, "splash.html"))) {
+  const builtSplash = await readFile(join(builtClientDir, "splash.html"), "utf8");
+  const builtGame = await readFile(join(builtClientDir, "game.html"), "utf8").catch(() => "");
+  if (builtSplash.includes('src="/assets') || builtSplash.includes('href="/assets')) {
+    failures.push("built splash.html must use relative asset paths for Devvit static hosting");
+  }
+  if (builtGame.includes('src="/assets') || builtGame.includes('href="/assets')) {
+    failures.push("built game.html must use relative asset paths for Devvit static hosting");
+  }
   if (!(await fileExists(join(builtClientDir, "game.html")))) {
     failures.push("built devvit client is missing game.html");
+  }
+  if (!(await dirExists(join(builtClientDir, "assets")))) {
+    failures.push("built devvit client is missing bundled assets");
   }
 } else {
   const distInfo = await stat(join(root, "dist")).catch(() => null);

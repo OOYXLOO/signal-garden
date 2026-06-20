@@ -92,6 +92,8 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
 - The Devvit client entry uses same-origin server routes for proposal consensus.
+- The Devvit splash entry requests expanded mode for the `game` entrypoint and still falls back to `game.html` in a normal browser.
+- The Devvit client build uses relative asset paths, avoiding root `/assets` assumptions in WebView static hosting.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text does not mention private goal tracking or financial intent.

@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 
 export default defineConfig({
   root: "src/devvit/client",
+  base: "./",
   build: {
     outDir: "../../../dist/client",
     emptyOutDir: true,
