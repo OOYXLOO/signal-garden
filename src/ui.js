@@ -31,6 +31,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     archiveList: document.querySelector("#archive-list"),
     briefing: document.querySelector("#briefing-output"),
     applyPlan: document.querySelector("#apply-plan"),
+    hintPlan: document.querySelector("#hint-plan"),
     clearPlan: document.querySelector("#clear-plan"),
     copyBriefing: document.querySelector("#copy-briefing"),
     saveProposal: document.querySelector("#save-proposal"),
@@ -49,6 +50,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     }
     scene.applyPlan(latestConsensus.best.plan);
   });
+  refs.hintPlan.addEventListener("click", () => scene.revealHint());
   refs.clearPlan.addEventListener("click", () => scene.clearPlan());
   refs.copyBriefing.addEventListener("click", async () => {
     refs.briefing.select();
@@ -95,6 +97,13 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";
     refs.statusHint.textContent = describeResult(puzzle, result);
+    const hints = scene.getHintProgress();
+    refs.hintPlan.disabled = result.complete || hints.revealed >= hints.total;
+    refs.hintPlan.textContent = result.complete
+      ? "Solved"
+      : hints.revealed >= hints.total
+        ? `Hints ${hints.revealed}/${hints.total}`
+        : `Hint ${hints.revealed}/${hints.total}`;
     refs.briefing.value = briefing;
     refs.moveList.replaceChildren(
       ...(plan.length

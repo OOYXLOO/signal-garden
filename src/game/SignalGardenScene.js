@@ -23,6 +23,7 @@ export class SignalGardenScene extends Phaser.Scene {
     super("SignalGardenScene");
     this.puzzle = options.puzzle;
     this.placements = planToMap(options.initialPlan || []);
+    this.hintsRevealed = 0;
     this.layers = {};
     this.wasComplete = false;
     this.completionFx = null;
@@ -42,7 +43,20 @@ export class SignalGardenScene extends Phaser.Scene {
 
   clearPlan() {
     this.placements = new Map();
+    this.hintsRevealed = 0;
     this.redraw();
+  }
+
+  revealHint() {
+    this.hintsRevealed = Math.min(this.hintsRevealed + 1, this.puzzle.solution.length);
+    this.redraw();
+  }
+
+  getHintProgress() {
+    return {
+      revealed: this.hintsRevealed,
+      total: this.puzzle.solution.length,
+    };
   }
 
   handlePointer(pointer) {
@@ -221,7 +235,7 @@ export class SignalGardenScene extends Phaser.Scene {
 
   drawGhostPlan(layout) {
     const graphics = this.layers.board;
-    for (const move of this.puzzle.solution) {
+    for (const move of this.puzzle.solution.slice(0, this.hintsRevealed)) {
       const key = cellKey(move.x, move.y);
       if (!this.placements.has(key)) {
         this.drawMirror(graphics, layout, move.x, move.y, move.mirror, COLORS.ghost, 0.32);

@@ -12,7 +12,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 1. Open on the full board.
    - Say: "Signal Garden is a daily relay puzzle built with Phaser."
-   - Show the date chip, board title, move limit, and three beacons.
+   - Show the date chip, board title, move limit, hint button, and three beacons.
 
 2. Place or apply a complete plan.
    - Say: "Players guide one signal through all three beacons before it reaches the receiver."

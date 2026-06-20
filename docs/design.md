@@ -27,6 +27,6 @@ Future server routes should recompute every proposal score from the shared puzzl
 
 - Warm paper background for a puzzle-table feel.
 - Teal signal path, coral receiver, amber beacons, violet mirrors.
-- Ghost mirrors show the suggested community plan without solving the board automatically.
+- Hint mirrors are hidden by default and appear one at a time only when the player asks, so the first board is not spoiled.
 - A solved board flashes a short amber/coral pulse across the route, beacons, and receiver.
 - Blocked, lost, and partial routes get an explicit status hint plus a board marker so the player knows where to revise the route.
