@@ -36,7 +36,7 @@ npm run record:demo
 - Recent local archive and streak state for the daily return loop.
 - Completion pulse feedback for solved boards.
 - Status hints and board markers for blocked, lost, and partial routes.
-- Demo script, submission field pack, local silent WebM demo, captioned walkthrough draft, and 60-90 second final captioned demo candidate.
+- Demo script, submission field pack, local silent WebM demo, captioned walkthrough draft, and final captioned demo candidate with explainable route feedback.
 - Server-shaped adapter for init, proposal submission, and archive reads.
 - Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 

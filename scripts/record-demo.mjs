@@ -1,9 +1,12 @@
 import { copyFile, mkdir, rm } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { traceSignal } from "../src/game/puzzle.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const require = createRequire(import.meta.url);
 const args = new Set(process.argv.slice(2));
 const final = args.has("--final") || process.env.DEMO_FINAL === "1";
 const captioned = final || args.has("--captioned") || process.env.DEMO_CAPTIONED === "1";
@@ -15,6 +18,7 @@ const tempDir = process.env.DEMO_TEMP_DIR || join(tmpdir(), "signal-garden-demo-
 
 const shortDurations = {
   intro: 3200,
+  feedback: 2800,
   route: 2800,
   proposal: 3200,
   clear: 2400,
@@ -26,6 +30,7 @@ const shortDurations = {
 const finalDurations = {
   intro: 8200,
   board: 7200,
+  feedback: 6800,
   route: 7600,
   proposal: 8200,
   clear: 6200,
@@ -36,12 +41,20 @@ const finalDurations = {
 };
 
 async function loadPlaywright() {
+  if (process.env.PLAYWRIGHT_MODULE_PATH) {
+    return await import(pathToFileURL(resolve(process.env.PLAYWRIGHT_MODULE_PATH, "index.mjs")).href);
+  }
+
   try {
     return await import("playwright");
   } catch {
-    throw new Error(
-      "Playwright is required to record the demo. Install or expose it in the current Node environment, then rerun npm run record:demo.",
-    );
+    try {
+      return require("playwright");
+    } catch {
+      throw new Error(
+        "Playwright is required to record the demo. Install it in the project or expose it through the current Node runtime, then rerun npm run record:demo.",
+      );
+    }
   }
 }
 
@@ -84,6 +97,13 @@ async function main() {
     await showCaption(page, "The first screen shows the daily seed, board title, three beacons, and the five-move limit.", durations.board);
   }
 
+  const puzzle = await page.evaluate(() => window.signalGarden.scene.puzzle);
+  const feedbackPlan = findRouteExample(puzzle, ["partial", "blocked", "lost"]);
+  if (feedbackPlan) {
+    await page.evaluate((plan) => window.signalGarden.scene.applyPlan(plan), feedbackPlan);
+    await showCaption(page, "If a route fails, the status hint and board marker show where the player should revise it.", durations.feedback);
+  }
+
   await page.evaluate(() => window.signalGarden.scene.applyPlan(window.signalGarden.scene.puzzle.solution));
   await showCaption(page, "A complete route must reach all three beacons before the receiver.", durations.route);
   await page.locator("#save-proposal").click();
@@ -122,6 +142,50 @@ async function main() {
   await copyFile(videoPath, output);
   console.log(`Recorded demo to ${output}`);
   console.log(JSON.stringify(state, null, 2));
+}
+
+function findRouteExample(puzzle, preferredStatuses) {
+  const unlockedCells = [];
+  for (let y = 0; y < puzzle.size; y += 1) {
+    for (let x = 0; x < puzzle.size; x += 1) {
+      const locked =
+        (x === puzzle.source.x && y === puzzle.source.y) ||
+        (x === puzzle.target.x && y === puzzle.target.y) ||
+        puzzle.blockers.some((cell) => cell.x === x && cell.y === y);
+      if (!locked) {
+        unlockedCells.push({ x, y });
+      }
+    }
+  }
+
+  const mirrors = ["slash", "backslash"];
+  const found = new Map();
+  const plan = [];
+
+  function search(startIndex, maxMoves) {
+    const result = traceSignal(puzzle, plan);
+    if (plan.length && preferredStatuses.includes(result.status) && !found.has(result.status)) {
+      found.set(result.status, plan.map((move) => ({ ...move })));
+    }
+    if (plan.length >= maxMoves || found.size === preferredStatuses.length) {
+      return;
+    }
+    for (let index = startIndex; index < unlockedCells.length; index += 1) {
+      for (const mirror of mirrors) {
+        plan.push({ ...unlockedCells[index], mirror });
+        search(index + 1, maxMoves);
+        plan.pop();
+      }
+    }
+  }
+
+  search(0, 3);
+  for (const status of preferredStatuses) {
+    if (found.has(status)) {
+      return found.get(status);
+    }
+  }
+  return null;
 }
 
 async function installCaptionLayer(page) {
