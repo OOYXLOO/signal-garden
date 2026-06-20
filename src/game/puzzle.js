@@ -229,6 +229,17 @@ export function createDailyPuzzle(date = new Date()) {
   };
 }
 
+export function createPuzzleForDayKey(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) {
+    return null;
+  }
+  const date = new Date(`${value}T00:00:00.000Z`);
+  if (Number.isNaN(date.getTime()) || dayKey(date) !== value) {
+    return null;
+  }
+  return createDailyPuzzle(date);
+}
+
 export function planToMap(plan = []) {
   const placements = new Map();
   for (const move of normalizePlan(plan)) {

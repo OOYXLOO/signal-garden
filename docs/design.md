@@ -19,7 +19,7 @@
 
 ## Community Proposal Layer
 
-The current prototype saves proposals locally, ranks completed paths above partial paths, and produces a compact consensus payload. Applying the top proposal uses the best saved plan rather than a hidden answer. Share links encode the daily route so a post or review thread can reopen the same plan. This keeps the community loop testable before a platform adapter exists.
+The current prototype saves proposals locally, ranks completed paths above partial paths, and produces a compact consensus payload. Applying the top proposal uses the best saved plan rather than a hidden answer. Share links encode the daily route and rebuild that exact daily board later, so a post or review thread can reopen the same plan. This keeps the community loop testable before a platform adapter exists.
 
 Future server routes should recompute every proposal score from the shared puzzle module instead of trusting client-provided values.
 

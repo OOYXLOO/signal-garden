@@ -1,11 +1,15 @@
 import assert from "node:assert/strict";
 import { createProposal, rankProposals, summarizeConsensus, toCommunityPayload } from "../src/game/proposals.js";
-import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
+import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createPuzzleForDayKey, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
+const linkedPuzzle = createPuzzleForDayKey("2026-06-19");
 const solved = traceSignal(puzzle, puzzle.solution);
 const empty = traceSignal(puzzle, []);
 
+assert.equal(linkedPuzzle.id, puzzle.id);
+assert.equal(createPuzzleForDayKey("2026-02-31"), null);
+assert.equal(createPuzzleForDayKey("not-a-day"), null);
 assert.equal(puzzle.size, 8);
 assert.equal(puzzle.beacons.length, 3);
 assert.ok(PUZZLE_TEMPLATES.length >= 7);
@@ -18,6 +22,7 @@ assert.match(describeResult(puzzle, empty), /row|Place mirrors|Receiver reached|
 assert.match(createRouteInsight(puzzle, solved).map((insight) => insight.value).join(" "), /beacons are connected/);
 assert.match(createRouteInsight(puzzle, empty).map((insight) => insight.value).join(" "), /first beacon|leaves after/);
 assert.deepEqual(decodePlanToken(encodePlanToken(puzzle.solution), puzzle), puzzle.solution);
+assert.deepEqual(decodePlanToken(encodePlanToken(linkedPuzzle.solution), linkedPuzzle), linkedPuzzle.solution);
 assert.deepEqual(decodePlanToken(`0-0-s.99-1-b.bad.${puzzle.blockers[0].x}-${puzzle.blockers[0].y}-b`, puzzle), [{ x: 0, y: 0, mirror: "slash" }]);
 
 const partialPuzzle = {
