@@ -20,8 +20,8 @@ Observed public requirements and signals on 2026-06-20:
 
 - `README.md`: project overview, local run, quality checks, and scope.
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
-- `docs/demo-script.md`: 60-90 second walkthrough plan.
-- `docs/demo-final-captioned.webm`: current captioned demo candidate.
+- `docs/demo-script.md`: under-60-second walkthrough plan.
+- `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
 - `docs/desktop-preview.png`: desktop gallery preview.
 - `docs/mobile-preview.png`: mobile gallery preview.
@@ -41,6 +41,8 @@ npm run audit:devvit
 npm run audit:submission
 npm audit --audit-level=moderate
 ```
+
+`npm run audit:submission` checks that the final captioned demo stays at or below 60 seconds.
 
 Optional asset refresh:
 

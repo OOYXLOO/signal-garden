@@ -30,18 +30,20 @@ const shortDurations = {
 };
 
 const finalDurations = {
-  intro: 8200,
-  board: 7200,
-  feedback: 6800,
-  route: 7600,
-  replay: 6200,
-  proposal: 8200,
-  share: 6200,
-  clear: 6200,
-  apply: 7600,
-  archive: 8200,
-  adapter: 7600,
-  close: 6800,
+  intro: 4000,
+  board: 3400,
+  feedback: 3800,
+  route: 3800,
+  replay: 3200,
+  proposal: 3800,
+  share: 3400,
+  import: 4600,
+  recap: 4000,
+  clear: 2800,
+  apply: 3400,
+  archive: 3600,
+  adapter: 3400,
+  close: 3000,
 };
 
 async function loadPlaywright() {
@@ -117,6 +119,14 @@ async function main() {
   await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", durations.proposal);
   await page.locator("#copy-link").click();
   await showCaption(page, "The briefing includes an exact review link, so a post or review thread can reopen the same plan.", durations.share);
+  if (final) {
+    const briefing = await page.locator("#briefing-output").inputValue();
+    await page.locator("#comment-route").fill(`Comment route:\n${briefing}`);
+    await page.locator("#import-route").click();
+    await page.waitForFunction(() => document.querySelector("#contributor-list")?.textContent.includes("comment-route"));
+    await showCaption(page, "Paste a review link from a comment: it becomes another scored community proposal.", durations.import);
+    await showCaption(page, "The contributor board and daily recap turn today's routes into a discussion loop.", durations.recap);
+  }
   await page.locator("#clear-plan").click();
   await showCaption(page, "Clear the board: the community plan is now stored separately from the local draft.", durations.clear);
   await page.locator("#apply-plan").click();
@@ -131,6 +141,8 @@ async function main() {
     title: document.querySelector("#puzzle-title")?.textContent,
     status: document.querySelector("#status-value")?.textContent,
     summary: document.querySelector("#proposal-summary")?.textContent,
+    contributors: document.querySelector("#contributor-list")?.textContent,
+    recap: document.querySelector("#daily-recap")?.value,
     briefing: document.querySelector("#briefing-output")?.value,
     objectives: [...document.querySelectorAll("#objective-list li")].map((item) => item.getAttribute("aria-label")),
     archive: [...document.querySelectorAll("#archive-list li")].map((item) => item.getAttribute("aria-label") || item.textContent),
@@ -143,11 +155,14 @@ async function main() {
   if (consoleErrors.length) {
     throw new Error(`Console errors during demo recording: ${consoleErrors.join(" | ")}`);
   }
-  if (state.status !== "Complete" || !state.summary?.includes("1/1 saved proposals complete")) {
+  if (state.status !== "Complete" || !state.summary?.includes("saved proposals complete")) {
     throw new Error(`Unexpected demo state: ${JSON.stringify(state)}`);
   }
   if (!state.briefing?.includes("Review link:") || !state.objectives.every((objective) => objective?.includes("complete"))) {
     throw new Error(`Incomplete share or objective state: ${JSON.stringify(state)}`);
+  }
+  if (final && (!state.contributors?.includes("comment-route") || !state.recap?.includes("Contributor lead"))) {
+    throw new Error(`Incomplete contributor recap state: ${JSON.stringify(state)}`);
   }
 
   const videoPath = await video.path();

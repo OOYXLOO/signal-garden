@@ -39,6 +39,8 @@ const textExpectations = [
   },
 ];
 
+const maxDemoDurationSeconds = 60;
+
 function readPngDimensions(buffer) {
   const signature = buffer.subarray(0, 8).toString("hex");
   if (signature !== "89504e470d0a1a0a") {
@@ -52,6 +54,68 @@ function readPngDimensions(buffer) {
     width: buffer.readUInt32BE(16),
     height: buffer.readUInt32BE(20),
   };
+}
+
+function readVintSize(buffer, offset) {
+  const first = buffer[offset];
+  if (first === undefined) {
+    throw new Error("missing vint");
+  }
+  let length = 1;
+  let marker = 0x80;
+  while (length <= 8 && !(first & marker)) {
+    length += 1;
+    marker >>= 1;
+  }
+  if (length > 8 || offset + length > buffer.length) {
+    throw new Error("invalid vint");
+  }
+  let value = BigInt(first & ~marker);
+  for (let index = 1; index < length; index += 1) {
+    value = (value << 8n) + BigInt(buffer[offset + index]);
+  }
+  return { length, value: Number(value) };
+}
+
+function readUnsigned(buffer, offset, length) {
+  let value = 0;
+  for (let index = 0; index < length; index += 1) {
+    value = value * 256 + buffer[offset + index];
+  }
+  return value;
+}
+
+function findElement(buffer, idBytes) {
+  const id = Buffer.from(idBytes);
+  const offset = buffer.indexOf(id);
+  if (offset === -1) {
+    return null;
+  }
+  const size = readVintSize(buffer, offset + id.length);
+  const dataOffset = offset + id.length + size.length;
+  if (dataOffset + size.value > buffer.length) {
+    throw new Error(`element ${id.toString("hex")} exceeds file size`);
+  }
+  return { offset: dataOffset, size: size.value };
+}
+
+function readWebmDurationSeconds(buffer) {
+  const scaleElement = findElement(buffer, [0x2a, 0xd7, 0xb1]);
+  const timecodeScale = scaleElement ? readUnsigned(buffer, scaleElement.offset, scaleElement.size) : 1_000_000;
+  const durationElement = findElement(buffer, [0x44, 0x89]);
+  if (!durationElement) {
+    throw new Error("missing duration metadata");
+  }
+
+  let duration;
+  if (durationElement.size === 4) {
+    duration = buffer.readFloatBE(durationElement.offset);
+  } else if (durationElement.size === 8) {
+    duration = buffer.readDoubleBE(durationElement.offset);
+  } else {
+    throw new Error(`unsupported duration size ${durationElement.size}`);
+  }
+  return (duration * timecodeScale) / 1_000_000_000;
 }
 
 const failures = [];
@@ -86,12 +150,22 @@ for (const expectation of pngExpectations) {
 }
 
 try {
-  const info = await stat(join(root, "docs/demo-final-captioned.webm"));
-  if (info.size < 4_000_000) {
-    failures.push(`docs/demo-final-captioned.webm size ${info.size}, expected at least 4000000`);
+  const path = join(root, "docs/demo-final-captioned.webm");
+  const info = await stat(path);
+  if (info.size < 2_000_000) {
+    failures.push(`docs/demo-final-captioned.webm size ${info.size}, expected at least 2000000`);
   }
-} catch {
-  failures.push("docs/demo-final-captioned.webm missing");
+  const duration = readWebmDurationSeconds(await readFile(path));
+  if (!Number.isFinite(duration) || duration <= 0) {
+    failures.push("docs/demo-final-captioned.webm duration metadata is invalid");
+  }
+  if (duration > maxDemoDurationSeconds) {
+    failures.push(
+      `docs/demo-final-captioned.webm duration ${duration.toFixed(2)}s, expected at most ${maxDemoDurationSeconds}s`,
+    );
+  }
+} catch (error) {
+  failures.push(`docs/demo-final-captioned.webm check failed: ${error.message}`);
 }
 
 for (const expectation of textExpectations) {
@@ -117,5 +191,5 @@ if (failures.length) {
 console.log("PASS submission assets present");
 console.log("PASS gallery image dimensions valid");
 console.log("PASS final captioned demo size valid");
+console.log("PASS final captioned demo duration valid");
 console.log("PASS submission text pack complete");
-

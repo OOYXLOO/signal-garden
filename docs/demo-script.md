@@ -1,8 +1,8 @@
 # Signal Garden Demo Script
 
-Target length: 60-90 seconds.
+Target length: under 60 seconds.
 
-Current local assets include a shorter captioned walkthrough draft at `docs/demo-captioned.webm` and a final captioned candidate at `docs/demo-final-captioned.webm`. Use the final candidate for submission review, then add voiceover only if the platform strongly benefits from audio.
+Current local assets include a shorter captioned walkthrough draft at `docs/demo-captioned.webm` and a final captioned candidate at `docs/demo-final-captioned.webm`. Use the final candidate for submission review only after `npm run audit:submission` confirms it stays under 60 seconds.
 
 ## Core Message
 
@@ -34,20 +34,28 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
    - Say: "A share link and briefing carry the exact route into a post, comment, or review thread."
    - Show the review link inside the briefing output and the copy button changing to `Link copied`.
 
-7. Clear and apply the top proposal.
+7. Import a comment route.
+   - Say: "A pasted review link becomes another scored community proposal."
+   - Show the comment route import and the contributor board updating.
+
+8. Show the daily recap.
+   - Say: "The contributor board and daily recap make each board easy to discuss."
+   - Show the recap text with route count and contributor lead.
+
+9. Clear and apply the top proposal.
    - Say: "The top proposal is not a hidden answer. It is the best saved community plan."
    - Show the board returning to the saved route.
 
-8. Show the loop panel.
+10. Show the loop panel.
    - Say: "The local archive and streak make the daily board feel persistent."
    - Point out daily seed, local streak, status, and the archive Review link.
 
-9. Close on the platform path.
+11. Close on the platform path.
    - Say: "The browser version is testable today, and the Devvit shell keeps the client and server adapter ready for a Reddit surface."
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, objective progress, route replay, local proposal consensus, shareable route links, review-link briefing export, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, objective progress, route replay, local proposal consensus, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 
