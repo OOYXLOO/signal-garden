@@ -1,4 +1,5 @@
 import { createCommunityClient } from "./client/communityClient.js";
+import { createGameAudio } from "./audio.js";
 import { describeResult, encodePlanToken } from "./game/puzzle.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
@@ -15,7 +16,7 @@ function mirrorLabel(move) {
   return `${symbol} mirror at row ${move.y + 1}, column ${move.x + 1}`;
 }
 
-export function bindUi(scene, { communityClient = createCommunityClient() } = {}) {
+export function bindUi(scene, { communityClient = createCommunityClient(), audio = createGameAudio() } = {}) {
   const refs = {
     dayChip: document.querySelector("#day-chip"),
     title: document.querySelector("#puzzle-title"),
@@ -32,6 +33,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     briefing: document.querySelector("#briefing-output"),
     copyLink: document.querySelector("#copy-link"),
     applyPlan: document.querySelector("#apply-plan"),
+    soundToggle: document.querySelector("#sound-toggle"),
     hintPlan: document.querySelector("#hint-plan"),
     clearPlan: document.querySelector("#clear-plan"),
     replayPlan: document.querySelector("#replay-plan"),
@@ -43,8 +45,20 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
   let latest = null;
   let latestDay = null;
   let latestConsensus = null;
+  let lastSoundStatus = null;
+  let hasRenderedState = false;
+
+  function renderSoundToggle() {
+    refs.soundToggle.textContent = audio.isMuted() ? "Sound off" : "Sound on";
+    refs.soundToggle.setAttribute("aria-pressed", String(!audio.isMuted()));
+  }
 
   refs.applyPlan.disabled = true;
+  renderSoundToggle();
+  refs.soundToggle.addEventListener("click", () => {
+    audio.toggle();
+    renderSoundToggle();
+  });
   refs.applyPlan.addEventListener("click", () => {
     if (!latestConsensus?.best?.plan) {
       refs.proposalSummary.textContent = "Save or load a community proposal before applying one.";
@@ -54,7 +68,11 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
   });
   refs.hintPlan.addEventListener("click", () => scene.revealHint());
   refs.clearPlan.addEventListener("click", () => scene.clearPlan());
-  refs.replayPlan.addEventListener("click", () => scene.replayRoute());
+  refs.replayPlan.addEventListener("click", () => {
+    if (scene.replayRoute()) {
+      audio.play("replay");
+    }
+  });
   refs.copyBriefing.addEventListener("click", async () => {
     refs.briefing.select();
     try {
@@ -121,6 +139,15 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";
     refs.statusHint.textContent = describeResult(puzzle, result);
+    if (hasRenderedState && lastSoundStatus !== result.status) {
+      if (result.complete) {
+        audio.play("complete");
+      } else if (plan.length && ["blocked", "lost"].includes(result.status)) {
+        audio.play("blocked");
+      }
+    }
+    lastSoundStatus = result.status;
+    hasRenderedState = true;
     const hints = scene.getHintProgress();
     refs.hintPlan.disabled = result.complete || hints.revealed >= hints.total;
     refs.hintPlan.textContent = result.complete
