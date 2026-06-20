@@ -15,6 +15,10 @@ Generated: 2026-06-20
 - The browser UI now submits proposals through a `communityClient` boundary instead of directly writing the consensus list.
 - Browser validation confirms saved proposals reload through the local adapter store.
 - A local `devvit.json` shell and Vite Devvit client/server builds exist for pre-account validation.
+- Devvit build outputs now follow the official Phaser starter shape:
+  - `dist/client`
+  - `dist/server/index.cjs`
+- `npm run audit:devvit` verifies the configured entrypoint paths and built output paths stay in sync.
 
 ## Not Yet Done
 
@@ -32,7 +36,7 @@ Use the official Phaser starter structure as the migration shell:
 
 1. Inject the platform Redis object as `globalThis.signalGardenRedis` or replace `createStore` with the official Devvit Redis import pattern.
 2. Point `createFetchCommunityClient` at the hosted route root inside the Devvit client build.
-3. Add post creation flow through the official menu endpoint shape.
+3. Replace the local menu placeholder with the official post creation helper when the account owner runs a real playtest.
 4. Keep `tests/serverAdapter.test.mjs` and `tests/communityClient.test.mjs` as contract tests while the storage implementation changes.
 
 ## Account Gate

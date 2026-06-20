@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 export default defineConfig({
   root: "src/devvit/client",
   build: {
-    outDir: "../../../dist/devvit-client",
+    outDir: "../../../dist/client",
     emptyOutDir: true,
     chunkSizeWarningLimit: 1400,
     rollupOptions: {

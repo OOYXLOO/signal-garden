@@ -2,7 +2,7 @@
   "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
   "name": "signal-garden",
   "post": {
-    "dir": "dist/devvit-client",
+    "dir": "dist/client",
     "entrypoints": {
       "default": {
         "inline": true,
@@ -14,7 +14,7 @@
     }
   },
   "server": {
-    "dir": "dist/devvit-server",
+    "dir": "dist/server",
     "entry": "index.cjs"
   },
   "menu": {
@@ -33,4 +33,3 @@
     "dev": "npm run build:devvit -- --watch"
   }
 }
-

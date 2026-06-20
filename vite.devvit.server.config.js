@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 
 export default defineConfig({
   build: {
-    outDir: "dist/devvit-server",
+    outDir: "dist/server",
     emptyOutDir: true,
     target: "node22",
     lib: {

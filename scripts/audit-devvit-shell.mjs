@@ -33,8 +33,8 @@ const config = JSON.parse(await readFile(join(root, "devvit.json"), "utf8"));
 if (config.name !== "signal-garden") {
   failures.push("devvit.json name must be signal-garden");
 }
-if (config.post?.dir !== "dist/devvit-client") {
-  failures.push("devvit client dir must be dist/devvit-client");
+if (config.post?.dir !== "dist/client") {
+  failures.push("devvit client dir must be dist/client");
 }
 if (config.post?.entrypoints?.default?.entry !== "splash.html") {
   failures.push("default post entrypoint must be splash.html");
@@ -42,8 +42,8 @@ if (config.post?.entrypoints?.default?.entry !== "splash.html") {
 if (config.post?.entrypoints?.game?.entry !== "game.html") {
   failures.push("game post entrypoint must be game.html");
 }
-if (config.server?.dir !== "dist/devvit-server" || config.server?.entry !== "index.cjs") {
-  failures.push("server output must be dist/devvit-server/index.cjs");
+if (config.server?.dir !== "dist/server" || config.server?.entry !== "index.cjs") {
+  failures.push("server output must be dist/server/index.cjs");
 }
 const serialized = JSON.stringify(config);
 if (serialized.includes("<%") || serialized.includes("%>")) {
@@ -58,7 +58,7 @@ async function fileExists(path) {
   }
 }
 
-const builtClientDir = join(root, "dist/devvit-client");
+const builtClientDir = join(root, "dist/client");
 if (await fileExists(join(builtClientDir, "splash.html"))) {
   if (!(await fileExists(join(builtClientDir, "game.html")))) {
     failures.push("built devvit client is missing game.html");
@@ -66,14 +66,14 @@ if (await fileExists(join(builtClientDir, "splash.html"))) {
 } else {
   const distInfo = await stat(join(root, "dist")).catch(() => null);
   if (distInfo) {
-    failures.push("dist exists but built devvit client is missing splash.html at the root");
+    failures.push("dist exists but built devvit client is missing splash.html in the configured client dir");
   }
 }
 
-const builtServer = join(root, "dist/devvit-server/index.cjs");
+const builtServer = join(root, "dist/server/index.cjs");
 const distInfo = await stat(join(root, "dist")).catch(() => null);
 if (distInfo && !(await fileExists(builtServer))) {
-  failures.push("dist exists but built devvit server is missing index.cjs");
+  failures.push("dist exists but built devvit server is missing index.cjs in the configured server dir");
 }
 
 if (failures.length) {
