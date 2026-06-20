@@ -91,6 +91,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - A pasted review link or briefing can be imported as a community proposal.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
+- The Devvit client entry uses same-origin server routes for proposal consensus.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text does not mention private goal tracking or financial intent.

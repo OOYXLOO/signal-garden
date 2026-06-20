@@ -63,7 +63,10 @@ It also has a local server adapter that mirrors the future Devvit API shape:
   - accepts an injected Redis object so the source remains buildable before account setup.
 - `src/client/communityClient.js`
   - local client adapter used by the browser UI.
-  - fetch client adapter for future hosted Devvit routes.
+  - fetch client adapter used by the Devvit client entry for hosted same-origin routes.
+- `src/devvit/client/game-entry.js`
+  - starts the game manually.
+  - injects `createFetchCommunityClient({ baseUrl: window.location.origin })`.
 - `src/state/browserProposalStore.js`
   - browser-backed local store used only by the local adapter.
 

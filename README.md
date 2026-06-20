@@ -50,6 +50,7 @@ npm run record:demo
 - Launch readiness checklist for user-approved platform submission gates.
 - Server-shaped adapter for init, proposal submission, and archive reads.
 - Devvit-style subreddit menu route for creating a daily relay post when a platform post helper is available.
+- Devvit client entry uses the fetch-backed community client against the hosted origin.
 - Redis-shaped proposal store and local Devvit shell build outputs for pre-account validation.
 
 No production account setup, hosting configuration, or platform submission is performed by this repository.

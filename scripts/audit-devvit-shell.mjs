@@ -61,6 +61,17 @@ if (serialized.includes("<%") || serialized.includes("%>")) {
   failures.push("devvit.json still contains template placeholders");
 }
 
+const gameEntry = await readFile(join(root, "src/devvit/client/game-entry.js"), "utf8");
+if (!gameEntry.includes("SIGNAL_GARDEN_MANUAL_START")) {
+  failures.push("devvit game entry must use manual Signal Garden startup");
+}
+if (!gameEntry.includes("createFetchCommunityClient")) {
+  failures.push("devvit game entry must use the fetch-backed community client");
+}
+if (!gameEntry.includes("window.location.origin")) {
+  failures.push("devvit game entry must point fetch client at the hosted origin");
+}
+
 async function fileExists(path) {
   try {
     return (await stat(path)).isFile();

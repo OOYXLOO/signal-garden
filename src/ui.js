@@ -263,7 +263,7 @@ function renderArchive(refs, currentPuzzleId) {
 }
 
 async function refreshConsensus(refs, communityClient, day) {
-  refs.proposalSummary.textContent = "Loading local consensus...";
+  refs.proposalSummary.textContent = "Loading consensus...";
   try {
     const response = await communityClient.init(day);
     return renderConsensus(refs, response.consensus, response.puzzle);

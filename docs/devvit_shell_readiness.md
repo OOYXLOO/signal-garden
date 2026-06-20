@@ -17,6 +17,7 @@ Generated: 2026-06-20
 - A memory store exists for tests and local pre-Devvit development.
 - Tests prove a forged client score is ignored.
 - The browser UI now submits proposals through a `communityClient` boundary instead of directly writing the consensus list.
+- The Devvit client entry starts the app manually with `createFetchCommunityClient({ baseUrl: window.location.origin })`.
 - Browser validation confirms saved proposals reload through the local adapter store.
 - A local `devvit.json` shell and Vite Devvit client/server builds exist for pre-account validation.
 - Devvit build outputs now follow the official Phaser starter shape:
@@ -32,7 +33,7 @@ Generated: 2026-06-20
 - The Devvit server shell can accept `globalThis.signalGardenRedis`; without it, it falls back to `MemoryProposalStore` for local build validation.
 - A Redis-shaped proposal store exists and is tested with a fake Redis implementation.
 - The Devvit server shell test injects a Redis-shaped object and verifies proposals persist through that path.
-- The default browser client still uses the local adapter. Switching to hosted Devvit routes should use `createFetchCommunityClient`.
+- The default browser client still uses the local adapter. The Devvit client entry uses hosted same-origin routes.
 
 ## Next Engineering Step
 
