@@ -20,6 +20,7 @@ const shortDurations = {
   intro: 3200,
   feedback: 2800,
   route: 2800,
+  replay: 2800,
   proposal: 3200,
   share: 2600,
   clear: 2400,
@@ -33,6 +34,7 @@ const finalDurations = {
   board: 7200,
   feedback: 6800,
   route: 7600,
+  replay: 6200,
   proposal: 8200,
   share: 6200,
   clear: 6200,
@@ -108,6 +110,8 @@ async function main() {
 
   await page.evaluate(() => window.signalGarden.scene.applyPlan(window.signalGarden.scene.puzzle.solution));
   await showCaption(page, "A complete route must reach all three beacons before the receiver.", durations.route);
+  await page.locator("#replay-plan").click();
+  await showCaption(page, "Replay route animates the signal path so the solution is readable during review.", durations.replay);
   await page.locator("#save-proposal").click();
   await page.waitForFunction(() => !document.querySelector("#apply-plan").disabled);
   await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", durations.proposal);

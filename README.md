@@ -36,6 +36,7 @@ npm run record:demo
 - Share links that reopen the same daily route for review or discussion.
 - Recent local archive and streak state for the daily return loop.
 - Completion pulse feedback for solved boards.
+- Replay route animation for the current plan.
 - Status hints and board markers for blocked, lost, and partial routes.
 - Optional progressive hints that reveal solution mirrors only when the player asks.
 - Demo script, submission field pack, local silent WebM demo, captioned walkthrough draft, and final captioned demo candidate with explainable route feedback.

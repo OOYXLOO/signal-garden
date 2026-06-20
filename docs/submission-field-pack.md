@@ -26,6 +26,7 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 
 - Phaser + Vite browser game.
 - Shared deterministic puzzle engine.
+- Replay animation for the current route.
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.
 - Compact route encoding for share links.
@@ -38,6 +39,7 @@ The current build includes seven verified puzzle templates, Phaser rendering, lo
 
 - Show a full board in the first five seconds.
 - Complete a route through all three beacons.
+- Replay the completed route.
 - Save the proposal and show the consensus summary.
 - Copy a share link for the exact route.
 - Clear the board and apply the top proposal.

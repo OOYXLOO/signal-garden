@@ -34,6 +34,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     applyPlan: document.querySelector("#apply-plan"),
     hintPlan: document.querySelector("#hint-plan"),
     clearPlan: document.querySelector("#clear-plan"),
+    replayPlan: document.querySelector("#replay-plan"),
     copyBriefing: document.querySelector("#copy-briefing"),
     saveProposal: document.querySelector("#save-proposal"),
     proposalSummary: document.querySelector("#proposal-summary"),
@@ -53,6 +54,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
   });
   refs.hintPlan.addEventListener("click", () => scene.revealHint());
   refs.clearPlan.addEventListener("click", () => scene.clearPlan());
+  refs.replayPlan.addEventListener("click", () => scene.replayRoute());
   refs.copyBriefing.addEventListener("click", async () => {
     refs.briefing.select();
     try {
@@ -114,6 +116,7 @@ export function bindUi(scene, { communityClient = createCommunityClient() } = {}
     refs.beacons.textContent = `${result.hitBeacons.length}/${puzzle.beacons.length}`;
     refs.moves.textContent = `${plan.length}/${puzzle.moveLimit}`;
     refs.copyLink.disabled = plan.length === 0;
+    refs.replayPlan.disabled = plan.length === 0;
     refs.seed.textContent = puzzle.id.replaceAll("-", "");
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";

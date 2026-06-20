@@ -27,6 +27,7 @@ export class SignalGardenScene extends Phaser.Scene {
     this.layers = {};
     this.wasComplete = false;
     this.completionFx = null;
+    this.replayFx = null;
   }
 
   create() {
@@ -37,11 +38,13 @@ export class SignalGardenScene extends Phaser.Scene {
   }
 
   applyPlan(plan = []) {
+    this.stopReplay();
     this.placements = planToMap(plan);
     this.redraw();
   }
 
   clearPlan() {
+    this.stopReplay();
     this.placements = new Map();
     this.hintsRevealed = 0;
     this.redraw();
@@ -57,6 +60,83 @@ export class SignalGardenScene extends Phaser.Scene {
       revealed: this.hintsRevealed,
       total: this.puzzle.solution.length,
     };
+  }
+
+  replayRoute() {
+    const result = traceSignal(this.puzzle, mapToPlan(this.placements));
+    if (result.moves.length === 0 || result.visited.length < 2) {
+      return false;
+    }
+
+    this.stopReplay();
+    const layout = this.getLayout();
+    const points = result.visited.map((step) => this.cellCenter(layout, step.x, step.y));
+    const marker = this.add.graphics();
+    marker.setDepth(20);
+    this.replayFx = marker;
+
+    let index = 0;
+    const drawMarker = (point, alpha = 1) => {
+      if (this.replayFx !== marker) {
+        return;
+      }
+      marker.clear();
+      marker.fillStyle(COLORS.amber, 0.88 * alpha);
+      marker.fillCircle(point.x, point.y, layout.cell * 0.18);
+      marker.lineStyle(4, COLORS.teal, 0.74 * alpha);
+      marker.strokeCircle(point.x, point.y, layout.cell * 0.28);
+    };
+
+    drawMarker(points[0]);
+    const advance = () => {
+      index += 1;
+      if (index >= points.length) {
+        this.tweens.add({
+          targets: marker,
+          alpha: 0,
+          duration: 220,
+          onComplete: () => this.stopReplay(),
+        });
+        return;
+      }
+
+      const from = points[index - 1];
+      const to = points[index];
+      const progress = { value: 0 };
+      this.tweens.add({
+        targets: progress,
+        value: 1,
+        duration: 120,
+        ease: "Sine.easeInOut",
+        onUpdate: () => {
+          if (this.replayFx !== marker) {
+            return;
+          }
+          drawMarker(
+            {
+              x: Phaser.Math.Linear(from.x, to.x, progress.value),
+              y: Phaser.Math.Linear(from.y, to.y, progress.value),
+            },
+            1,
+          );
+        },
+        onComplete: () => {
+          if (this.replayFx === marker) {
+            advance();
+          }
+        },
+      });
+    };
+    advance();
+    return true;
+  }
+
+  stopReplay() {
+    if (this.replayFx) {
+      this.tweens.killTweensOf(this.replayFx);
+      this.replayFx.destroy();
+      this.replayFx = null;
+    }
   }
 
   handlePointer(pointer) {
@@ -112,6 +192,7 @@ export class SignalGardenScene extends Phaser.Scene {
   }
 
   redraw() {
+    this.stopReplay();
     if (this.completionFx) {
       this.completionFx.destroy();
       this.completionFx = null;
