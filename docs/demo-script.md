@@ -38,9 +38,9 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
    - Say: "A pasted review link becomes another scored community proposal."
    - Show the comment route import and the contributor board updating.
 
-8. Show the daily recap.
-   - Say: "The contributor board and daily recap make each board easy to discuss."
-   - Show the recap text with route count and contributor lead.
+8. Show the comment challenge and daily recap.
+   - Say: "The comment prompt gives each player a clean way to reply with a route, and the recap closes the day."
+   - Show the comment challenge with a Review link, then the recap text with route count and contributor lead.
 
 9. Clear and apply the top proposal.
    - Say: "The top proposal is not a hidden answer. It is the best saved community plan."
@@ -55,7 +55,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, objective progress, route replay, local proposal consensus, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, objective progress, route replay, local proposal consensus, comment challenge prompts, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 

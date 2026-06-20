@@ -23,11 +23,18 @@ const pngExpectations = [
 const textExpectations = [
   {
     file: "docs/submission-field-pack.md",
-    fragments: ["Short Description", "Long Description", "What Makes It Social", "Technical Highlights", "Demo Checklist"],
+    fragments: [
+      "Short Description",
+      "Long Description",
+      "What Makes It Social",
+      "Technical Highlights",
+      "Demo Checklist",
+      "comment challenge",
+    ],
   },
   {
     file: "docs/demo-script.md",
-    fragments: ["objective progress", "review link", "archive Review"],
+    fragments: ["objective progress", "review link", "archive Review", "comment prompt"],
   },
   {
     file: "docs/gallery_assets.md",

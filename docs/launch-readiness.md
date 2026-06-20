@@ -89,6 +89,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
 - A pasted review link or briefing can be imported as a community proposal.
+- The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
 - The Devvit client entry uses same-origin server routes for proposal consensus.

@@ -2,7 +2,7 @@ import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { createDailyRecap } from "./game/proposals.js";
-import { buildShareUrl, createShareBriefing, parseSharedRoute } from "./share.js";
+import { buildShareUrl, createCommentChallenge, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -50,6 +50,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     contributorList: document.querySelector("#contributor-list"),
     dailyRecap: document.querySelector("#daily-recap"),
     copyRecap: document.querySelector("#copy-recap"),
+    commentChallenge: document.querySelector("#comment-challenge"),
+    copyCommentChallenge: document.querySelector("#copy-comment-challenge"),
   };
   let latest = null;
   let latestDay = null;
@@ -123,6 +125,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyCommentChallenge.addEventListener("click", async () => {
+    refs.commentChallenge.select();
+    try {
+      await navigator.clipboard.writeText(refs.commentChallenge.value);
+      refs.copyCommentChallenge.textContent = "Challenge copied";
+      window.setTimeout(() => {
+        refs.copyCommentChallenge.textContent = "Copy comment challenge";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
 
   refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
@@ -136,6 +150,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         author: "local-player",
       });
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
+      renderCommentChallenge(refs, latest, latestConsensus);
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
@@ -160,6 +175,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         author: "comment-route",
       });
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
+      renderCommentChallenge(refs, latest, latestConsensus);
       const summary = refs.proposalSummary.textContent;
       refs.proposalSummary.textContent = `Imported ${parsed.plan.length} move ${parsed.source}. ${summary}`;
       refs.commentRoute.value = "";
@@ -205,6 +221,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         : `Hint ${hints.revealed}/${hints.total}`;
     const shareUrl = buildShareUrl(window.location.href, puzzle, plan);
     refs.briefing.value = createShareBriefing({ briefing, shareUrl });
+    renderCommentChallenge(refs, latest, latestConsensus);
     refs.moveList.replaceChildren(
       ...(plan.length
         ? plan.map((move) => {
@@ -223,9 +240,22 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestDay = puzzle.id;
       refreshConsensus(refs, communityClient, puzzle.id).then((consensus) => {
         latestConsensus = consensus;
+        renderCommentChallenge(refs, latest, latestConsensus);
       });
     }
   });
+}
+
+function renderCommentChallenge(refs, latest, consensus) {
+  refs.commentChallenge.value = latest
+    ? createCommentChallenge({
+        puzzle: latest.puzzle,
+        result: latest.result,
+        plan: latest.plan,
+        shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+        consensus,
+      })
+    : "";
 }
 
 function renderArchive(refs, currentPuzzleId) {

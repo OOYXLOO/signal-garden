@@ -88,6 +88,14 @@ for (const file of required) {
   }
 }
 
+const indexHtml = await readFile(join(root, "index.html"), "utf8");
+if (!indexHtml.includes('id="comment-challenge"')) {
+  failures.push("index.html missing comment challenge prompt");
+}
+if (!indexHtml.includes('id="copy-comment-challenge"')) {
+  failures.push("index.html missing comment challenge copy control");
+}
+
 for (const file of await walk(root)) {
   if (!checkedExtensions.has(extname(file))) {
     continue;

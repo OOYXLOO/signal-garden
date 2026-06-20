@@ -12,7 +12,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, comment route import, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, comment route import, a comment challenge prompt, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
 
 ## What Makes It Social
 
@@ -20,6 +20,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Each route can be shared as a link that reopens the same plan.
 - Briefings include the exact review link for the current route.
 - Routes pasted from comments or briefings can be imported into the consensus list.
+- A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - Contributors get a compact daily board based on complete routes and best score.
 - A daily recap can be copied back into a discussion thread.
 - The top route can be applied by the community.
@@ -36,6 +37,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Optional progressive hints that avoid spoiling the board on first load.
 - Compact route encoding for share links.
 - Review link and briefing parser for community route import.
+- Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Contributor aggregation and Reddit-ready daily recap text.
 - Briefing export with exact review link.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
@@ -50,6 +52,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Replay the completed route.
 - Save the proposal and show the consensus summary.
 - Copy a share link and briefing for the exact route.
+- Copy the comment challenge prompt for a reply thread.
 - Paste the route back as a comment route and show it in consensus.
 - Show the contributor board and copy the daily recap.
 - Clear the board and apply the top proposal.

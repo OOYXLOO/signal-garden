@@ -73,6 +73,14 @@ if (!gameEntry.includes("window.location.origin")) {
   failures.push("devvit game entry must point fetch client at the hosted origin");
 }
 
+const gameHtml = await readFile(join(root, "src/devvit/client/game.html"), "utf8");
+if (!gameHtml.includes('id="comment-challenge"')) {
+  failures.push("devvit game shell must include the comment challenge prompt");
+}
+if (!gameHtml.includes('id="copy-comment-challenge"')) {
+  failures.push("devvit game shell must include the comment challenge copy control");
+}
+
 const splash = await readFile(join(root, "src/devvit/client/splash.html"), "utf8");
 if (!splash.includes("./splash.js")) {
   failures.push("devvit splash must load its entry shim");

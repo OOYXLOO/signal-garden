@@ -17,6 +17,30 @@ export function createShareBriefing({ briefing, shareUrl }) {
   return `${briefing}\nReview link: ${shareUrl}`;
 }
 
+export function createCommentChallenge({ puzzle, result, plan = [], shareUrl = "", consensus = null }) {
+  const hasRoute = plan.length > 0 && result;
+  const best = consensus?.best || null;
+  const lines = [
+    `Signal Garden ${puzzle.id} challenge`,
+    `${puzzle.title}: ${puzzle.brief}`,
+    hasRoute
+      ? `My route: ${result.status}, ${result.score} pts, ${result.hitBeacons.length}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`
+      : `Open board: ${puzzle.beacons.length} beacons, ${puzzle.moveLimit} mirrors max.`,
+  ];
+
+  if (shareUrl) {
+    lines.push(`Review link: ${shareUrl}`);
+  }
+
+  lines.push(
+    best
+      ? `Current top: ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves.`
+      : "Current top: open.",
+  );
+  lines.push("Reply with your Review link so it can join the community board.");
+  return lines.join("\n");
+}
+
 function firstUrl(input) {
   const match = String(input || "").match(/https?:\/\/[^\s<>"']+/i);
   if (!match) {
