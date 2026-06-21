@@ -124,6 +124,9 @@ if (!indexHtml.includes('id="mission-list"')) {
 if (!indexHtml.includes('id="load-sample-thread"')) {
   failures.push("index.html missing sample comment thread loader");
 }
+if (!indexHtml.includes('id="top-route-rationale"')) {
+  failures.push("index.html missing top route rationale");
+}
 if (!devvitGameHtml.includes('id="target-card"')) {
   failures.push("devvit game.html missing rival target card");
 }
@@ -142,6 +145,9 @@ if (!devvitGameHtml.includes('id="launch-packet"')) {
 if (!devvitGameHtml.includes('id="load-sample-thread"')) {
   failures.push("devvit game.html missing sample comment thread loader");
 }
+if (!devvitGameHtml.includes('id="top-route-rationale"')) {
+  failures.push("devvit game.html missing top route rationale");
+}
 const sceneText = await readFile(join(root, "src/game/SignalGardenScene.js"), "utf8");
 const proposalText = await readFile(join(root, "src/game/proposals.js"), "utf8");
 if (!sceneText.includes("setRivalPlan")) {
@@ -149,6 +155,9 @@ if (!sceneText.includes("setRivalPlan")) {
 }
 if (!proposalText.includes("createRivalRouteGuide")) {
   failures.push("proposals missing rival route guide");
+}
+if (!proposalText.includes("createTopRouteRationale")) {
+  failures.push("proposals missing top route rationale");
 }
 
 for (const file of await walk(root)) {

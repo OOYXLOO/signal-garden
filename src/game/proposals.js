@@ -176,6 +176,59 @@ export function createRivalRouteGuide(puzzle, consensus) {
   };
 }
 
+export function createTopRouteRationale(puzzle, consensus) {
+  const best = consensus?.best || null;
+  if (!best) {
+    return {
+      label: "Top route rationale",
+      summary: "No ranked route yet.",
+      points: [
+        `First saved or imported route sets the ${puzzle.beacons.length}-beacon target.`,
+        "Reply-thread review links can become ranked proposals once imported.",
+      ],
+    };
+  }
+
+  const runnerUp = consensus.top?.find((proposal) => proposal.id !== best.id) || null;
+  const beaconTotal = puzzle.beacons.length;
+  const bestComplete = Boolean(best.complete || best.beacons >= beaconTotal);
+  const bestStatus = best.status || (bestComplete ? "complete" : "partial");
+  const points = [
+    bestComplete
+      ? `Completes all ${beaconTotal} beacons.`
+      : `Reaches ${best.beacons}/${beaconTotal} beacons with status ${bestStatus}.`,
+    `${best.score} pts using ${best.moves}/${puzzle.moveLimit} moves.`,
+  ];
+
+  if (runnerUp) {
+    const runnerUpComplete = Boolean(runnerUp.complete || runnerUp.beacons >= beaconTotal);
+    if (bestComplete !== runnerUpComplete) {
+      points.push(`Ranks above ${runnerUp.author} because complete routes lead partial routes.`);
+    } else if (best.score !== runnerUp.score) {
+      points.push(`${best.score - runnerUp.score} pts ahead of ${runnerUp.author}.`);
+    } else if (best.moves !== runnerUp.moves) {
+      points.push(`Tie-break: ${Math.abs(best.moves - runnerUp.moves)} fewer moves than ${runnerUp.author}.`);
+    } else {
+      points.push(`Tie-break: earlier route than ${runnerUp.author}.`);
+    }
+  } else if (consensus.preview) {
+    points.push("Sample preview route, clearly labeled and not stored.");
+  } else {
+    points.push("First ranked route sets today's chase target.");
+  }
+
+  const contributor = consensus.contributors?.find((entry) => entry.author === best.author);
+  if (contributor) {
+    points.push(`${best.author} contributor record: ${contributor.completed}/${contributor.proposals} complete.`);
+  }
+
+  return {
+    label: `Why ${best.author} leads`,
+    summary: `${best.score} pts, ${best.beacons}/${beaconTotal} beacons, ${best.moves} moves.`,
+    points,
+  };
+}
+
 export function toCommunityPayload(puzzle, proposals = []) {
   const consensus = summarizeConsensus(puzzle, proposals);
   return {
@@ -253,6 +306,7 @@ export function createDailyRecap(puzzle, consensus) {
 
   if (best) {
     lines.push(`Top route: ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves`);
+    lines.push(`Lead rationale: ${createTopRouteRationale(puzzle, consensus).points[0]}`);
   } else {
     lines.push("Top route: open");
   }

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
+import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, createTopRouteRationale, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
 import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteCues, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
@@ -123,6 +123,13 @@ assert.equal(consensus.contributors[0].author, "reader-b");
 assert.equal(consensus.contributors[0].completed, 1);
 assert.equal(summarizeContributors([weakProposal, solvedProposal]).length, 2);
 assert.match(createDailyRecap(puzzle, consensus), /Contributor lead: reader-b/);
+assert.match(createDailyRecap(puzzle, consensus), /Lead rationale: Completes all 3 beacons/);
+const rationale = createTopRouteRationale(puzzle, consensus);
+assert.equal(rationale.label, "Why reader-b leads");
+assert.match(rationale.summary, /beacons/);
+assert.match(rationale.points.join(" "), /Completes all 3 beacons/);
+assert.match(rationale.points.join(" "), /complete routes lead partial routes/);
+assert.match(createTopRouteRationale(puzzle, summarizeConsensus(puzzle, [])).summary, /No ranked route/);
 assert.equal(toCommunityPayload(puzzle, [solvedProposal]).best.complete, true);
 assert.equal(toCommunityPayload(puzzle, [solvedProposal]).contributors, 1);
 assert.equal(createCommunityTarget(puzzle, solved, summarizeConsensus(puzzle, [])).state, "open");

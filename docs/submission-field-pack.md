@@ -12,9 +12,9 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
-The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, comment challenge, and import loop for a one-minute evaluation pass.
+The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
 
 ## What Makes It Social
 
@@ -25,12 +25,13 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - A sample thread loader fills the import box with a complete route, a partial route, a cross-day route, and a duplicate route for an immediate review of the reply loop.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
-- A reviewer fast path packages the sample route, current review link, top-route ghost, and comment import loop in one compact block.
+- A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A launch packet combines the comment challenge, review snapshot, daily recap, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
 - Contributors get a compact daily board based on complete routes and best score.
 - A daily recap can be copied back into a discussion thread.
 - The top route can be applied by the community.
 - The top route appears as a low-contrast board ghost so players can see what the community is chasing before applying it.
+- The top route rationale explains the leader by completion, score, move count, tie-breaks, and contributor record.
 - The briefing output is short enough to fit in a post or comment.
 - Daily boards and archive rows support recurring discussion.
 
@@ -41,6 +42,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Objective progress derived from the current trace.
 - Daily missions for route tracing, proposal saving, relay completion, and rival target chasing.
 - Top route ghosting for community route visibility on the board.
+- Top route rationale for explaining the current leader after saved proposals or comment-thread imports.
 - Replay animation for the current route.
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.
@@ -51,7 +53,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
-- Launch packet generated from the current route, Review link, consensus, Reddit fit checks, and platform feedback notes.
+- Launch packet generated from the current route, Review link, consensus, top route rationale, Reddit fit checks, and platform feedback notes.
 - Strict launch packet CLI export for injecting public app listing, demo post, and review URLs after the platform gate.
 - GitHub Pages workflow plus artifact audit for publishing the static browser build from a repository-page path after the repository gate.
 - Public URL audit for checking the deployed app and `sample=1` reviewer walkthrough before a submission pass.
@@ -72,6 +74,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Replay the completed route.
 - Save the proposal and show the consensus summary.
 - Show the top route ghost after a route is saved or imported.
+- Show the top route rationale and explain why the leader ranks above the next route.
 - Copy a share link and briefing for the exact route.
 - Copy the comment challenge prompt for a reply thread.
 - Copy the review snapshot for a judge or gallery note.

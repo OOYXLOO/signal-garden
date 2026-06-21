@@ -21,7 +21,7 @@ Observed public requirements and signals on 2026-06-20:
 - `README.md`: project overview, local run, quality checks, and scope.
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
-- Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
+- Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
 - `docs/desktop-preview.png`: desktop gallery preview.
@@ -78,7 +78,7 @@ For a quick reviewer walkthrough before a copied Review link exists, open the pu
 <public-app-url>?day=2026-06-21&sample=1
 ```
 
-The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs.
+The app turns that sample route into the same briefing, review snapshot, comment challenge, top route rationale, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs.
 
 ## Static Review Surface
 
@@ -130,6 +130,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The first screen shows the daily board, objective chips, and move limit.
 - Daily missions show route tracing, proposal saving, relay completion, and rival target progress.
 - A saved or imported top route appears as a low-contrast board ghost before it is applied.
+- The top route rationale explains why the current route leads, including completion, score, move count, tie-breaks, and contributor record.
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
 - `?day=YYYY-MM-DD&sample=1` loads a complete sample route without keeping the sample flag in copied Review links.

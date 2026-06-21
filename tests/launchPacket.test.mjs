@@ -39,6 +39,8 @@ assert.equal(packet.launchChecks.length, 5);
 assert.match(packet.commentChallenge, /Reply with your Review link/);
 assert.match(packet.reviewerFastPath, /reviewer fast path/);
 assert.match(packet.reviewerFastPath, /Reddit loop/);
+assert.match(packet.topRouteRationale.summary, /3\/3 beacons/);
+assert.match(packet.topRouteRationale.points.join(" "), /Completes all 3 beacons/);
 assert.match(packet.reviewSnapshot, /Judge checks/);
 assert.match(packet.dailyRecap, /Signal Garden 2026-06-19 recap/);
 
@@ -50,6 +52,7 @@ assert.match(formatted, /Review link: https:\/\/example\.test\/play/);
 assert.match(formatted, /## Why It Fits Reddit/);
 assert.match(formatted, /## Comment Challenge/);
 assert.match(formatted, /## Reviewer Fast Path/);
+assert.match(formatted, /## Top Route Rationale/);
 assert.match(formatted, /## Review Snapshot/);
 assert.match(formatted, /## Daily Recap/);
 assert.match(formatted, /## Developer Platform Feedback/);

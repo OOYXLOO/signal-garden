@@ -541,6 +541,40 @@ textarea.compact-textarea {
   overflow-wrap: anywhere;
 }
 
+.rationale-card {
+  margin: 12px 0;
+  border: 1px solid rgba(39, 125, 126, 0.28);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #f6fbf8;
+}
+
+.rationale-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.rationale-card strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--teal);
+  line-height: 1.25;
+}
+
+.rationale-card ol {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.rationale-card li {
+  margin-top: 4px;
+  color: var(--charcoal);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
 textarea.launch-packet {
   min-height: 160px;
 }

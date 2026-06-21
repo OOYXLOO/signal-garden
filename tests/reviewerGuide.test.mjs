@@ -28,6 +28,8 @@ const fastPath = createReviewerFastPath({
 assert.match(fastPath, /Signal Garden reviewer fast path/);
 assert.match(fastPath, /Route state: complete/);
 assert.match(fastPath, /Community state: 1\/1 saved routes complete/);
+assert.match(fastPath, /Lead rationale:/);
+assert.match(fastPath, /Completes all 3 beacons/);
 assert.match(fastPath, /Sample route: https:\/\/example\.test\/play/);
 assert.match(fastPath, /Current review link:/);
 assert.match(fastPath, /1-minute check:/);

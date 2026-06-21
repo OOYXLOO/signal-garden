@@ -1,4 +1,4 @@
-import { createDailyRecap } from "./game/proposals.js";
+import { createDailyRecap, createTopRouteRationale } from "./game/proposals.js";
 import { createReviewerFastPath } from "./reviewerGuide.js";
 import { createCommentChallenge, createReviewSnapshot } from "./share.js";
 
@@ -32,6 +32,10 @@ export function createLaunchPacket({
   const reviewSnapshot = createReviewSnapshot({ puzzle, result, plan, shareUrl, consensus });
   const commentChallenge = createCommentChallenge({ puzzle, result, plan, shareUrl, consensus });
   const reviewerFastPath = createReviewerFastPath({ puzzle, result, plan, shareUrl, consensus });
+  const topRouteRationale = createTopRouteRationale(
+    puzzle,
+    consensus || { completed: 0, proposalCount: 0, contributors: [], best: null, top: [] },
+  );
   const dailyRecap = createDailyRecap(
     puzzle,
     consensus || { completed: 0, proposalCount: 0, contributors: [], best: null },
@@ -56,6 +60,7 @@ export function createLaunchPacket({
     launchChecks,
     commentChallenge,
     reviewerFastPath,
+    topRouteRationale,
     reviewSnapshot,
     dailyRecap,
   };
@@ -89,6 +94,10 @@ export function formatLaunchPacket(packet) {
     "",
     "## Reviewer Fast Path",
     packet.reviewerFastPath,
+    "",
+    "## Top Route Rationale",
+    packet.topRouteRationale.summary,
+    ...packet.topRouteRationale.points.map((point) => `- ${point}`),
     "",
     "## Review Snapshot",
     packet.reviewSnapshot,

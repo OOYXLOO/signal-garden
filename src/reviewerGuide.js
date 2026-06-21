@@ -1,3 +1,5 @@
+import { createTopRouteRationale } from "./game/proposals.js";
+
 export function buildSampleRouteUrl(currentHref, puzzle) {
   if (!puzzle?.id) {
     return "";
@@ -29,6 +31,14 @@ function consensusSummary(consensus, puzzle) {
   return `${prefix}; top route ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves.`;
 }
 
+function rationaleSummary(consensus, puzzle) {
+  if (!consensus?.best) {
+    return "Lead rationale: no ranked route yet.";
+  }
+  const rationale = createTopRouteRationale(puzzle, consensus);
+  return `Lead rationale: ${rationale.points.slice(0, 2).join(" ")}`;
+}
+
 export function createReviewerFastPath({
   puzzle,
   result,
@@ -45,6 +55,7 @@ export function createReviewerFastPath({
     `Day: ${puzzle.id} - ${puzzle.title}`,
     `Route state: ${routeSummary(puzzle, result, plan)}`,
     `Community state: ${consensusSummary(consensus, puzzle)}`,
+    rationaleSummary(consensus, puzzle),
     sampleRouteUrl
       ? `Sample route: ${sampleRouteUrl}`
       : "Sample route: open the app with day=<date>&sample=1 to load a complete labeled preview.",
