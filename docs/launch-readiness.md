@@ -21,7 +21,7 @@ Observed public requirements and signals on 2026-06-20:
 - `README.md`: project overview, local run, quality checks, and scope.
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
-- Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
+- Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
 - `docs/desktop-preview.png`: desktop gallery preview.
@@ -120,6 +120,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - Social loop notes: use `What Makes It Social` from `docs/submission-field-pack.md`.
 - Demo discussion packet: copy the app launch packet after a complete route exists.
 - Reddit post draft: copy only after the user is ready to create a public demo post; the app generates text but does not post it.
+- Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
 - Final launch packet: use `npm run export:launch-packet -- --strict` after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, app listing, demo post, and route token exist.
 - Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.
@@ -140,6 +141,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The sample comment thread loader produces a visible import summary with duplicate and cross-day skip reasons.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The Reddit post draft includes a title, body, route review link or sample route, community target, and first-comment prompt.
+- The developer feedback draft includes Devvit Web setup notes, Phaser static asset notes, mobile WebView checks, public review-link flow, and comment-loop feedback.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.

@@ -4,7 +4,7 @@ import { createObjectiveList, createRouteInsight, describeResult } from "./game/
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide, createTopRouteRationale } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
-import { buildShareUrl, createCommentChallenge, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute } from "./share.js";
+import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -65,6 +65,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     copyCommentChallenge: document.querySelector("#copy-comment-challenge"),
     redditPostDraft: document.querySelector("#reddit-post-draft"),
     copyRedditPostDraft: document.querySelector("#copy-reddit-post-draft"),
+    developerFeedbackDraft: document.querySelector("#developer-feedback-draft"),
+    copyDeveloperFeedbackDraft: document.querySelector("#copy-developer-feedback-draft"),
     reviewSnapshot: document.querySelector("#review-snapshot"),
     copyReviewSnapshot: document.querySelector("#copy-review-snapshot"),
     reviewerFastPath: document.querySelector("#reviewer-fast-path"),
@@ -173,6 +175,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyDeveloperFeedbackDraft.addEventListener("click", async () => {
+    refs.developerFeedbackDraft.select();
+    try {
+      await navigator.clipboard.writeText(refs.developerFeedbackDraft.value);
+      refs.copyDeveloperFeedbackDraft.textContent = "Feedback copied";
+      window.setTimeout(() => {
+        refs.copyDeveloperFeedbackDraft.textContent = "Copy feedback draft";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
   refs.copyReviewSnapshot.addEventListener("click", async () => {
     refs.reviewSnapshot.select();
     try {
@@ -234,6 +248,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
       renderRedditPostDraft(refs, latest, latestConsensus);
+      renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
       renderReviewerFastPath(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
@@ -267,6 +282,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
       renderRedditPostDraft(refs, latest, latestConsensus);
+      renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
       renderReviewerFastPath(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
@@ -321,6 +337,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     refs.briefing.value = createShareBriefing({ briefing, shareUrl });
     renderCommentChallenge(refs, latest, latestConsensus);
     renderRedditPostDraft(refs, latest, latestConsensus);
+    renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
     renderReviewerFastPath(refs, latest, latestConsensus);
     renderReviewSnapshot(refs, latest, latestConsensus);
     renderLaunchPacket(refs, latest, latestConsensus);
@@ -353,6 +370,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         renderDailyMissions(refs, createDailyMissions(puzzle, result, plan, latestConsensus));
         renderCommentChallenge(refs, latest, latestConsensus);
         renderRedditPostDraft(refs, latest, latestConsensus);
+        renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
         renderReviewerFastPath(refs, latest, latestConsensus);
         renderReviewSnapshot(refs, latest, latestConsensus);
         renderLaunchPacket(refs, latest, latestConsensus);
@@ -407,6 +425,19 @@ function renderReviewSnapshot(refs, latest, consensus) {
 function renderRedditPostDraft(refs, latest, consensus) {
   refs.redditPostDraft.value = latest
     ? createRedditPostDraft({
+        puzzle: latest.puzzle,
+        result: latest.result,
+        plan: latest.plan,
+        shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+        sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
+        consensus,
+      })
+    : "";
+}
+
+function renderDeveloperFeedbackDraft(refs, latest, consensus) {
+  refs.developerFeedbackDraft.value = latest
+    ? createDeveloperFeedbackDraft({
         puzzle: latest.puzzle,
         result: latest.result,
         plan: latest.plan,

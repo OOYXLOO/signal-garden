@@ -1,6 +1,6 @@
 import { createDailyRecap, createTopRouteRationale } from "./game/proposals.js";
 import { createReviewerFastPath } from "./reviewerGuide.js";
-import { createCommentChallenge, createRedditPostDraft, createReviewSnapshot } from "./share.js";
+import { createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot } from "./share.js";
 
 const DEFAULT_FEEDBACK_URL = "https://forms.gle/";
 
@@ -32,6 +32,7 @@ export function createLaunchPacket({
   const reviewSnapshot = createReviewSnapshot({ puzzle, result, plan, shareUrl, consensus });
   const commentChallenge = createCommentChallenge({ puzzle, result, plan, shareUrl, consensus });
   const redditPostDraft = createRedditPostDraft({ puzzle, result, plan, shareUrl, consensus });
+  const developerFeedbackDraft = createDeveloperFeedbackDraft({ puzzle, result, plan, shareUrl, consensus });
   const reviewerFastPath = createReviewerFastPath({ puzzle, result, plan, shareUrl, consensus });
   const topRouteRationale = createTopRouteRationale(
     puzzle,
@@ -61,6 +62,7 @@ export function createLaunchPacket({
     launchChecks,
     commentChallenge,
     redditPostDraft,
+    developerFeedbackDraft,
     reviewerFastPath,
     topRouteRationale,
     reviewSnapshot,
@@ -112,7 +114,7 @@ export function formatLaunchPacket(packet) {
     "",
     "## Developer Platform Feedback",
     `Survey URL: ${packet.feedbackUrl || "add official survey URL"}`,
-    "Feedback topics: Devvit Web setup, Phaser static assets, interactive post judging path, mobile WebView checks, and post/comment route import flow.",
+    packet.developerFeedbackDraft,
   );
 
   return lines.join("\n");

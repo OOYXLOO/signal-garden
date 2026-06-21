@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createDailyPuzzle } from "../src/game/puzzle.js";
-import { buildShareUrl, createCommentChallenge, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
+import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const shareUrl = buildShareUrl("https://example.test/play?old=1", puzzle, puzzle.solution);
@@ -87,6 +87,29 @@ assert.match(postDraft, /Community target: 900 pts/);
 assert.match(postDraft, /Review my route: https:\/\/example\.test\/play/);
 assert.match(postDraft, /First comment prompt:/);
 assert.match(postDraft, /explain why the top route leads/);
+
+const feedbackDraft = createDeveloperFeedbackDraft({
+  puzzle,
+  result: {
+    status: "complete",
+    complete: true,
+    score: 820,
+    hitBeacons: puzzle.beacons,
+  },
+  plan: puzzle.solution,
+  shareUrl,
+  sampleRouteUrl: "https://example.test/play?day=2026-06-19&sample=1",
+  consensus: {
+    completed: 2,
+    proposalCount: 3,
+  },
+});
+assert.match(feedbackDraft, /developer feedback draft/);
+assert.match(feedbackDraft, /Devvit Web-style client shell/);
+assert.match(feedbackDraft, /Route state: complete, 820 pts, 3\/3 beacons, 2\/5 moves/);
+assert.match(feedbackDraft, /Review path: https:\/\/example\.test\/play/);
+assert.match(feedbackDraft, /Mobile WebView guidance/);
+assert.match(feedbackDraft, /sample route URL/);
 
 const snapshot = createReviewSnapshot({
   puzzle,

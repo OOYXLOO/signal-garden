@@ -39,6 +39,8 @@ assert.equal(packet.launchChecks.length, 5);
 assert.match(packet.commentChallenge, /Reply with your Review link/);
 assert.match(packet.redditPostDraft, /Title: Signal Garden 2026-06-19/);
 assert.match(packet.redditPostDraft, /First comment prompt/);
+assert.match(packet.developerFeedbackDraft, /developer feedback draft/);
+assert.match(packet.developerFeedbackDraft, /Devvit Web-style client shell/);
 assert.match(packet.reviewerFastPath, /reviewer fast path/);
 assert.match(packet.reviewerFastPath, /Reddit loop/);
 assert.match(packet.topRouteRationale.summary, /3\/3 beacons/);
@@ -59,7 +61,8 @@ assert.match(formatted, /## Top Route Rationale/);
 assert.match(formatted, /## Review Snapshot/);
 assert.match(formatted, /## Daily Recap/);
 assert.match(formatted, /## Developer Platform Feedback/);
-assert.match(formatted, /Phaser static assets/);
+assert.match(formatted, /Product feedback:/);
+assert.match(formatted, /Mobile WebView guidance/);
 
 const emptyRoutePacket = formatLaunchPacket(createLaunchPacket({ puzzle, result: null, plan: [], consensus: null }));
 assert.match(emptyRoutePacket, /create a route first/);

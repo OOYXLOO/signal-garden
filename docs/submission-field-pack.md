@@ -25,6 +25,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - A sample thread loader fills the import box with a complete route, a partial route, a cross-day route, and a duplicate route for an immediate review of the reply loop.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A Reddit post draft prepares a title, body, route review link, community target, and first-comment prompt for a later user-approved demo post.
+- A developer feedback draft packages setup notes, mobile WebView checks, public review-link flow, and comment-loop feedback for a later user-approved platform feedback pass.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A launch packet combines the comment challenge, review snapshot, daily recap, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
@@ -53,6 +54,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Sample preview consensus that shows the top-route loop without writing fake proposals to storage.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Reddit post draft generated from the current route, sample route, Review link, and top proposal.
+- Developer feedback draft generated from the current route, Review link, sample route, consensus, and Devvit Web integration notes.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Launch packet generated from the current route, Review link, consensus, top route rationale, Reddit fit checks, and platform feedback notes.
@@ -80,6 +82,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Copy a share link and briefing for the exact route.
 - Copy the comment challenge prompt for a reply thread.
 - Copy the Reddit post draft for a later user-approved demo post.
+- Copy the developer feedback draft for a later user-approved platform feedback pass.
 - Copy the review snapshot for a judge or gallery note.
 - Copy the reviewer fast path for a quick judge or playtester handoff.
 - Copy the launch packet for the public demo post, app listing, discussion follow-up, and platform feedback pass.

@@ -41,6 +41,7 @@ const textExpectations = [
       "GitHub Pages workflow",
       "public URL audit",
       "submission pack",
+      "developer feedback draft",
     ],
   },
   {
@@ -68,6 +69,7 @@ const textExpectations = [
       "audit:pages",
       "audit:public",
       "export:submission-pack",
+      "developer feedback draft",
     ],
   },
 ];

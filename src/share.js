@@ -105,6 +105,53 @@ export function createRedditPostDraft({
   return lines.join("\n");
 }
 
+export function createDeveloperFeedbackDraft({
+  puzzle,
+  result,
+  plan = [],
+  shareUrl = "",
+  sampleRouteUrl = "",
+  consensus = null,
+} = {}) {
+  if (!puzzle) {
+    throw new Error("createDeveloperFeedbackDraft requires a puzzle");
+  }
+
+  const status = result?.complete ? "complete" : result?.status || "open";
+  const score = Number(result?.score || 0);
+  const beacons = result?.hitBeacons?.length || 0;
+  const completed = Number(consensus?.completed || 0);
+  const proposalCount = Number(consensus?.proposalCount || 0);
+  const reviewLine = shareUrl || sampleRouteUrl || "add a public review URL after playtest";
+  const lines = [
+    "Signal Garden developer feedback draft",
+    "",
+    "What I tested:",
+    "- Devvit Web-style client shell running a Phaser/Vite game surface.",
+    "- Daily deterministic puzzle, Review links, and comment-thread route import.",
+    "- Server-shaped proposal consensus with a Redis-shaped store for later platform wiring.",
+    "",
+    "Current build:",
+    `- Board: ${puzzle.id} ${puzzle.title}.`,
+    `- Route state: ${status}, ${score} pts, ${beacons}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`,
+    `- Community loop: ${completed}/${proposalCount} saved routes complete.`,
+    `- Review path: ${reviewLine}`,
+    "",
+    "Product feedback:",
+    "- Devvit Web setup would be easier with a compact Phaser/Vite starter that shows static asset paths, expanded post launch, and same-origin server routes together.",
+    "- Interactive post review would benefit from a checklist that connects app listing URL, public demo post URL, and a playable review link in one flow.",
+    "- Mobile WebView guidance should call out touch targets, fixed canvas sizing, audio unlock behavior, and safe-area constraints.",
+    "- Comment-driven games need clearer examples for importing public reply links, handling duplicates, and showing why one community result leads another.",
+    "- A local dry-run command that validates client bundle, server routes, and public review links before submission would reduce last-minute mistakes.",
+    "",
+    "What worked well:",
+    "- The app can keep the first screen playable without account data.",
+    "- A sample route URL lets reviewers test the loop before live community data exists.",
+    "- Copyable post, review, recap, and launch packets keep the public handoff consistent.",
+  ];
+  return lines.join("\n");
+}
+
 export function createReviewSnapshot({ puzzle, result, plan = [], shareUrl = "", consensus = null }) {
   const best = consensus?.best || null;
   const completed = Number(consensus?.completed || 0);
