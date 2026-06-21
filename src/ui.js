@@ -3,6 +3,7 @@ import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
+import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute, wantsSampleRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
@@ -60,6 +61,12 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     copyCommentChallenge: document.querySelector("#copy-comment-challenge"),
     reviewSnapshot: document.querySelector("#review-snapshot"),
     copyReviewSnapshot: document.querySelector("#copy-review-snapshot"),
+    reviewerFastPath: document.querySelector("#reviewer-fast-path"),
+    copyReviewerFastPath: document.querySelector("#copy-reviewer-fast-path"),
+    sampleRouteLink: document.querySelector("#sample-route-link"),
+    fastPathRoute: document.querySelector("#fast-path-route"),
+    fastPathConsensus: document.querySelector("#fast-path-consensus"),
+    fastPathLoop: document.querySelector("#fast-path-loop"),
     launchPacket: document.querySelector("#launch-packet"),
     copyLaunchPacket: document.querySelector("#copy-launch-packet"),
   };
@@ -160,6 +167,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyReviewerFastPath.addEventListener("click", async () => {
+    refs.reviewerFastPath.select();
+    try {
+      await navigator.clipboard.writeText(refs.reviewerFastPath.value);
+      refs.copyReviewerFastPath.textContent = "Path copied";
+      window.setTimeout(() => {
+        refs.copyReviewerFastPath.textContent = "Copy reviewer path";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
   refs.copyLaunchPacket.addEventListener("click", async () => {
     refs.launchPacket.select();
     try {
@@ -187,6 +206,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
+      renderReviewerFastPath(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
     } catch (error) {
@@ -215,6 +235,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
+      renderReviewerFastPath(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
       const summary = refs.proposalSummary.textContent;
@@ -265,6 +286,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     const shareUrl = buildShareUrl(window.location.href, puzzle, plan);
     refs.briefing.value = createShareBriefing({ briefing, shareUrl });
     renderCommentChallenge(refs, latest, latestConsensus);
+    renderReviewerFastPath(refs, latest, latestConsensus);
     renderReviewSnapshot(refs, latest, latestConsensus);
     renderLaunchPacket(refs, latest, latestConsensus);
     refs.moveList.replaceChildren(
@@ -295,6 +317,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         renderCommunityTarget(refs, puzzle, result, latestConsensus);
         renderDailyMissions(refs, createDailyMissions(puzzle, result, plan, latestConsensus));
         renderCommentChallenge(refs, latest, latestConsensus);
+        renderReviewerFastPath(refs, latest, latestConsensus);
         renderReviewSnapshot(refs, latest, latestConsensus);
         renderLaunchPacket(refs, latest, latestConsensus);
       });
@@ -329,6 +352,36 @@ function renderReviewSnapshot(refs, latest, consensus) {
         consensus,
       })
     : "";
+}
+
+function renderReviewerFastPath(refs, latest, consensus) {
+  if (!latest) {
+    refs.reviewerFastPath.value = "";
+    refs.fastPathRoute.textContent = "Loading";
+    refs.fastPathConsensus.textContent = "Loading";
+    refs.fastPathLoop.textContent = "Loading";
+    refs.sampleRouteLink.removeAttribute("href");
+    return;
+  }
+  const sampleRouteUrl = buildSampleRouteUrl(window.location.href, latest.puzzle);
+  const shareUrl = buildShareUrl(window.location.href, latest.puzzle, latest.plan);
+  refs.sampleRouteLink.href = sampleRouteUrl;
+  refs.sampleRouteLink.textContent = "Open sample route";
+  refs.fastPathRoute.textContent = latest.result?.complete ? "Complete route" : latest.plan.length ? "Draft route" : "Open board";
+  refs.fastPathConsensus.textContent = consensus?.proposalCount
+    ? `${consensus.completed}/${consensus.proposalCount} complete`
+    : consensus?.preview
+      ? "Sample preview"
+      : "Open board";
+  refs.fastPathLoop.textContent = "Reply route -> import -> ranked proposal";
+  refs.reviewerFastPath.value = createReviewerFastPath({
+    puzzle: latest.puzzle,
+    result: latest.result,
+    plan: latest.plan,
+    shareUrl,
+    sampleRouteUrl,
+    consensus,
+  });
 }
 
 function renderLaunchPacket(refs, latest, consensus) {

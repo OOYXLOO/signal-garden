@@ -41,6 +41,32 @@
           </div>
         </section>
 
+        <section class="panel reviewer-panel">
+          <div class="panel-title-row">
+            <div>
+              <p class="eyebrow">Reviewer fast path</p>
+              <h2>One-minute loop</h2>
+            </div>
+            <a id="sample-route-link" class="inline-action" href="?sample=1">Open sample route</a>
+          </div>
+          <div class="fast-path-grid">
+            <div>
+              <span>Route</span>
+              <strong id="fast-path-route">Loading</strong>
+            </div>
+            <div>
+              <span>Consensus</span>
+              <strong id="fast-path-consensus">Loading</strong>
+            </div>
+            <div>
+              <span>Loop</span>
+              <strong id="fast-path-loop">Loading</strong>
+            </div>
+          </div>
+          <textarea id="reviewer-fast-path" class="compact-textarea" readonly aria-label="Reviewer fast path"></textarea>
+          <button id="copy-reviewer-fast-path" class="wide secondary" type="button">Copy reviewer path</button>
+        </section>
+
         <section class="panel">
           <div class="panel-title-row">
             <p class="eyebrow">Plan</p>
