@@ -1,10 +1,33 @@
 import { decodePlanToken, encodePlanToken } from "./game/puzzle.js";
 
+function clonePlan(plan = []) {
+  return plan.map((move) => ({ x: move.x, y: move.y, mirror: move.mirror }));
+}
+
+export function wantsSampleRoute(searchParams) {
+  const value = String(searchParams.get("sample") || searchParams.get("sampleRoute") || "").toLowerCase();
+  return ["1", "true", "yes", "route"].includes(value);
+}
+
+export function resolveInitialRoutePlan({ searchParams, puzzle, storedPlan = [] }) {
+  const sharedDay = searchParams.get("day");
+  const sharedPlan = sharedDay === puzzle.id ? decodePlanToken(searchParams.get("plan"), puzzle) : [];
+  if (sharedPlan.length) {
+    return sharedPlan;
+  }
+  if (wantsSampleRoute(searchParams)) {
+    return clonePlan(puzzle.solution);
+  }
+  return clonePlan(storedPlan);
+}
+
 export function buildShareUrl(currentHref, puzzle, plan = []) {
   if (!plan.length) {
     return "";
   }
   const url = new URL(currentHref);
+  url.searchParams.delete("sample");
+  url.searchParams.delete("sampleRoute");
   url.searchParams.set("day", puzzle.id);
   url.searchParams.set("plan", encodePlanToken(plan));
   return url.toString();

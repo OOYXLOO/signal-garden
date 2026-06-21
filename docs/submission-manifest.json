@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 4228,
-      "sha256": "533e8e67169fe307fc7ec33287437d8717d76ad36d083c37c4056dd24fd82c59"
+      "bytes": 4361,
+      "sha256": "f24c0d0df8af1eabae1f562af38aeef25db493e874aa693d0901e3bd42a71108"
     },
     {
       "path": "docs/cover.png",
@@ -43,13 +43,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 6051,
-      "sha256": "e5cc99b6dfb0422793e9058fb26fe85bb3ce6d6458d4f30975f43741402aa08d"
+      "bytes": 6479,
+      "sha256": "e80152e5345efa38f2dfc0f46a92940773209b38d764caf008cf4dc96fad7f16"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 5785,
-      "sha256": "10c35555cd65b49b3c9b0154b1caedb17081c424ed12a0affa8786737bfdfd93"
+      "bytes": 6027,
+      "sha256": "0bfe4f755b3b853fec10f624bc9b9752d25522bc0274f01b2dd0335d12b1da19"
     },
     {
       "path": "docs/devvit_shell_readiness.md",

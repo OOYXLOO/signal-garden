@@ -46,6 +46,7 @@ npm run export:launch-packet -- --help
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
+- Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists.
 - Comment route import that turns a pasted review link or briefing into a ranked community proposal.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
 - Briefing output that includes an exact review link whenever a route is present.

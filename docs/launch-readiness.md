@@ -64,6 +64,14 @@ npm run export:launch-packet -- --day 2026-06-21 --plan <review-plan-token> --re
 
 `--strict` fails if the route, review URL, app listing URL, or demo post URL is missing or points to localhost.
 
+For a quick reviewer walkthrough before a copied Review link exists, open the public app with a sample route:
+
+```text
+<public-app-url>?day=2026-06-21&sample=1
+```
+
+The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route.
+
 ## User-Present Gates
 
 These steps require the account owner to be present and approving each action:
@@ -105,6 +113,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - A saved or imported top route appears as a low-contrast board ghost before it is applied.
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
+- `?day=YYYY-MM-DD&sample=1` loads a complete sample route without keeping the sample flag in copied Review links.
 - A pasted review link or briefing can be imported as a community proposal.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
