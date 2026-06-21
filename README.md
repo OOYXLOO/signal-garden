@@ -23,6 +23,7 @@ npm run build:devvit
 npm run audit:local
 npm run audit:devvit
 npm run record:demo
+npm run export:launch-packet -- --help
 ```
 
 ## Scope
@@ -40,6 +41,7 @@ npm run record:demo
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
 - Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
 - Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
+- Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Comment route import that turns a pasted review link or briefing into a ranked community proposal.

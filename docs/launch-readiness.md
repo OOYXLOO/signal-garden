@@ -53,6 +53,14 @@ npm run record:demo:final
 
 The optional recording command should only target `127.0.0.1` and write generated media into `docs/`.
 
+After the user-approved app listing and public demo post exist, generate a final copyable launch packet with real public URLs:
+
+```powershell
+npm run export:launch-packet -- --day 2026-06-21 --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict
+```
+
+`--strict` fails if the route, review URL, app listing URL, or demo post URL is missing or points to localhost.
+
 ## User-Present Gates
 
 These steps require the account owner to be present and approving each action:
@@ -82,6 +90,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - Technical notes: use `Technical Highlights` from `docs/submission-field-pack.md`.
 - Social loop notes: use `What Makes It Social` from `docs/submission-field-pack.md`.
 - Demo discussion packet: copy the app launch packet after a complete route exists.
+- Final launch packet: use `npm run export:launch-packet -- --strict` after real public URLs exist.
 - Demo post: add only after a user-approved public Reddit post exists.
 - App listing: add only after a user-approved Devvit listing exists.
 
