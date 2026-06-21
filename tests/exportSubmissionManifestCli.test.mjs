@@ -14,9 +14,11 @@ assert.equal(manifest.project.name, "Signal Garden");
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/demo-final-captioned.webm"));
 assert.ok(manifest.evidence.some((entry) => entry.path === ".github/workflows/deploy-pages.yml"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/audit-pages-build.mjs"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/audit-public-url.mjs"));
 assert.ok(manifest.evidence.every((entry) => typeof entry.bytes === "number" && entry.bytes > 0));
 assert.ok(manifest.evidence.every((entry) => /^[a-f0-9]{64}$/.test(entry.sha256)));
 assert.match(manifest.launchPacketCommand, /export:launch-packet/);
+assert.match(manifest.publicUrlAuditCommand, /audit:public/);
 assert.ok(manifest.requiredLocalChecks.includes("npm run audit:submission"));
 assert.ok(manifest.requiredLocalChecks.includes("npm run audit:pages"));
 

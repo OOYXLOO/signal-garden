@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 4960,
-      "sha256": "ac980d36cea21c2e1af04b8762c2751f34644ad447cf642099606a66083d246b"
+      "bytes": 5226,
+      "sha256": "cb61ab51f2ae261665343d0700a2598a13e238bb5e66f7e5d3c317b92110f3d7"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -48,13 +48,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 7761,
-      "sha256": "371cbaee5f6d92cbdb9b0892d7a09118ae23c73649f6584b0b55e2b9a80af7d3"
+      "bytes": 8239,
+      "sha256": "88e4daa1cfb2c63246487097f45d855a2848123bbab593c6d09297d68859b719"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 6964,
-      "sha256": "544852dd65b86389c273354f9567ebb3d4d732361fb2166b886fe065356b29b1"
+      "bytes": 7188,
+      "sha256": "92d42543038ca591ab772714b76d25d89e13001e1b9c8b365aad5ab03bdc8704"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -65,6 +65,11 @@
       "path": "scripts/audit-pages-build.mjs",
       "bytes": 1397,
       "sha256": "972006addcf8000267a99b375e24837ee19d1f2dc62a4db467a8ac18b5a96b3e"
+    },
+    {
+      "path": "scripts/audit-public-url.mjs",
+      "bytes": 5704,
+      "sha256": "177025cc13a18b1d40f7660530aacf997f5a02af9e1a791028997fdc39cf349f"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
@@ -83,6 +88,7 @@
     "npm audit --audit-level=moderate"
   ],
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
+  "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "publicGatePlaceholders": [
     "public app listing URL",
     "public demo post URL",

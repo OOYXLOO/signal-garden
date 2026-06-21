@@ -31,6 +31,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/submission-manifest.json`: deterministic file manifest with byte counts and SHA-256 hashes for the public evidence packet.
 - `.github/workflows/deploy-pages.yml`: GitHub Pages deployment workflow for the static browser build.
 - `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
+- `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
 
 ## Local Verification Before Any User Gate
 
@@ -44,6 +45,7 @@ npm run audit:local
 npm run audit:devvit
 npm run build
 npm run audit:pages
+npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run audit:submission
 npm audit --audit-level=moderate
@@ -83,6 +85,7 @@ The browser build is ready for a repository-page path such as `https://<owner>.g
 - `vite.config.js` uses relative asset paths for the standard static build.
 - `.github/workflows/deploy-pages.yml` builds `dist/` and deploys it through GitHub Pages when the repository is configured for GitHub Actions Pages.
 - `npm run audit:pages` fails if `dist/index.html` contains root-relative asset URLs that would break on a project page.
+- `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` fails if the deployed page or its `sample=1` route is unavailable or looks like an error page.
 
 ## User-Present Gates
 
@@ -136,6 +139,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The Devvit splash entry requests expanded mode for the `game` entrypoint and still falls back to `game.html` in a normal browser.
 - The Devvit client build uses relative asset paths, avoiding root `/assets` assumptions in WebView static hosting.
 - The standard static build uses relative asset paths, avoiding root `/assets` assumptions on GitHub Pages project URLs.
+- The public URL audit passes for both the base app URL and the `sample=1` reviewer walkthrough URL.
 - The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.

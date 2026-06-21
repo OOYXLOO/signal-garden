@@ -39,6 +39,7 @@ const textExpectations = [
       "sample route",
       "sample preview",
       "GitHub Pages workflow",
+      "public URL audit",
     ],
   },
   {
@@ -64,6 +65,7 @@ const textExpectations = [
       "sample preview",
       "Static Review Surface",
       "audit:pages",
+      "audit:public",
     ],
   },
 ];
@@ -177,6 +179,9 @@ async function auditSubmissionManifest() {
   }
   if (!String(manifest.launchPacketCommand || "").includes("export:launch-packet")) {
     failures.push(`${manifestPath} missing launch packet command`);
+  }
+  if (!String(manifest.publicUrlAuditCommand || "").includes("audit:public")) {
+    failures.push(`${manifestPath} missing public URL audit command`);
   }
 
   const seen = new Set();

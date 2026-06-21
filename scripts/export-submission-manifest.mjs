@@ -19,6 +19,7 @@ const evidenceFiles = [
   "docs/submission-field-pack.md",
   "docs/devvit_shell_readiness.md",
   "scripts/audit-pages-build.mjs",
+  "scripts/audit-public-url.mjs",
   "scripts/export-launch-packet.mjs",
 ];
 
@@ -88,6 +89,7 @@ export async function createSubmissionManifest() {
     ],
     launchPacketCommand:
       "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
+    publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
     publicGatePlaceholders: ["public app listing URL", "public demo post URL", "public review URL"],
     guardrails: [
       "No private account pages or credentials in media.",

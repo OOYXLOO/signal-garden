@@ -38,6 +38,7 @@ npm run audit:pages
 ```
 
 `.github/workflows/deploy-pages.yml` builds `dist/`, audits the artifact, and publishes it through GitHub Pages after the repository has Pages enabled for GitHub Actions.
+After the public URL exists, run `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` to verify the deployed page and sample-route review URL.
 
 ## Scope
 
@@ -56,6 +57,7 @@ npm run audit:pages
 - Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
+- Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
