@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createDailyRecap, createProposal, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
+import { createCommunityTarget, createDailyRecap, createProposal, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
 import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
@@ -72,6 +72,11 @@ assert.equal(summarizeContributors([weakProposal, solvedProposal]).length, 2);
 assert.match(createDailyRecap(puzzle, consensus), /Contributor lead: reader-b/);
 assert.equal(toCommunityPayload(puzzle, [solvedProposal]).best.complete, true);
 assert.equal(toCommunityPayload(puzzle, [solvedProposal]).contributors, 1);
+assert.equal(createCommunityTarget(puzzle, solved, summarizeConsensus(puzzle, [])).state, "open");
+assert.equal(createCommunityTarget(puzzle, empty, consensus).state, "chasing");
+assert.match(createCommunityTarget(puzzle, empty, consensus).detail, /Top saved route/);
+assert.equal(createCommunityTarget(puzzle, solved, consensus).state, "matched");
+assert.equal(createCommunityTarget(puzzle, solved, summarizeConsensus(puzzle, [weakProposal])).state, "leading");
 
 for (const template of PUZZLE_TEMPLATES) {
   const templatePuzzle = {

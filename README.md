@@ -36,6 +36,7 @@ npm run record:demo
 - Contributor board that aggregates completed routes and best scores by author.
 - Daily community recap copy for discussion posts or comment follow-ups.
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
+- Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Comment route import that turns a pasted review link or briefing into a ranked community proposal.

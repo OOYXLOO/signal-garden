@@ -57,6 +57,53 @@ export function summarizeConsensus(puzzle, proposals = []) {
   };
 }
 
+export function createCommunityTarget(puzzle, result, consensus) {
+  const best = consensus?.best || null;
+  const currentScore = Number(result?.score || 0);
+  const currentMoves = result?.moves?.length || 0;
+  const beaconTotal = puzzle.beacons.length;
+
+  if (!best) {
+    return {
+      state: "open",
+      label: "Rival target",
+      value: "Open board",
+      detail: `First complete route sets the ${beaconTotal}-beacon target.`,
+    };
+  }
+
+  const bestSummary = `${best.score} pts, ${best.beacons}/${beaconTotal} beacons, ${best.moves} moves`;
+  if (result?.complete && currentScore > best.score) {
+    return {
+      state: "leading",
+      label: "Rival target",
+      value: `+${currentScore - best.score} pts`,
+      detail: `Current route leads the top saved route: ${bestSummary}.`,
+    };
+  }
+
+  if (result?.complete && currentScore === best.score && currentMoves <= best.moves) {
+    return {
+      state: "matched",
+      label: "Rival target",
+      value: "Top route matched",
+      detail: `Current route matches the saved target: ${bestSummary}.`,
+    };
+  }
+
+  const scoreGap = Math.max(1, best.score - currentScore + 1);
+  const detail = result?.complete
+    ? `Need ${scoreGap} more pts to pass the saved target: ${bestSummary}.`
+    : `Top saved route: ${bestSummary}.`;
+
+  return {
+    state: "chasing",
+    label: "Rival target",
+    value: `${best.score + 1} pts`,
+    detail,
+  };
+}
+
 export function toCommunityPayload(puzzle, proposals = []) {
   const consensus = summarizeConsensus(puzzle, proposals);
   return {

@@ -41,6 +41,32 @@ export function createCommentChallenge({ puzzle, result, plan = [], shareUrl = "
   return lines.join("\n");
 }
 
+export function createReviewSnapshot({ puzzle, result, plan = [], shareUrl = "", consensus = null }) {
+  const best = consensus?.best || null;
+  const completed = Number(consensus?.completed || 0);
+  const proposalCount = Number(consensus?.proposalCount || 0);
+  const contributorCount = Array.isArray(consensus?.contributors) ? consensus.contributors.length : 0;
+  const status = result?.complete ? "complete" : result?.status || "drafting";
+  const beacons = result?.hitBeacons?.length || 0;
+  const lines = [
+    `Signal Garden review snapshot`,
+    `Day: ${puzzle.id}`,
+    `Board: ${puzzle.title}`,
+    `Route: ${status}, ${result?.score || 0} pts, ${beacons}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves`,
+    `Community: ${completed}/${proposalCount} saved routes complete, ${contributorCount} contributors`,
+    best
+      ? `Top saved route: ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves`
+      : "Top saved route: open",
+  ];
+
+  if (shareUrl) {
+    lines.push(`Review link: ${shareUrl}`);
+  }
+
+  lines.push("Judge checks: deterministic daily seed; route can be reopened; consensus is built from saved/imported proposals.");
+  return lines.join("\n");
+}
+
 function firstUrl(input) {
   const match = String(input || "").match(/https?:\/\/[^\s<>"']+/i);
   if (!match) {

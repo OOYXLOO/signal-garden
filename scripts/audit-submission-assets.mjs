@@ -30,11 +30,12 @@ const textExpectations = [
       "Technical Highlights",
       "Demo Checklist",
       "comment challenge",
+      "review snapshot",
     ],
   },
   {
     file: "docs/demo-script.md",
-    fragments: ["objective progress", "review link", "archive Review", "comment prompt"],
+    fragments: ["objective progress", "review link", "archive Review", "comment prompt", "review snapshot"],
   },
   {
     file: "docs/gallery_assets.md",

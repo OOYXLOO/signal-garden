@@ -1,8 +1,8 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
-import { createDailyRecap } from "./game/proposals.js";
-import { buildShareUrl, createCommentChallenge, createShareBriefing, parseSharedRoute } from "./share.js";
+import { createCommunityTarget, createDailyRecap } from "./game/proposals.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -31,6 +31,10 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     seed: document.querySelector("#seed-value"),
     streak: document.querySelector("#streak-value"),
     status: document.querySelector("#status-value"),
+    targetCard: document.querySelector("#target-card"),
+    targetLabel: document.querySelector("#target-label"),
+    targetValue: document.querySelector("#target-value"),
+    targetDetail: document.querySelector("#target-detail"),
     statusHint: document.querySelector("#status-hint"),
     routeInsight: document.querySelector("#route-insight"),
     archiveList: document.querySelector("#archive-list"),
@@ -52,6 +56,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     copyRecap: document.querySelector("#copy-recap"),
     commentChallenge: document.querySelector("#comment-challenge"),
     copyCommentChallenge: document.querySelector("#copy-comment-challenge"),
+    reviewSnapshot: document.querySelector("#review-snapshot"),
+    copyReviewSnapshot: document.querySelector("#copy-review-snapshot"),
   };
   let latest = null;
   let latestDay = null;
@@ -137,6 +143,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyReviewSnapshot.addEventListener("click", async () => {
+    refs.reviewSnapshot.select();
+    try {
+      await navigator.clipboard.writeText(refs.reviewSnapshot.value);
+      refs.copyReviewSnapshot.textContent = "Snapshot copied";
+      window.setTimeout(() => {
+        refs.copyReviewSnapshot.textContent = "Copy review snapshot";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
 
   refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
@@ -151,6 +169,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       });
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       renderCommentChallenge(refs, latest, latestConsensus);
+      renderReviewSnapshot(refs, latest, latestConsensus);
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
@@ -176,6 +195,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       });
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       renderCommentChallenge(refs, latest, latestConsensus);
+      renderReviewSnapshot(refs, latest, latestConsensus);
       const summary = refs.proposalSummary.textContent;
       refs.proposalSummary.textContent = `Imported ${parsed.plan.length} move ${parsed.source}. ${summary}`;
       refs.commentRoute.value = "";
@@ -201,6 +221,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     refs.seed.textContent = puzzle.id.replaceAll("-", "");
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";
+    renderCommunityTarget(refs, puzzle, result, latestConsensus);
     refs.statusHint.textContent = describeResult(puzzle, result);
     renderRouteInsight(refs, createRouteInsight(puzzle, result));
     if (hasRenderedState && lastSoundStatus !== result.status) {
@@ -222,6 +243,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     const shareUrl = buildShareUrl(window.location.href, puzzle, plan);
     refs.briefing.value = createShareBriefing({ briefing, shareUrl });
     renderCommentChallenge(refs, latest, latestConsensus);
+    renderReviewSnapshot(refs, latest, latestConsensus);
     refs.moveList.replaceChildren(
       ...(plan.length
         ? plan.map((move) => {
@@ -240,7 +262,9 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestDay = puzzle.id;
       refreshConsensus(refs, communityClient, puzzle.id).then((consensus) => {
         latestConsensus = consensus;
+        renderCommunityTarget(refs, puzzle, result, latestConsensus);
         renderCommentChallenge(refs, latest, latestConsensus);
+        renderReviewSnapshot(refs, latest, latestConsensus);
       });
     }
   });
@@ -249,6 +273,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
 function renderCommentChallenge(refs, latest, consensus) {
   refs.commentChallenge.value = latest
     ? createCommentChallenge({
+        puzzle: latest.puzzle,
+        result: latest.result,
+        plan: latest.plan,
+        shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+        consensus,
+      })
+    : "";
+}
+
+function renderReviewSnapshot(refs, latest, consensus) {
+  refs.reviewSnapshot.value = latest
+    ? createReviewSnapshot({
         puzzle: latest.puzzle,
         result: latest.result,
         plan: latest.plan,
@@ -326,6 +362,14 @@ function renderConsensus(refs, consensus, puzzle) {
   renderContributors(refs, consensus.contributors || []);
   refs.dailyRecap.value = puzzle ? createDailyRecap(puzzle, consensus) : "";
   return consensus;
+}
+
+function renderCommunityTarget(refs, puzzle, result, consensus) {
+  const target = createCommunityTarget(puzzle, result, consensus);
+  refs.targetCard.className = `target-card ${target.state}`;
+  refs.targetLabel.textContent = target.label;
+  refs.targetValue.textContent = target.value;
+  refs.targetDetail.textContent = target.detail;
 }
 
 function renderContributors(refs, contributors) {

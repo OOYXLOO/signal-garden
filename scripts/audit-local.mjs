@@ -89,11 +89,27 @@ for (const file of required) {
 }
 
 const indexHtml = await readFile(join(root, "index.html"), "utf8");
+const devvitGameHtml = await readFile(join(root, "src/devvit/client/game.html"), "utf8");
 if (!indexHtml.includes('id="comment-challenge"')) {
   failures.push("index.html missing comment challenge prompt");
 }
 if (!indexHtml.includes('id="copy-comment-challenge"')) {
   failures.push("index.html missing comment challenge copy control");
+}
+if (!indexHtml.includes('id="review-snapshot"')) {
+  failures.push("index.html missing review snapshot");
+}
+if (!indexHtml.includes('id="copy-review-snapshot"')) {
+  failures.push("index.html missing review snapshot copy control");
+}
+if (!indexHtml.includes('id="target-card"')) {
+  failures.push("index.html missing rival target card");
+}
+if (!devvitGameHtml.includes('id="target-card"')) {
+  failures.push("devvit game.html missing rival target card");
+}
+if (!devvitGameHtml.includes('id="review-snapshot"')) {
+  failures.push("devvit game.html missing review snapshot");
 }
 
 for (const file of await walk(root)) {

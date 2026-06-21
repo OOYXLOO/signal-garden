@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createDailyPuzzle } from "../src/game/puzzle.js";
-import { buildShareUrl, createCommentChallenge, createShareBriefing, parseSharedRoute } from "../src/share.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute } from "../src/share.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const shareUrl = buildShareUrl("https://example.test/play?old=1", puzzle, puzzle.solution);
@@ -32,6 +32,34 @@ assert.match(challenge, /My route: complete, 820 pts, 3\/3 beacons, 2\/5 moves/)
 assert.match(challenge, /Review link: https:\/\/example\.test\/play/);
 assert.match(challenge, /Current top: 900 pts, 3\/3 beacons, 2 moves/);
 assert.match(challenge, /Reply with your Review link/);
+
+const snapshot = createReviewSnapshot({
+  puzzle,
+  result: {
+    status: "complete",
+    complete: true,
+    score: 820,
+    hitBeacons: puzzle.beacons,
+  },
+  plan: puzzle.solution,
+  shareUrl,
+  consensus: {
+    completed: 2,
+    proposalCount: 3,
+    contributors: [{ author: "local-player" }],
+    best: {
+      score: 900,
+      beacons: 3,
+      moves: 2,
+    },
+  },
+});
+assert.match(snapshot, /Signal Garden review snapshot/);
+assert.match(snapshot, /Route: complete, 820 pts, 3\/3 beacons, 2\/5 moves/);
+assert.match(snapshot, /Community: 2\/3 saved routes complete, 1 contributors/);
+assert.match(snapshot, /Top saved route: 900 pts, 3\/3 beacons, 2 moves/);
+assert.match(snapshot, /Review link: https:\/\/example\.test\/play/);
+assert.match(snapshot, /deterministic daily seed/);
 
 const parsedLink = parseSharedRoute(`Try this path: ${shareUrl}`, puzzle);
 assert.equal(parsedLink.ok, true);
