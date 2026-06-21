@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "signal-garden-submission-manifest/v1",
+  "project": {
+    "name": "Signal Garden",
+    "type": "daily-community-relay-puzzle",
+    "buildSurface": "Phaser browser game with Devvit shell"
+  },
+  "evidence": [
+    {
+      "path": "README.md",
+      "bytes": 4228,
+      "sha256": "533e8e67169fe307fc7ec33287437d8717d76ad36d083c37c4056dd24fd82c59"
+    },
+    {
+      "path": "docs/cover.png",
+      "bytes": 59828,
+      "sha256": "e8414d46a4b3c9fed4fddfabee19930cbfa6a03c17d7bcb67c2096644e7eeaec"
+    },
+    {
+      "path": "docs/desktop-preview.png",
+      "bytes": 114680,
+      "sha256": "51f5c8d7b76a423dddcbfc533d159ef4f5065f65f5e076a6d0f15b2715631456"
+    },
+    {
+      "path": "docs/mobile-preview.png",
+      "bytes": 95312,
+      "sha256": "1fd8b11b829b4e455341419ccd0d24c1f0761ca7f8a66226b9c61243cfa9fba8"
+    },
+    {
+      "path": "docs/demo-final-captioned.webm",
+      "bytes": 3860774,
+      "sha256": "d745ad3e748671021b7378afdfe06c632233d965f0068e1062ffc82d10951103"
+    },
+    {
+      "path": "docs/demo-script.md",
+      "bytes": 3777,
+      "sha256": "f9d2f33e5fd9deb40e8ec029013fc9079305b704568f19bd675301f608064ba4"
+    },
+    {
+      "path": "docs/gallery_assets.md",
+      "bytes": 1708,
+      "sha256": "0eb84301f145391c2910b42441d5e58926f1cc90abf8873a6b7be3eec973357b"
+    },
+    {
+      "path": "docs/launch-readiness.md",
+      "bytes": 6051,
+      "sha256": "e5cc99b6dfb0422793e9058fb26fe85bb3ce6d6458d4f30975f43741402aa08d"
+    },
+    {
+      "path": "docs/submission-field-pack.md",
+      "bytes": 5785,
+      "sha256": "10c35555cd65b49b3c9b0154b1caedb17081c424ed12a0affa8786737bfdfd93"
+    },
+    {
+      "path": "docs/devvit_shell_readiness.md",
+      "bytes": 3534,
+      "sha256": "7e7e6a39a276f36eef087f5e1fc4de84bf1a94f099fc97966b571448e0aaa3d2"
+    },
+    {
+      "path": "scripts/export-launch-packet.mjs",
+      "bytes": 5807,
+      "sha256": "dcb1686f7935ff34a32f96f00cb8b93d1a91a7f3d990860551f118174e5998bd"
+    }
+  ],
+  "requiredLocalChecks": [
+    "npm test",
+    "npm run check",
+    "npm run build:all",
+    "npm run audit:local",
+    "npm run audit:devvit",
+    "npm run audit:submission",
+    "npm audit --audit-level=moderate"
+  ],
+  "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
+  "publicGatePlaceholders": [
+    "public app listing URL",
+    "public demo post URL",
+    "public review URL"
+  ],
+  "guardrails": [
+    "No private account pages or credentials in media.",
+    "No localhost URLs in strict launch packet output.",
+    "No private planning context in public repository text."
+  ]
+}

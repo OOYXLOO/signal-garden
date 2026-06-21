@@ -13,6 +13,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
 The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, comment route import, a comment challenge prompt, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
+The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 
 ## What Makes It Social
 
@@ -46,6 +47,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Launch packet generated from the current route, Review link, consensus, Reddit fit checks, and platform feedback notes.
 - Strict launch packet CLI export for injecting public app listing, demo post, and review URLs after the platform gate.
+- Submission evidence manifest export for checking that media and source notes are current before a submission pass.
 - Contributor aggregation and Reddit-ready daily recap text.
 - Briefing export with exact review link.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
@@ -80,3 +82,4 @@ The current build includes seven verified puzzle templates, objective progress c
 ## Local Asset Check
 
 Run `npm run audit:submission` before a user-approved submission pass to verify gallery image dimensions, final demo presence, under-60-second duration, and required submission text sections.
+Refresh `docs/submission-manifest.json` with `npm run export:submission-manifest -- --output docs/submission-manifest.json` whenever evidence files change; the submission audit recomputes hashes and fails if the manifest is stale.

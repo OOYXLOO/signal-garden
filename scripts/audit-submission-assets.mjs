@@ -1,9 +1,11 @@
+import { createHash } from "node:crypto";
 import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 
 const requiredFiles = [
+  "docs/submission-manifest.json",
   "docs/cover.png",
   "docs/desktop-preview.png",
   "docs/mobile-preview.png",
@@ -60,6 +62,7 @@ const textExpectations = [
 ];
 
 const maxDemoDurationSeconds = 60;
+const expectedManifestSchema = "signal-garden-submission-manifest/v1";
 
 function readPngDimensions(buffer) {
   const signature = buffer.subarray(0, 8).toString("hex");
@@ -138,6 +141,67 @@ function readWebmDurationSeconds(buffer) {
   return (duration * timecodeScale) / 1_000_000_000;
 }
 
+function sha256(buffer) {
+  return createHash("sha256").update(buffer).digest("hex");
+}
+
+async function auditSubmissionManifest() {
+  const manifestPath = "docs/submission-manifest.json";
+  let manifest;
+  try {
+    manifest = JSON.parse(await readFile(join(root, manifestPath), "utf8"));
+  } catch (error) {
+    failures.push(`${manifestPath} parse failed: ${error.message}`);
+    return;
+  }
+
+  if (manifest.schemaVersion !== expectedManifestSchema) {
+    failures.push(`${manifestPath} schema ${manifest.schemaVersion}, expected ${expectedManifestSchema}`);
+  }
+  if (manifest.project?.name !== "Signal Garden") {
+    failures.push(`${manifestPath} missing Signal Garden project name`);
+  }
+  if (!Array.isArray(manifest.evidence) || manifest.evidence.length === 0) {
+    failures.push(`${manifestPath} evidence list is empty`);
+    return;
+  }
+  if (!Array.isArray(manifest.requiredLocalChecks) || !manifest.requiredLocalChecks.includes("npm run audit:submission")) {
+    failures.push(`${manifestPath} missing required local check list`);
+  }
+  if (!String(manifest.launchPacketCommand || "").includes("export:launch-packet")) {
+    failures.push(`${manifestPath} missing launch packet command`);
+  }
+
+  const seen = new Set();
+  for (const entry of manifest.evidence) {
+    if (!entry || typeof entry.path !== "string") {
+      failures.push(`${manifestPath} contains an evidence entry without a path`);
+      continue;
+    }
+    if (entry.path.includes("\\") || entry.path.startsWith("/") || entry.path.includes("..")) {
+      failures.push(`${manifestPath} evidence path is not repository-relative: ${entry.path}`);
+      continue;
+    }
+    if (seen.has(entry.path)) {
+      failures.push(`${manifestPath} duplicate evidence path: ${entry.path}`);
+      continue;
+    }
+    seen.add(entry.path);
+
+    try {
+      const buffer = await readFile(join(root, entry.path));
+      if (entry.bytes !== buffer.length) {
+        failures.push(`${manifestPath} stale byte count for ${entry.path}`);
+      }
+      if (entry.sha256 !== sha256(buffer)) {
+        failures.push(`${manifestPath} stale sha256 for ${entry.path}`);
+      }
+    } catch (error) {
+      failures.push(`${manifestPath} evidence read failed for ${entry.path}: ${error.message}`);
+    }
+  }
+}
+
 const failures = [];
 
 for (const file of requiredFiles) {
@@ -201,6 +265,8 @@ for (const expectation of textExpectations) {
   }
 }
 
+await auditSubmissionManifest();
+
 if (failures.length) {
   for (const failure of failures) {
     console.error(`FAIL ${failure}`);
@@ -213,3 +279,4 @@ console.log("PASS gallery image dimensions valid");
 console.log("PASS final captioned demo size valid");
 console.log("PASS final captioned demo duration valid");
 console.log("PASS submission text pack complete");
+console.log("PASS submission manifest fresh");

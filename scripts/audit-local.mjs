@@ -41,10 +41,13 @@ const required = [
   "docs/devvit_shell_readiness.md",
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
+  "docs/submission-manifest.json",
   "scripts/record-demo.mjs",
   "scripts/audit-submission-assets.mjs",
   "scripts/export-launch-packet.mjs",
+  "scripts/export-submission-manifest.mjs",
   "tests/exportLaunchPacketCli.test.mjs",
+  "tests/exportSubmissionManifestCli.test.mjs",
 ];
 
 const forbidden = [

@@ -28,6 +28,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/mobile-preview.png`: mobile gallery preview.
 - `docs/devvit_shell_readiness.md`: Devvit shell status and account gates.
 - `docs/gallery_assets.md`: asset inventory and guardrails.
+- `docs/submission-manifest.json`: deterministic file manifest with byte counts and SHA-256 hashes for the public evidence packet.
 
 ## Local Verification Before Any User Gate
 
@@ -39,11 +40,13 @@ npm run check
 npm run build:all
 npm run audit:local
 npm run audit:devvit
+npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run audit:submission
 npm audit --audit-level=moderate
 ```
 
 `npm run audit:submission` checks that the final captioned demo stays at or below 60 seconds.
+It also recomputes the submission manifest hashes so the evidence packet fails closed if an asset changes after export.
 
 Optional asset refresh:
 
@@ -91,6 +94,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - Social loop notes: use `What Makes It Social` from `docs/submission-field-pack.md`.
 - Demo discussion packet: copy the app launch packet after a complete route exists.
 - Final launch packet: use `npm run export:launch-packet -- --strict` after real public URLs exist.
+- Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.
 - Demo post: add only after a user-approved public Reddit post exists.
 - App listing: add only after a user-approved Devvit listing exists.
 
@@ -111,4 +115,4 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The Devvit client build uses relative asset paths, avoiding root `/assets` assumptions in WebView static hosting.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
-- The public repository text does not mention private goal tracking or financial intent.
+- The public repository text does not mention private planning context.

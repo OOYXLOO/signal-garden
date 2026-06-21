@@ -1,0 +1,118 @@
+import { createHash } from "node:crypto";
+import { readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const scriptPath = fileURLToPath(import.meta.url);
+const root = resolve(dirname(scriptPath), "..");
+
+const evidenceFiles = [
+  "README.md",
+  "docs/cover.png",
+  "docs/desktop-preview.png",
+  "docs/mobile-preview.png",
+  "docs/demo-final-captioned.webm",
+  "docs/demo-script.md",
+  "docs/gallery_assets.md",
+  "docs/launch-readiness.md",
+  "docs/submission-field-pack.md",
+  "docs/devvit_shell_readiness.md",
+  "scripts/export-launch-packet.mjs",
+];
+
+function parseArgs(argv) {
+  const options = {
+    output: "",
+    help: false,
+  };
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === "--help" || arg === "-h") {
+      options.help = true;
+    } else if (arg === "--output") {
+      index += 1;
+      if (index >= argv.length) {
+        throw new Error("Missing value for --output");
+      }
+      options.output = argv[index];
+    } else {
+      throw new Error(`Unexpected argument: ${arg}`);
+    }
+  }
+  return options;
+}
+
+function helpText() {
+  return [
+    "Usage:",
+    "  npm run export:submission-manifest -- --output docs/submission-manifest.json",
+    "",
+    "Creates a deterministic manifest of public submission evidence files.",
+  ].join("\n");
+}
+
+async function fileEntry(path) {
+  const buffer = await readFile(resolve(root, path));
+  return {
+    path,
+    bytes: buffer.length,
+    sha256: createHash("sha256").update(buffer).digest("hex"),
+  };
+}
+
+export async function createSubmissionManifest() {
+  const entries = [];
+  for (const path of evidenceFiles) {
+    entries.push(await fileEntry(path));
+  }
+
+  return {
+    schemaVersion: "signal-garden-submission-manifest/v1",
+    project: {
+      name: "Signal Garden",
+      type: "daily-community-relay-puzzle",
+      buildSurface: "Phaser browser game with Devvit shell",
+    },
+    evidence: entries,
+    requiredLocalChecks: [
+      "npm test",
+      "npm run check",
+      "npm run build:all",
+      "npm run audit:local",
+      "npm run audit:devvit",
+      "npm run audit:submission",
+      "npm audit --audit-level=moderate",
+    ],
+    launchPacketCommand:
+      "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
+    publicGatePlaceholders: ["public app listing URL", "public demo post URL", "public review URL"],
+    guardrails: [
+      "No private account pages or credentials in media.",
+      "No localhost URLs in strict launch packet output.",
+      "No private planning context in public repository text.",
+    ],
+  };
+}
+
+async function main() {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.help) {
+    console.log(helpText());
+    return;
+  }
+
+  const manifest = await createSubmissionManifest();
+  const text = `${JSON.stringify(manifest, null, 2)}\n`;
+  if (options.output) {
+    await writeFile(resolve(root, options.output), text, "utf8");
+  } else {
+    process.stdout.write(text);
+  }
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === scriptPath) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exit(1);
+  });
+}
