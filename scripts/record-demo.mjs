@@ -116,16 +116,16 @@ async function main() {
   await showCaption(page, "Replay route animates the signal path so the solution is readable during review.", durations.replay);
   await page.locator("#save-proposal").click();
   await page.waitForFunction(() => !document.querySelector("#apply-plan").disabled);
-  await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score instead of trusting the client.", durations.proposal);
+  await showCaption(page, "Saving a route creates a proposal. The adapter recomputes score and explains why the top route leads.", durations.proposal);
   await page.locator("#copy-link").click();
   await showCaption(page, "The briefing includes an exact review link, so a post or review thread can reopen the same plan.", durations.share);
   if (final) {
-    const briefing = await page.locator("#briefing-output").inputValue();
-    await page.locator("#comment-route").fill(`Comment route:\n${briefing}`);
+    await page.locator("#load-sample-thread").click();
     await page.locator("#import-route").click();
-    await page.waitForFunction(() => document.querySelector("#contributor-list")?.textContent.includes("comment-route"));
+    await page.waitForFunction(() => document.querySelector("#proposal-summary")?.textContent.includes("Imported 2/4"));
+    await page.waitForFunction(() => document.querySelector("#top-route-rationale span")?.textContent.includes("Why"));
     await showCaption(page, "Paste a review link from a comment: it becomes another scored community proposal.", durations.import);
-    await showCaption(page, "The contributor board and daily recap turn today's routes into a discussion loop.", durations.recap);
+    await showCaption(page, "The top-route rationale, contributor board, and daily recap turn today's routes into a discussion loop.", durations.recap);
   }
   await page.locator("#clear-plan").click();
   await showCaption(page, "Clear the board: the top route ghost remains as the community target while the local draft resets.", durations.clear);
@@ -141,6 +141,7 @@ async function main() {
     title: document.querySelector("#puzzle-title")?.textContent,
     status: document.querySelector("#status-value")?.textContent,
     summary: document.querySelector("#proposal-summary")?.textContent,
+    rationale: document.querySelector("#top-route-rationale")?.textContent,
     contributors: document.querySelector("#contributor-list")?.textContent,
     recap: document.querySelector("#daily-recap")?.value,
     briefing: document.querySelector("#briefing-output")?.value,
@@ -165,7 +166,7 @@ async function main() {
   if (state.rivalPlanLength <= 0) {
     throw new Error(`Missing top route ghost state: ${JSON.stringify(state)}`);
   }
-  if (final && (!state.contributors?.includes("comment-route") || !state.recap?.includes("Contributor lead"))) {
+  if (final && (!state.contributors?.includes("alice") || !state.recap?.includes("Contributor lead") || !state.rationale?.includes("leads"))) {
     throw new Error(`Incomplete contributor recap state: ${JSON.stringify(state)}`);
   }
 
