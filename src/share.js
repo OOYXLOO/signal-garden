@@ -9,6 +9,11 @@ export function wantsSampleRoute(searchParams) {
   return ["1", "true", "yes", "route"].includes(value);
 }
 
+export function wantsSampleWeek(searchParams) {
+  const value = String(searchParams.get("sampleWeek") || searchParams.get("weekPreview") || "").toLowerCase();
+  return wantsSampleRoute(searchParams) || ["1", "true", "yes", "week"].includes(value);
+}
+
 export function resolveInitialRoutePlan({ searchParams, puzzle, storedPlan = [] }) {
   const sharedDay = searchParams.get("day");
   const sharedPlan = sharedDay === puzzle.id ? decodePlanToken(searchParams.get("plan"), puzzle) : [];
@@ -28,6 +33,8 @@ export function buildShareUrl(currentHref, puzzle, plan = []) {
   const url = new URL(currentHref);
   url.searchParams.delete("sample");
   url.searchParams.delete("sampleRoute");
+  url.searchParams.delete("sampleWeek");
+  url.searchParams.delete("weekPreview");
   url.searchParams.set("day", puzzle.id);
   url.searchParams.set("plan", encodePlanToken(plan));
   return url.toString();

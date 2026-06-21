@@ -4,8 +4,8 @@ import { createObjectiveList, createRouteInsight, describeResult } from "./game/
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide, createTopRouteRationale } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
-import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute } from "./share.js";
-import { createGardenLog, getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
+import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute, wantsSampleWeek } from "./share.js";
+import { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
 
 const statusText = {
   complete: "Complete",
@@ -85,7 +85,9 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
   let latestConsensus = null;
   let lastSoundStatus = null;
   let hasRenderedState = false;
-  const sampleRoutePreview = wantsSampleRoute(new URLSearchParams(window.location.search));
+  const initialSearchParams = new URLSearchParams(window.location.search);
+  const sampleRoutePreview = wantsSampleRoute(initialSearchParams);
+  const sampleWeekPreview = wantsSampleWeek(initialSearchParams);
 
   function renderSoundToggle() {
     refs.soundToggle.textContent = audio.isMuted() ? "Sound off" : "Sound on";
@@ -357,7 +359,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     }
     savePlan(puzzle.id, plan, result);
     renderArchive(refs, puzzle.id);
-    renderGardenLog(refs, puzzle.id);
+    renderGardenLog(refs, puzzle.id, { preview: sampleWeekPreview });
     if (latestDay !== puzzle.id) {
       latestDay = puzzle.id;
       latestConsensus = null;
@@ -529,12 +531,14 @@ function renderArchive(refs, currentPuzzleId) {
   }
 }
 
-function renderGardenLog(refs, currentPuzzleId) {
-  const archive = getLocalArchive(currentPuzzleId);
+function renderGardenLog(refs, currentPuzzleId, { preview = false } = {}) {
+  const archive = preview
+    ? mergeGardenArchive(getLocalArchive(currentPuzzleId), createSampleGardenArchive(currentPuzzleId))
+    : getLocalArchive(currentPuzzleId);
   const log = createGardenLog({
     currentPuzzleId,
     archive,
-    streak: getLocalStreak(currentPuzzleId),
+    streak: preview ? undefined : getLocalStreak(currentPuzzleId),
   });
   refs.retentionSummary.textContent = log.summary;
   refs.gardenLogList.replaceChildren(
@@ -544,7 +548,7 @@ function renderGardenLog(refs, currentPuzzleId) {
           const label = document.createElement("span");
           const value = document.createElement("strong");
           const detail = document.createElement("em");
-          item.className = slot.state;
+          item.className = `${slot.state}${slot.preview ? " preview" : ""}`;
           item.setAttribute("aria-label", `${slot.label}: ${slot.value}, ${slot.detail}`);
           label.textContent = slot.label;
           value.textContent = slot.value;

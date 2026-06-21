@@ -326,6 +326,10 @@ h2 {
   background: #fff1cf;
 }
 
+.garden-log-list li.preview {
+  border-style: dashed;
+}
+
 .garden-log-list span,
 .garden-log-list strong,
 .garden-log-list em {

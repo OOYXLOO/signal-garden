@@ -22,7 +22,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
 - Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
-- Seven-day return map in the Loop panel: visible local archive, streak, complete, draft, and open day states for retention review.
+- Seven-day return map in the Loop panel: visible local archive, streak, complete, draft, open day states, and non-persistent sample week preview for retention review.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
 - `docs/desktop-preview.png`: desktop gallery preview.
@@ -79,7 +79,7 @@ For a quick reviewer walkthrough before a copied Review link exists, open the pu
 <public-app-url>?day=2026-06-21&sample=1
 ```
 
-The app turns that sample route into the same briefing, review snapshot, comment challenge, top route rationale, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs.
+The app turns that sample route into the same briefing, review snapshot, comment challenge, top route rationale, return map, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus and sample week preview without writing either preview to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs.
 
 ## Static Review Surface
 
@@ -132,7 +132,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 
 - The first screen shows the daily board, objective chips, and move limit.
 - Daily missions show route tracing, proposal saving, relay completion, and rival target progress.
-- The return map shows a seven-day local archive with complete, draft, and open day states.
+- The return map shows a seven-day local archive with complete, draft, and open day states; `sample=1` can add a clearly labeled sample week preview without persisting fake archive data.
 - A saved or imported top route appears as a low-contrast board ghost before it is applied.
 - The top route rationale explains why the current route leads, including completion, score, move count, tie-breaks, and contributor record.
 - A completed route turns all objectives complete.

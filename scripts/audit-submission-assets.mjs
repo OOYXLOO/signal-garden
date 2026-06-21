@@ -43,6 +43,7 @@ const textExpectations = [
       "submission pack",
       "developer feedback draft",
       "return map",
+      "sample week preview",
     ],
   },
   {
@@ -72,6 +73,7 @@ const textExpectations = [
       "export:submission-pack",
       "developer feedback draft",
       "return map",
+      "sample week preview",
     ],
   },
 ];

@@ -64,7 +64,55 @@ function formatDayKey(date) {
   return date.toISOString().slice(0, 10);
 }
 
-export function createGardenLog({ currentPuzzleId, archive = [], streak = 0, limit = 7 } = {}) {
+export function createSampleGardenArchive(currentPuzzleId) {
+  const currentDate = parseDayKey(currentPuzzleId);
+  if (!currentDate) {
+    return [];
+  }
+
+  const sampleDays = [
+    { offset: 0, complete: true, status: "complete", score: 1012, beacons: 3, moves: 2 },
+    { offset: 1, complete: true, status: "complete", score: 740, beacons: 3, moves: 3 },
+    { offset: 2, complete: false, status: "blocked", score: 80, beacons: 1, moves: 1 },
+    { offset: 4, complete: true, status: "complete", score: 680, beacons: 3, moves: 4 },
+  ];
+
+  return sampleDays.map((sample) => {
+    const date = new Date(currentDate.getTime() - sample.offset * 24 * 60 * 60 * 1000);
+    return {
+      id: formatDayKey(date),
+      complete: sample.complete,
+      status: sample.status,
+      score: sample.score,
+      beacons: sample.beacons,
+      moves: sample.moves,
+      plan: [{ x: sample.offset % 4, y: (sample.offset + 1) % 4, mirror: sample.offset % 2 ? "slash" : "backslash" }],
+      updatedAt: `${formatDayKey(date)}T00:00:00.000Z`,
+      preview: true,
+    };
+  });
+}
+
+export function mergeGardenArchive(actualArchive = [], previewArchive = []) {
+  const actualIds = new Set(actualArchive.map((entry) => entry.id));
+  return [...actualArchive, ...previewArchive.filter((entry) => !actualIds.has(entry.id))]
+    .sort((left, right) => String(right.id).localeCompare(String(left.id)))
+    .slice(0, 7);
+}
+
+function countArchiveStreak(currentDate, archiveById) {
+  let streak = 0;
+  while (true) {
+    const date = new Date(currentDate.getTime() - streak * 24 * 60 * 60 * 1000);
+    const entry = archiveById.get(formatDayKey(date));
+    if (!entry?.complete) {
+      return streak;
+    }
+    streak += 1;
+  }
+}
+
+export function createGardenLog({ currentPuzzleId, archive = [], streak, limit = 7 } = {}) {
   const currentDate = parseDayKey(currentPuzzleId);
   const archiveById = new Map(archive.map((entry) => [entry.id, entry]));
   if (!currentDate) {
@@ -91,13 +139,15 @@ export function createGardenLog({ currentPuzzleId, archive = [], streak = 0, lim
         : hasRoute
           ? `${entry.beacons || 0} beacons`
           : "Open",
-      detail: entry ? status : "not played",
+      detail: entry?.preview ? `sample ${status}` : entry ? status : "not played",
+      preview: Boolean(entry?.preview),
     });
   }
 
   const completed = slots.filter((slot) => slot.state === "complete").length;
+  const effectiveStreak = Number.isFinite(streak) ? streak : countArchiveStreak(currentDate, archiveById);
   return {
-    summary: streak ? `${streak}-day complete streak` : `${completed}/${slots.length} recent days complete`,
+    summary: effectiveStreak ? `${effectiveStreak}-day complete streak` : `${completed}/${slots.length} recent days complete`,
     slots,
   };
 }

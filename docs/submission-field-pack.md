@@ -11,7 +11,7 @@ Signal Garden is a daily Phaser relay puzzle where players place mirrors, guide 
 Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. A deterministic board appears each day with a source, receiver, blockers, three beacons, and a five-move limit. Players place mirrors to route the signal, then save the route as a proposal.
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
-The current interface also includes a seven-day return map that shows complete, draft, and open days from the local archive, turning the retention loop into a visible product surface rather than a note in the README.
+The current interface also includes a seven-day return map that shows complete, draft, and open days from the local archive, plus a clearly labeled sample week preview for first-minute review when no real archive exists yet. That turns the retention loop into a visible product surface rather than a note in the README.
 
 The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
@@ -37,7 +37,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - The top route rationale explains the leader by completion, score, move count, tie-breaks, and contributor record.
 - The briefing output is short enough to fit in a post or comment.
 - Daily boards and archive rows support recurring discussion.
-- The seven-day return map makes streak and recent-day progress visible at a glance.
+- The seven-day return map and sample week preview make streak and recent-day progress visible at a glance.
 
 ## Technical Highlights
 
@@ -45,7 +45,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Shared deterministic puzzle engine.
 - Objective progress derived from the current trace.
 - Daily missions for route tracing, proposal saving, relay completion, and rival target chasing.
-- Seven-day garden log generated from the local archive and streak state.
+- Seven-day garden log generated from the local archive, streak state, and non-persistent sample week preview.
 - Top route ghosting for community route visibility on the board.
 - Top route rationale for explaining the current leader after saved proposals or comment-thread imports.
 - Replay animation for the current route.
@@ -97,7 +97,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Show the contributor board and copy the daily recap.
 - Clear the board and apply the top proposal.
 - Show daily seed, streak, archive, and briefing output.
-- Show the seven-day return map after playing or loading a sample route.
+- Show the seven-day return map and sample week preview after playing or loading a sample route.
 - Avoid account pages and private consoles.
 
 ## Current Local Video Assets
