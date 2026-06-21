@@ -1,7 +1,7 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
-import { createCommunityTarget, createDailyRecap } from "./game/proposals.js";
+import { createCommunityTarget, createDailyMissions, createDailyRecap } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
@@ -36,6 +36,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     targetLabel: document.querySelector("#target-label"),
     targetValue: document.querySelector("#target-value"),
     targetDetail: document.querySelector("#target-detail"),
+    missions: document.querySelector("#mission-list"),
     statusHint: document.querySelector("#status-hint"),
     routeInsight: document.querySelector("#route-insight"),
     archiveList: document.querySelector("#archive-list"),
@@ -239,6 +240,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     refs.streak.textContent = String(getLocalStreak(puzzle.id));
     refs.status.textContent = statusText[result.status] || "Drafting";
     renderCommunityTarget(refs, puzzle, result, latestConsensus);
+    renderDailyMissions(refs, createDailyMissions(puzzle, result, plan, latestConsensus));
     refs.statusHint.textContent = describeResult(puzzle, result);
     renderRouteInsight(refs, createRouteInsight(puzzle, result));
     if (hasRenderedState && lastSoundStatus !== result.status) {
@@ -281,6 +283,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       refreshConsensus(refs, communityClient, puzzle.id).then((consensus) => {
         latestConsensus = consensus;
         renderCommunityTarget(refs, puzzle, result, latestConsensus);
+        renderDailyMissions(refs, createDailyMissions(puzzle, result, plan, latestConsensus));
         renderCommentChallenge(refs, latest, latestConsensus);
         renderReviewSnapshot(refs, latest, latestConsensus);
         renderLaunchPacket(refs, latest, latestConsensus);
@@ -403,6 +406,22 @@ function renderCommunityTarget(refs, puzzle, result, consensus) {
   refs.targetLabel.textContent = target.label;
   refs.targetValue.textContent = target.value;
   refs.targetDetail.textContent = target.detail;
+}
+
+function renderDailyMissions(refs, missions) {
+  refs.missions.replaceChildren(
+    ...missions.map((mission) => {
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      item.className = mission.complete ? "complete" : "";
+      item.setAttribute("aria-label", `${mission.label}: ${mission.complete ? "complete" : "open"}, ${mission.value}`);
+      label.textContent = mission.label;
+      value.textContent = mission.value;
+      item.append(label, value);
+      return item;
+    }),
+  );
 }
 
 function renderContributors(refs, contributors) {

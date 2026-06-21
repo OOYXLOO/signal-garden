@@ -104,6 +104,40 @@ export function createCommunityTarget(puzzle, result, consensus) {
   };
 }
 
+export function createDailyMissions(puzzle, result, plan = [], consensus) {
+  const proposalCount = Number(consensus?.proposalCount || 0);
+  const best = consensus?.best || null;
+  const moveCount = plan.length;
+  const beaconTotal = puzzle.beacons.length;
+  const hitBeacons = result?.hitBeacons?.length || 0;
+  const currentScore = Number(result?.score || 0);
+  const currentMoves = result?.moves?.length || moveCount;
+  const beatsBest = best && result?.complete && (currentScore > best.score || (currentScore === best.score && currentMoves <= best.moves));
+
+  return [
+    {
+      label: "Trace a route",
+      value: moveCount ? `${moveCount}/${puzzle.moveLimit} moves` : "Open path",
+      complete: moveCount > 0,
+    },
+    {
+      label: "Save proposal",
+      value: proposalCount ? `${proposalCount} saved` : "Open slot",
+      complete: proposalCount > 0,
+    },
+    {
+      label: "Complete relay",
+      value: result?.complete ? `${currentScore} pts` : `${hitBeacons}/${beaconTotal} beacons`,
+      complete: Boolean(result?.complete),
+    },
+    {
+      label: best ? "Beat top route" : "Set first target",
+      value: best ? `${best.score + 1} pts` : "First saved route",
+      complete: best ? Boolean(beatsBest) : proposalCount > 0,
+    },
+  ];
+}
+
 export function toCommunityPayload(puzzle, proposals = []) {
   const consensus = summarizeConsensus(puzzle, proposals);
   return {

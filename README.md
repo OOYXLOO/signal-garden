@@ -31,6 +31,7 @@ npm run record:demo
 - Deterministic daily puzzle seed.
 - Seven verified puzzle templates for a broader daily rotation.
 - Objective progress chips for the three beacons and receiver.
+- Daily missions that connect route tracing, proposal saving, relay completion, and the rival target.
 - Local-only persistence with no credentials or private account data.
 - Adapter-backed proposal consensus that ranks saved player plans.
 - Contributor board that aggregates completed routes and best scores by author.

@@ -326,6 +326,15 @@ h2 {
   list-style: none;
 }
 
+.mission-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
 .route-insight {
   display: grid;
   gap: 8px;
@@ -358,6 +367,43 @@ h2 {
   background: #fffdf8;
   font-size: 13px;
   line-height: 1.3;
+}
+
+.mission-list li {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: var(--charcoal);
+  background: #fffdf8;
+}
+
+.mission-list li.complete {
+  border-color: rgba(31, 122, 115, 0.4);
+  background: var(--teal-soft);
+}
+
+.mission-list span,
+.mission-list strong {
+  display: block;
+}
+
+.mission-list span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.mission-list strong {
+  margin-top: 4px;
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.mission-list li.complete strong {
+  color: var(--teal);
 }
 
 .archive-list li > span {
@@ -476,6 +522,7 @@ textarea.launch-packet {
 
   .score-grid,
   .objective-list,
+  .mission-list,
   .button-row {
     grid-template-columns: 1fr;
   }

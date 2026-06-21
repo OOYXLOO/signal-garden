@@ -12,7 +12,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, comment route import, a comment challenge prompt, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, comment route import, a comment challenge prompt, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, and a Devvit shell for pre-account validation.
 
 ## What Makes It Social
 
@@ -34,6 +34,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Phaser + Vite browser game.
 - Shared deterministic puzzle engine.
 - Objective progress derived from the current trace.
+- Daily missions for route tracing, proposal saving, relay completion, and rival target chasing.
 - Replay animation for the current route.
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.

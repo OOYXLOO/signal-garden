@@ -105,8 +105,14 @@ if (!indexHtml.includes('id="copy-review-snapshot"')) {
 if (!indexHtml.includes('id="target-card"')) {
   failures.push("index.html missing rival target card");
 }
+if (!indexHtml.includes('id="mission-list"')) {
+  failures.push("index.html missing daily missions");
+}
 if (!devvitGameHtml.includes('id="target-card"')) {
   failures.push("devvit game.html missing rival target card");
+}
+if (!devvitGameHtml.includes('id="mission-list"')) {
+  failures.push("devvit game.html missing daily missions");
 }
 if (!devvitGameHtml.includes('id="review-snapshot"')) {
   failures.push("devvit game.html missing review snapshot");
