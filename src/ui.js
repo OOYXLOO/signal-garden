@@ -3,7 +3,7 @@ import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide, createTopRouteRationale } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
-import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
+import { buildSampleRouteUrl, createReviewerFastPath, createSubmissionReadiness, formatSubmissionReadiness } from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute, wantsSampleWeek } from "./share.js";
 import { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
 
@@ -77,6 +77,10 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     fastPathRoute: document.querySelector("#fast-path-route"),
     fastPathConsensus: document.querySelector("#fast-path-consensus"),
     fastPathLoop: document.querySelector("#fast-path-loop"),
+    submissionReadinessTitle: document.querySelector("#submission-readiness-title"),
+    submissionReadinessList: document.querySelector("#submission-readiness-list"),
+    submissionReadinessOutput: document.querySelector("#submission-readiness-output"),
+    copySubmissionReadiness: document.querySelector("#copy-submission-readiness"),
     launchPacket: document.querySelector("#launch-packet"),
     copyLaunchPacket: document.querySelector("#copy-launch-packet"),
   };
@@ -215,6 +219,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copySubmissionReadiness.addEventListener("click", async () => {
+    refs.submissionReadinessOutput.select();
+    try {
+      await navigator.clipboard.writeText(refs.submissionReadinessOutput.value);
+      refs.copySubmissionReadiness.textContent = "Readiness copied";
+      window.setTimeout(() => {
+        refs.copySubmissionReadiness.textContent = "Copy readiness";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
   refs.copyLaunchPacket.addEventListener("click", async () => {
     refs.launchPacket.select();
     try {
@@ -256,6 +272,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       renderReviewerFastPath(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
+      renderSubmissionReadiness(refs, latest, latestConsensus, { sampleWeekPreview });
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
@@ -290,6 +307,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       renderReviewerFastPath(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
+      renderSubmissionReadiness(refs, latest, latestConsensus, { sampleWeekPreview });
       const summary = refs.proposalSummary.textContent;
       const routeLabel = parsed.routes.length === 1 ? "route" : "routes";
       const skipped = parsed.skipped ? `, ${parsed.skipped} skipped (${formatImportSkipReasons(parsed.skippedByReason)})` : "";
@@ -345,6 +363,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     renderReviewerFastPath(refs, latest, latestConsensus);
     renderReviewSnapshot(refs, latest, latestConsensus);
     renderLaunchPacket(refs, latest, latestConsensus);
+    renderSubmissionReadiness(refs, latest, latestConsensus, { sampleWeekPreview });
     refs.moveList.replaceChildren(
       ...(plan.length
         ? plan.map((move) => {
@@ -379,6 +398,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         renderReviewerFastPath(refs, latest, latestConsensus);
         renderReviewSnapshot(refs, latest, latestConsensus);
         renderLaunchPacket(refs, latest, latestConsensus);
+        renderSubmissionReadiness(refs, latest, latestConsensus, { sampleWeekPreview });
       });
     }
   });
@@ -495,6 +515,50 @@ function renderLaunchPacket(refs, latest, consensus) {
         }),
       )
     : "";
+}
+
+function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview = false } = {}) {
+  if (!latest) {
+    refs.submissionReadinessTitle.textContent = "Loading";
+    refs.submissionReadinessList.replaceChildren();
+    refs.submissionReadinessOutput.value = "";
+    return;
+  }
+
+  const archive = sampleWeekPreview
+    ? mergeGardenArchive(getLocalArchive(latest.puzzle.id), createSampleGardenArchive(latest.puzzle.id))
+    : getLocalArchive(latest.puzzle.id);
+  const gardenLog = createGardenLog({
+    currentPuzzleId: latest.puzzle.id,
+    archive,
+    streak: sampleWeekPreview ? undefined : getLocalStreak(latest.puzzle.id),
+  });
+  const readiness = createSubmissionReadiness({
+    puzzle: latest.puzzle,
+    result: latest.result,
+    plan: latest.plan,
+    shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+    sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
+    consensus,
+    gardenLog,
+    launchPacket: refs.launchPacket.value,
+  });
+  refs.submissionReadinessTitle.textContent = readiness.summary;
+  refs.submissionReadinessOutput.value = formatSubmissionReadiness(readiness);
+  refs.submissionReadinessList.replaceChildren(
+    ...readiness.items.map((check) => {
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      const detail = document.createElement("em");
+      item.className = check.state;
+      label.textContent = check.label;
+      value.textContent = check.state;
+      detail.textContent = check.detail;
+      item.append(label, value, detail);
+      return item;
+    }),
+  );
 }
 
 function renderArchive(refs, currentPuzzleId) {

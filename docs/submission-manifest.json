@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 6812,
-      "sha256": "ef18564c93bd27c43a34ded7266e104c14674b3edccc0195180a61bc40a05bf7"
+      "bytes": 7023,
+      "sha256": "4917796bea790c45d665b0c77dd3b6bbd736239da27b3df6332d2b4483081b40"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -38,8 +38,8 @@
     },
     {
       "path": "docs/demo-script.md",
-      "bytes": 4062,
-      "sha256": "888cbc4c270a2fc58ad186c253bdf54d04228025bed6e55b0dc0e41b6636209a"
+      "bytes": 4144,
+      "sha256": "38e9ed9a43638fe123110c9af212ef3059ec28f0aac97f7aa5809739902ad343"
     },
     {
       "path": "docs/gallery_assets.md",
@@ -48,13 +48,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 10618,
-      "sha256": "923728a2c44ef82480ac2e9df97e4ee5c1d0b3f2698006a27be3d9fda546a421"
+      "bytes": 10969,
+      "sha256": "c23254183ff95fa1eb23b419274c1b47f777777892fe447fe587d903d6eff3dd"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 9648,
-      "sha256": "79aa7e25d26fcdacc25c54f1161e07772e84b0f66e53b16648e3cff49d373d2d"
+      "bytes": 10296,
+      "sha256": "be0a9e59173cc30f000059b383650ee3c6462c1d65ec4266b053177b46f83cbb"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -103,6 +103,6 @@
   "guardrails": [
     "No private account pages or credentials in media.",
     "No localhost URLs in strict launch packet output.",
-    "No off-project planning notes in public repository text."
+    "Repository text stays focused on Signal Garden project evidence."
   ]
 }

@@ -22,6 +22,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
 - Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
+- Submission readiness panel in the app: playable board, sample route, Review link, return map, contribution loop, launch packet, and remaining public URL placeholders in one copyable checklist.
 - Seven-day return map in the Loop panel: visible local archive, streak, complete, draft, open day states, and non-persistent sample week preview for retention review.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
@@ -144,6 +145,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The Reddit post draft includes a title, body, route review link or sample route, community target, and first-comment prompt.
 - The developer feedback draft includes Devvit Web setup notes, Phaser static asset notes, mobile WebView checks, public review-link flow, and comment-loop feedback.
+- The submission readiness panel marks the sample route, route link, return map, contribution loop, launch packet, and public URL placeholders clearly.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
@@ -156,4 +158,4 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
-- The public repository text does not mention off-project planning notes.
+- The public repository text stays focused on Signal Garden project evidence.

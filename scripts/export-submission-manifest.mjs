@@ -97,7 +97,7 @@ export async function createSubmissionManifest() {
     guardrails: [
       "No private account pages or credentials in media.",
       "No localhost URLs in strict launch packet output.",
-      "No off-project planning notes in public repository text.",
+      "Repository text stays focused on Signal Garden project evidence.",
     ],
   };
 }

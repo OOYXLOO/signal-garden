@@ -35,6 +35,7 @@ const textExpectations = [
       "review snapshot",
       "launch packet",
       "launch packet CLI export",
+      "submission readiness",
       "top route ghosting",
       "sample route",
       "sample preview",
@@ -48,7 +49,16 @@ const textExpectations = [
   },
   {
     file: "docs/demo-script.md",
-    fragments: ["objective progress", "review link", "archive Review", "comment prompt", "review snapshot", "launch packet", "top route ghost"],
+    fragments: [
+      "objective progress",
+      "review link",
+      "archive Review",
+      "comment prompt",
+      "review snapshot",
+      "submission readiness",
+      "launch packet",
+      "top route ghost",
+    ],
   },
   {
     file: "docs/gallery_assets.md",
@@ -63,6 +73,7 @@ const textExpectations = [
       "app listing",
       "public demo post",
       "launch packet",
+      "submission readiness",
       "export:launch-packet",
       "top route",
       "sample=1",

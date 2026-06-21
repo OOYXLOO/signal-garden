@@ -605,6 +605,10 @@ textarea.compact-textarea {
   border-color: rgba(99, 85, 163, 0.24);
 }
 
+.readiness-panel {
+  border-color: rgba(31, 122, 115, 0.26);
+}
+
 .fast-path-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -634,6 +638,79 @@ textarea.compact-textarea {
   font-size: 14px;
   line-height: 1.2;
   overflow-wrap: anywhere;
+}
+
+.readiness-list {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.readiness-list li {
+  min-width: 0;
+  border-left: 4px solid var(--line);
+  padding: 3px 0 4px 10px;
+  color: var(--charcoal);
+}
+
+.readiness-list li.ready {
+  border-left-color: var(--teal);
+}
+
+.readiness-list li.preview {
+  border-left-color: var(--amber);
+}
+
+.readiness-list li.waiting {
+  border-left-color: var(--violet);
+}
+
+.readiness-list li.todo {
+  border-left-color: var(--coral);
+}
+
+.readiness-list span,
+.readiness-list strong,
+.readiness-list em {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.readiness-list span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.readiness-list strong {
+  margin-top: 3px;
+  color: var(--teal);
+  font-size: 14px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.readiness-list li.preview strong {
+  color: var(--amber);
+}
+
+.readiness-list li.waiting strong {
+  color: var(--violet);
+}
+
+.readiness-list li.todo strong {
+  color: var(--coral);
+}
+
+.readiness-list em {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.35;
 }
 
 .rationale-card {
