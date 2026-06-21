@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { createBriefing, mapToPlan, planToMap, traceSignal } from "./puzzle.js";
+import { createBriefing, createRouteCues, mapToPlan, planToMap, traceSignal } from "./puzzle.js";
 
 const COLORS = {
   ink: 0x202124,
@@ -341,38 +341,95 @@ export class SignalGardenScene extends Phaser.Scene {
     }
 
     const graphics = this.layers.feedback;
-    const last = result.visited.at(-1);
-    const center = this.cellCenter(layout, last.x, last.y);
+    const cues = createRouteCues(this.puzzle, result);
+    const focus = cues.focus;
+    if (!focus) {
+      return;
+    }
+    const center = this.cellCenter(layout, focus.x, focus.y);
     const radius = layout.cell * 0.34;
 
-    if (result.status === "partial") {
+    if (cues.kind === "partial") {
       const target = this.cellCenter(layout, this.puzzle.target.x, this.puzzle.target.y);
       graphics.lineStyle(5, COLORS.amber, 0.82);
       graphics.strokeCircle(target.x, target.y, layout.cell * 0.38);
 
-      const hit = new Set(result.hitBeacons);
-      for (const beacon of this.puzzle.beacons) {
-        if (!hit.has(cellKey(beacon.x, beacon.y))) {
-          const missing = this.cellCenter(layout, beacon.x, beacon.y);
-          graphics.lineStyle(4, COLORS.coral, 0.72);
-          graphics.strokeCircle(missing.x, missing.y, layout.cell * 0.28);
-        }
+      for (const beacon of cues.missingBeacons) {
+        const missing = this.cellCenter(layout, beacon.x, beacon.y);
+        graphics.lineStyle(4, COLORS.coral, 0.72);
+        graphics.strokeCircle(missing.x, missing.y, layout.cell * 0.28);
+        graphics.lineStyle(2, COLORS.coral, 0.28);
+        graphics.lineBetween(target.x, target.y, missing.x, missing.y);
       }
+      this.drawCueLabel(layout, target, cues.label, COLORS.amber);
       return;
     }
 
     graphics.lineStyle(5, COLORS.coral, 0.84);
-    if (result.status === "blocked") {
+    if (cues.lastSafe) {
+      const safe = this.cellCenter(layout, cues.lastSafe.x, cues.lastSafe.y);
+      graphics.lineStyle(4, COLORS.amber, 0.78);
+      graphics.strokeCircle(safe.x, safe.y, layout.cell * 0.28);
+      graphics.lineStyle(3, COLORS.amber, 0.36);
+      graphics.lineBetween(safe.x, safe.y, center.x, center.y);
+      this.drawCueLabel(layout, safe, "Last safe", COLORS.amber);
+    }
+
+    graphics.lineStyle(5, COLORS.coral, 0.84);
+    if (cues.kind === "blocked") {
       graphics.strokeRoundedRect(center.x - radius, center.y - radius, radius * 2, radius * 2, 8);
+      this.drawCueLabel(layout, center, cues.label, COLORS.coral);
       return;
     }
 
-    if (result.status === "lost") {
+    if (cues.kind === "lost") {
       graphics.strokeCircle(center.x, center.y, radius);
       graphics.lineStyle(4, COLORS.coral, 0.82);
       graphics.lineBetween(center.x - radius * 0.55, center.y - radius * 0.55, center.x + radius * 0.55, center.y + radius * 0.55);
       graphics.lineBetween(center.x + radius * 0.55, center.y - radius * 0.55, center.x - radius * 0.55, center.y + radius * 0.55);
+      this.drawEscapeArrow(graphics, layout, center, cues.escapeDirection);
+      this.drawCueLabel(layout, center, cues.label, COLORS.coral);
     }
+  }
+
+  drawEscapeArrow(graphics, layout, center, direction) {
+    const vector =
+      {
+        N: { x: 0, y: -1 },
+        E: { x: 1, y: 0 },
+        S: { x: 0, y: 1 },
+        W: { x: -1, y: 0 },
+      }[direction] || { x: 0, y: 0 };
+    if (!vector.x && !vector.y) {
+      return;
+    }
+
+    const start = {
+      x: center.x + vector.x * layout.cell * 0.22,
+      y: center.y + vector.y * layout.cell * 0.22,
+    };
+    const end = {
+      x: center.x + vector.x * layout.cell * 0.48,
+      y: center.y + vector.y * layout.cell * 0.48,
+    };
+    graphics.lineStyle(4, COLORS.coral, 0.76);
+    graphics.lineBetween(start.x, start.y, end.x, end.y);
+    graphics.fillStyle(COLORS.coral, 0.76);
+    graphics.fillCircle(end.x, end.y, layout.cell * 0.08);
+  }
+
+  drawCueLabel(layout, center, label, color) {
+    const text = this.add.text(center.x, center.y - layout.cell * 0.48, label, {
+      color: "#fffdf8",
+      fontFamily: "Inter, system-ui, sans-serif",
+      fontSize: `${Math.max(11, Math.floor(layout.cell * 0.18))}px`,
+      fontStyle: "bold",
+      padding: { x: 6, y: 3 },
+    });
+    text.setOrigin(0.5, 0.5);
+    text.setBackgroundColor(`#${color.toString(16).padStart(6, "0")}`);
+    text.setDepth(18);
+    this.layers.labels.add(text);
   }
 
   playCompletionPulse(layout, result) {

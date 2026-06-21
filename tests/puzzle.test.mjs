@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createCommunityTarget, createDailyRecap, createProposal, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
-import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
+import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteCues, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const linkedPuzzle = createPuzzleForDayKey("2026-06-19");
@@ -21,6 +21,9 @@ assert.match(describeResult(puzzle, solved), /All beacons/);
 assert.match(describeResult(puzzle, empty), /row|Place mirrors|Receiver reached|left the garden/);
 assert.match(createRouteInsight(puzzle, solved).map((insight) => insight.value).join(" "), /beacons are connected/);
 assert.match(createRouteInsight(puzzle, empty).map((insight) => insight.value).join(" "), /first beacon|leaves after/);
+assert.equal(createRouteCues(puzzle, solved).kind, "complete");
+assert.equal(createRouteCues(puzzle, empty).kind, "drafting");
+assert.equal(createRouteCues(puzzle, empty).missingBeacons.length, puzzle.beacons.length);
 assert.deepEqual(createObjectiveList(puzzle, solved).map((objective) => objective.complete), [true, true, true, true]);
 assert.equal(createObjectiveList(puzzle, empty).filter((objective) => objective.complete).length, empty.hitBeacons.length);
 assert.equal(createObjectiveList(puzzle, empty).at(-1).complete, false);
@@ -46,6 +49,56 @@ const partialPuzzle = {
 const partial = traceSignal(partialPuzzle, [{ x: 7, y: 7, mirror: "slash" }]);
 assert.equal(partial.status, "partial");
 assert.match(createRouteInsight(partialPuzzle, partial).map((insight) => insight.value).join(" "), /Missing|row 3, column 3/);
+const partialCue = createRouteCues(partialPuzzle, partial);
+assert.equal(partialCue.kind, "partial");
+assert.equal(partialCue.focus.x, partialPuzzle.target.x);
+assert.equal(partialCue.missingBeacons.length, 2);
+assert.match(partialCue.message, /beacons still need/);
+
+const blockedPuzzle = {
+  id: "blocked-check",
+  title: "Blocked check",
+  size: 8,
+  moveLimit: 5,
+  source: { x: 0, y: 0, dir: "E" },
+  target: { x: 7, y: 7 },
+  beacons: [
+    { x: 3, y: 3 },
+    { x: 4, y: 4 },
+    { x: 5, y: 5 },
+  ],
+  blockers: [{ x: 2, y: 0 }],
+  solution: [],
+};
+const blocked = traceSignal(blockedPuzzle, [{ x: 7, y: 7, mirror: "slash" }]);
+const blockedCue = createRouteCues(blockedPuzzle, blocked);
+assert.equal(blocked.status, "blocked");
+assert.equal(blockedCue.kind, "blocked");
+assert.deepEqual({ x: blockedCue.focus.x, y: blockedCue.focus.y }, { x: 2, y: 0 });
+assert.deepEqual({ x: blockedCue.lastSafe.x, y: blockedCue.lastSafe.y }, { x: 1, y: 0 });
+assert.match(blockedCue.message, /Obstacle/);
+
+const lostPuzzle = {
+  id: "lost-check",
+  title: "Lost check",
+  size: 8,
+  moveLimit: 5,
+  source: { x: 7, y: 1, dir: "E" },
+  target: { x: 0, y: 7 },
+  beacons: [
+    { x: 1, y: 1 },
+    { x: 2, y: 2 },
+    { x: 3, y: 3 },
+  ],
+  blockers: [],
+  solution: [],
+};
+const lost = traceSignal(lostPuzzle, [{ x: 0, y: 0, mirror: "slash" }]);
+const lostCue = createRouteCues(lostPuzzle, lost);
+assert.equal(lost.status, "lost");
+assert.equal(lostCue.kind, "lost");
+assert.equal(lostCue.escapeDirection, "E");
+assert.match(lostCue.message, /heading east/);
 
 const weakProposal = createProposal({
   puzzle,

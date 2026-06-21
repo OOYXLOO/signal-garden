@@ -435,6 +435,83 @@ export function createRouteInsight(puzzle, result) {
   ];
 }
 
+export function createRouteCues(puzzle, result) {
+  const last = result.visited.at(-1) || null;
+  const previous = result.visited.at(-2) || null;
+  const hit = new Set(result.hitBeacons);
+  const missingBeacons = puzzle.beacons.filter((beacon) => !hit.has(keyOf(beacon)));
+
+  if (result.complete) {
+    return {
+      kind: "complete",
+      focus: puzzle.target,
+      lastSafe: null,
+      missingBeacons: [],
+      escapeDirection: "",
+      label: "Complete",
+      message: "Every beacon is connected before the receiver.",
+    };
+  }
+
+  if (result.status === "drafting") {
+    return {
+      kind: "drafting",
+      focus: puzzle.beacons[0],
+      lastSafe: null,
+      missingBeacons: puzzle.beacons,
+      escapeDirection: "",
+      label: "Start here",
+      message: `Aim first for ${labelCell(puzzle.beacons[0])}.`,
+    };
+  }
+
+  if (result.status === "partial") {
+    return {
+      kind: "partial",
+      focus: puzzle.target,
+      lastSafe: previous,
+      missingBeacons,
+      escapeDirection: "",
+      label: "Too early",
+      message: `${missingBeacons.length} beacon${missingBeacons.length === 1 ? "" : "s"} still need a detour before the receiver.`,
+    };
+  }
+
+  if (result.status === "blocked") {
+    return {
+      kind: "blocked",
+      focus: last,
+      lastSafe: previous,
+      missingBeacons,
+      escapeDirection: "",
+      label: "Blocked",
+      message: last ? `Obstacle at ${labelCell(last)}. Re-route from the previous safe cell.` : "Obstacle hit.",
+    };
+  }
+
+  if (result.status === "lost") {
+    return {
+      kind: "lost",
+      focus: last,
+      lastSafe: previous,
+      missingBeacons,
+      escapeDirection: last?.dir || "",
+      label: "Signal exit",
+      message: last ? `Signal leaves after ${labelCell(last)} heading ${labelDirection(last.dir)}.` : "Signal left the board.",
+    };
+  }
+
+  return {
+    kind: result.status || "drafting",
+    focus: last,
+    lastSafe: previous,
+    missingBeacons,
+    escapeDirection: "",
+    label: "Adjust",
+    message: "Keep adjusting mirrors until every beacon lights before the receiver.",
+  };
+}
+
 export function createObjectiveList(puzzle, result) {
   const hit = new Set(result.hitBeacons);
   return [
