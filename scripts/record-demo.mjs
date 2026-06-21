@@ -128,7 +128,7 @@ async function main() {
     await showCaption(page, "The contributor board and daily recap turn today's routes into a discussion loop.", durations.recap);
   }
   await page.locator("#clear-plan").click();
-  await showCaption(page, "Clear the board: the community plan is now stored separately from the local draft.", durations.clear);
+  await showCaption(page, "Clear the board: the top route ghost remains as the community target while the local draft resets.", durations.clear);
   await page.locator("#apply-plan").click();
   await showCaption(page, "Apply top proposal restores the best saved plan, not a hidden answer.", durations.apply);
   await showCaption(page, "Archive review links reopen saved routes, making the daily board feel persistent.", durations.archive);
@@ -144,6 +144,7 @@ async function main() {
     contributors: document.querySelector("#contributor-list")?.textContent,
     recap: document.querySelector("#daily-recap")?.value,
     briefing: document.querySelector("#briefing-output")?.value,
+    rivalPlanLength: window.signalGarden?.scene?.rivalPlan?.length || 0,
     objectives: [...document.querySelectorAll("#objective-list li")].map((item) => item.getAttribute("aria-label")),
     archive: [...document.querySelectorAll("#archive-list li")].map((item) => item.getAttribute("aria-label") || item.textContent),
   }));
@@ -160,6 +161,9 @@ async function main() {
   }
   if (!state.briefing?.includes("Review link:") || !state.objectives.every((objective) => objective?.includes("complete"))) {
     throw new Error(`Incomplete share or objective state: ${JSON.stringify(state)}`);
+  }
+  if (state.rivalPlanLength <= 0) {
+    throw new Error(`Missing top route ghost state: ${JSON.stringify(state)}`);
   }
   if (final && (!state.contributors?.includes("comment-route") || !state.recap?.includes("Contributor lead"))) {
     throw new Error(`Incomplete contributor recap state: ${JSON.stringify(state)}`);

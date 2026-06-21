@@ -27,7 +27,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
    - Show the status hint and board marker for an incomplete path.
 
 5. Save the proposal.
-   - Say: "Each route becomes a proposal. The app recomputes the score and ranks the best plan."
+   - Say: "Each route becomes a proposal. The app recomputes the score, ranks the best plan, and shows the top route as a board ghost."
    - Show the consensus summary changing to `1/1 saved proposals complete`.
 
 6. Copy the share link and briefing.
@@ -44,7 +44,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 9. Clear and apply the top proposal.
    - Say: "The top proposal is not a hidden answer. It is the best saved community plan."
-   - Show the board returning to the saved route.
+   - Show the top route ghost remaining after the local draft is cleared, then show the board returning to the saved route.
 
 10. Show the loop panel.
    - Say: "The local archive and streak make the daily board feel persistent."
@@ -55,7 +55,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, comment challenge prompts, review snapshot export, launch packet export, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, top route ghosting, comment challenge prompts, review snapshot export, launch packet export, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 
