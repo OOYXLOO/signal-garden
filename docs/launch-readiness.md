@@ -78,7 +78,7 @@ For a quick reviewer walkthrough before a copied Review link exists, open the pu
 <public-app-url>?day=2026-06-21&sample=1
 ```
 
-The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage.
+The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs.
 
 ## Static Review Surface
 
@@ -135,6 +135,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - `?day=YYYY-MM-DD&sample=1` loads a complete sample route without keeping the sample flag in copied Review links.
 - Empty local consensus plus `sample=1` shows a sample preview top route and contributor row without claiming live community data.
 - A pasted review link or briefing can be imported as a community proposal.
+- The sample comment thread loader produces a visible import summary with duplicate and cross-day skip reasons.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.

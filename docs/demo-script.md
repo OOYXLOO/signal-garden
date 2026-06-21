@@ -36,7 +36,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 7. Import a comment thread.
    - Say: "Pasted review links become scored community proposals, while duplicate or cross-day routes are explained instead of silently failing."
-   - Show the comment thread import summary, skip reasons, and the contributor board updating.
+   - Click `Load sample thread`, import it, then show the import summary, skip reasons, and the contributor board updating.
 
 8. Show the comment challenge, review snapshot, launch packet, and daily recap.
    - Say: "The comment prompt invites routes back in, the review snapshot gives judges the route and reproducibility checks, and the launch packet gathers the demo-post setup in one copy."
@@ -55,7 +55,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, top route ghosting, comment challenge prompts, review snapshot export, launch packet export, comment thread route import with skip reasons, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, top route ghosting, comment challenge prompts, review snapshot export, launch packet export, sample thread loading, comment thread route import with skip reasons, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 

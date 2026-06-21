@@ -231,6 +231,14 @@ h2 {
   gap: 10px;
 }
 
+.button-row.two-up {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.community-actions {
+  margin-top: 12px;
+}
+
 .button-row button {
   min-width: 0;
   font-size: 14px;

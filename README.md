@@ -55,6 +55,7 @@ Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --
 - Daily community recap copy for discussion posts or comment follow-ups.
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
 - Comment thread import that parses multiple pasted Review links into ranked community proposals while preserving lightweight author labels.
+- Sample comment thread loader for instantly previewing the reply-thread import loop without manual URL assembly.
 - Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
 - Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
@@ -65,7 +66,7 @@ Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled sample preview consensus when no proposal exists yet.
-- Comment thread route import that turns pasted review links or briefings into ranked community proposals, with import counts and skip reasons for duplicate or cross-day routes.
+- Comment thread route import that turns pasted review links or briefings into ranked community proposals, with import counts, skip reasons for duplicate or cross-day routes, and a one-click sample thread loader.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
 - Briefing output that includes an exact review link whenever a route is present.
 - Completion pulse feedback for solved boards.

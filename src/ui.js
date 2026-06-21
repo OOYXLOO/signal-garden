@@ -50,6 +50,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     replayPlan: document.querySelector("#replay-plan"),
     copyBriefing: document.querySelector("#copy-briefing"),
     commentRoute: document.querySelector("#comment-route"),
+    loadSampleThread: document.querySelector("#load-sample-thread"),
     importRoute: document.querySelector("#import-route"),
     saveProposal: document.querySelector("#save-proposal"),
     proposalSummary: document.querySelector("#proposal-summary"),
@@ -192,6 +193,15 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     }
   });
 
+  refs.loadSampleThread.addEventListener("click", () => {
+    if (!latest) {
+      return;
+    }
+    refs.commentRoute.value = createSampleCommentThread(window.location.href, latest.puzzle);
+    refs.commentRoute.focus();
+    refs.proposalSummary.textContent = "Sample thread loaded. Import it to preview ranked comment routes.";
+  });
+
   refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
       return;
@@ -328,6 +338,20 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       });
     }
   });
+}
+
+function createSampleCommentThread(currentHref, puzzle) {
+  const completeRoute = buildShareUrl(currentHref, puzzle, puzzle.solution);
+  const partialRoute = buildShareUrl(currentHref, puzzle, puzzle.solution.slice(0, 1));
+  const oldRoute = new URL(currentHref);
+  oldRoute.searchParams.set("day", "2026-06-18");
+  oldRoute.searchParams.set("plan", "2-2-b");
+  return [
+    `u/alice: ${completeRoute}`,
+    `@bob - ${partialRoute}`,
+    `u/old: ${oldRoute.toString()}`,
+    `u/alice-again: ${completeRoute}`,
+  ].join("\n");
 }
 
 function syncRivalGuide(scene, puzzle, consensus) {

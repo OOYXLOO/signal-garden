@@ -121,6 +121,9 @@ if (!indexHtml.includes('id="target-card"')) {
 if (!indexHtml.includes('id="mission-list"')) {
   failures.push("index.html missing daily missions");
 }
+if (!indexHtml.includes('id="load-sample-thread"')) {
+  failures.push("index.html missing sample comment thread loader");
+}
 if (!devvitGameHtml.includes('id="target-card"')) {
   failures.push("devvit game.html missing rival target card");
 }
@@ -135,6 +138,9 @@ if (!devvitGameHtml.includes('id="reviewer-fast-path"')) {
 }
 if (!devvitGameHtml.includes('id="launch-packet"')) {
   failures.push("devvit game.html missing launch packet");
+}
+if (!devvitGameHtml.includes('id="load-sample-thread"')) {
+  failures.push("devvit game.html missing sample comment thread loader");
 }
 const sceneText = await readFile(join(root, "src/game/SignalGardenScene.js"), "utf8");
 const proposalText = await readFile(join(root, "src/game/proposals.js"), "utf8");
