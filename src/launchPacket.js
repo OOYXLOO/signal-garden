@@ -1,6 +1,6 @@
 import { createDailyRecap, createTopRouteRationale } from "./game/proposals.js";
 import { createReviewerFastPath } from "./reviewerGuide.js";
-import { createCommentChallenge, createReviewSnapshot } from "./share.js";
+import { createCommentChallenge, createRedditPostDraft, createReviewSnapshot } from "./share.js";
 
 const DEFAULT_FEEDBACK_URL = "https://forms.gle/";
 
@@ -31,6 +31,7 @@ export function createLaunchPacket({
 
   const reviewSnapshot = createReviewSnapshot({ puzzle, result, plan, shareUrl, consensus });
   const commentChallenge = createCommentChallenge({ puzzle, result, plan, shareUrl, consensus });
+  const redditPostDraft = createRedditPostDraft({ puzzle, result, plan, shareUrl, consensus });
   const reviewerFastPath = createReviewerFastPath({ puzzle, result, plan, shareUrl, consensus });
   const topRouteRationale = createTopRouteRationale(
     puzzle,
@@ -59,6 +60,7 @@ export function createLaunchPacket({
     reviewLink: hasRoute ? shareUrl : "",
     launchChecks,
     commentChallenge,
+    redditPostDraft,
     reviewerFastPath,
     topRouteRationale,
     reviewSnapshot,
@@ -91,6 +93,9 @@ export function formatLaunchPacket(packet) {
     "",
     "## Comment Challenge",
     packet.commentChallenge,
+    "",
+    "## Reddit Post Draft",
+    packet.redditPostDraft,
     "",
     "## Reviewer Fast Path",
     packet.reviewerFastPath,

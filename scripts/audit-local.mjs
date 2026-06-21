@@ -103,6 +103,12 @@ if (!indexHtml.includes('id="comment-challenge"')) {
 if (!indexHtml.includes('id="copy-comment-challenge"')) {
   failures.push("index.html missing comment challenge copy control");
 }
+if (!indexHtml.includes('id="reddit-post-draft"')) {
+  failures.push("index.html missing reddit post draft");
+}
+if (!indexHtml.includes('id="copy-reddit-post-draft"')) {
+  failures.push("index.html missing reddit post draft copy control");
+}
 if (!indexHtml.includes('id="review-snapshot"')) {
   failures.push("index.html missing review snapshot");
 }
@@ -135,6 +141,9 @@ if (!devvitGameHtml.includes('id="mission-list"')) {
 }
 if (!devvitGameHtml.includes('id="review-snapshot"')) {
   failures.push("devvit game.html missing review snapshot");
+}
+if (!devvitGameHtml.includes('id="reddit-post-draft"')) {
+  failures.push("devvit game.html missing reddit post draft");
 }
 if (!devvitGameHtml.includes('id="reviewer-fast-path"')) {
   failures.push("devvit game.html missing reviewer fast path");

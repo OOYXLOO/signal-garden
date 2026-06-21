@@ -55,10 +55,11 @@ Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --
 - Contributor board that aggregates completed routes and best scores by author.
 - Daily community recap copy for discussion posts or comment follow-ups.
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
+- Reddit post draft export that prepares a title, body, route review link, community target, and first-comment prompt without posting.
 - Comment thread import that parses multiple pasted Review links into ranked community proposals while preserving lightweight author labels.
 - Sample comment thread loader for instantly previewing the reply-thread import loop without manual URL assembly.
 - Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
-- Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, top route rationale, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
+- Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, Reddit post draft, top route rationale, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.

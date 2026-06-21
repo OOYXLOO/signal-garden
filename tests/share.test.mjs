@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createDailyPuzzle } from "../src/game/puzzle.js";
-import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
+import { buildShareUrl, createCommentChallenge, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const shareUrl = buildShareUrl("https://example.test/play?old=1", puzzle, puzzle.solution);
@@ -60,6 +60,33 @@ assert.match(challenge, /My route: complete, 820 pts, 3\/3 beacons, 2\/5 moves/)
 assert.match(challenge, /Review link: https:\/\/example\.test\/play/);
 assert.match(challenge, /Current top: 900 pts, 3\/3 beacons, 2 moves/);
 assert.match(challenge, /Reply with your Review link/);
+
+const postDraft = createRedditPostDraft({
+  puzzle,
+  result: {
+    status: "complete",
+    complete: true,
+    score: 820,
+    hitBeacons: puzzle.beacons,
+  },
+  plan: puzzle.solution,
+  shareUrl,
+  sampleRouteUrl: "https://example.test/play?day=2026-06-19&sample=1",
+  consensus: {
+    best: {
+      score: 900,
+      beacons: 3,
+      moves: 2,
+    },
+  },
+});
+assert.match(postDraft, /Title: Signal Garden 2026-06-19/);
+assert.match(postDraft, /Body:/);
+assert.match(postDraft, /Current route: complete, 820 pts, 3\/3 beacons, 2\/5 moves/);
+assert.match(postDraft, /Community target: 900 pts/);
+assert.match(postDraft, /Review my route: https:\/\/example\.test\/play/);
+assert.match(postDraft, /First comment prompt:/);
+assert.match(postDraft, /explain why the top route leads/);
 
 const snapshot = createReviewSnapshot({
   puzzle,

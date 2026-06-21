@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 6177,
-      "sha256": "85fe8a18a459a588f309ab574110799739f6d141ba88522bcd5b487818011a88"
+      "bytes": 6331,
+      "sha256": "b90b530bad32e8094b493481f73bc2dfe629ae58a8753e21338e30195799aefd"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -38,8 +38,8 @@
     },
     {
       "path": "docs/demo-script.md",
-      "bytes": 4014,
-      "sha256": "08652e9c6bb38303c169971232770cdc927fdf576735d006b9fa3a2792610ae9"
+      "bytes": 4062,
+      "sha256": "888cbc4c270a2fc58ad186c253bdf54d04228025bed6e55b0dc0e41b6636209a"
     },
     {
       "path": "docs/gallery_assets.md",
@@ -48,13 +48,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 9602,
-      "sha256": "226bbb9a35ddb23dcaeb3c2cb70e800dc6522f262447c5ef814503f24f2eb7df"
+      "bytes": 9878,
+      "sha256": "9e9e6800d4579a66e102c6430d494e73610ba9c22fd237769f25bed01048fda8"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 8287,
-      "sha256": "30f946532f4b6597d434314dc6ef10b622ba76a2fde089070d1d271602078911"
+      "bytes": 8618,
+      "sha256": "11819c596a5cb2954b162b766a18d4805c320ed96014596ba3b49494dfca5d1e"
     },
     {
       "path": "docs/devvit_shell_readiness.md",

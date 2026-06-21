@@ -37,6 +37,8 @@ assert.match(packet.currentRoute, /complete/);
 assert.match(packet.currentRoute, /3\/3 beacons/);
 assert.equal(packet.launchChecks.length, 5);
 assert.match(packet.commentChallenge, /Reply with your Review link/);
+assert.match(packet.redditPostDraft, /Title: Signal Garden 2026-06-19/);
+assert.match(packet.redditPostDraft, /First comment prompt/);
 assert.match(packet.reviewerFastPath, /reviewer fast path/);
 assert.match(packet.reviewerFastPath, /Reddit loop/);
 assert.match(packet.topRouteRationale.summary, /3\/3 beacons/);
@@ -51,6 +53,7 @@ assert.match(formatted, /App listing: https:\/\/developers\.reddit\.com\/apps\/s
 assert.match(formatted, /Review link: https:\/\/example\.test\/play/);
 assert.match(formatted, /## Why It Fits Reddit/);
 assert.match(formatted, /## Comment Challenge/);
+assert.match(formatted, /## Reddit Post Draft/);
 assert.match(formatted, /## Reviewer Fast Path/);
 assert.match(formatted, /## Top Route Rationale/);
 assert.match(formatted, /## Review Snapshot/);

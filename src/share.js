@@ -64,6 +64,47 @@ export function createCommentChallenge({ puzzle, result, plan = [], shareUrl = "
   return lines.join("\n");
 }
 
+export function createRedditPostDraft({
+  puzzle,
+  result,
+  plan = [],
+  shareUrl = "",
+  sampleRouteUrl = "",
+  consensus = null,
+} = {}) {
+  const best = consensus?.best || null;
+  const hasRoute = plan.length > 0 && result;
+  const status = result?.complete ? "complete" : result?.status || "open";
+  const score = Number(result?.score || 0);
+  const beacons = result?.hitBeacons?.length || 0;
+  const reviewLine = shareUrl
+    ? `Review my route: ${shareUrl}`
+    : sampleRouteUrl
+      ? `Quick review route: ${sampleRouteUrl}`
+      : "Review route: add a public route link after playtest.";
+  const title = `Signal Garden ${puzzle.id}: route today's ${puzzle.title}`;
+  const lines = [
+    `Title: ${title}`,
+    "",
+    "Body:",
+    `${puzzle.brief}`,
+    "",
+    hasRoute
+      ? `Current route: ${status}, ${score} pts, ${beacons}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`
+      : `Open board: ${puzzle.beacons.length} beacons, ${puzzle.moveLimit} mirrors max.`,
+    best
+      ? `Community target: ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves.`
+      : "Community target: open. First complete route sets the chase target.",
+    reviewLine,
+    "",
+    "Try it: place mirrors, copy your Review link, then reply with it so the route can join the daily board.",
+    "",
+    "First comment prompt:",
+    "Reply with your Review link. The app can import a thread of links, skip duplicate or cross-day routes, and explain why the top route leads.",
+  ];
+  return lines.join("\n");
+}
+
 export function createReviewSnapshot({ puzzle, result, plan = [], shareUrl = "", consensus = null }) {
   const best = consensus?.best || null;
   const completed = Number(consensus?.completed || 0);

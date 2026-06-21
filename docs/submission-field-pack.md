@@ -12,7 +12,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
 
@@ -24,6 +24,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Multiple routes pasted from a comment thread, individual comments, or briefings can be imported into the consensus list, with visible counts for imported, duplicate, and cross-day routes.
 - A sample thread loader fills the import box with a complete route, a partial route, a cross-day route, and a duplicate route for an immediate review of the reply loop.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
+- A Reddit post draft prepares a title, body, route review link, community target, and first-comment prompt for a later user-approved demo post.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A launch packet combines the comment challenge, review snapshot, daily recap, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
@@ -51,6 +52,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Sample route query support with `?day=YYYY-MM-DD&sample=1` for first-minute review.
 - Sample preview consensus that shows the top-route loop without writing fake proposals to storage.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
+- Reddit post draft generated from the current route, sample route, Review link, and top proposal.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Launch packet generated from the current route, Review link, consensus, top route rationale, Reddit fit checks, and platform feedback notes.
@@ -77,6 +79,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Show the top route rationale and explain why the leader ranks above the next route.
 - Copy a share link and briefing for the exact route.
 - Copy the comment challenge prompt for a reply thread.
+- Copy the Reddit post draft for a later user-approved demo post.
 - Copy the review snapshot for a judge or gallery note.
 - Copy the reviewer fast path for a quick judge or playtester handoff.
 - Copy the launch packet for the public demo post, app listing, discussion follow-up, and platform feedback pass.
