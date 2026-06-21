@@ -231,6 +231,13 @@ h2 {
   gap: 10px;
 }
 
+.button-row button {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
 .move-list {
   display: grid;
   gap: 8px;

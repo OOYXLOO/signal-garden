@@ -90,12 +90,20 @@ export function createReviewSnapshot({ puzzle, result, plan = [], shareUrl = "",
   return lines.join("\n");
 }
 
+function cleanUrl(value) {
+  return String(value || "").replace(/[),.;\]]+$/, "");
+}
+
+function urlMatches(input) {
+  const pattern = /https?:\/\/[^\s<>"']+/gi;
+  return [...String(input || "").matchAll(pattern)].map((match) => ({
+    index: match.index || 0,
+    url: cleanUrl(match[0]),
+  }));
+}
+
 function firstUrl(input) {
-  const match = String(input || "").match(/https?:\/\/[^\s<>"']+/i);
-  if (!match) {
-    return "";
-  }
-  return match[0].replace(/[),.;\]]+$/, "");
+  return urlMatches(input)[0]?.url || "";
 }
 
 function parseBriefingPlan(input) {
@@ -150,4 +158,96 @@ export function parseSharedRoute(input, puzzle) {
     return { ok: false, error: "No playable route was found in that text." };
   }
   return { ok: true, day, plan, source: "briefing" };
+}
+
+function normalizeThreadAuthor(value, fallback) {
+  const normalized = String(value || "")
+    .trim()
+    .replace(/^u\//i, "")
+    .replace(/^@/, "")
+    .replace(/[^A-Za-z0-9_-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 24);
+  return normalized || fallback;
+}
+
+function lineAround(text, index) {
+  const source = String(text || "");
+  const start = source.lastIndexOf("\n", Math.max(0, index - 1)) + 1;
+  const end = source.indexOf("\n", index);
+  return source.slice(start, end === -1 ? source.length : end);
+}
+
+function inferThreadAuthor(text, index, routeIndex) {
+  const line = lineAround(text, index);
+  const prefix = line.slice(0, Math.max(0, index - (String(text || "").lastIndexOf("\n", Math.max(0, index - 1)) + 1)));
+  const prefixMatch = prefix.match(/(?:^|\s)(u\/[A-Za-z0-9_-]{2,24}|@[A-Za-z0-9_-]{2,24}|[A-Za-z][A-Za-z0-9_-]{1,23})\s*[:>-]\s*$/);
+  if (prefixMatch) {
+    return normalizeThreadAuthor(prefixMatch[1], `comment-${routeIndex + 1}`);
+  }
+  const byMatch = line.match(/\bby\s+(u\/[A-Za-z0-9_-]{2,24}|@[A-Za-z0-9_-]{2,24}|[A-Za-z][A-Za-z0-9_-]{1,23})\b/i);
+  if (byMatch) {
+    return normalizeThreadAuthor(byMatch[1], `comment-${routeIndex + 1}`);
+  }
+  return `comment-${routeIndex + 1}`;
+}
+
+export function parseSharedRoutes(input, puzzle) {
+  const text = String(input || "").trim();
+  if (!text) {
+    return { ok: false, error: "Paste a comment thread, route link, or briefing first.", routes: [], errors: [] };
+  }
+
+  const routes = [];
+  const errors = [];
+  const seen = new Set();
+
+  function addRoute(parsed, author) {
+    if (!parsed.ok) {
+      errors.push(parsed.error);
+      return;
+    }
+    const token = encodePlanToken(parsed.plan);
+    if (seen.has(token)) {
+      errors.push(`Duplicate route skipped for ${author}.`);
+      return;
+    }
+    seen.add(token);
+    routes.push({
+      day: parsed.day,
+      plan: parsed.plan,
+      source: parsed.source,
+      author,
+    });
+  }
+
+  const matches = urlMatches(text);
+  if (matches.length) {
+    matches.forEach((match, index) => {
+      addRoute(parseSharedRoute(match.url, puzzle), inferThreadAuthor(text, match.index, index));
+    });
+  } else {
+    const blocks = text.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+    blocks.forEach((block, index) => {
+      addRoute(parseSharedRoute(block, puzzle), inferThreadAuthor(block, 0, index));
+    });
+  }
+
+  if (!routes.length) {
+    return {
+      ok: false,
+      error: errors[0] || "No playable routes were found in that thread.",
+      routes,
+      errors,
+    };
+  }
+
+  return {
+    ok: true,
+    routes,
+    errors,
+    imported: routes.length,
+    skipped: errors.length,
+  };
 }

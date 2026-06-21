@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createDailyPuzzle } from "../src/game/puzzle.js";
-import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const shareUrl = buildShareUrl("https://example.test/play?old=1", puzzle, puzzle.solution);
@@ -109,5 +109,28 @@ const wrongDay = parseSharedRoute("https://example.test/play?day=2026-06-18&plan
 assert.equal(wrongDay.ok, false);
 assert.match(wrongDay.error, /2026-06-18/);
 assert.equal(parseSharedRoute("No route here", puzzle).ok, false);
+
+const partialRouteUrl = buildShareUrl("https://example.test/play", puzzle, [{ x: 0, y: 0, mirror: "slash" }]);
+const threadRoutes = parseSharedRoutes(
+  [
+    `u/alice: ${shareUrl}`,
+    `@bob - ${partialRouteUrl}`,
+    `u/old: https://example.test/play?day=2026-06-18&plan=2-2-b`,
+    `u/alice-again: ${shareUrl}`,
+  ].join("\n"),
+  puzzle,
+);
+assert.equal(threadRoutes.ok, true);
+assert.equal(threadRoutes.imported, 2);
+assert.equal(threadRoutes.skipped, 2);
+assert.deepEqual(
+  threadRoutes.routes.map((route) => route.author),
+  ["alice", "bob"],
+);
+assert.deepEqual(threadRoutes.routes[0].plan, puzzle.solution);
+assert.deepEqual(threadRoutes.routes[1].plan, [{ x: 0, y: 0, mirror: "slash" }]);
+assert.match(threadRoutes.errors.join("\n"), /2026-06-18/);
+assert.match(threadRoutes.errors.join("\n"), /Duplicate route skipped/);
+assert.equal(parseSharedRoutes("", puzzle).ok, false);
 
 console.log("signal garden share tests passed");

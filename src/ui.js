@@ -4,7 +4,7 @@ import { createObjectiveList, createRouteInsight, describeResult } from "./game/
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
-import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute, wantsSampleRoute } from "./share.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoutes, wantsSampleRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -220,18 +220,21 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     if (!latest) {
       return;
     }
-    const parsed = parseSharedRoute(refs.commentRoute.value, latest.puzzle);
+    const parsed = parseSharedRoutes(refs.commentRoute.value, latest.puzzle);
     if (!parsed.ok) {
       refs.proposalSummary.textContent = parsed.error;
       return;
     }
     refs.importRoute.disabled = true;
     try {
-      const response = await communityClient.submitProposal({
-        day: latest.puzzle.id,
-        plan: parsed.plan,
-        author: "comment-route",
-      });
+      let response = null;
+      for (const route of parsed.routes) {
+        response = await communityClient.submitProposal({
+          day: latest.puzzle.id,
+          plan: route.plan,
+          author: route.author,
+        });
+      }
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
@@ -239,10 +242,12 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
       const summary = refs.proposalSummary.textContent;
-      refs.proposalSummary.textContent = `Imported ${parsed.plan.length} move ${parsed.source}. ${summary}`;
+      const routeLabel = parsed.routes.length === 1 ? "route" : "routes";
+      const skipped = parsed.skipped ? `, ${parsed.skipped} skipped` : "";
+      refs.proposalSummary.textContent = `Imported ${parsed.routes.length} comment ${routeLabel}${skipped}. ${summary}`;
       refs.commentRoute.value = "";
     } catch (error) {
-      refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not import route.";
+      refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not import comment routes.";
     } finally {
       refs.importRoute.disabled = false;
     }
@@ -373,7 +378,7 @@ function renderReviewerFastPath(refs, latest, consensus) {
     : consensus?.preview
       ? "Sample preview"
       : "Open board";
-  refs.fastPathLoop.textContent = "Reply route -> import -> ranked proposal";
+  refs.fastPathLoop.textContent = "Reply thread -> import -> ranked proposals";
   refs.reviewerFastPath.value = createReviewerFastPath({
     puzzle: latest.puzzle,
     result: latest.result,
