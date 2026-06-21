@@ -5,7 +5,7 @@ import { createCommunityTarget, createDailyMissions, createDailyRecap, createPre
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute } from "./share.js";
-import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
+import { createGardenLog, getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
   complete: "Complete",
@@ -33,6 +33,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     seed: document.querySelector("#seed-value"),
     streak: document.querySelector("#streak-value"),
     status: document.querySelector("#status-value"),
+    retentionSummary: document.querySelector("#retention-summary"),
+    gardenLogList: document.querySelector("#garden-log-list"),
     targetCard: document.querySelector("#target-card"),
     targetLabel: document.querySelector("#target-label"),
     targetValue: document.querySelector("#target-value"),
@@ -355,6 +357,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     }
     savePlan(puzzle.id, plan, result);
     renderArchive(refs, puzzle.id);
+    renderGardenLog(refs, puzzle.id);
     if (latestDay !== puzzle.id) {
       latestDay = puzzle.id;
       latestConsensus = null;
@@ -523,6 +526,36 @@ function renderArchive(refs, currentPuzzleId) {
   );
   if (!archive.length) {
     refs.archiveList.firstChild.textContent = "Play a daily board to start the local archive.";
+  }
+}
+
+function renderGardenLog(refs, currentPuzzleId) {
+  const archive = getLocalArchive(currentPuzzleId);
+  const log = createGardenLog({
+    currentPuzzleId,
+    archive,
+    streak: getLocalStreak(currentPuzzleId),
+  });
+  refs.retentionSummary.textContent = log.summary;
+  refs.gardenLogList.replaceChildren(
+    ...(log.slots.length
+      ? log.slots.map((slot) => {
+          const item = document.createElement("li");
+          const label = document.createElement("span");
+          const value = document.createElement("strong");
+          const detail = document.createElement("em");
+          item.className = slot.state;
+          item.setAttribute("aria-label", `${slot.label}: ${slot.value}, ${slot.detail}`);
+          label.textContent = slot.label;
+          value.textContent = slot.value;
+          detail.textContent = slot.detail;
+          item.append(label, value, detail);
+          return item;
+        })
+      : [document.createElement("li")]),
+  );
+  if (!log.slots.length) {
+    refs.gardenLogList.firstChild.textContent = "Daily log opens after the first board loads.";
   }
 }
 

@@ -42,6 +42,7 @@ const textExpectations = [
       "public URL audit",
       "submission pack",
       "developer feedback draft",
+      "return map",
     ],
   },
   {
@@ -70,6 +71,7 @@ const textExpectations = [
       "audit:public",
       "export:submission-pack",
       "developer feedback draft",
+      "return map",
     ],
   },
 ];

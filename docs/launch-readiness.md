@@ -22,6 +22,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
 - Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
+- Seven-day return map in the Loop panel: visible local archive, streak, complete, draft, and open day states for retention review.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
 - `docs/desktop-preview.png`: desktop gallery preview.
@@ -131,6 +132,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 
 - The first screen shows the daily board, objective chips, and move limit.
 - Daily missions show route tracing, proposal saving, relay completion, and rival target progress.
+- The return map shows a seven-day local archive with complete, draft, and open day states.
 - A saved or imported top route appears as a low-contrast board ghost before it is applied.
 - The top route rationale explains why the current route leads, including completion, score, move count, tie-breaks, and contributor record.
 - A completed route turns all objectives complete.

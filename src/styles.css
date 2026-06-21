@@ -273,6 +273,97 @@ h2 {
   gap: 10px;
 }
 
+.garden-log {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px;
+  background: #fffdf8;
+}
+
+.garden-log > span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.garden-log > strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--violet);
+  font-size: 20px;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.garden-log-list {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin: 11px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.garden-log-list li {
+  min-width: 0;
+  min-height: 68px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 6px;
+  background: #f9f2e8;
+  text-align: center;
+}
+
+.garden-log-list li.complete {
+  border-color: rgba(31, 122, 115, 0.42);
+  background: var(--teal-soft);
+}
+
+.garden-log-list li.draft {
+  border-color: rgba(185, 133, 19, 0.36);
+  background: #fff1cf;
+}
+
+.garden-log-list span,
+.garden-log-list strong,
+.garden-log-list em {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.garden-log-list span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.12;
+}
+
+.garden-log-list strong {
+  margin-top: 5px;
+  color: var(--charcoal);
+  font-size: 12px;
+  line-height: 1.12;
+}
+
+.garden-log-list li.complete strong {
+  color: var(--teal);
+}
+
+.garden-log-list li.draft strong {
+  color: var(--amber);
+}
+
+.garden-log-list em {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.12;
+}
+
 .target-card {
   margin-top: 12px;
   border: 1px solid var(--line);
@@ -616,8 +707,13 @@ textarea.launch-packet {
   .score-grid,
   .objective-list,
   .mission-list,
+  .garden-log-list,
   .fast-path-grid,
   .button-row {
     grid-template-columns: 1fr;
+  }
+
+  .garden-log-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

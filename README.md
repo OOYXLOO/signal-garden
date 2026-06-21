@@ -48,6 +48,7 @@ Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --
 - Seven verified puzzle templates for a broader daily rotation.
 - Objective progress chips for the three beacons and receiver.
 - Daily missions that connect route tracing, proposal saving, relay completion, and the rival target.
+- Return map that turns the recent seven-day archive into a visible retention loop with streak, draft, complete, and open day states.
 - Local-only persistence with no credentials or private account data.
 - Adapter-backed proposal consensus that ranks saved player plans.
 - Top route ghosting that shows the current community route on the board without applying it.
@@ -71,6 +72,7 @@ Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --
 - Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled sample preview consensus when no proposal exists yet.
 - Comment thread route import that turns pasted review links or briefings into ranked community proposals, with import counts, skip reasons for duplicate or cross-day routes, a one-click sample thread loader, and an explainable top route rationale after ranking.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
+- Seven-day garden log that makes the return loop visible even before platform analytics exist.
 - Briefing output that includes an exact review link whenever a route is present.
 - Completion pulse feedback for solved boards.
 - Short Web Audio cues with a persistent mute toggle.

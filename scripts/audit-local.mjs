@@ -133,6 +133,12 @@ if (!indexHtml.includes('id="target-card"')) {
 if (!indexHtml.includes('id="mission-list"')) {
   failures.push("index.html missing daily missions");
 }
+if (!indexHtml.includes('id="retention-summary"')) {
+  failures.push("index.html missing retention summary");
+}
+if (!indexHtml.includes('id="garden-log-list"')) {
+  failures.push("index.html missing garden log list");
+}
 if (!indexHtml.includes('id="load-sample-thread"')) {
   failures.push("index.html missing sample comment thread loader");
 }
@@ -144,6 +150,12 @@ if (!devvitGameHtml.includes('id="target-card"')) {
 }
 if (!devvitGameHtml.includes('id="mission-list"')) {
   failures.push("devvit game.html missing daily missions");
+}
+if (!devvitGameHtml.includes('id="retention-summary"')) {
+  failures.push("devvit game.html missing retention summary");
+}
+if (!devvitGameHtml.includes('id="garden-log-list"')) {
+  failures.push("devvit game.html missing garden log list");
 }
 if (!devvitGameHtml.includes('id="review-snapshot"')) {
   failures.push("devvit game.html missing review snapshot");
