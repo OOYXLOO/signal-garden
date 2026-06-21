@@ -336,7 +336,7 @@ function renderArchive(refs, currentPuzzleId) {
           const summary = document.createElement("span");
           const label = document.createElement("span");
           const score = document.createElement("strong");
-          label.textContent = `${entry.id.slice(5)} · ${entry.complete ? "complete" : entry.status}`;
+          label.textContent = `${entry.id.slice(5)} route ${entry.complete ? "complete" : entry.status}`;
           score.textContent = `${entry.score} pts`;
           item.setAttribute("aria-label", `${label.textContent}, ${score.textContent}`);
           summary.append(label, score);
