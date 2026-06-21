@@ -138,6 +138,24 @@ export function createDailyMissions(puzzle, result, plan = [], consensus) {
   ];
 }
 
+export function createRivalRouteGuide(puzzle, consensus) {
+  const best = consensus?.best || null;
+  if (!best?.plan?.length) {
+    return null;
+  }
+
+  const result = traceSignal(puzzle, best.plan);
+  return {
+    label: "Top route",
+    score: best.score,
+    moves: best.moves,
+    beacons: best.beacons,
+    complete: best.complete,
+    plan: result.moves,
+    visited: result.visited,
+  };
+}
+
 export function toCommunityPayload(puzzle, proposals = []) {
   const consensus = summarizeConsensus(puzzle, proposals);
   return {

@@ -1,7 +1,7 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
-import { createCommunityTarget, createDailyMissions, createDailyRecap } from "./game/proposals.js";
+import { createCommunityTarget, createDailyMissions, createDailyRecap, createRivalRouteGuide } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
@@ -184,6 +184,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         author: "local-player",
       });
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
+      syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
@@ -211,6 +212,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         author: "comment-route",
       });
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
+      syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
       renderLaunchPacket(refs, latest, latestConsensus);
@@ -280,8 +282,11 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     renderArchive(refs, puzzle.id);
     if (latestDay !== puzzle.id) {
       latestDay = puzzle.id;
+      latestConsensus = null;
+      syncRivalGuide(scene, puzzle, latestConsensus);
       refreshConsensus(refs, communityClient, puzzle.id).then((consensus) => {
         latestConsensus = consensus;
+        syncRivalGuide(scene, puzzle, latestConsensus);
         renderCommunityTarget(refs, puzzle, result, latestConsensus);
         renderDailyMissions(refs, createDailyMissions(puzzle, result, plan, latestConsensus));
         renderCommentChallenge(refs, latest, latestConsensus);
@@ -290,6 +295,11 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       });
     }
   });
+}
+
+function syncRivalGuide(scene, puzzle, consensus) {
+  const guide = createRivalRouteGuide(puzzle, consensus);
+  scene.setRivalPlan(guide?.plan || []);
 }
 
 function renderCommentChallenge(refs, latest, consensus) {

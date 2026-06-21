@@ -28,6 +28,7 @@ export class SignalGardenScene extends Phaser.Scene {
     this.wasComplete = false;
     this.completionFx = null;
     this.replayFx = null;
+    this.rivalPlan = [];
   }
 
   create() {
@@ -40,6 +41,15 @@ export class SignalGardenScene extends Phaser.Scene {
   applyPlan(plan = []) {
     this.stopReplay();
     this.placements = planToMap(plan);
+    this.redraw();
+  }
+
+  setRivalPlan(plan = []) {
+    const next = mapToPlan(planToMap(plan));
+    if (JSON.stringify(next) === JSON.stringify(this.rivalPlan)) {
+      return;
+    }
+    this.rivalPlan = next;
     this.redraw();
   }
 
@@ -238,6 +248,7 @@ export class SignalGardenScene extends Phaser.Scene {
     }
 
     this.drawGhostPlan(layout);
+    this.drawRivalGuide(layout);
     this.drawSpecialCells(layout, result);
     this.drawPath(layout, result);
     this.drawMirrors(layout);
@@ -321,6 +332,36 @@ export class SignalGardenScene extends Phaser.Scene {
       if (!this.placements.has(key)) {
         this.drawMirror(graphics, layout, move.x, move.y, move.mirror, COLORS.ghost, 0.32);
       }
+    }
+  }
+
+  drawRivalGuide(layout) {
+    if (!this.rivalPlan.length) {
+      return;
+    }
+
+    const result = traceSignal(this.puzzle, this.rivalPlan);
+    const graphics = this.layers.board;
+    if (result.visited.length >= 2) {
+      const first = this.cellCenter(layout, result.visited[0].x, result.visited[0].y);
+      graphics.lineStyle(Math.max(3, layout.cell * 0.06), COLORS.ghost, 0.58);
+      graphics.beginPath();
+      graphics.moveTo(first.x, first.y);
+      for (const step of result.visited.slice(1)) {
+        const point = this.cellCenter(layout, step.x, step.y);
+        graphics.lineTo(point.x, point.y);
+      }
+      graphics.strokePath();
+
+      graphics.fillStyle(COLORS.ghost, 0.52);
+      for (const step of result.visited) {
+        const point = this.cellCenter(layout, step.x, step.y);
+        graphics.fillCircle(point.x, point.y, layout.cell * 0.07);
+      }
+    }
+
+    for (const move of this.rivalPlan) {
+      this.drawMirror(graphics, layout, move.x, move.y, move.mirror, COLORS.ghost, 0.5);
     }
   }
 

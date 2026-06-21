@@ -117,6 +117,14 @@ if (!devvitGameHtml.includes('id="mission-list"')) {
 if (!devvitGameHtml.includes('id="review-snapshot"')) {
   failures.push("devvit game.html missing review snapshot");
 }
+const sceneText = await readFile(join(root, "src/game/SignalGardenScene.js"), "utf8");
+const proposalText = await readFile(join(root, "src/game/proposals.js"), "utf8");
+if (!sceneText.includes("setRivalPlan")) {
+  failures.push("SignalGardenScene missing rival route guide sync");
+}
+if (!proposalText.includes("createRivalRouteGuide")) {
+  failures.push("proposals missing rival route guide");
+}
 
 for (const file of await walk(root)) {
   if (!checkedExtensions.has(extname(file))) {

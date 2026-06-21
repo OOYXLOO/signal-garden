@@ -89,6 +89,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 
 - The first screen shows the daily board, objective chips, and move limit.
 - Daily missions show route tracing, proposal saving, relay completion, and rival target progress.
+- A saved or imported top route appears as a low-contrast board ghost before it is applied.
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
 - A pasted review link or briefing can be imported as a community proposal.
