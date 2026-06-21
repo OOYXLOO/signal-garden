@@ -25,6 +25,7 @@ Generated: 2026-06-20
   - `dist/client`
   - `dist/server/index.cjs`
 - The Devvit client build uses relative asset paths (`base: "./"`) so `splash.html` and `game.html` can be served from a static WebView directory without depending on root-level `/assets`.
+- The Devvit game shell keeps the same reviewer fast path, launch packet, review snapshot, mission list, and rival target DOM contracts as the browser page.
 - `npm run audit:devvit` verifies the configured entrypoint paths, built output paths, and menu endpoint stay in sync.
 
 ## Not Yet Done

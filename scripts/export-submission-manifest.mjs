@@ -8,6 +8,7 @@ const root = resolve(dirname(scriptPath), "..");
 
 const evidenceFiles = [
   "README.md",
+  ".github/workflows/deploy-pages.yml",
   "docs/cover.png",
   "docs/desktop-preview.png",
   "docs/mobile-preview.png",
@@ -17,6 +18,7 @@ const evidenceFiles = [
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "docs/devvit_shell_readiness.md",
+  "scripts/audit-pages-build.mjs",
   "scripts/export-launch-packet.mjs",
 ];
 
@@ -80,6 +82,7 @@ export async function createSubmissionManifest() {
       "npm run build:all",
       "npm run audit:local",
       "npm run audit:devvit",
+      "npm run audit:pages",
       "npm run audit:submission",
       "npm audit --audit-level=moderate",
     ],

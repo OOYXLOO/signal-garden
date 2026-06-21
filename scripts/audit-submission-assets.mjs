@@ -38,6 +38,7 @@ const textExpectations = [
       "top route ghosting",
       "sample route",
       "sample preview",
+      "GitHub Pages workflow",
     ],
   },
   {
@@ -61,6 +62,8 @@ const textExpectations = [
       "top route",
       "sample=1",
       "sample preview",
+      "Static Review Surface",
+      "audit:pages",
     ],
   },
 ];

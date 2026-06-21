@@ -22,10 +22,22 @@ npm run build
 npm run build:devvit
 npm run audit:local
 npm run audit:devvit
+npm run audit:pages
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run record:demo
 npm run export:launch-packet -- --help
 ```
+
+## Static Pages Deployment
+
+The standard browser build uses relative asset paths so it can run from a project page such as `https://example.github.io/signal-garden/`.
+
+```powershell
+npm run build
+npm run audit:pages
+```
+
+`.github/workflows/deploy-pages.yml` builds `dist/`, audits the artifact, and publishes it through GitHub Pages after the repository has Pages enabled for GitHub Actions.
 
 ## Scope
 
@@ -43,6 +55,7 @@ npm run export:launch-packet -- --help
 - Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
 - Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
+- GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.

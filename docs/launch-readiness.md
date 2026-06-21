@@ -29,6 +29,8 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/devvit_shell_readiness.md`: Devvit shell status and account gates.
 - `docs/gallery_assets.md`: asset inventory and guardrails.
 - `docs/submission-manifest.json`: deterministic file manifest with byte counts and SHA-256 hashes for the public evidence packet.
+- `.github/workflows/deploy-pages.yml`: GitHub Pages deployment workflow for the static browser build.
+- `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
 
 ## Local Verification Before Any User Gate
 
@@ -40,6 +42,8 @@ npm run check
 npm run build:all
 npm run audit:local
 npm run audit:devvit
+npm run build
+npm run audit:pages
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run audit:submission
 npm audit --audit-level=moderate
@@ -71,6 +75,14 @@ For a quick reviewer walkthrough before a copied Review link exists, open the pu
 ```
 
 The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage.
+
+## Static Review Surface
+
+The browser build is ready for a repository-page path such as `https://<owner>.github.io/signal-garden/`.
+
+- `vite.config.js` uses relative asset paths for the standard static build.
+- `.github/workflows/deploy-pages.yml` builds `dist/` and deploys it through GitHub Pages when the repository is configured for GitHub Actions Pages.
+- `npm run audit:pages` fails if `dist/index.html` contains root-relative asset URLs that would break on a project page.
 
 ## User-Present Gates
 
@@ -123,6 +135,8 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The Devvit client entry uses same-origin server routes for proposal consensus.
 - The Devvit splash entry requests expanded mode for the `game` entrypoint and still falls back to `game.html` in a normal browser.
 - The Devvit client build uses relative asset paths, avoiding root `/assets` assumptions in WebView static hosting.
+- The standard static build uses relative asset paths, avoiding root `/assets` assumptions on GitHub Pages project URLs.
+- The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text does not mention off-project planning notes.

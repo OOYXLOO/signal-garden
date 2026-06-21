@@ -8,8 +8,13 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 4435,
-      "sha256": "26f6d7d9d31cdca1255488a0714baa179bbc9f63531eee0bdcc36867f8b930e2"
+      "bytes": 4960,
+      "sha256": "ac980d36cea21c2e1af04b8762c2751f34644ad447cf642099606a66083d246b"
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "bytes": 1102,
+      "sha256": "a1843b8aa4d489a6f0da7160ba714f6715580e4e81f1bd7b982da5bd703810b2"
     },
     {
       "path": "docs/cover.png",
@@ -43,18 +48,23 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 6753,
-      "sha256": "750500e9869a043974a392e88c3330060f03547071a246d58fb2cc2fadcc639f"
+      "bytes": 7761,
+      "sha256": "371cbaee5f6d92cbdb9b0892d7a09118ae23c73649f6584b0b55e2b9a80af7d3"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 6698,
-      "sha256": "74642c119aa0073b0cacba876784342bc6913ad1fd29957ab84f386b1f5d4996"
+      "bytes": 6964,
+      "sha256": "544852dd65b86389c273354f9567ebb3d4d732361fb2166b886fe065356b29b1"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
-      "bytes": 3534,
-      "sha256": "7e7e6a39a276f36eef087f5e1fc4de84bf1a94f099fc97966b571448e0aaa3d2"
+      "bytes": 3691,
+      "sha256": "4e57f7f1ddd5a257ddb8876bdef962038397c7fcba6ba6f6b14ebc42ccb9568d"
+    },
+    {
+      "path": "scripts/audit-pages-build.mjs",
+      "bytes": 1397,
+      "sha256": "972006addcf8000267a99b375e24837ee19d1f2dc62a4db467a8ac18b5a96b3e"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
@@ -68,6 +78,7 @@
     "npm run build:all",
     "npm run audit:local",
     "npm run audit:devvit",
+    "npm run audit:pages",
     "npm run audit:submission",
     "npm audit --audit-level=moderate"
   ],

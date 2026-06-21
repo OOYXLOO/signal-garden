@@ -4,6 +4,7 @@ import { join, relative } from "node:path";
 const root = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const required = [
   "README.md",
+  ".github/workflows/deploy-pages.yml",
   "devvit.json",
   "index.html",
   "vite.devvit.client.config.js",
@@ -43,6 +44,7 @@ const required = [
   "docs/submission-field-pack.md",
   "docs/submission-manifest.json",
   "scripts/record-demo.mjs",
+  "scripts/audit-pages-build.mjs",
   "scripts/audit-submission-assets.mjs",
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-manifest.mjs",
@@ -107,6 +109,12 @@ if (!indexHtml.includes('id="review-snapshot"')) {
 if (!indexHtml.includes('id="copy-review-snapshot"')) {
   failures.push("index.html missing review snapshot copy control");
 }
+if (!indexHtml.includes('id="reviewer-fast-path"')) {
+  failures.push("index.html missing reviewer fast path");
+}
+if (!indexHtml.includes('id="launch-packet"')) {
+  failures.push("index.html missing launch packet");
+}
 if (!indexHtml.includes('id="target-card"')) {
   failures.push("index.html missing rival target card");
 }
@@ -121,6 +129,12 @@ if (!devvitGameHtml.includes('id="mission-list"')) {
 }
 if (!devvitGameHtml.includes('id="review-snapshot"')) {
   failures.push("devvit game.html missing review snapshot");
+}
+if (!devvitGameHtml.includes('id="reviewer-fast-path"')) {
+  failures.push("devvit game.html missing reviewer fast path");
+}
+if (!devvitGameHtml.includes('id="launch-packet"')) {
+  failures.push("devvit game.html missing launch packet");
 }
 const sceneText = await readFile(join(root, "src/game/SignalGardenScene.js"), "utf8");
 const proposalText = await readFile(join(root, "src/game/proposals.js"), "utf8");

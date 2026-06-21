@@ -52,6 +52,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Launch packet generated from the current route, Review link, consensus, Reddit fit checks, and platform feedback notes.
 - Strict launch packet CLI export for injecting public app listing, demo post, and review URLs after the platform gate.
+- GitHub Pages workflow plus artifact audit for publishing the static browser build from a repository-page path after the repository gate.
 - Submission evidence manifest export for checking that media and source notes are current before a submission pass.
 - Contributor aggregation and Reddit-ready daily recap text.
 - Briefing export with exact review link.
@@ -74,6 +75,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Copy the reviewer fast path for a quick judge or playtester handoff.
 - Copy the launch packet for the public demo post, app listing, discussion follow-up, and platform feedback pass.
 - After real public URLs exist, run the strict launch packet export before copying final submission text.
+- If using GitHub Pages as the public review surface, run `npm run build` and `npm run audit:pages` before the final URL pass.
 - Paste the route back as a comment route and show it in consensus.
 - Show the contributor board and copy the daily recap.
 - Clear the board and apply the top proposal.
