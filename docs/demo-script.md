@@ -55,7 +55,7 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, objective progress, route replay, local proposal consensus, comment challenge prompts, review snapshot export, launch packet export, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, comment challenge prompts, review snapshot export, launch packet export, comment route import, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 

@@ -32,7 +32,7 @@ npm run record:demo
 - Seven verified puzzle templates for a broader daily rotation.
 - Objective progress chips for the three beacons and receiver.
 - Local-only persistence with no credentials or private account data.
-- Local proposal consensus that ranks saved player plans.
+- Adapter-backed proposal consensus that ranks saved player plans.
 - Contributor board that aggregates completed routes and best scores by author.
 - Daily community recap copy for discussion posts or comment follow-ups.
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
