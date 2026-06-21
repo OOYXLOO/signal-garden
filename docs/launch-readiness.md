@@ -70,7 +70,7 @@ For a quick reviewer walkthrough before a copied Review link exists, open the pu
 <public-app-url>?day=2026-06-21&sample=1
 ```
 
-The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route.
+The app turns that sample route into the same briefing, review snapshot, comment challenge, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus without writing it to saved proposal storage.
 
 ## User-Present Gates
 
@@ -114,6 +114,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - A completed route turns all objectives complete.
 - The briefing contains an exact review link.
 - `?day=YYYY-MM-DD&sample=1` loads a complete sample route without keeping the sample flag in copied Review links.
+- Empty local consensus plus `sample=1` shows a sample preview top route and contributor row without claiming live community data.
 - A pasted review link or briefing can be imported as a community proposal.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
@@ -124,4 +125,4 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The Devvit client build uses relative asset paths, avoiding root `/assets` assumptions in WebView static hosting.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
-- The public repository text does not mention private planning context.
+- The public repository text does not mention off-project planning notes.

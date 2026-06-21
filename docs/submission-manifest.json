@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 4361,
-      "sha256": "f24c0d0df8af1eabae1f562af38aeef25db493e874aa693d0901e3bd42a71108"
+      "bytes": 4435,
+      "sha256": "26f6d7d9d31cdca1255488a0714baa179bbc9f63531eee0bdcc36867f8b930e2"
     },
     {
       "path": "docs/cover.png",
@@ -43,13 +43,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 6479,
-      "sha256": "e80152e5345efa38f2dfc0f46a92940773209b38d764caf008cf4dc96fad7f16"
+      "bytes": 6753,
+      "sha256": "750500e9869a043974a392e88c3330060f03547071a246d58fb2cc2fadcc639f"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 6027,
-      "sha256": "0bfe4f755b3b853fec10f624bc9b9752d25522bc0274f01b2dd0335d12b1da19"
+      "bytes": 6165,
+      "sha256": "6ca426534a6f078e77ecce1b01b8aec9f247ac3edde579f543919ee3d8275257"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -80,6 +80,6 @@
   "guardrails": [
     "No private account pages or credentials in media.",
     "No localhost URLs in strict launch packet output.",
-    "No private planning context in public repository text."
+    "No off-project planning notes in public repository text."
   ]
 }

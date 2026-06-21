@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createCommunityTarget, createDailyMissions, createDailyRecap, createProposal, createRivalRouteGuide, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
+import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
 import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteCues, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
@@ -133,6 +133,13 @@ assert.equal(createCommunityTarget(puzzle, solved, summarizeConsensus(puzzle, [w
 assert.equal(createRivalRouteGuide(puzzle, summarizeConsensus(puzzle, [])), null);
 assert.deepEqual(createRivalRouteGuide(puzzle, consensus).plan, solvedProposal.plan);
 assert.equal(createRivalRouteGuide(puzzle, consensus).visited.length, solved.visited.length);
+const previewConsensus = createPreviewConsensus(puzzle, puzzle.solution);
+assert.equal(previewConsensus.preview, true);
+assert.equal(previewConsensus.proposalCount, 1);
+assert.equal(previewConsensus.best.author, "sample-review");
+assert.deepEqual(createRivalRouteGuide(puzzle, previewConsensus).plan, puzzle.solution);
+assert.match(createCommunityTarget(puzzle, empty, previewConsensus).detail, /Sample preview route/);
+assert.match(createDailyRecap(puzzle, previewConsensus), /sample preview/);
 assert.deepEqual(
   createDailyMissions(puzzle, empty, [], summarizeConsensus(puzzle, [])).map((mission) => mission.complete),
   [false, false, false, false],

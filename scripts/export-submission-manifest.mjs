@@ -89,7 +89,7 @@ export async function createSubmissionManifest() {
     guardrails: [
       "No private account pages or credentials in media.",
       "No localhost URLs in strict launch packet output.",
-      "No private planning context in public repository text.",
+      "No off-project planning notes in public repository text.",
     ],
   };
 }

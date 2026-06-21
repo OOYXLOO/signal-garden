@@ -12,7 +12,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, sample route URLs for reviewer walkthroughs, comment route import, a comment challenge prompt, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, comment route import, a comment challenge prompt, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 
 ## What Makes It Social
@@ -44,6 +44,7 @@ The submission packet also has a deterministic manifest that records byte counts
 - Compact route encoding for share links.
 - Review link and briefing parser for community route import.
 - Sample route query support with `?day=YYYY-MM-DD&sample=1` for first-minute review.
+- Sample preview consensus that shows the top-route loop without writing fake proposals to storage.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Launch packet generated from the current route, Review link, consensus, Reddit fit checks, and platform feedback notes.

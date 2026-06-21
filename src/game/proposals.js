@@ -57,11 +57,29 @@ export function summarizeConsensus(puzzle, proposals = []) {
   };
 }
 
+export function createPreviewConsensus(puzzle, plan = [], author = "sample-review") {
+  if (!plan.length) {
+    return null;
+  }
+  return {
+    ...summarizeConsensus(puzzle, [
+      createProposal({
+        puzzle,
+        plan,
+        author,
+        createdAt: `${puzzle.id}T00:00:00.000Z`,
+      }),
+    ]),
+    preview: true,
+  };
+}
+
 export function createCommunityTarget(puzzle, result, consensus) {
   const best = consensus?.best || null;
   const currentScore = Number(result?.score || 0);
   const currentMoves = result?.moves?.length || 0;
   const beaconTotal = puzzle.beacons.length;
+  const targetName = consensus?.preview ? "sample preview route" : "saved target";
 
   if (!best) {
     return {
@@ -93,8 +111,10 @@ export function createCommunityTarget(puzzle, result, consensus) {
 
   const scoreGap = Math.max(1, best.score - currentScore + 1);
   const detail = result?.complete
-    ? `Need ${scoreGap} more pts to pass the saved target: ${bestSummary}.`
-    : `Top saved route: ${bestSummary}.`;
+    ? `Need ${scoreGap} more pts to pass the ${targetName}: ${bestSummary}.`
+    : consensus?.preview
+      ? `Sample preview route: ${bestSummary}.`
+      : `Top saved route: ${bestSummary}.`;
 
   return {
     state: "chasing",
@@ -222,10 +242,13 @@ export function summarizeContributors(proposals = []) {
 export function createDailyRecap(puzzle, consensus) {
   const leader = consensus.contributors?.[0] || null;
   const best = consensus.best || null;
+  const preview = Boolean(consensus.preview);
   const lines = [
     `Signal Garden ${puzzle.id} recap`,
     `Board: ${puzzle.title}`,
-    `Routes: ${consensus.completed}/${consensus.proposalCount} complete`,
+    preview
+      ? `Routes: sample preview, ${consensus.completed}/${consensus.proposalCount} complete`
+      : `Routes: ${consensus.completed}/${consensus.proposalCount} complete`,
   ];
 
   if (best) {

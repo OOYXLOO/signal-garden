@@ -1,9 +1,9 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
-import { createCommunityTarget, createDailyMissions, createDailyRecap, createRivalRouteGuide } from "./game/proposals.js";
+import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
-import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute } from "./share.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute, wantsSampleRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -68,6 +68,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
   let latestConsensus = null;
   let lastSoundStatus = null;
   let hasRenderedState = false;
+  const sampleRoutePreview = wantsSampleRoute(new URLSearchParams(window.location.search));
 
   function renderSoundToggle() {
     refs.soundToggle.textContent = audio.isMuted() ? "Sound off" : "Sound on";
@@ -284,7 +285,11 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestDay = puzzle.id;
       latestConsensus = null;
       syncRivalGuide(scene, puzzle, latestConsensus);
-      refreshConsensus(refs, communityClient, puzzle.id).then((consensus) => {
+      refreshConsensus(refs, communityClient, puzzle.id, {
+        preview: sampleRoutePreview,
+        puzzle,
+        plan,
+      }).then((consensus) => {
         latestConsensus = consensus;
         syncRivalGuide(scene, puzzle, latestConsensus);
         renderCommunityTarget(refs, puzzle, result, latestConsensus);
@@ -374,11 +379,15 @@ function renderArchive(refs, currentPuzzleId) {
   }
 }
 
-async function refreshConsensus(refs, communityClient, day) {
+async function refreshConsensus(refs, communityClient, day, previewRoute = null) {
   refs.proposalSummary.textContent = "Loading consensus...";
   try {
     const response = await communityClient.init(day);
-    return renderConsensus(refs, response.consensus, response.puzzle);
+    const consensus =
+      previewRoute?.preview && !response.consensus?.proposalCount
+        ? createPreviewConsensus(previewRoute.puzzle || response.puzzle, previewRoute.plan || [])
+        : response.consensus;
+    return renderConsensus(refs, consensus, response.puzzle);
   } catch (error) {
     refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not load consensus.";
     return null;
@@ -389,9 +398,11 @@ function renderConsensus(refs, consensus, puzzle) {
   const best = consensus.best || null;
   refs.applyPlan.disabled = !best;
   refs.applyPlan.textContent = best ? "Apply top proposal" : "No proposal yet";
-  refs.proposalSummary.textContent = consensus.proposalCount
-    ? `${consensus.completed}/${consensus.proposalCount} saved proposals complete. Best score ${consensus.best.score}.`
-    : "No saved proposals yet.";
+  refs.proposalSummary.textContent = consensus.preview
+    ? `Sample route preview: ${consensus.completed}/${consensus.proposalCount} complete route shown.`
+    : consensus.proposalCount
+      ? `${consensus.completed}/${consensus.proposalCount} saved proposals complete. Best score ${consensus.best.score}.`
+      : "No saved proposals yet.";
   refs.proposalList.replaceChildren(
     ...(consensus.top.length
       ? consensus.top.map((proposal) => {

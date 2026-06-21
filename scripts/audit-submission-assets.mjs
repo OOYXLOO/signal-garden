@@ -37,6 +37,7 @@ const textExpectations = [
       "launch packet CLI export",
       "top route ghosting",
       "sample route",
+      "sample preview",
     ],
   },
   {
@@ -59,6 +60,7 @@ const textExpectations = [
       "export:launch-packet",
       "top route",
       "sample=1",
+      "sample preview",
     ],
   },
 ];
