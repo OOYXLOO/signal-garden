@@ -21,6 +21,7 @@ const evidenceFiles = [
   "scripts/audit-pages-build.mjs",
   "scripts/audit-public-url.mjs",
   "scripts/export-launch-packet.mjs",
+  "scripts/export-submission-pack.mjs",
 ];
 
 function parseArgs(argv) {
@@ -90,6 +91,8 @@ export async function createSubmissionManifest() {
     launchPacketCommand:
       "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
+    submissionPackCommand:
+      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
     publicGatePlaceholders: ["public app listing URL", "public demo post URL", "public review URL"],
     guardrails: [
       "No private account pages or credentials in media.",

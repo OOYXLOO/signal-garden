@@ -40,6 +40,7 @@ const textExpectations = [
       "sample preview",
       "GitHub Pages workflow",
       "public URL audit",
+      "submission pack",
     ],
   },
   {
@@ -66,6 +67,7 @@ const textExpectations = [
       "Static Review Surface",
       "audit:pages",
       "audit:public",
+      "export:submission-pack",
     ],
   },
 ];
@@ -182,6 +184,9 @@ async function auditSubmissionManifest() {
   }
   if (!String(manifest.publicUrlAuditCommand || "").includes("audit:public")) {
     failures.push(`${manifestPath} missing public URL audit command`);
+  }
+  if (!String(manifest.submissionPackCommand || "").includes("export:submission-pack")) {
+    failures.push(`${manifestPath} missing submission pack command`);
   }
 
   const seen = new Set();

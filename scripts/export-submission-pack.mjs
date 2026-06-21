@@ -1,0 +1,247 @@
+import { readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { auditPublicUrl } from "./audit-public-url.mjs";
+import { createPuzzleForDayKey, decodePlanToken, traceSignal } from "../src/game/puzzle.js";
+import { summarizeConsensus } from "../src/game/proposals.js";
+import { createLaunchPacket, formatLaunchPacket } from "../src/launchPacket.js";
+
+const scriptPath = fileURLToPath(import.meta.url);
+const root = resolve(dirname(scriptPath), "..");
+
+function parseArgs(argv) {
+  const options = {
+    allowLocal: false,
+    appListingUrl: "",
+    day: "",
+    demoPostUrl: "",
+    feedbackUrl: "",
+    help: false,
+    output: "",
+    plan: "",
+    publicAppUrl: "",
+    timeoutMs: 20_000,
+  };
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === "--help" || arg === "-h") {
+      options.help = true;
+    } else if (arg === "--allow-local") {
+      options.allowLocal = true;
+    } else if (arg.startsWith("--")) {
+      const key = arg.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+      if (!(key in options)) throw new Error(`Unknown option: ${arg}`);
+      index += 1;
+      if (index >= argv.length) throw new Error(`Missing value for ${arg}`);
+      options[key] = argv[index];
+    } else {
+      throw new Error(`Unexpected argument: ${arg}`);
+    }
+  }
+  return options;
+}
+
+function helpText() {
+  return [
+    "Usage:",
+    "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --plan <token> --app-listing-url https://... --demo-post-url https://...",
+    "",
+    "Creates a copyable public submission packet after the public app URL exists.",
+    "The command audits the public app URL and sample route before writing output.",
+  ].join("\n");
+}
+
+function assertPublicHttpUrl(name, value, { allowLocal = false, required = true } = {}) {
+  const trimmed = String(value || "").trim();
+  if (!trimmed) {
+    if (required) throw new Error(`${name} is required`);
+    return "";
+  }
+  const parsed = new URL(trimmed);
+  if (!["http:", "https:"].includes(parsed.protocol)) {
+    throw new Error(`${name} must use http or https`);
+  }
+  const host = parsed.hostname.toLowerCase();
+  const isLocal = host === "localhost" || host === "127.0.0.1" || host === "::1" || host.endsWith(".localhost");
+  if (isLocal && !allowLocal) {
+    throw new Error(`${name} must be public, not localhost`);
+  }
+  return parsed.toString();
+}
+
+function normalizeBaseUrl(value, allowLocal) {
+  const parsed = new URL(assertPublicHttpUrl("public app URL", value, { allowLocal }));
+  parsed.hash = "";
+  parsed.search = "";
+  if (!parsed.pathname.endsWith("/")) {
+    parsed.pathname = `${parsed.pathname}/`;
+  }
+  return parsed;
+}
+
+function createReviewUrl(baseUrl, day, planToken) {
+  const url = new URL(baseUrl.toString());
+  url.searchParams.set("day", day);
+  url.searchParams.set("plan", planToken);
+  return url.toString();
+}
+
+function extractSection(markdown, heading) {
+  const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = markdown.match(new RegExp(`^## ${escaped}\\s*\\n([\\s\\S]*?)(?=\\n## |$)`, "m"));
+  if (!match) {
+    throw new Error(`docs/submission-field-pack.md missing section: ${heading}`);
+  }
+  return match[1].trim();
+}
+
+async function createSubmissionPack(options) {
+  if (!options.day || !/^\d{4}-\d{2}-\d{2}$/.test(options.day)) {
+    throw new Error("--day must be YYYY-MM-DD");
+  }
+  if (!options.plan) {
+    throw new Error("--plan is required");
+  }
+  const puzzle = createPuzzleForDayKey(options.day);
+  if (!puzzle) {
+    throw new Error("--day must be a real date in YYYY-MM-DD format");
+  }
+  const plan = decodePlanToken(options.plan, puzzle);
+  if (!plan.length) {
+    throw new Error("--plan did not decode to a playable route for the selected day");
+  }
+  const publicAppUrl = normalizeBaseUrl(options.publicAppUrl, options.allowLocal);
+  const appListingUrl = assertPublicHttpUrl("app listing URL", options.appListingUrl, {
+    allowLocal: options.allowLocal,
+  });
+  const demoPostUrl = assertPublicHttpUrl("demo post URL", options.demoPostUrl, {
+    allowLocal: options.allowLocal,
+  });
+  const feedbackUrl = assertPublicHttpUrl("feedback URL", options.feedbackUrl, {
+    allowLocal: options.allowLocal,
+    required: false,
+  });
+  const publicAudit = await auditPublicUrl({
+    allowLocal: options.allowLocal,
+    baseUrl: publicAppUrl.toString(),
+    day: options.day,
+    timeoutMs: options.timeoutMs,
+  });
+  if (!publicAudit.ok) {
+    throw new Error(`public URL audit failed: ${publicAudit.failures.join("; ")}`);
+  }
+
+  const reviewUrl = createReviewUrl(publicAppUrl, options.day, options.plan);
+  const result = traceSignal(puzzle, plan);
+  const proposal = {
+    id: "submission-pack-preview",
+    puzzleId: puzzle.id,
+    author: "submission-preview",
+    createdAt: new Date(`${puzzle.id}T00:00:00.000Z`).toISOString(),
+    plan,
+    status: result.status,
+    complete: result.complete,
+    score: result.score,
+    beacons: result.hitBeacons.length,
+    moves: result.moves.length,
+  };
+  const consensus = summarizeConsensus(puzzle, [proposal]);
+  const launchPacket = formatLaunchPacket(
+    createLaunchPacket({
+      puzzle,
+      result,
+      plan,
+      shareUrl: reviewUrl,
+      consensus,
+      appListingUrl,
+      demoPostUrl,
+      feedbackUrl,
+    }),
+  );
+  const fieldPack = await readFile(resolve(root, "docs/submission-field-pack.md"), "utf8");
+  const shortDescription = extractSection(fieldPack, "Short Description");
+  const longDescription = extractSection(fieldPack, "Long Description");
+  const socialLoop = extractSection(fieldPack, "What Makes It Social");
+  const technicalHighlights = extractSection(fieldPack, "Technical Highlights");
+  const demoChecklist = extractSection(fieldPack, "Demo Checklist");
+
+  return [
+    "# Signal Garden Public Submission Pack",
+    "",
+    "## Public URLs",
+    "",
+    `- Public app: ${publicAppUrl.toString()}`,
+    `- Sample route: ${publicAudit.sampleRouteUrl}`,
+    `- Review link: ${reviewUrl}`,
+    `- App listing: ${appListingUrl}`,
+    `- Demo post: ${demoPostUrl}`,
+    feedbackUrl ? `- Feedback form: ${feedbackUrl}` : "- Feedback form: add only if the target platform asks for it.",
+    "",
+    "## Public URL Audit",
+    "",
+    `- Base URL: HTTP ${publicAudit.baseStatus}, ${publicAudit.baseTitle || "untitled"}`,
+    `- Sample route URL: HTTP ${publicAudit.sampleStatus}, ${publicAudit.sampleTitle || "untitled"}`,
+    "- Localhost guard: passed by this command before generating the pack.",
+    "",
+    "## Submission Fields",
+    "",
+    "### Project Name",
+    "",
+    "Signal Garden",
+    "",
+    "### Short Description",
+    "",
+    shortDescription,
+    "",
+    "### Long Description",
+    "",
+    longDescription,
+    "",
+    "### What Makes It Social",
+    "",
+    socialLoop,
+    "",
+    "### Technical Highlights",
+    "",
+    technicalHighlights,
+    "",
+    "## Media Assets",
+    "",
+    "- Cover: `docs/cover.png`",
+    "- Desktop preview: `docs/desktop-preview.png`",
+    "- Mobile preview: `docs/mobile-preview.png`",
+    "- Demo video: `docs/demo-final-captioned.webm`",
+    "",
+    "## Demo Checklist",
+    "",
+    demoChecklist,
+    "",
+    "## Launch Packet",
+    "",
+    launchPacket,
+    "",
+  ].join("\n");
+}
+
+async function main() {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.help) {
+    console.log(helpText());
+    return;
+  }
+  const text = await createSubmissionPack(options);
+  if (options.output) {
+    await writeFile(resolve(options.output), text, "utf8");
+  } else {
+    process.stdout.write(text);
+  }
+}
+
+export { createSubmissionPack };
+
+if (process.argv[1] && resolve(process.argv[1]) === scriptPath) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exit(1);
+  });
+}
