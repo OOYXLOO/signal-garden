@@ -21,6 +21,7 @@ Observed public requirements and signals on 2026-06-20:
 - `README.md`: project overview, local run, quality checks, and scope.
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
+- Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
 - `docs/desktop-preview.png`: desktop gallery preview.
@@ -80,6 +81,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
   - Demo: `docs/demo-final-captioned.webm`
 - Technical notes: use `Technical Highlights` from `docs/submission-field-pack.md`.
 - Social loop notes: use `What Makes It Social` from `docs/submission-field-pack.md`.
+- Demo discussion packet: copy the app launch packet after a complete route exists.
 - Demo post: add only after a user-approved public Reddit post exists.
 - App listing: add only after a user-approved Devvit listing exists.
 
@@ -90,6 +92,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The briefing contains an exact review link.
 - A pasted review link or briefing can be imported as a community proposal.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
+- The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
 - The Devvit client entry uses same-origin server routes for proposal consensus.

@@ -31,11 +31,12 @@ const textExpectations = [
       "Demo Checklist",
       "comment challenge",
       "review snapshot",
+      "launch packet",
     ],
   },
   {
     file: "docs/demo-script.md",
-    fragments: ["objective progress", "review link", "archive Review", "comment prompt", "review snapshot"],
+    fragments: ["objective progress", "review link", "archive Review", "comment prompt", "review snapshot", "launch packet"],
   },
   {
     file: "docs/gallery_assets.md",
@@ -43,7 +44,14 @@ const textExpectations = [
   },
   {
     file: "docs/launch-readiness.md",
-    fragments: ["User-Present Gates", "Submission Field Mapping", "Final Pre-Submit Check", "app listing", "public demo post"],
+    fragments: [
+      "User-Present Gates",
+      "Submission Field Mapping",
+      "Final Pre-Submit Check",
+      "app listing",
+      "public demo post",
+      "launch packet",
+    ],
   },
 ];
 

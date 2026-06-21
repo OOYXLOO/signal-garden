@@ -22,6 +22,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Routes pasted from comments or briefings can be imported into the consensus list.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
+- A launch packet combines the comment challenge, review snapshot, daily recap, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
 - Contributors get a compact daily board based on complete routes and best score.
 - A daily recap can be copied back into a discussion thread.
 - The top route can be applied by the community.
@@ -40,6 +41,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Review link and briefing parser for community route import.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
+- Launch packet generated from the current route, Review link, consensus, Reddit fit checks, and platform feedback notes.
 - Contributor aggregation and Reddit-ready daily recap text.
 - Briefing export with exact review link.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
@@ -56,6 +58,7 @@ The current build includes seven verified puzzle templates, objective progress c
 - Copy a share link and briefing for the exact route.
 - Copy the comment challenge prompt for a reply thread.
 - Copy the review snapshot for a judge or gallery note.
+- Copy the launch packet for the public demo post, app listing, discussion follow-up, and platform feedback pass.
 - Paste the route back as a comment route and show it in consensus.
 - Show the contributor board and copy the daily recap.
 - Clear the board and apply the top proposal.

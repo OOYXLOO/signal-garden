@@ -2,6 +2,7 @@ import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { createCommunityTarget, createDailyRecap } from "./game/proposals.js";
+import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
@@ -58,6 +59,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     copyCommentChallenge: document.querySelector("#copy-comment-challenge"),
     reviewSnapshot: document.querySelector("#review-snapshot"),
     copyReviewSnapshot: document.querySelector("#copy-review-snapshot"),
+    launchPacket: document.querySelector("#launch-packet"),
+    copyLaunchPacket: document.querySelector("#copy-launch-packet"),
   };
   let latest = null;
   let latestDay = null;
@@ -155,6 +158,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyLaunchPacket.addEventListener("click", async () => {
+    refs.launchPacket.select();
+    try {
+      await navigator.clipboard.writeText(refs.launchPacket.value);
+      refs.copyLaunchPacket.textContent = "Packet copied";
+      window.setTimeout(() => {
+        refs.copyLaunchPacket.textContent = "Copy launch packet";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
 
   refs.saveProposal.addEventListener("click", async () => {
     if (!latest) {
@@ -170,6 +185,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       renderCommentChallenge(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
+      renderLaunchPacket(refs, latest, latestConsensus);
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not save proposal.";
     } finally {
@@ -196,6 +212,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       renderCommentChallenge(refs, latest, latestConsensus);
       renderReviewSnapshot(refs, latest, latestConsensus);
+      renderLaunchPacket(refs, latest, latestConsensus);
       const summary = refs.proposalSummary.textContent;
       refs.proposalSummary.textContent = `Imported ${parsed.plan.length} move ${parsed.source}. ${summary}`;
       refs.commentRoute.value = "";
@@ -244,6 +261,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     refs.briefing.value = createShareBriefing({ briefing, shareUrl });
     renderCommentChallenge(refs, latest, latestConsensus);
     renderReviewSnapshot(refs, latest, latestConsensus);
+    renderLaunchPacket(refs, latest, latestConsensus);
     refs.moveList.replaceChildren(
       ...(plan.length
         ? plan.map((move) => {
@@ -265,6 +283,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         renderCommunityTarget(refs, puzzle, result, latestConsensus);
         renderCommentChallenge(refs, latest, latestConsensus);
         renderReviewSnapshot(refs, latest, latestConsensus);
+        renderLaunchPacket(refs, latest, latestConsensus);
       });
     }
   });
@@ -291,6 +310,20 @@ function renderReviewSnapshot(refs, latest, consensus) {
         shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
         consensus,
       })
+    : "";
+}
+
+function renderLaunchPacket(refs, latest, consensus) {
+  refs.launchPacket.value = latest
+    ? formatLaunchPacket(
+        createLaunchPacket({
+          puzzle: latest.puzzle,
+          result: latest.result,
+          plan: latest.plan,
+          shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+          consensus,
+        }),
+      )
     : "";
 }
 
