@@ -122,7 +122,7 @@ function parseBriefingPlan(input) {
 export function parseSharedRoute(input, puzzle) {
   const text = String(input || "").trim();
   if (!text) {
-    return { ok: false, error: "Paste a route link or briefing first." };
+    return { ok: false, reason: "empty", error: "Paste a route link or briefing first." };
   }
 
   const urlText = firstUrl(text);
@@ -132,30 +132,30 @@ export function parseSharedRoute(input, puzzle) {
       const day = url.searchParams.get("day");
       const token = url.searchParams.get("plan");
       if (!day || !token) {
-        return { ok: false, error: "That link does not include a route plan." };
+        return { ok: false, reason: "missing-plan", error: "That link does not include a route plan." };
       }
       if (day !== puzzle.id) {
-        return { ok: false, error: `That route is for ${day}. Open that day before importing it.` };
+        return { ok: false, reason: "cross-day", error: `That route is for ${day}. Open that day before importing it.` };
       }
       const plan = decodePlanToken(token, puzzle);
       if (!plan.length) {
-        return { ok: false, error: "That route has no playable mirrors." };
+        return { ok: false, reason: "empty-route", error: "That route has no playable mirrors." };
       }
       return { ok: true, day, plan, source: "review-link" };
     } catch {
-      return { ok: false, error: "That route link is not readable." };
+      return { ok: false, reason: "unreadable-link", error: "That route link is not readable." };
     }
   }
 
   const dayMatch = text.match(/Signal Garden\s+(\d{4}-\d{2}-\d{2})/i);
   const day = dayMatch ? dayMatch[1] : puzzle.id;
   if (day !== puzzle.id) {
-    return { ok: false, error: `That briefing is for ${day}. Open that day before importing it.` };
+    return { ok: false, reason: "cross-day", error: `That briefing is for ${day}. Open that day before importing it.` };
   }
 
   const plan = decodePlanToken(encodePlanToken(parseBriefingPlan(text)), puzzle);
   if (!plan.length) {
-    return { ok: false, error: "No playable route was found in that text." };
+    return { ok: false, reason: "no-route", error: "No playable route was found in that text." };
   }
   return { ok: true, day, plan, source: "briefing" };
 }
@@ -196,21 +196,35 @@ function inferThreadAuthor(text, index, routeIndex) {
 export function parseSharedRoutes(input, puzzle) {
   const text = String(input || "").trim();
   if (!text) {
-    return { ok: false, error: "Paste a comment thread, route link, or briefing first.", routes: [], errors: [] };
+    return {
+      ok: false,
+      error: "Paste a comment thread, route link, or briefing first.",
+      routes: [],
+      errors: [],
+      candidates: 0,
+      skippedByReason: {},
+    };
   }
 
   const routes = [];
   const errors = [];
+  const skippedByReason = {};
   const seen = new Set();
+
+  function skip(reason, error) {
+    const key = reason || "unreadable";
+    skippedByReason[key] = (skippedByReason[key] || 0) + 1;
+    errors.push(error);
+  }
 
   function addRoute(parsed, author) {
     if (!parsed.ok) {
-      errors.push(parsed.error);
+      skip(parsed.reason, parsed.error);
       return;
     }
     const token = encodePlanToken(parsed.plan);
     if (seen.has(token)) {
-      errors.push(`Duplicate route skipped for ${author}.`);
+      skip("duplicate", `Duplicate route skipped for ${author}.`);
       return;
     }
     seen.add(token);
@@ -223,12 +237,14 @@ export function parseSharedRoutes(input, puzzle) {
   }
 
   const matches = urlMatches(text);
+  let candidates = matches.length;
   if (matches.length) {
     matches.forEach((match, index) => {
       addRoute(parseSharedRoute(match.url, puzzle), inferThreadAuthor(text, match.index, index));
     });
   } else {
     const blocks = text.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+    candidates = blocks.length;
     blocks.forEach((block, index) => {
       addRoute(parseSharedRoute(block, puzzle), inferThreadAuthor(block, 0, index));
     });
@@ -240,6 +256,8 @@ export function parseSharedRoutes(input, puzzle) {
       error: errors[0] || "No playable routes were found in that thread.",
       routes,
       errors,
+      candidates,
+      skippedByReason,
     };
   }
 
@@ -249,5 +267,24 @@ export function parseSharedRoutes(input, puzzle) {
     errors,
     imported: routes.length,
     skipped: errors.length,
+    candidates,
+    skippedByReason,
   };
+}
+
+export function formatImportSkipReasons(skippedByReason = {}) {
+  const labels = {
+    "cross-day": "cross-day",
+    duplicate: "duplicate",
+    "missing-plan": "missing plan",
+    "empty-route": "empty route",
+    "no-route": "no route",
+    "unreadable-link": "unreadable link",
+    empty: "empty block",
+    unreadable: "unreadable",
+  };
+  return Object.entries(skippedByReason)
+    .filter(([, count]) => Number(count) > 0)
+    .map(([reason, count]) => `${count} ${labels[reason] || reason}`)
+    .join(", ");
 }

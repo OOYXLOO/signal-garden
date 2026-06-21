@@ -65,7 +65,7 @@ Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled sample preview consensus when no proposal exists yet.
-- Comment thread route import that turns pasted review links or briefings into ranked community proposals.
+- Comment thread route import that turns pasted review links or briefings into ranked community proposals, with import counts and skip reasons for duplicate or cross-day routes.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
 - Briefing output that includes an exact review link whenever a route is present.
 - Completion pulse feedback for solved boards.

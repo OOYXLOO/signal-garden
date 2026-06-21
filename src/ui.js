@@ -4,7 +4,7 @@ import { createObjectiveList, createRouteInsight, describeResult } from "./game/
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import { buildSampleRouteUrl, createReviewerFastPath } from "./reviewerGuide.js";
-import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoutes, wantsSampleRoute } from "./share.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute } from "./share.js";
 import { getLocalArchive, getLocalStreak, savePlan } from "./state/store.js";
 
 const statusText = {
@@ -243,8 +243,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       renderLaunchPacket(refs, latest, latestConsensus);
       const summary = refs.proposalSummary.textContent;
       const routeLabel = parsed.routes.length === 1 ? "route" : "routes";
-      const skipped = parsed.skipped ? `, ${parsed.skipped} skipped` : "";
-      refs.proposalSummary.textContent = `Imported ${parsed.routes.length} comment ${routeLabel}${skipped}. ${summary}`;
+      const skipped = parsed.skipped ? `, ${parsed.skipped} skipped (${formatImportSkipReasons(parsed.skippedByReason)})` : "";
+      refs.proposalSummary.textContent = `Imported ${parsed.routes.length}/${parsed.candidates} comment ${routeLabel}${skipped}. ${summary}`;
       refs.commentRoute.value = "";
     } catch (error) {
       refs.proposalSummary.textContent = error instanceof Error ? error.message : "Could not import comment routes.";

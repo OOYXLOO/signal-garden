@@ -12,7 +12,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 
-The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, comment thread route import, a comment challenge prompt, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, comment thread route import with skip reasons, a comment challenge prompt, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, comment challenge, and import loop for a one-minute evaluation pass.
 
@@ -21,7 +21,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Each mirror route is a proposal.
 - Each route can be shared as a link that reopens the same plan.
 - Briefings include the exact review link for the current route.
-- Multiple routes pasted from a comment thread, individual comments, or briefings can be imported into the consensus list.
+- Multiple routes pasted from a comment thread, individual comments, or briefings can be imported into the consensus list, with visible counts for imported, duplicate, and cross-day routes.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, and comment import loop in one compact block.
@@ -44,7 +44,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.
 - Compact route encoding for share links.
-- Review link, briefing, and comment-thread parser for community route import.
+- Review link, briefing, and comment-thread parser for community route import, including duplicate and cross-day skip summaries.
 - Sample route query support with `?day=YYYY-MM-DD&sample=1` for first-minute review.
 - Sample preview consensus that shows the top-route loop without writing fake proposals to storage.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
@@ -80,7 +80,7 @@ The app also includes a copyable reviewer fast path that points to the sample ro
 - If using GitHub Pages as the public review surface, run `npm run build` and `npm run audit:pages` before the final URL pass.
 - After the public app URL exists, run `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>`.
 - After public app, app listing, demo post, and review route token exist, run `npm run export:submission-pack`.
-- Paste a comment thread with multiple Review links and show the imported routes in consensus.
+- Paste a comment thread with multiple Review links and show the imported routes plus skip reasons in consensus.
 - Show the contributor board and copy the daily recap.
 - Clear the board and apply the top proposal.
 - Show daily seed, streak, archive, and briefing output.

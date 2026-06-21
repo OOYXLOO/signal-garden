@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createDailyPuzzle } from "../src/game/puzzle.js";
-import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
+import { buildShareUrl, createCommentChallenge, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoute, parseSharedRoutes, resolveInitialRoutePlan, wantsSampleRoute } from "../src/share.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const shareUrl = buildShareUrl("https://example.test/play?old=1", puzzle, puzzle.solution);
@@ -123,6 +123,12 @@ const threadRoutes = parseSharedRoutes(
 assert.equal(threadRoutes.ok, true);
 assert.equal(threadRoutes.imported, 2);
 assert.equal(threadRoutes.skipped, 2);
+assert.equal(threadRoutes.candidates, 4);
+assert.deepEqual(threadRoutes.skippedByReason, {
+  "cross-day": 1,
+  duplicate: 1,
+});
+assert.equal(formatImportSkipReasons(threadRoutes.skippedByReason), "1 cross-day, 1 duplicate");
 assert.deepEqual(
   threadRoutes.routes.map((route) => route.author),
   ["alice", "bob"],
