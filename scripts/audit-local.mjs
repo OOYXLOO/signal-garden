@@ -48,6 +48,7 @@ const required = [
   "scripts/audit-submission-assets.mjs",
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-manifest.mjs",
+  "scripts/github-pages-release-check.ps1",
   "tests/exportLaunchPacketCli.test.mjs",
   "tests/exportSubmissionManifestCli.test.mjs",
 ];

@@ -41,6 +41,14 @@ npm run audit:pages
 After the public URL exists, run `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` to verify the deployed page and sample-route review URL.
 Then run `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` to generate one copyable submission packet.
 
+For a repository publish pass after the GitHub repository exists:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 -SetOrigin -Push
+```
+
+After GitHub Pages is live, add `-PublicAudit` to verify the public page and sample route.
+
 ## Scope
 
 - Browser-first Phaser game loop.

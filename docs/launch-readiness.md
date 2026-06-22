@@ -35,6 +35,7 @@ Observed public requirements and signals on 2026-06-20:
 - `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
 - `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
 - `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist.
+- `scripts/github-pages-release-check.ps1`: runs the local quality checks, can set the GitHub remote after the repository exists, can push the current branch, and can audit the public Pages URL after it is live.
 
 ## Local Verification Before Any User Gate
 
@@ -73,6 +74,18 @@ npm run export:launch-packet -- --day 2026-06-21 --plan <review-plan-token> --re
 ```
 
 `--strict` fails if the route, review URL, app listing URL, or demo post URL is missing or points to localhost.
+
+After the GitHub repository exists, the release helper can run the local checks and push the current branch:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 -SetOrigin -Push
+```
+
+After GitHub Pages is live, verify the deployed page and sample route:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 -PublicAudit
+```
 
 For a quick reviewer walkthrough before a copied Review link exists, open the public app with a sample route:
 
