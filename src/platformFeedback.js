@@ -125,6 +125,133 @@ export function countFeedbackText(value) {
   };
 }
 
+export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OOYXLOO" } = {}) {
+  const pack = feedbackPack || createPlatformFeedbackPack({
+    puzzle: {
+      id: "2026-06-22",
+      title: "North arcade",
+      beacons: [1, 2, 3],
+      moveLimit: 5,
+    },
+    result: { complete: true, status: "complete", score: 1008, hitBeacons: [1, 2, 3], moves: [1, 2] },
+    plan: [1, 2],
+    shareUrl: "https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1",
+    consensus: { completed: 1, proposalCount: 1 },
+  });
+  const actionability = (pack.actionabilityMatrix || [])
+    .map((item) => `${item.gap}: ${item.recommendation}`)
+    .join(" ");
+  const concreteEvidence = (pack.actionabilityMatrix || [])
+    .map((item) => `${item.gap} repro: ${item.reproduction}`)
+    .join(" ");
+  return {
+    formTitle: "Developer Feedback Survey",
+    sourceForm:
+      "https://docs.google.com/forms/d/e/1FAIpQLScfeZ3BcPpusRRD4CDlDDbyyH8gHtzYcIeWF2KqH-t9jqAmHw/viewform?usp=send_form",
+    fields: [
+      {
+        question: "How likely are you to recommend Reddit's Developer Platform to another dev?",
+        answer: "8",
+        note: "Use the 1-10 scale. This is positive but leaves room for the concrete integration gaps below.",
+      },
+      {
+        question: "Why or why not?",
+        answer:
+          "I would recommend it to web-game builders who want Reddit-native distribution, daily posts, and comment-driven loops. Signal Garden proved that a Phaser/Vite game can be shaped toward Devvit with a splash entrypoint, same-origin API calls, proposal ranking, and public review links. I would hesitate for less experienced builders until the docs include a clearer end-to-end game path for asset hosting, expanded-mode lifecycle, comment-to-state examples, and final evidence handoff.",
+      },
+      {
+        question: "If we ran another Hackathon, what would you like the category to be?",
+        answer:
+          "Async community games built around recurring subreddit rituals: daily puzzles, comment-to-game actions, collaborative rankings, contributor recaps, and lightweight mod tools.",
+      },
+      {
+        question: "How did you hear about the hackathon?",
+        answer: "Dev Post",
+      },
+      {
+        question: "How satisfied are you with the developer experience?",
+        answer: "4",
+        note: "Use the 1-5 scale.",
+      },
+      {
+        question: "Why did you choose this rating?",
+        answer:
+          "The overall direction is strong because Devvit Web lets an existing web-game workflow become a Reddit surface. The remaining friction is not the core idea, but the path between local prototype and real post: static asset paths, splash-to-expanded-game handoff, persistence, and comment ingestion all need clearer examples. Signal Garden now has local checks for those boundaries, but I had to build those checks myself.",
+      },
+      {
+        question: "How satisfied are you with the devvit documentation?",
+        answer: "3",
+        note: "Use the 1-5 scale.",
+      },
+      {
+        question: "Why did you choose this rating?",
+        answer: `The docs are enough to understand the platform direction, but game builders need a more concrete walkthrough. ${actionability}`,
+      },
+      {
+        question: "How satisfied are you with support in our communities?",
+        answer: "3",
+        note: "Use the 1-5 scale. This reflects mostly self-serve/public-doc usage.",
+      },
+      {
+        question: "Why did you choose this rating?",
+        answer:
+          "I mostly used self-serve public docs and public challenge materials, so I do not want to overstate direct community support usage. The most helpful improvement would be a public, searchable reference thread or example repository for common game integration issues: Vite assets, expanded mode, Redis persistence, and comment parsing.",
+      },
+      {
+        question: "Do you plan on continuing to develop your project?",
+        answer: "Yes",
+      },
+      {
+        question: "Why or why not?",
+        answer:
+          "Yes. Signal Garden has a clear Reddit-native loop: a daily post can produce route replies, route replies become ranked proposals, and the top proposal gives the community a reason to return. The next useful step is a real Devvit playtest and public demo post so the sample route and local proposal loop can become live subreddit behavior.",
+      },
+      {
+        question:
+          "Would you be open to joining us for a feedback session? (If yes, please make sure to submit your username in the next question)",
+        answer: "No",
+        note:
+          "Choose Yes instead only if the account owner is personally willing to attend or schedule a session.",
+      },
+      {
+        question: "What is your username (please share this to be eligible for the feedback award)",
+        answer: username || "<Reddit username>",
+        note: "Replace with the submitting Reddit username if different.",
+      },
+      {
+        question: "What would get you most excited to start working on a new app?",
+        answer:
+          "A complete official game starter that feels Reddit-native instead of only web-embedded: Phaser/Vite config, splash-to-expanded-game transition, a comment parser, server-side validation, Redis-backed daily persistence, a recap/comment reply pattern, mobile WebView checks, and a final submission evidence template.",
+      },
+      {
+        question: "Please share anything else you would like for the team to know",
+        answer: `${pack.variants?.medium || pack.feedbackSummary} Concrete reproduction notes: ${concreteEvidence}`,
+      },
+    ],
+  };
+}
+
+export function formatDeveloperFeedbackSurveyPack(surveyPack) {
+  const lines = [
+    "# Signal Garden Developer Feedback Form Pack",
+    "",
+    `Form title: ${surveyPack.formTitle}`,
+    "",
+    `Source form: ${surveyPack.sourceForm}`,
+    "",
+    "This pack follows the public Google Form question order. It is copy-only and does not submit the form.",
+  ];
+
+  for (const [index, field] of (surveyPack.fields || []).entries()) {
+    lines.push("", `## ${index + 1}. ${field.question}`, "", field.answer || "");
+    if (field.note) {
+      lines.push("", `Note: ${field.note}`);
+    }
+  }
+  lines.push("");
+  return lines.join("\n");
+}
+
 export function formatPlatformFeedbackPack(pack) {
   const variants = pack.variants || {};
   const lines = [

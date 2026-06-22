@@ -21,6 +21,7 @@ const evidenceFiles = [
   "docs/devpost-field-pack.md",
   "docs/criteria-fit.md",
   "docs/platform-feedback-pack.md",
+  "docs/developer-feedback-form-pack.md",
   "docs/submission-runbook.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
@@ -34,6 +35,7 @@ const evidenceFiles = [
   "scripts/export-submission-pack.mjs",
   "scripts/export-devpost-fields.mjs",
   "scripts/export-platform-feedback.mjs",
+  "scripts/export-feedback-form-pack.mjs",
   "scripts/export-demo-post.mjs",
   "scripts/export-devvit-readiness.mjs",
   "scripts/export-submission-runbook.mjs",
@@ -109,6 +111,8 @@ export async function createSubmissionManifest() {
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
     platformFeedbackCommand:
       "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+    feedbackFormPackCommand:
+      "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
     devvitReadinessCommand:
       "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
     submissionRunbookCommand: "npm run export:submission-runbook -- --output docs/submission-runbook.md",

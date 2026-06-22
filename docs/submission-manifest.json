@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 7456,
-      "sha256": "86b12a85db6a2190fca644a1ed3d80466421c76953d917b4dd8d9a9107b117c9"
+      "bytes": 7611,
+      "sha256": "a87d6de9b31b73a6674ef6f87fbdca1d55816f6eb9e36a0d583a2153cd2cf62b"
     },
     {
       "path": "docs/cover.png",
@@ -77,9 +77,14 @@
       "sha256": "85acd55f07863a397ac90e4b7456fdd62b082749199f7d68ecc55f93efd5606c"
     },
     {
+      "path": "docs/developer-feedback-form-pack.md",
+      "bytes": 6271,
+      "sha256": "331abb48b668adf87b174601e9026aadb5a54f7851a2625265d778e49fb2b5f9"
+    },
+    {
       "path": "docs/submission-runbook.md",
-      "bytes": 4693,
-      "sha256": "94b6dd332b10e5bb7ac655aaea11fe6d4a2bffe5c988e9f81c18291c594735bf"
+      "bytes": 4918,
+      "sha256": "2060ab3690405459f6a19d8d83ddaafe519f1493dc727faf62576b5a4ec68790"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
@@ -103,8 +108,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 11891,
-      "sha256": "82c9b422cd0d6ebd46e5a71e7483eab823fafdbcbfda3adfd6d960be50c4fbfc"
+      "bytes": 18212,
+      "sha256": "93dcd9a7910c6790b85298c055ab8bbd2147d968c8208559c5a77ac329c23449"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -142,6 +147,11 @@
       "sha256": "13a174896f37c7ef7e144e74e6f184ba511d0141312470a0ee7938972cf25fe2"
     },
     {
+      "path": "scripts/export-feedback-form-pack.mjs",
+      "bytes": 3956,
+      "sha256": "d39dceb873b644b7c870ca5de09adc6eb7736c035964c80965846b1a25a708b1"
+    },
+    {
       "path": "scripts/export-demo-post.mjs",
       "bytes": 7378,
       "sha256": "84d6b6690f5b04adc1fb723b7ae8e010c49bcd85fd79d6cad2989f80f907906e"
@@ -153,8 +163,8 @@
     },
     {
       "path": "scripts/export-submission-runbook.mjs",
-      "bytes": 9352,
-      "sha256": "298489cac1faf04df3fa0c7987cbecfb349df5acbf5d02c4aa3a6f6498b08b76"
+      "bytes": 9661,
+      "sha256": "47f18f493fef47545f9aaf5c8fef2a4e8525fae5db00c98f09d0900a89fcdb0c"
     }
   ],
   "requiredLocalChecks": [
@@ -171,6 +181,7 @@
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+  "feedbackFormPackCommand": "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
   "submissionRunbookCommand": "npm run export:submission-runbook -- --output docs/submission-runbook.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",

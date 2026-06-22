@@ -1,0 +1,45 @@
+import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { createFeedbackFormPackFromOptions } from "../scripts/export-feedback-form-pack.mjs";
+import { formatDeveloperFeedbackSurveyPack } from "../src/platformFeedback.js";
+
+const run = promisify(execFile);
+const script = new URL("../scripts/export-feedback-form-pack.mjs", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+
+const pack = createFeedbackFormPackFromOptions({
+  day: "2026-06-22",
+  sampleRoute: true,
+  username: "OOYXLOO",
+});
+
+assert.equal(pack.formTitle, "Developer Feedback Survey");
+assert.equal(pack.fields.length, 16);
+assert.equal(pack.fields[0].answer, "8");
+assert.equal(pack.fields[4].answer, "4");
+assert.equal(pack.fields[6].answer, "3");
+assert.equal(pack.fields[10].answer, "Yes");
+assert.equal(pack.fields[12].answer, "No");
+assert.equal(pack.fields[13].answer, "OOYXLOO");
+assert.ok(pack.fields.some((field) => field.question.includes("What would get you most excited")));
+assert.ok(pack.fields.some((field) => field.answer.includes("Phaser/Vite config")));
+assert.ok(pack.fields.some((field) => field.answer.includes("Concrete reproduction notes")));
+
+const markdown = formatDeveloperFeedbackSurveyPack(pack);
+assert.match(markdown, /Signal Garden Developer Feedback Form Pack/);
+assert.match(markdown, /How likely are you to recommend/);
+assert.match(markdown, /What is your username/);
+assert.match(markdown, /copy-only and does not submit/);
+assert.match(markdown, /OOYXLOO/);
+assert.doesNotMatch(markdown, /password|OTP|cookie|KYC/i);
+
+const { stdout } = await run(process.execPath, [script, "--sample-route", "--username", "OOYXLOO"]);
+assert.match(stdout, /Developer Feedback Survey/);
+assert.match(stdout, /How satisfied are you with the developer experience/);
+assert.match(stdout, /Concrete reproduction notes/);
+assert.match(stdout, /OOYXLOO/);
+
+const help = await run(process.execPath, [script, "--help"]);
+assert.match(help.stdout, /export:feedback-form-pack/);
+
+console.log("signal garden export feedback form pack cli tests passed");

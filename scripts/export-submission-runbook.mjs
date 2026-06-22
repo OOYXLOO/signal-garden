@@ -6,6 +6,8 @@ const defaultSourceRepoUrl = "https://github.com/OOYXLOO/signal-garden";
 const defaultJudgeUrl = "https://ooyxloo.github.io/signal-garden/judge.html";
 const defaultFeedbackPackUrl =
   "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md";
+const defaultFeedbackFormPackUrl =
+  "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md";
 const defaultDevpostFieldsUrl =
   "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devpost-field-pack.md";
 const defaultDemoPostDraftUrl =
@@ -116,6 +118,7 @@ export function createSubmissionRunbook(options = {}) {
     `- Devpost-style field pack: ${defaultDevpostFieldsUrl}`,
     `- Reddit demo post draft: ${defaultDemoPostDraftUrl}`,
     `- Platform feedback pack: ${defaultFeedbackPackUrl}`,
+    `- Developer feedback form pack: ${defaultFeedbackFormPackUrl}`,
     optionalLine("Devvit app listing", appListingUrl, "<fill after platform gate>"),
     optionalLine("Public Reddit demo post", demoPostUrl, "<fill after posting gate>"),
     optionalLine("Platform feedback confirmation", feedbackConfirmationUrl, "<fill only if a public confirmation URL exists>"),
@@ -185,10 +188,11 @@ export function createSubmissionRunbook(options = {}) {
     "Account-owner action:",
     "",
     "1. Open the platform feedback pack.",
-    "2. Prefer the evidence-backed Actionability Matrix when a form allows multiple paragraphs.",
-    "3. Use the medium single-field version for a compact text field.",
-    "4. Use the short single-field version if the form is very constrained.",
-    "5. If the form returns a public confirmation URL, record it. If it returns only a private confirmation screen, keep it out of public docs.",
+    "2. Open the developer feedback form pack and copy answers in the public form question order.",
+    "3. Prefer the evidence-backed Actionability Matrix when a form allows multiple paragraphs.",
+    "4. Use the medium single-field version for a compact text field.",
+    "5. Use the short single-field version if the form is very constrained.",
+    "6. If the form returns a public confirmation URL, record it. If it returns only a private confirmation screen, keep it out of public docs.",
     "",
     "## Final Evidence Return",
     "",
