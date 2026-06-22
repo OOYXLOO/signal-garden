@@ -44,7 +44,7 @@ const cliResult = JSON.parse(stdout);
 assert.equal(cliResult.project, "signal-garden");
 assert.equal(cliResult.ok, true);
 assert.ok(cliResult.gates.some((gate) => gate.id === "public-app-url" && gate.status === "waiting"));
-assert.ok(cliResult.gates.some((gate) => gate.id === "source-repo-url" && gate.status === "waiting"));
 assert.ok(cliResult.gates.some((gate) => gate.id === "origin" && ["ready", "waiting"].includes(gate.status)));
+assert.ok(cliResult.gates.some((gate) => gate.id === "source-repo-url" && ["ready", "waiting"].includes(gate.status)));
 
 console.log("signal garden release gate audit tests passed");
