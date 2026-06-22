@@ -6,6 +6,7 @@ Public review desk: https://ooyxloo.github.io/signal-garden/judge.html
 Public app: https://ooyxloo.github.io/signal-garden/  
 Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1  
 Source repository: https://github.com/OOYXLOO/signal-garden
+Rubric evidence matrix: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/rubric-evidence-matrix.md
 
 This brief maps Signal Garden to the public Reddit Games with a Hook materials so a reviewer can
 judge the project without hunting through the repository.

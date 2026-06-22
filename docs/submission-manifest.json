@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 15935,
-      "sha256": "7d6a2181d46b588c57cd87df70dbe17f002863c4207e2656be3fc0c9bb5c30d9"
+      "bytes": 16329,
+      "sha256": "542b44a38516188e0784106517b4719bfcbf24740b1b2e22ba943501ec5369a3"
     },
     {
       "path": "docs/cover.png",
@@ -68,8 +68,13 @@
     },
     {
       "path": "docs/criteria-fit.md",
-      "bytes": 4997,
-      "sha256": "5c0f7d4b2a4b29df962d7618be869fbaa6724f200a08019f6360df6bdd519d5d"
+      "bytes": 5115,
+      "sha256": "73fff63a981d2aa30a5983ce204b941fac83328de34d0865a7ecb3d6c0f39f11"
+    },
+    {
+      "path": "docs/rubric-evidence-matrix.md",
+      "bytes": 4333,
+      "sha256": "904a0fc30b663f22d483d9b8c05af3ebf474519100b3f4373e9e061cb4d16373"
     },
     {
       "path": "docs/platform-feedback-pack.md",
@@ -112,6 +117,11 @@
       "sha256": "06ec2db3c2052a483ce3e4bc6037bc684dcf86139c369dc70c44e782c2b210cf"
     },
     {
+      "path": "src/rubricEvidence.js",
+      "bytes": 7197,
+      "sha256": "326bdf72f15099823df6f838940d9608166e349f58460d22b75b75be2e3446a0"
+    },
+    {
       "path": "scripts/audit-pages-build.mjs",
       "bytes": 2394,
       "sha256": "6ab0946eafd028e9f4d9ba9c8b2c20f2f637156e3b90f5bc46c26d4e30c9be7e"
@@ -150,6 +160,11 @@
       "path": "scripts/export-feedback-form-pack.mjs",
       "bytes": 4293,
       "sha256": "aeddbd6fe8f5a1a62b76ab52724fa20a788dc555c9528dd0d553ff7ea798db9a"
+    },
+    {
+      "path": "scripts/export-rubric-evidence.mjs",
+      "bytes": 1894,
+      "sha256": "747a7df9e6ad35b71b47eba6d997aa5b99d01b153ad4d1bedfafdc4693db27e2"
     },
     {
       "path": "scripts/export-demo-post.mjs",
