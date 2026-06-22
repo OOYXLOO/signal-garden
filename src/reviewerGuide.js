@@ -119,6 +119,103 @@ export function createReviewerFastPath({
   return lines.join("\n");
 }
 
+function guideStep(label, state, value, detail) {
+  return {
+    label,
+    state,
+    ready: state === "ready" || state === "preview",
+    value,
+    detail,
+  };
+}
+
+export function createFirstSessionGuide({
+  puzzle,
+  result,
+  plan = [],
+  shareUrl = "",
+  sampleRouteUrl = "",
+  consensus = null,
+} = {}) {
+  if (!puzzle) {
+    throw new Error("createFirstSessionGuide requires a puzzle");
+  }
+
+  const routeStatus = result?.complete ? "complete" : result?.status || "drafting";
+  const routeBeacons = result?.hitBeacons?.length || 0;
+  const routeStep = plan.length
+    ? guideStep(
+        "Trace the beam",
+        result?.complete ? "ready" : "preview",
+        `${routeStatus}, ${routeBeacons}/${puzzle.beacons.length} beacons`,
+        `${plan.length}/${puzzle.moveLimit} mirrors placed. Use Replay route to show how the signal travels.`,
+      )
+    : guideStep(
+        "Trace the beam",
+        "todo",
+        "Place mirrors",
+        "Tap board cells to rotate mirrors, or open the sample route for a full first-minute walkthrough.",
+      );
+
+  const sampleStep = guideStep(
+    "Open sample route",
+    sampleRouteUrl ? "preview" : "todo",
+    sampleRouteUrl ? "Sample ready" : "Needs sample URL",
+    sampleRouteUrl
+      ? "The sample route demonstrates the full loop without creating stored community data."
+      : "Use a day-specific sample route so reviewers do not need to solve the board first.",
+  );
+
+  const communityStep =
+    consensus?.proposalCount || consensus?.preview
+      ? guideStep(
+          "Show community loop",
+          consensus.preview ? "preview" : "ready",
+          consensus.preview
+            ? "Sample consensus"
+            : `${consensus.completed}/${consensus.proposalCount} routes ranked`,
+          consensus.preview
+            ? "Sample consensus explains how reply links become ranked routes."
+            : "Saved or imported comment routes now feed the contributor board and top-route ghost.",
+        )
+      : guideStep(
+          "Show community loop",
+          "todo",
+          "Save or import",
+          "Use Save route proposal or Load sample thread -> Import comment routes to prove user contribution flow.",
+        );
+
+  const evidenceStep =
+    shareUrl || plan.length
+      ? guideStep(
+          "Copy handoff proof",
+          "ready",
+          "Evidence ready",
+          "Reviewer fast path, evidence receipt, launch packet, and post draft now reflect the current board state.",
+        )
+      : guideStep(
+          "Copy handoff proof",
+          "todo",
+          "Needs route",
+          "Trace or load a route before copying the final review link and evidence receipt.",
+        );
+
+  const steps = [routeStep, sampleStep, communityStep, evidenceStep];
+  const readyCount = steps.filter((step) => step.ready).length;
+  const summary =
+    readyCount === steps.length
+      ? "Reviewer path is ready: play route, social loop, and evidence handoff are visible."
+      : `${readyCount}/${steps.length} first-session guide steps ready. Follow the open steps from top to bottom.`;
+
+  return {
+    title: "First-session guide",
+    summary,
+    readyCount,
+    total: steps.length,
+    steps,
+  };
+}
+
 function readinessState(label, ready, detail, state = "ready") {
   return {
     label,

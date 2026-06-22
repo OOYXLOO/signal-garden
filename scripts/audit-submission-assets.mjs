@@ -68,6 +68,7 @@ const textExpectations = [
       "Demo Checklist",
       "comment challenge",
       "review snapshot",
+      "first-session guide",
       "launch packet",
       "source repository placeholder",
       "launch packet CLI export",

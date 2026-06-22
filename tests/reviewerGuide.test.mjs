@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   buildSampleRouteUrl,
   createEvidenceReceipt,
+  createFirstSessionGuide,
   createReviewerFastPath,
   createReviewerLoopChecks,
   createSubmissionReadiness,
@@ -54,6 +55,47 @@ assert.match(fastPath, /Reddit loop:/);
 
 const emptyConsensus = createReviewerFastPath({ puzzle, result: null, plan: [], consensus: null });
 assert.match(emptyConsensus, /No saved proposals yet/);
+
+const draftGuide = createFirstSessionGuide({
+  puzzle,
+  result: null,
+  plan: [],
+  sampleRouteUrl: sampleUrl,
+  consensus: null,
+});
+assert.equal(draftGuide.total, 4);
+assert.equal(draftGuide.readyCount, 1);
+assert.deepEqual(
+  draftGuide.steps.map((step) => step.label),
+  ["Trace the beam", "Open sample route", "Show community loop", "Copy handoff proof"],
+);
+assert.deepEqual(
+  draftGuide.steps.map((step) => step.state),
+  ["todo", "preview", "todo", "todo"],
+);
+assert.match(draftGuide.summary, /1\/4 first-session guide steps ready/);
+assert.match(draftGuide.steps[0].detail, /open the sample route/);
+
+const readyGuide = createFirstSessionGuide({
+  puzzle,
+  result,
+  plan: puzzle.solution,
+  shareUrl: "https://example.test/play?day=2026-06-19&plan=2-2-b.2-6-b",
+  sampleRouteUrl: sampleUrl,
+  consensus: {
+    completed: 1,
+    proposalCount: 1,
+    best: {
+      score: result.score,
+      beacons: 3,
+      moves: 2,
+    },
+  },
+});
+assert.equal(readyGuide.readyCount, 4);
+assert.match(readyGuide.summary, /Reviewer path is ready/);
+assert.deepEqual(readyGuide.steps.map((step) => step.state), ["ready", "preview", "ready", "ready"]);
+assert.match(readyGuide.steps[2].detail, /top-route ghost/);
 
 const loopChecks = createReviewerLoopChecks({
   puzzle,

@@ -128,6 +128,9 @@ if (!indexHtml.includes('id="copy-review-snapshot"')) {
 if (!indexHtml.includes('id="reviewer-fast-path"')) {
   failures.push("index.html missing reviewer fast path");
 }
+if (!indexHtml.includes('id="onboarding-steps"')) {
+  failures.push("index.html missing first-session guide");
+}
 if (!indexHtml.includes('id="reviewer-loop-checks"')) {
   failures.push("index.html missing reviewer loop checks");
 }
@@ -193,6 +196,9 @@ if (!devvitGameHtml.includes('id="copy-developer-feedback-draft"')) {
 }
 if (!devvitGameHtml.includes('id="reviewer-fast-path"')) {
   failures.push("devvit game.html missing reviewer fast path");
+}
+if (!devvitGameHtml.includes('id="onboarding-steps"')) {
+  failures.push("devvit game.html missing first-session guide");
 }
 if (!devvitGameHtml.includes('id="reviewer-loop-checks"')) {
   failures.push("devvit game.html missing reviewer loop checks");

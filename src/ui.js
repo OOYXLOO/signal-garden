@@ -14,6 +14,7 @@ import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import {
   buildSampleRouteUrl,
   createEvidenceReceipt,
+  createFirstSessionGuide,
   createReviewerFastPath,
   createReviewerLoopChecks,
   createSubmissionReadiness,
@@ -46,6 +47,9 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     score: document.querySelector("#score-value"),
     beacons: document.querySelector("#beacon-value"),
     moves: document.querySelector("#move-value"),
+    onboardingTitle: document.querySelector("#onboarding-title"),
+    onboardingSummary: document.querySelector("#onboarding-summary"),
+    onboardingSteps: document.querySelector("#onboarding-steps"),
     moveList: document.querySelector("#move-list"),
     seed: document.querySelector("#seed-value"),
     streak: document.querySelector("#streak-value"),
@@ -303,6 +307,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
+      renderFirstSessionGuide(refs, latest, latestConsensus);
       renderRedditPostDraft(refs, latest, latestConsensus);
       renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
       renderReviewerFastPath(refs, latest, latestConsensus);
@@ -338,6 +343,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       latestConsensus = renderConsensus(refs, response.consensus, latest.puzzle);
       syncRivalGuide(scene, latest.puzzle, latestConsensus);
       renderCommentChallenge(refs, latest, latestConsensus);
+      renderFirstSessionGuide(refs, latest, latestConsensus);
       renderRedditPostDraft(refs, latest, latestConsensus);
       renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
       renderReviewerFastPath(refs, latest, latestConsensus);
@@ -394,6 +400,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     const shareUrl = buildShareUrl(window.location.href, puzzle, plan);
     refs.briefing.value = createShareBriefing({ briefing, shareUrl });
     renderCommentChallenge(refs, latest, latestConsensus);
+    renderFirstSessionGuide(refs, latest, latestConsensus);
     renderRedditPostDraft(refs, latest, latestConsensus);
     renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
     renderReviewerFastPath(refs, latest, latestConsensus);
@@ -429,6 +436,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         renderCommunityTarget(refs, puzzle, result, latestConsensus);
         renderDailyMissions(refs, createDailyMissions(puzzle, result, plan, latestConsensus));
         renderCommentChallenge(refs, latest, latestConsensus);
+        renderFirstSessionGuide(refs, latest, latestConsensus);
         renderRedditPostDraft(refs, latest, latestConsensus);
         renderDeveloperFeedbackDraft(refs, latest, latestConsensus);
         renderReviewerFastPath(refs, latest, latestConsensus);
@@ -469,6 +477,42 @@ function renderCommentChallenge(refs, latest, consensus) {
         consensus,
       })
     : "";
+}
+
+function renderFirstSessionGuide(refs, latest, consensus) {
+  if (!latest) {
+    refs.onboardingTitle.textContent = "First-session guide";
+    refs.onboardingSummary.textContent = "Waiting for the daily board.";
+    refs.onboardingSteps.replaceChildren();
+    return;
+  }
+
+  const guide = createFirstSessionGuide({
+    puzzle: latest.puzzle,
+    result: latest.result,
+    plan: latest.plan,
+    shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+    sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
+    consensus,
+  });
+
+  refs.onboardingTitle.textContent = guide.title;
+  refs.onboardingSummary.textContent = guide.summary;
+  refs.onboardingSteps.replaceChildren(
+    ...guide.steps.map((step) => {
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      const detail = document.createElement("em");
+      item.className = step.state;
+      item.setAttribute("aria-label", `${step.label}: ${step.state}, ${step.detail}`);
+      label.textContent = step.label;
+      value.textContent = step.value;
+      detail.textContent = step.detail;
+      item.append(label, value, detail);
+      return item;
+    }),
+  );
 }
 
 function renderReviewSnapshot(refs, latest, consensus) {

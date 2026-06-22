@@ -225,6 +225,73 @@ h2 {
   overflow-wrap: anywhere;
 }
 
+.guide-panel {
+  border-color: rgba(185, 133, 19, 0.3);
+}
+
+.onboarding-list {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.onboarding-list li {
+  min-width: 0;
+  border-left: 4px solid var(--coral);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 10px;
+  background: #fffdf8;
+}
+
+.onboarding-list li.ready {
+  border-left-color: var(--teal);
+  background: var(--teal-soft);
+}
+
+.onboarding-list li.preview {
+  border-left-color: var(--amber);
+  background: #fff1cf;
+}
+
+.onboarding-list span,
+.onboarding-list strong,
+.onboarding-list em {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.onboarding-list span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.onboarding-list strong {
+  margin-top: 3px;
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.onboarding-list li.ready strong {
+  color: var(--teal);
+}
+
+.onboarding-list li.preview strong {
+  color: var(--amber);
+}
+
+.onboarding-list em {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.35;
+}
+
 .button-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
