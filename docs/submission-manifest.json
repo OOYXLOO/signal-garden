@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 7611,
-      "sha256": "a87d6de9b31b73a6674ef6f87fbdca1d55816f6eb9e36a0d583a2153cd2cf62b"
+      "bytes": 8781,
+      "sha256": "4674e405c36f64d714b29ff037106891baf4f66ce76c3a14e46805ce50908949"
     },
     {
       "path": "docs/cover.png",
@@ -113,13 +113,13 @@
     },
     {
       "path": "scripts/audit-pages-build.mjs",
-      "bytes": 2110,
-      "sha256": "30623295dd67ecb194ea2344bec18d557ad9ac0290ccf86b951b892b66dc300e"
+      "bytes": 2202,
+      "sha256": "feba862a0a871f365066f6f9d5d691d86f5c9be8bba9838677718fb79a843cf6"
     },
     {
       "path": "scripts/audit-public-url.mjs",
-      "bytes": 6558,
-      "sha256": "d8355c99e936e4e8dae7de1343fe0225d591027a37e9a0c35548fc54ab0cfda4"
+      "bytes": 6650,
+      "sha256": "7041371c8a72e529581d1e9b38a519d4ab3a448f8e80117d7b9bc7c56a6f26d5"
     },
     {
       "path": "scripts/audit-release-gates.mjs",

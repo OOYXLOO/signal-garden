@@ -57,6 +57,10 @@ if (!html.includes("./favicon.svg")) {
 for (const fragment of [
   "Signal Garden Judge Desk",
   "Open sample route",
+  "Retention Mechanics",
+  "User Contributions",
+  "Developer Feedback",
+  "Return pledge",
   "demo-final-captioned.webm",
   "submission-manifest.json",
   "criteria-fit.md",
