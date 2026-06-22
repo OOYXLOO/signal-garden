@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 8938,
-      "sha256": "1fd2697dbcfa23791449dda26eb93ad92b627d257dbedb913133da31d9d31f1d"
+      "bytes": 9324,
+      "sha256": "4b6889136ce3f3ee0e58e8682138a39d7925cb214d378130bf4209c6c13aa4bd"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -48,13 +48,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 14783,
-      "sha256": "14303221ec4136b3efe5f3141da924cadd1a618ae4eea8d81c26cadd5ce05ff3"
+      "bytes": 15458,
+      "sha256": "4db460b75623a5479c5c082c4636afd0c0269c36bedc75345b77092b7085a0c0"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 12139,
-      "sha256": "3efd1bd3ec252136fcf2a3ff2bf742e0bcfec701619340345830b7e6148d09d8"
+      "bytes": 12715,
+      "sha256": "a31b43c5568683a22386ea3d7b4383f20c9bb6ac3887c1295d3590c1cad80390"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -65,6 +65,11 @@
       "path": "docs/devvit_dependency_watch.md",
       "bytes": 1761,
       "sha256": "7a7ad29e4f1126af7d3abc8bc881681ebaecce8092d93d7bccc9834e786f4ca2"
+    },
+    {
+      "path": "src/platformFeedback.js",
+      "bytes": 6916,
+      "sha256": "c3a3267439b6ad54b29ce8c2088fa52f7fd5661f606748ef07398786a184e342"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -90,6 +95,11 @@
       "path": "scripts/export-submission-pack.mjs",
       "bytes": 11933,
       "sha256": "45c6dfb3b7344f843a48c2600e36734057851de9c1973760b763f094830fae48"
+    },
+    {
+      "path": "scripts/export-platform-feedback.mjs",
+      "bytes": 4466,
+      "sha256": "13a174896f37c7ef7e144e74e6f184ba511d0141312470a0ee7938972cf25fe2"
     }
   ],
   "requiredLocalChecks": [
@@ -105,6 +115,7 @@
   ],
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
+  "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
   "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
   "publicGatePlaceholders": [
     "public source repository URL",

@@ -22,6 +22,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
 - Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
+- Platform feedback export: field-specific answers and short, medium, and long single-field variants for a later user-approved feedback pass.
 - Submission readiness panel in the app: playable board, sample route, Review link, public app URL status, return map, contribution loop, launch packet, and remaining platform URL placeholders in one copyable checklist.
 - Evidence receipt in the app and exported submission pack: gameplay proof, route proof, community proof, retention proof, launch handoff proof, public URL evidence slots, and safety boundary claims.
 - Seven-day return map in the Loop panel: visible local archive, streak, complete, draft, open day states, and non-persistent sample week preview for retention review.
@@ -38,6 +39,7 @@ Observed public requirements and signals on 2026-06-20:
 - `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
 - `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, source repository URL, app listing URL, and demo post URL gates as ready, waiting, or blocked. If `origin` points to the expected GitHub repository, the source repository URL is inferred from origin.
 - `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist, including a Gate Runbook for the ordered public evidence pass.
+- `scripts/export-platform-feedback.mjs`: generates copyable developer/platform feedback fields without submitting any form.
 - `scripts/github-pages-release-check.ps1`: runs the local quality checks, can set the GitHub remote after the repository exists, can push the current branch, and can audit the public Pages URL after it is live.
 
 ## Local Verification Before Any User Gate
@@ -56,6 +58,7 @@ npm run audit:release
 npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>
 npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
 npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
+npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run audit:submission
 npm audit --audit-level=moderate
@@ -144,6 +147,7 @@ Do not automate account login, human verification, private console pages, billin
 - Demo discussion packet: copy the app launch packet after a complete route exists.
 - Reddit post draft: copy only after the user is ready to create a public demo post; the app generates text but does not post it.
 - Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
+- Platform feedback export: run `npm run export:platform-feedback` when the user wants field-specific answers and short/medium/long variants outside the app UI.
 - Final launch packet: use `npm run export:launch-packet -- --strict` with public app, source repository, app listing, and demo post URLs after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, and demo post exist; pass either a copied route token with `--plan` or the built-in complete review route with `--sample-route`.
 - Evidence receipt: copy the app receipt or the `Evidence Receipt` section from the exported submission pack as a compact reviewer proof block.
@@ -169,6 +173,7 @@ Do not automate account login, human verification, private console pages, billin
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The Reddit post draft includes a title, body, route review link or sample route, community target, and first-comment prompt.
 - The developer feedback draft includes Devvit Web setup notes, Phaser static asset notes, dependency hygiene observations, mobile WebView checks, public review-link flow, and comment-loop feedback.
+- The platform feedback export includes field-specific answers plus short, medium, and long variants, without posting or submitting anything.
 - The submission readiness panel marks the sample route, route link, public app URL, return map, contribution loop, launch packet, and platform URL placeholders clearly.
 - The evidence receipt summarizes public URL evidence slots plus gameplay, route, community, retention, handoff, and safety proof claims.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.

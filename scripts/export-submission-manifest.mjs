@@ -19,11 +19,13 @@ const evidenceFiles = [
   "docs/submission-field-pack.md",
   "docs/devvit_shell_readiness.md",
   "docs/devvit_dependency_watch.md",
+  "src/platformFeedback.js",
   "scripts/audit-pages-build.mjs",
   "scripts/audit-public-url.mjs",
   "scripts/audit-release-gates.mjs",
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-pack.mjs",
+  "scripts/export-platform-feedback.mjs",
 ];
 
 function parseArgs(argv) {
@@ -94,6 +96,8 @@ export async function createSubmissionManifest() {
     launchPacketCommand:
       "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
+    platformFeedbackCommand:
+      "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
     submissionPackCommand:
       "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
     publicGatePlaceholders: [

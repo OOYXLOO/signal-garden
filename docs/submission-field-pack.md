@@ -14,6 +14,7 @@ The proposal layer recomputes scores from the shared puzzle rules instead of tru
 The current interface also includes a seven-day return map that shows complete, draft, and open days from the local archive, plus a clearly labeled sample week preview for first-minute review when no real archive exists yet. That turns the retention loop into a visible product surface rather than a note in the README.
 
 The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, dependency hygiene notes, and a Devvit shell for pre-account validation.
+The project also includes a platform feedback export that turns the real integration lessons into copyable field answers plus short, medium, and long single-field versions.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
 The app now also includes a submission readiness checklist that keeps the playable board, sample route, Review link, public app URL status, return map, contribution loop, launch packet, and platform URL placeholders visible in one compact handoff surface.
@@ -30,6 +31,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A Reddit post draft prepares a title, body, route review link, community target, and first-comment prompt for a later user-approved demo post.
 - A developer feedback draft packages setup notes, mobile WebView checks, dependency hygiene observations, public review-link flow, and comment-loop feedback for a later user-approved platform feedback pass.
+- A platform feedback export packages the same lessons into copyable form-field answers and length-limited variants.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A submission readiness checklist summarizes the playable board, sample route, Review link, public app URL status, retention surface, contribution loop, launch packet, and remaining platform URL placeholders.
@@ -64,6 +66,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Reddit post draft generated from the current route, sample route, Review link, and top proposal.
 - Developer feedback draft generated from the current route, Review link, sample route, consensus, dependency hygiene notes, and Devvit Web integration notes.
+- Platform feedback export generated from the current route, Review link, sample route, consensus, and integration notes, with short, medium, and long single-field variants.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Submission readiness generated from the current route, sample URL, Review link, return map, consensus, and launch packet state.
@@ -95,6 +98,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - Copy the comment challenge prompt for a reply thread.
 - Copy the Reddit post draft for a later user-approved demo post.
 - Copy the developer feedback draft for a later user-approved platform feedback pass.
+- Run `npm run export:platform-feedback` when a copyable platform feedback packet is needed outside the app UI.
 - Copy the review snapshot for a judge or gallery note.
 - Copy the reviewer fast path for a quick judge or playtester handoff.
 - Copy the submission readiness checklist to verify the handoff surface before final submission text.

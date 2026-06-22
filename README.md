@@ -32,6 +32,7 @@ npm run audit:local
 npm run audit:devvit
 npm run audit:pages
 npm run audit:release
+npm run export:platform-feedback -- --day 2026-06-19 --sample-route --review-base-url <public-app-url>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run record:demo
 npm run export:launch-packet -- --help
@@ -76,11 +77,13 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
 - Reddit post draft export that prepares a title, body, route review link, community target, and first-comment prompt without posting.
 - Developer feedback draft export that packages Devvit Web setup notes, Phaser static asset notes, mobile WebView checks, and comment-loop feedback without posting.
+- Platform feedback export that turns the same integration lessons into copyable field answers plus short, medium, and long single-field versions without posting.
 - Comment thread import that parses multiple pasted Review links or short coordinate routes into ranked community proposals while preserving lightweight author labels.
 - Sample comment thread loader for instantly previewing the reply-thread import loop without manual URL assembly.
 - Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
 - Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
+- Platform feedback CLI export for preparing user-approved developer/platform feedback after the public app URL exists.
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
 - Release gate audit that reports local release readiness and marks public app, source repository, listing, demo post, and remote repository gates as ready, waiting, or blocked.
