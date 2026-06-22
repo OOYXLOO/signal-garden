@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 10474,
-      "sha256": "9f03dba15f8ee2248a0475c831aac7bb0b837da66284836077d89dfe641e8aed"
+      "bytes": 10494,
+      "sha256": "04d2e2b1b4988ac0e003e12b9d627de1003d2ece48430c00de6a3bacb1dcffc7"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 8781,
-      "sha256": "4674e405c36f64d714b29ff037106891baf4f66ce76c3a14e46805ce50908949"
+      "bytes": 11194,
+      "sha256": "d0663c7ce57df655cd99304767831b688b81177ac3bfd4563725e5b02c2665ef"
     },
     {
       "path": "docs/cover.png",
@@ -48,8 +48,8 @@
     },
     {
       "path": "docs/gallery_assets.md",
-      "bytes": 1848,
-      "sha256": "3c69b1548f83b368b15c4114d1ffc8ef59cdf2095d4a434d1f9324407ddd40b6"
+      "bytes": 2173,
+      "sha256": "026f4dbafcf77abea9d6589c99642ec7c7c08b7aeb7cd19dcc9bf0cbbe062074"
     },
     {
       "path": "docs/launch-readiness.md",
@@ -118,8 +118,8 @@
     },
     {
       "path": "scripts/audit-public-url.mjs",
-      "bytes": 6650,
-      "sha256": "7041371c8a72e529581d1e9b38a519d4ab3a448f8e80117d7b9bc7c56a6f26d5"
+      "bytes": 6723,
+      "sha256": "6acff94a6ea85fa1459a20969e272104ea8f37d9faa6e30f7038032bb6926916"
     },
     {
       "path": "scripts/audit-release-gates.mjs",

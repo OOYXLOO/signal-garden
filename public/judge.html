@@ -155,6 +155,38 @@
         grid-column: span 2;
       }
 
+      .full {
+        grid-column: 1 / -1;
+      }
+
+      .media-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .media-grid video,
+      .media-grid img {
+        display: block;
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: #07090b;
+      }
+
+      .media-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .media-note {
+        margin: 12px 0 0;
+        color: #c9c1b1;
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+
       @media (max-width: 840px) {
         .hero {
           min-height: 52vh;
@@ -167,6 +199,10 @@
 
         .wide {
           grid-column: auto;
+        }
+
+        .media-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -244,10 +280,44 @@
           </ul>
         </article>
 
+        <article class="panel full">
+          <h2>Media Evidence Kit</h2>
+          <div class="media-grid">
+            <div>
+              <video
+                controls
+                preload="metadata"
+                poster="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/cover.png"
+              >
+                <source
+                  src="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm"
+                  type="video/webm"
+                />
+              </video>
+              <p class="media-note">
+                Final captioned demo candidate, kept under one minute and listed in the submission manifest.
+              </p>
+            </div>
+            <div class="media-stack">
+              <img
+                src="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/desktop-preview.png"
+                alt="Signal Garden desktop preview with board, reviewer loop, and contribution panels"
+              />
+              <img
+                src="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/mobile-preview.png"
+                alt="Signal Garden mobile preview showing the narrow viewport review surface"
+              />
+            </div>
+          </div>
+        </article>
+
         <article class="panel wide">
           <h2>Evidence Links</h2>
           <div class="links">
             <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm">Final captioned demo WebM</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/cover.png">Cover image</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/desktop-preview.png">Desktop preview image</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/mobile-preview.png">Mobile preview image</a>
             <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-manifest.json">Submission manifest with hashes</a>
             <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md">Criteria fit brief</a>
             <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md">Devvit readiness report</a>

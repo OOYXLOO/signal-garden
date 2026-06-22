@@ -34,6 +34,10 @@ Generated: 2026-06-20
 
 Daily browser puzzle prototype with seven verified board templates, objective progress, first-session guide, route replay, adapter-backed proposal consensus, community quality proof, shareable route links, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export with an exact review link, and a captioned demo candidate.
 
+## Judge Desk Placement
+
+The public judge desk embeds `docs/demo-final-captioned.webm` with `docs/cover.png` as the poster and shows the desktop and mobile preview images in the same Media Evidence Kit. This keeps the first review pass useful even when a judge evaluates from text, images, and video before running the app.
+
 ## Guardrails
 
 - Do not upload screenshots that contain private account data.
