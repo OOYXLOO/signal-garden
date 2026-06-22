@@ -108,6 +108,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Submission readiness panel that summarizes the playable board, sample route, current Review link, public app URL status, return map, contribution loop, launch packet, and remaining platform URL placeholders in one copyable checklist.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.
 - Seven-day garden log with sample week preview that makes the return loop visible even before platform analytics exist.
+- Return pledge card that turns today's solved, partial, or sample archive state into a next-day invite prompt for the thread.
 - Briefing output that includes an exact review link whenever a route is present.
 - Completion pulse feedback for solved boards.
 - Short Web Audio cues with a persistent mute toggle.

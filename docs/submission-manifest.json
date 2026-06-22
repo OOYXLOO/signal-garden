@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 10329,
-      "sha256": "ad33ddd7d0af63cf14975a7b9627b457abfc91aab9b3f483471be99b956b956c"
+      "bytes": 10456,
+      "sha256": "cded94ee708a57cdec9a44a9e91a60a39aa76a1cc2f4d914dc999b72dad42354"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -53,8 +53,8 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 16168,
-      "sha256": "4b202b88c47c2a8a5d137da0585ec83c8e92e7869409ded99a51afb9fcc444ed"
+      "bytes": 16343,
+      "sha256": "8e5edbc87306eff50f6e5bfc0681d1480d241f49e94d4174bc3a725cc26dddca"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -68,8 +68,8 @@
     },
     {
       "path": "docs/criteria-fit.md",
-      "bytes": 4829,
-      "sha256": "94ed25dd1a1461d329a9b25f1b9a5fa0fd8a6b3a15daeb09659a2e5e2e9db2ad"
+      "bytes": 4953,
+      "sha256": "f513109985adf27a9219eff20d1cd7f9adf53051e1c5b841f5b7bd2a701cea6f"
     },
     {
       "path": "docs/platform-feedback-pack.md",

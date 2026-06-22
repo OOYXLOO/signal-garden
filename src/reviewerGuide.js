@@ -261,17 +261,18 @@ function consensusReadiness(puzzle, consensus) {
   );
 }
 
-function retentionReadiness(gardenLog) {
+function retentionReadiness(gardenLog, returnPledge = null) {
   if (!gardenLog?.slots?.length) {
     return readinessState("Retention loop", false, "Return map has not rendered yet.");
   }
   const activeSlots = gardenLog.slots.filter((slot) => slot.state !== "open").length;
+  const pledgeDetail = returnPledge?.nextDay ? ` Next-day pledge: ${returnPledge.summary}.` : "";
   return readinessState(
     "Retention loop",
     true,
     activeSlots
-      ? `${activeSlots}/${gardenLog.slots.length} return-map slots show activity or preview state.`
-      : "Seven-day return map is visible and ready for archive data.",
+      ? `${activeSlots}/${gardenLog.slots.length} return-map slots show activity or preview state.${pledgeDetail}`
+      : `Seven-day return map is visible and ready for archive data.${pledgeDetail}`,
     activeSlots ? "ready" : "preview",
   );
 }
@@ -373,6 +374,7 @@ export function createSubmissionReadiness({
   sampleRouteUrl = "",
   consensus = null,
   gardenLog = null,
+  returnPledge = null,
   launchPacket = "",
   currentHref = "",
   sourceRepoUrl = "",
@@ -398,7 +400,7 @@ export function createSubmissionReadiness({
     routeReadiness(puzzle, result, plan),
     publicAppReadiness(currentHref),
     sourceRepoReadiness(currentHref, sourceRepoUrl),
-    retentionReadiness(gardenLog),
+    retentionReadiness(gardenLog, returnPledge),
     consensusReadiness(puzzle, consensus),
     readinessState(
       "Launch packet",
@@ -442,6 +444,7 @@ export function createEvidenceReceipt({
   sampleRouteUrl = "",
   consensus = null,
   gardenLog = null,
+  returnPledge = null,
   launchPacket = "",
   publicAppUrl = "",
   sourceRepoUrl = "",
@@ -478,7 +481,7 @@ export function createEvidenceReceipt({
         ? `Community proof: sample preview demonstrates ranking without stored data and ${contributionQuality.score}/100 contribution quality.`
         : "Community proof: waiting for saved or imported route proposals.",
     gardenLog?.slots?.length
-      ? `Retention proof: ${activeReturnSlots}/${gardenLog.slots.length} return-map slots show activity or preview state.`
+      ? `Retention proof: ${activeReturnSlots}/${gardenLog.slots.length} return-map slots show activity or preview state; ${returnPledge?.summary || "next-day pledge waiting"}.`
       : "Retention proof: waiting for return-map render.",
     launchPacket ? "Handoff proof: launch packet is generated from the current board state." : "Handoff proof: waiting for launch packet render.",
     "Safety proof: public evidence avoids credentials, private data, billing, identity checks, and platform secrets.",

@@ -11,7 +11,7 @@ import {
   inferSourceRepoUrl,
 } from "../src/reviewerGuide.js";
 import { createDailyPuzzle, traceSignal } from "../src/game/puzzle.js";
-import { createGardenLog, createSampleGardenArchive } from "../src/state/store.js";
+import { createGardenLog, createReturnPledge, createSampleGardenArchive } from "../src/state/store.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const result = traceSignal(puzzle, puzzle.solution);
@@ -132,6 +132,10 @@ const gardenLog = createGardenLog({
   currentPuzzleId: puzzle.id,
   archive: createSampleGardenArchive(puzzle.id),
 });
+const returnPledge = createReturnPledge({
+  currentPuzzleId: puzzle.id,
+  archive: createSampleGardenArchive(puzzle.id),
+});
 const readiness = createSubmissionReadiness({
   puzzle,
   result,
@@ -149,6 +153,7 @@ const readiness = createSubmissionReadiness({
     },
   },
   gardenLog,
+  returnPledge,
   launchPacket: "Signal Garden launch packet",
 });
 assert.equal(readiness.total, 9);
@@ -175,6 +180,7 @@ assert.match(readinessText, /Public app URL: ready/);
 assert.match(readinessText, /Source repository: ready/);
 assert.match(readinessText, /github\.com\/ooyxloo\/signal-garden/);
 assert.match(readinessText, /80\/100 contribution quality/);
+assert.match(readinessText, /Next-day pledge:/);
 assert.match(readinessText, /Platform URLs: waiting/);
 assert.match(readinessText, /app listing and public demo post/);
 
@@ -208,6 +214,7 @@ const evidenceReceipt = createEvidenceReceipt({
     },
   },
   gardenLog,
+  returnPledge,
   launchPacket: "Signal Garden launch packet",
   publicAppUrl: "https://ooyxloo.github.io/signal-garden/",
   sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
@@ -219,6 +226,7 @@ assert.match(evidenceReceipt.claims.join(" "), /Playable puzzle/);
 assert.match(evidenceReceipt.claims.join(" "), /Community proof: 1\/1 saved routes complete/);
 assert.match(evidenceReceipt.claims.join(" "), /80\/100 contribution quality/);
 assert.match(evidenceReceipt.claims.join(" "), /Retention proof:/);
+assert.match(evidenceReceipt.claims.join(" "), /relay queued|return prompt/);
 const evidenceReceiptText = formatEvidenceReceipt(evidenceReceipt);
 assert.match(evidenceReceiptText, /Evidence claims/);
 assert.match(evidenceReceiptText, /Public URLs/);

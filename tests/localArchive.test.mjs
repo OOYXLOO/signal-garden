@@ -12,7 +12,7 @@ globalThis.window = {
   },
 };
 
-const { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, loadPlan, mergeGardenArchive, savePlan } = await import(`../src/state/store.js?case=${Date.now()}`);
+const { createGardenLog, createReturnPledge, createSampleGardenArchive, getLocalArchive, getLocalStreak, loadPlan, mergeGardenArchive, savePlan } = await import(`../src/state/store.js?case=${Date.now()}`);
 
 savePlan(
   "2026-06-18",
@@ -60,6 +60,26 @@ assert.equal(log.slots[1].value, "140 pts");
 assert.equal(log.summary, "1/7 recent days complete");
 assert.deepEqual(createGardenLog({ currentPuzzleId: "not-a-day", archive }).slots, []);
 
+const draftPledge = createReturnPledge({
+  currentPuzzleId: "2026-06-19",
+  archive,
+  streak: getLocalStreak("2026-06-19"),
+});
+assert.equal(draftPledge.nextDay, "2026-06-20");
+assert.equal(draftPledge.state, "preview");
+assert.match(draftPledge.prompt, /2026-06-20/);
+assert.match(draftPledge.detail, /return-map slots/);
+
+const solvedPledge = createReturnPledge({
+  currentPuzzleId: "2026-06-18",
+  archive,
+  streak: getLocalStreak("2026-06-18"),
+});
+assert.equal(solvedPledge.state, "ready");
+assert.equal(solvedPledge.nextDay, "2026-06-19");
+assert.match(solvedPledge.summary, /2026-06-19 relay queued/);
+assert.match(solvedPledge.detail, /1-day streak/);
+
 const previewArchive = createSampleGardenArchive("2026-06-19");
 assert.equal(previewArchive.length, 4);
 assert.equal(previewArchive[0].id, "2026-06-19");
@@ -91,5 +111,11 @@ const sampleRouteArchive = mergeGardenArchive(
   previewArchive,
 );
 assert.equal(createGardenLog({ currentPuzzleId: "2026-06-19", archive: sampleRouteArchive }).summary, "2-day complete streak");
+const previewPledge = createReturnPledge({
+  currentPuzzleId: "2026-06-19",
+  archive: sampleRouteArchive,
+});
+assert.equal(previewPledge.state, "ready");
+assert.match(previewPledge.prompt, /keep the daily streak alive/);
 
 console.log("signal garden local archive tests passed");

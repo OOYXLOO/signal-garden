@@ -858,6 +858,74 @@ textarea.compact-textarea {
   background: #f6fbf8;
 }
 
+.return-pledge {
+  margin: 12px 0;
+  border: 1px solid rgba(99, 85, 163, 0.24);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fbf8ff;
+}
+
+.return-pledge.ready {
+  border-color: rgba(31, 122, 115, 0.34);
+  background: var(--teal-soft);
+}
+
+.return-pledge.preview {
+  border-color: rgba(185, 133, 19, 0.35);
+  background: #fff6df;
+}
+
+.return-pledge.todo {
+  border-color: rgba(198, 85, 63, 0.3);
+  background: var(--coral-soft);
+}
+
+.return-pledge span,
+.return-pledge strong,
+.return-pledge p {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.return-pledge span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.return-pledge strong {
+  margin-top: 4px;
+  color: var(--violet);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.return-pledge.ready strong {
+  color: var(--teal);
+}
+
+.return-pledge.preview strong {
+  color: var(--amber);
+}
+
+.return-pledge.todo strong {
+  color: var(--coral);
+}
+
+.return-pledge p {
+  margin: 6px 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.return-pledge textarea {
+  min-height: 64px;
+}
+
 .rationale-card span {
   display: block;
   color: var(--muted);

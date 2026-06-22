@@ -180,6 +180,7 @@ Do not automate account login, human verification, private console pages, billin
 - The platform feedback export includes field-specific answers plus short, medium, and long variants, without posting or submitting anything.
 - The submission readiness panel marks the sample route, route link, public app URL, return map, contribution loop, launch packet, and platform URL placeholders clearly.
 - The evidence receipt summarizes public URL evidence slots plus gameplay, route, community, retention, handoff, and safety proof claims.
+- The return pledge card turns today's archive state into a next-day invite prompt, so the retention loop is visible in both the browser page and Devvit shell.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
@@ -193,7 +194,7 @@ Do not automate account login, human verification, private console pages, billin
 - The exported Devpost field pack contains project name, tagline, public URLs, built-with notes, testing instructions, criteria fit summary, and pending external gates.
 - The exported submission pack contains an Evidence Receipt section with public URL evidence slots and proof claims for gameplay, route, community, retention, handoff, and safety boundaries.
 - The exported submission pack contains a Gate Runbook that keeps public evidence checks in the right order.
-- The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.
+- The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, return pledge, and rival target DOM contracts as the browser page.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.
 - The public repository text stays focused on Signal Garden project evidence.

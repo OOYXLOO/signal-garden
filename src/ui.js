@@ -23,7 +23,7 @@ import {
   inferSourceRepoUrl,
 } from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute, wantsSampleWeek } from "./share.js";
-import { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
+import { createGardenLog, createReturnPledge, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
 
 const statusText = {
   complete: "Complete",
@@ -56,6 +56,10 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     status: document.querySelector("#status-value"),
     retentionSummary: document.querySelector("#retention-summary"),
     gardenLogList: document.querySelector("#garden-log-list"),
+    returnPledge: document.querySelector("#return-pledge"),
+    returnPledgeValue: document.querySelector("#return-pledge-value"),
+    returnPledgeDetail: document.querySelector("#return-pledge-detail"),
+    returnPledgePrompt: document.querySelector("#return-pledge-prompt"),
     targetCard: document.querySelector("#target-card"),
     targetLabel: document.querySelector("#target-label"),
     targetValue: document.querySelector("#target-value"),
@@ -647,6 +651,11 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
     archive,
     streak: sampleWeekPreview ? undefined : getLocalStreak(latest.puzzle.id),
   });
+  const returnPledge = createReturnPledge({
+    currentPuzzleId: latest.puzzle.id,
+    archive,
+    streak: sampleWeekPreview ? undefined : getLocalStreak(latest.puzzle.id),
+  });
   const readiness = createSubmissionReadiness({
     puzzle: latest.puzzle,
     result: latest.result,
@@ -655,6 +664,7 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
     sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
     consensus,
     gardenLog,
+    returnPledge,
     launchPacket: refs.launchPacket.value,
     currentHref: window.location.href,
     sourceRepoUrl: inferSourceRepoUrl(window.location.href),
@@ -670,6 +680,7 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
       sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
       consensus,
       gardenLog,
+      returnPledge,
       launchPacket: refs.launchPacket.value,
       publicAppUrl: publicAppReadinessUrl(window.location.href),
       sourceRepoUrl: inferSourceRepoUrl(window.location.href),
@@ -755,7 +766,13 @@ function renderGardenLog(refs, currentPuzzleId, { preview = false } = {}) {
     archive,
     streak: preview ? undefined : getLocalStreak(currentPuzzleId),
   });
+  const pledge = createReturnPledge({
+    currentPuzzleId,
+    archive,
+    streak: preview ? undefined : getLocalStreak(currentPuzzleId),
+  });
   refs.retentionSummary.textContent = log.summary;
+  renderReturnPledge(refs, pledge);
   refs.gardenLogList.replaceChildren(
     ...(log.slots.length
       ? log.slots.map((slot) => {
@@ -776,6 +793,13 @@ function renderGardenLog(refs, currentPuzzleId, { preview = false } = {}) {
   if (!log.slots.length) {
     refs.gardenLogList.firstChild.textContent = "Daily log opens after the first board loads.";
   }
+}
+
+function renderReturnPledge(refs, pledge) {
+  refs.returnPledge.className = `return-pledge ${pledge.state}`;
+  refs.returnPledgeValue.textContent = pledge.summary;
+  refs.returnPledgeDetail.textContent = pledge.detail;
+  refs.returnPledgePrompt.value = pledge.prompt;
 }
 
 async function refreshConsensus(refs, communityClient, day, previewRoute = null) {

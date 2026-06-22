@@ -152,6 +152,70 @@ export function createGardenLog({ currentPuzzleId, archive = [], streak, limit =
   };
 }
 
+export function createReturnPledge({ currentPuzzleId, archive = [], streak } = {}) {
+  const currentDate = parseDayKey(currentPuzzleId);
+  if (!currentDate) {
+    return {
+      label: "Return pledge",
+      state: "todo",
+      nextDay: "",
+      streak: 0,
+      activeDays: 0,
+      summary: "Waiting for a valid daily board.",
+      detail: "The return prompt opens after a dated puzzle renders.",
+      prompt: "Open a dated Signal Garden board before drafting the next-day invite.",
+    };
+  }
+
+  const archiveById = new Map(archive.map((entry) => [entry.id, entry]));
+  const currentEntry = archiveById.get(currentPuzzleId) || null;
+  const nextDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+  const nextDay = formatDayKey(nextDate);
+  const activeDays = archive.filter((entry) => entry.complete || entry.plan?.length || entry.preview).length;
+  const effectiveStreak = Number.isFinite(streak) ? streak : countArchiveStreak(currentDate, archiveById);
+
+  if (currentEntry?.complete) {
+    return {
+      label: "Return pledge",
+      state: currentEntry.preview ? "preview" : "ready",
+      nextDay,
+      streak: effectiveStreak,
+      activeDays,
+      summary: `${nextDay} relay queued`,
+      detail: effectiveStreak
+        ? `Solved today with a ${effectiveStreak}-day streak; invite the thread back for tomorrow's board.`
+        : "Solved today; invite the thread back for tomorrow's board.",
+      prompt: `Tomorrow's Signal Garden relay opens on ${nextDay}. Bring one route, compare it with today's top signal, and keep the daily streak alive.`,
+    };
+  }
+
+  if (currentEntry?.plan?.length) {
+    return {
+      label: "Return pledge",
+      state: currentEntry.preview ? "preview" : "ready",
+      nextDay,
+      streak: effectiveStreak,
+      activeDays,
+      summary: `${nextDay} comeback prompt ready`,
+      detail: `${currentEntry.beacons || 0} beacons reached today; the unfinished route gives the next reply a clear recovery target.`,
+      prompt: `Today's route is still open. Reply with a review link, help finish the relay, then come back on ${nextDay} for the next board.`,
+    };
+  }
+
+  return {
+    label: "Return pledge",
+    state: activeDays ? "preview" : "todo",
+    nextDay,
+    streak: effectiveStreak,
+    activeDays,
+    summary: activeDays ? `${nextDay} return prompt preview` : "No return prompt yet",
+    detail: activeDays
+      ? `${activeDays}/7 return-map slots show activity or sample state; solve or import today to make the pledge live.`
+      : "Trace, save, or import a route before asking the thread to return tomorrow.",
+    prompt: `Open today's board, save a route, and invite players back on ${nextDay} once the daily signal has a target.`,
+  };
+}
+
 export function getLocalStreak(currentPuzzleId) {
   const state = safeRead();
   const currentDate = parseDayKey(currentPuzzleId);

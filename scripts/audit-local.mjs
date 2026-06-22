@@ -164,6 +164,12 @@ if (!indexHtml.includes('id="retention-summary"')) {
 if (!indexHtml.includes('id="garden-log-list"')) {
   failures.push("index.html missing garden log list");
 }
+if (!indexHtml.includes('id="return-pledge"')) {
+  failures.push("index.html missing return pledge");
+}
+if (!indexHtml.includes('id="return-pledge-prompt"')) {
+  failures.push("index.html missing return pledge prompt");
+}
 if (!indexHtml.includes('id="load-sample-thread"')) {
   failures.push("index.html missing sample comment thread loader");
 }
@@ -181,6 +187,12 @@ if (!devvitGameHtml.includes('id="retention-summary"')) {
 }
 if (!devvitGameHtml.includes('id="garden-log-list"')) {
   failures.push("devvit game.html missing garden log list");
+}
+if (!devvitGameHtml.includes('id="return-pledge"')) {
+  failures.push("devvit game.html missing return pledge");
+}
+if (!devvitGameHtml.includes('id="return-pledge-prompt"')) {
+  failures.push("devvit game.html missing return pledge prompt");
 }
 if (!devvitGameHtml.includes('id="review-snapshot"')) {
   failures.push("devvit game.html missing review snapshot");
