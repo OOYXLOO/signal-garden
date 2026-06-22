@@ -35,7 +35,7 @@ assert.match(packet.hook, /daily mirror-routing relay/);
 assert.equal(packet.reviewLink, shareUrl);
 assert.match(packet.currentRoute, /complete/);
 assert.match(packet.currentRoute, /3\/3 beacons/);
-assert.equal(packet.launchChecks.length, 5);
+assert.equal(packet.launchChecks.length, 6);
 assert.match(packet.commentChallenge, /Reply with your Review link/);
 assert.match(packet.redditPostDraft, /Title: Signal Garden 2026-06-19/);
 assert.match(packet.redditPostDraft, /First comment prompt/);
@@ -63,6 +63,7 @@ assert.match(formatted, /## Daily Recap/);
 assert.match(formatted, /## Developer Platform Feedback/);
 assert.match(formatted, /Product feedback:/);
 assert.match(formatted, /Mobile WebView guidance/);
+assert.match(formatted, /Dependency hygiene/);
 
 const emptyRoutePacket = formatLaunchPacket(createLaunchPacket({ puzzle, result: null, plan: [], consensus: null }));
 assert.match(emptyRoutePacket, /create a route first/);

@@ -114,6 +114,7 @@ assert.match(feedbackDraft, /Devvit Web-style client shell/);
 assert.match(feedbackDraft, /Route state: complete, 820 pts, 3\/3 beacons, 2\/5 moves/);
 assert.match(feedbackDraft, /Review path: https:\/\/example\.test\/play/);
 assert.match(feedbackDraft, /Mobile WebView guidance/);
+assert.match(feedbackDraft, /Dependency hygiene/);
 assert.match(feedbackDraft, /sample route URL/);
 
 const snapshot = createReviewSnapshot({

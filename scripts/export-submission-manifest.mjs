@@ -18,6 +18,7 @@ const evidenceFiles = [
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "docs/devvit_shell_readiness.md",
+  "docs/devvit_dependency_watch.md",
   "scripts/audit-pages-build.mjs",
   "scripts/audit-public-url.mjs",
   "scripts/export-launch-packet.mjs",

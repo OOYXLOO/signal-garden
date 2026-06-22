@@ -14,6 +14,7 @@ const requiredFiles = [
   "docs/gallery_assets.md",
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
+  "docs/devvit_dependency_watch.md",
 ];
 
 const pngExpectations = [
@@ -43,8 +44,21 @@ const textExpectations = [
       "public URL audit",
       "submission pack",
       "developer feedback draft",
+      "dependency hygiene",
       "return map",
       "sample week preview",
+    ],
+  },
+  {
+    file: "docs/devvit_dependency_watch.md",
+    fragments: [
+      "Devvit Dependency Watch",
+      "devvit@0.13.4",
+      "@devvit/public-api@0.13.4",
+      "23",
+      "4",
+      "devvit@1.0.0",
+      "Repository Policy",
     ],
   },
   {

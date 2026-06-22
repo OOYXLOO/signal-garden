@@ -13,7 +13,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 The current interface also includes a seven-day return map that shows complete, draft, and open days from the local archive, plus a clearly labeled sample week preview for first-minute review when no real archive exists yet. That turns the retention loop into a visible product surface rather than a note in the README.
 
-The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, dependency hygiene notes, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
 The app now also includes a submission readiness checklist that keeps the playable board, sample route, Review link, public app URL status, return map, contribution loop, launch packet, and platform URL placeholders visible in one compact handoff surface.
@@ -27,7 +27,7 @@ The app now also includes a submission readiness checklist that keeps the playab
 - A sample thread loader fills the import box with a complete route, a partial route, a cross-day route, and a duplicate route for an immediate review of the reply loop.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A Reddit post draft prepares a title, body, route review link, community target, and first-comment prompt for a later user-approved demo post.
-- A developer feedback draft packages setup notes, mobile WebView checks, public review-link flow, and comment-loop feedback for a later user-approved platform feedback pass.
+- A developer feedback draft packages setup notes, mobile WebView checks, dependency hygiene observations, public review-link flow, and comment-loop feedback for a later user-approved platform feedback pass.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A submission readiness checklist summarizes the playable board, sample route, Review link, public app URL status, retention surface, contribution loop, launch packet, and remaining platform URL placeholders.
@@ -59,7 +59,7 @@ The app now also includes a submission readiness checklist that keeps the playab
 - Sample preview consensus that shows the top-route loop without writing fake proposals to storage.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.
 - Reddit post draft generated from the current route, sample route, Review link, and top proposal.
-- Developer feedback draft generated from the current route, Review link, sample route, consensus, and Devvit Web integration notes.
+- Developer feedback draft generated from the current route, Review link, sample route, consensus, dependency hygiene notes, and Devvit Web integration notes.
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Submission readiness generated from the current route, sample URL, Review link, return map, consensus, and launch packet state.

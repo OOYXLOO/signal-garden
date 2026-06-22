@@ -29,6 +29,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/desktop-preview.png`: desktop gallery preview.
 - `docs/mobile-preview.png`: mobile gallery preview.
 - `docs/devvit_shell_readiness.md`: Devvit shell status and account gates.
+- `docs/devvit_dependency_watch.md`: current Devvit npm package snapshot and isolated dependency audit rationale.
 - `docs/gallery_assets.md`: asset inventory and guardrails.
 - `docs/submission-manifest.json`: deterministic file manifest with byte counts and SHA-256 hashes for the public evidence packet.
 - `.github/workflows/deploy-pages.yml`: GitHub Pages deployment workflow for the static browser build.
@@ -157,7 +158,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The sample comment thread loader produces a visible import summary with duplicate and cross-day skip reasons.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The Reddit post draft includes a title, body, route review link or sample route, community target, and first-comment prompt.
-- The developer feedback draft includes Devvit Web setup notes, Phaser static asset notes, mobile WebView checks, public review-link flow, and comment-loop feedback.
+- The developer feedback draft includes Devvit Web setup notes, Phaser static asset notes, dependency hygiene observations, mobile WebView checks, public review-link flow, and comment-loop feedback.
 - The submission readiness panel marks the sample route, route link, public app URL, return map, contribution loop, launch packet, and platform URL placeholders clearly.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.
@@ -165,6 +166,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The Devvit client entry uses same-origin server routes for proposal consensus.
 - The Devvit splash entry requests expanded mode for the `game` entrypoint and still falls back to `game.html` in a normal browser.
 - The Devvit client build uses relative asset paths, avoiding root `/assets` assumptions in WebView static hosting.
+- The official Devvit CLI/API packages remain outside normal dependencies until the dependency chain passes an isolated audit or a user-approved playtest requires them.
 - The standard static build uses relative asset paths, avoiding root `/assets` assumptions on GitHub Pages project URLs.
 - The public URL audit passes for both the base app URL and the `sample=1` reviewer walkthrough URL.
 - The exported submission pack contains public URLs, submission fields, media assets, demo checklist, and launch packet copy.

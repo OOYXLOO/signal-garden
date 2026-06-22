@@ -28,6 +28,14 @@ Generated: 2026-06-20
 - The Devvit game shell keeps the same reviewer fast path, launch packet, review snapshot, mission list, and rival target DOM contracts as the browser page.
 - `npm run audit:devvit` verifies the configured entrypoint paths, built output paths, and menu endpoint stay in sync.
 
+## Dependency Watch
+
+- `docs/devvit_dependency_watch.md` records the current npm package snapshot and isolated audit result.
+- As of 2026-06-22, `devvit@0.13.4` is still the latest npm release and pulls `@devvit/cli@0.13.4`.
+- An isolated `npm audit --audit-level=moderate` pass for `devvit@0.13.4` plus `@devvit/public-api@0.13.4` reports 23 findings, including 4 high-severity findings.
+- `devvit@1.0.0` is not a usable migration target because npm marks it deprecated and `@devvit/public-api@1.0.0` is not published.
+- Therefore the repository keeps the official Devvit CLI/API packages out of normal dependencies and uses the shell only as a contract-tested migration surface.
+
 ## Not Yet Done
 
 - No Devvit app has been created or uploaded.

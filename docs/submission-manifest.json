@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 7399,
-      "sha256": "24565c0bfb5ca6a0c6747be4ab8bd3684cdd61717271e590b3cf571a3011a029"
+      "bytes": 7696,
+      "sha256": "7dfe43fc51273a08d47f0ea4adcf595a45eba0ee8b34281ac66f6b013095d1fb"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -48,18 +48,23 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 11777,
-      "sha256": "fc02fdbecb8881eba12786c151f7248ee0e8832a9ff1cfd2323333046e101014"
+      "bytes": 12093,
+      "sha256": "7373a8d6a87f953ce88353864a82a689d12de568ddd68f9594433cb56073fa6f"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 10403,
-      "sha256": "3cea2cae12ba6b6719deadc8500be250cf5d1acfd2ed2bac50f039c356cac0b4"
+      "bytes": 10488,
+      "sha256": "8412845f14c9e55b77611251c23582d702fefe85adcd163b523730d66a3f346a"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
-      "bytes": 3691,
-      "sha256": "4e57f7f1ddd5a257ddb8876bdef962038397c7fcba6ba6f6b14ebc42ccb9568d"
+      "bytes": 4373,
+      "sha256": "7e263c68d5664081242b47f423ccb937fe7785400a9ac2f81d6f5cbe9da04651"
+    },
+    {
+      "path": "docs/devvit_dependency_watch.md",
+      "bytes": 1761,
+      "sha256": "7a7ad29e4f1126af7d3abc8bc881681ebaecce8092d93d7bccc9834e786f4ca2"
     },
     {
       "path": "scripts/audit-pages-build.mjs",

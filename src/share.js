@@ -150,6 +150,7 @@ export function createDeveloperFeedbackDraft({
     "- Mobile WebView guidance should call out touch targets, fixed canvas sizing, audio unlock behavior, and safe-area constraints.",
     "- Comment-driven games need clearer examples for importing public reply links or short coordinate routes, handling duplicates, and showing why one community result leads another.",
     "- A local dry-run command that validates client bundle, server routes, and public review links before submission would reduce last-minute mistakes.",
+    "- Dependency hygiene is still hard to judge from the outside: an isolated 2026-06-22 audit of devvit@0.13.4 plus @devvit/public-api@0.13.4 reported 23 findings, including 4 high, while devvit@1.0.0 is a deprecated placeholder and @devvit/public-api@1.0.0 is not published.",
     "",
     "What worked well:",
     "- The app can keep the first screen playable without account data.",

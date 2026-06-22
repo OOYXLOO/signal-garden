@@ -48,6 +48,7 @@ export function createLaunchPacket({
     "Return loop: deterministic daily board, streak state, archive rows, and recap copy make tomorrow matter.",
     "User contribution loop: review links from comments can become ranked community proposals.",
     "Phaser surface: beam trace, blockers, beacons, route replay, audio cues, and responsive canvas are inside the game.",
+    "Integration boundary: official Devvit packages stay outside normal dependencies until the SDK chain is clean in an isolated playtest.",
     "Safety boundary: no account tokens, private data, billing pages, or platform credentials are stored in the app.",
   ];
 
