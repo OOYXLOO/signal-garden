@@ -37,7 +37,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/submission-manifest.json`: deterministic file manifest with byte counts and SHA-256 hashes for the public evidence packet.
 - `.github/workflows/deploy-pages.yml`: GitHub Pages deployment workflow for the static browser build.
 - `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
-- `scripts/audit-public-url.mjs`: checks the deployed public URL, dynamic judge-desk sample route entry, and `sample=1` reviewer walkthrough URL after a public app URL exists.
+- `scripts/audit-public-url.mjs`: checks the deployed public URL, dynamic judge-desk sample route entry, copyable evidence packet, and `sample=1` reviewer walkthrough URL after a public app URL exists.
 - `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, source repository URL, app listing URL, and demo post URL gates as ready, waiting, or blocked. If `origin` points to the expected GitHub repository, the source repository URL is inferred from origin.
 - `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist, including a Gate Runbook for the ordered public evidence pass.
 - `scripts/export-devpost-fields.mjs`: generates concise Devpost-style fields after the public app and source repository exist.
@@ -114,7 +114,7 @@ The browser build is ready for a repository-page path such as `https://<owner>.g
 - `.github/workflows/deploy-pages.yml` builds `dist/` and deploys it through GitHub Pages when the repository is configured for GitHub Actions Pages.
 - `npm run audit:pages` fails if `dist/index.html` contains root-relative asset URLs that would break on a project page.
 - `npm run audit:release -- --json` reports which local release checks are ready and which public platform gates are still waiting.
-- `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` fails if the deployed page, judge-desk dynamic sample route entry, or its `sample=1` route is unavailable or looks like an error page.
+- `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` fails if the deployed page, judge-desk dynamic sample route entry, copyable evidence packet, or its `sample=1` route is unavailable or looks like an error page.
 - `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` creates the final copyable packet after public URL checks pass.
 - `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` creates the same packet with the built-in complete review route when a final route token has not been copied yet.
 - The exported `Gate Runbook` section orders the public app check, sample route check, exact Review link check, source repository check, app listing URL, demo post URL, media attachments, and final audit commands.

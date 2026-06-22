@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 10502,
-      "sha256": "d376fc7954d3f0b7bb21b257069480111355255480b5f5a7f63b5d88b57e4754"
+      "bytes": 10528,
+      "sha256": "eff51178a1c688474932f2dfa2fc1a90f835d406326a24d58f646bd0a71890c1"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 11839,
-      "sha256": "01a71a80b3ed3d88e231e034101136a98b5079992083f29dfea30074047d9dd4"
+      "bytes": 15935,
+      "sha256": "7d6a2181d46b588c57cd87df70dbe17f002863c4207e2656be3fc0c9bb5c30d9"
     },
     {
       "path": "docs/cover.png",
@@ -53,8 +53,8 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 16462,
-      "sha256": "6c4ef787387dd9bab543e56c25ee1c9edbf789b394c81390cee13ec6779d82fb"
+      "bytes": 16514,
+      "sha256": "b9dec6d961b7a0e1ed0814e9820b5854bbe70b6b0b26a23ce333b7c663bec65b"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -113,13 +113,13 @@
     },
     {
       "path": "scripts/audit-pages-build.mjs",
-      "bytes": 2314,
-      "sha256": "498dc007d2fcce1ec9d33da9c02fd1bb05a0d99407a83e02b781fcbe12027da7"
+      "bytes": 2394,
+      "sha256": "6ab0946eafd028e9f4d9ba9c8b2c20f2f637156e3b90f5bc46c26d4e30c9be7e"
     },
     {
       "path": "scripts/audit-public-url.mjs",
-      "bytes": 6762,
-      "sha256": "d9af6a8020ffaba307cfacf4b4a801e009799360e0a4b71d374b9e4fe38dd43b"
+      "bytes": 6842,
+      "sha256": "14c8ff3a785a93de313e7be62785086de1849cf869de5379844b08ae4d0e3341"
     },
     {
       "path": "scripts/audit-release-gates.mjs",

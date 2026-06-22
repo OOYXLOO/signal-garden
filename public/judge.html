@@ -187,6 +187,36 @@
         line-height: 1.55;
       }
 
+      .copy-packet {
+        display: grid;
+        gap: 12px;
+      }
+
+      .copy-packet textarea {
+        width: 100%;
+        min-height: 220px;
+        resize: vertical;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        background: rgba(4, 6, 8, 0.72);
+        color: #f7f1e6;
+        padding: 14px;
+        font: 0.9rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      }
+
+      .copy-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .copy-status {
+        color: #b9f1de;
+        font-size: 0.86rem;
+        min-height: 1.2em;
+      }
+
       @media (max-width: 840px) {
         .hero {
           min-height: 52vh;
@@ -318,6 +348,29 @@
           </div>
         </article>
 
+        <article class="panel full">
+          <h2>Submission Copy Packet</h2>
+          <div class="copy-packet">
+            <textarea data-evidence-packet readonly aria-label="Signal Garden public evidence packet">
+Signal Garden public evidence packet
+Public app: https://ooyxloo.github.io/signal-garden/
+Today's sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&amp;sample=1
+Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+Source repository: https://github.com/OOYXLOO/signal-garden
+Final captioned demo: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm
+Submission manifest: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-manifest.json
+Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md
+Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
+Developer feedback form pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md
+Safety boundary: public review only; no private credentials, tokens, payment data, or account-console evidence is required.
+            </textarea>
+            <div class="copy-row">
+              <button class="button" type="button" data-copy-evidence-packet>Copy evidence packet</button>
+              <span class="copy-status" data-copy-evidence-status aria-live="polite"></span>
+            </div>
+          </div>
+        </article>
+
         <article class="panel wide">
           <h2>Evidence Links</h2>
           <div class="links">
@@ -357,6 +410,36 @@
         url.searchParams.set("sample", "1");
         sampleRoute.href = url.toString();
         sampleRoute.textContent = `Open today's sample route (${day})`;
+
+        const packet = document.querySelector("[data-evidence-packet]");
+        if (packet) {
+          packet.value = [
+            "Signal Garden public evidence packet",
+            "Public app: https://ooyxloo.github.io/signal-garden/",
+            `Today's sample route: ${url.toString()}`,
+            "Judge desk: https://ooyxloo.github.io/signal-garden/judge.html",
+            "Source repository: https://github.com/OOYXLOO/signal-garden",
+            "Final captioned demo: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm",
+            "Submission manifest: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-manifest.json",
+            "Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md",
+            "Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md",
+            "Developer feedback form pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md",
+            "Safety boundary: public review only; no private credentials, tokens, payment data, or account-console evidence is required.",
+          ].join("\n");
+        }
+
+        const copyButton = document.querySelector("[data-copy-evidence-packet]");
+        const copyStatus = document.querySelector("[data-copy-evidence-status]");
+        copyButton?.addEventListener("click", async () => {
+          if (!packet) return;
+          try {
+            await navigator.clipboard.writeText(packet.value);
+            if (copyStatus) copyStatus.textContent = "Evidence packet copied.";
+          } catch {
+            packet.select();
+            if (copyStatus) copyStatus.textContent = "Select the text and copy manually.";
+          }
+        });
       })();
     </script>
   </body>
