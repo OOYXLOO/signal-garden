@@ -69,6 +69,15 @@ try {
   ]);
   assert.match(stdout, /# Signal Garden Public Submission Pack/);
   assert.match(stdout, /Public URL Audit/);
+  assert.match(stdout, /Gate Runbook/);
+  assert.match(stdout, /Open the public app URL/);
+  assert.match(stdout, /Open the sample route/);
+  assert.match(stdout, /Open the exact review link/);
+  assert.match(stdout, /Attach media in this order/);
+  assert.match(stdout, /npm run audit:public/);
+  assert.match(stdout, /--base-url 'http:\/\/127\.0\.0\.1:/);
+  assert.match(stdout, /--plan '2-2-b\.2-6-b'/);
+  assert.match(stdout, /npm run audit:submission/);
   assert.match(stdout, /Review link:/);
   assert.match(stdout, /day=2026-06-19/);
   assert.match(stdout, /plan=2-2-b\.2-6-b/);

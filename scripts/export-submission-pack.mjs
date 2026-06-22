@@ -95,6 +95,56 @@ function extractSection(markdown, heading) {
   return match[1].trim();
 }
 
+function psArg(value) {
+  return `'${String(value).replaceAll("'", "''")}'`;
+}
+
+function createGateRunbook({
+  publicAppUrl,
+  sampleRouteUrl,
+  reviewUrl,
+  appListingUrl,
+  demoPostUrl,
+  feedbackUrl,
+  day,
+  planToken,
+}) {
+  const submissionPackCommand = [
+    "npm run export:submission-pack --",
+    "--public-app-url",
+    psArg(publicAppUrl),
+    "--day",
+    psArg(day),
+    "--plan",
+    psArg(planToken),
+    "--app-listing-url",
+    psArg(appListingUrl),
+    "--demo-post-url",
+    psArg(demoPostUrl),
+    ...(feedbackUrl ? ["--feedback-url", psArg(feedbackUrl)] : []),
+  ].join(" ");
+  return [
+    "1. Open the public app URL and confirm the board, objective chips, reviewer panel, and submission readiness panel are visible.",
+    `   Evidence: ${publicAppUrl}`,
+    "2. Open the sample route and confirm it shows a labeled sample preview, top-route rationale, return map preview, and comment import loop.",
+    `   Evidence: ${sampleRouteUrl}`,
+    "3. Open the exact review link and confirm the route replays on the same daily board without localhost or account-only links.",
+    `   Evidence: ${reviewUrl}`,
+    "4. Paste the app listing URL only after the user-approved Devvit listing is public.",
+    `   Evidence: ${appListingUrl}`,
+    "5. Paste the public demo post URL only after the user-approved Reddit demo post is public.",
+    `   Evidence: ${demoPostUrl}`,
+    feedbackUrl
+      ? `6. Paste the platform feedback URL only if that target flow asks for it: ${feedbackUrl}`
+      : "6. Leave the feedback URL blank unless the target flow asks for a public platform feedback form.",
+    "7. Attach media in this order: cover, desktop preview, mobile preview, final captioned demo.",
+    "8. Re-run the final commands before submission and keep their output with the project notes:",
+    `   npm run audit:public -- --base-url ${psArg(publicAppUrl)} --day ${psArg(day)}`,
+    `   ${submissionPackCommand}`,
+    "   npm run audit:submission",
+  ].join("\n");
+}
+
 async function createSubmissionPack(options) {
   if (!options.day || !/^\d{4}-\d{2}-\d{2}$/.test(options.day)) {
     throw new Error("--day must be YYYY-MM-DD");
@@ -164,6 +214,16 @@ async function createSubmissionPack(options) {
   const socialLoop = extractSection(fieldPack, "What Makes It Social");
   const technicalHighlights = extractSection(fieldPack, "Technical Highlights");
   const demoChecklist = extractSection(fieldPack, "Demo Checklist");
+  const gateRunbook = createGateRunbook({
+    publicAppUrl: publicAppUrl.toString(),
+    sampleRouteUrl: publicAudit.sampleRouteUrl,
+    reviewUrl,
+    appListingUrl,
+    demoPostUrl,
+    feedbackUrl,
+    day: options.day,
+    planToken: options.plan,
+  });
 
   return [
     "# Signal Garden Public Submission Pack",
@@ -182,6 +242,10 @@ async function createSubmissionPack(options) {
     `- Base URL: HTTP ${publicAudit.baseStatus}, ${publicAudit.baseTitle || "untitled"}`,
     `- Sample route URL: HTTP ${publicAudit.sampleStatus}, ${publicAudit.sampleTitle || "untitled"}`,
     "- Localhost guard: passed by this command before generating the pack.",
+    "",
+    "## Gate Runbook",
+    "",
+    gateRunbook,
     "",
     "## Submission Fields",
     "",

@@ -36,7 +36,7 @@ Observed public requirements and signals on 2026-06-20:
 - `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
 - `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
 - `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, app listing URL, and demo post URL gates as ready, waiting, or blocked.
-- `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist.
+- `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist, including a Gate Runbook for the ordered public evidence pass.
 - `scripts/github-pages-release-check.ps1`: runs the local quality checks, can set the GitHub remote after the repository exists, can push the current branch, and can audit the public Pages URL after it is live.
 
 ## Local Verification Before Any User Gate
@@ -108,6 +108,7 @@ The browser build is ready for a repository-page path such as `https://<owner>.g
 - `npm run audit:release -- --json` reports which local release checks are ready and which public platform gates are still waiting.
 - `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` fails if the deployed page or its `sample=1` route is unavailable or looks like an error page.
 - `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` creates the final copyable packet after public URL checks pass.
+- The exported `Gate Runbook` section orders the public app check, sample route check, exact Review link check, app listing URL, demo post URL, media attachments, and final audit commands.
 
 ## User-Present Gates
 
@@ -142,6 +143,7 @@ Do not automate account login, human verification, private console pages, billin
 - Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
 - Final launch packet: use `npm run export:launch-packet -- --strict` after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, app listing, demo post, and route token exist.
+- Gate runbook: use the `Gate Runbook` section from the exported submission packet as the final public evidence checklist.
 - Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.
 - Demo post: add only after a user-approved public Reddit post exists.
 - App listing: add only after a user-approved Devvit listing exists.
@@ -173,6 +175,7 @@ Do not automate account login, human verification, private console pages, billin
 - The standard static build uses relative asset paths, avoiding root `/assets` assumptions on GitHub Pages project URLs.
 - The public URL audit passes for both the base app URL and the `sample=1` reviewer walkthrough URL.
 - The exported submission pack contains public URLs, submission fields, media assets, demo checklist, and launch packet copy.
+- The exported submission pack contains a Gate Runbook that keeps public evidence checks in the right order.
 - The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.
 - The demo media does not show private pages, credentials, tokens, account consoles, or billing screens.

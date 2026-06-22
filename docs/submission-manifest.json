@@ -48,13 +48,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 12448,
-      "sha256": "b2fdd852da83d86a79e8bf7f9ce986e7fa2537bc3e52dcae1b392ac44219dcb7"
+      "bytes": 12932,
+      "sha256": "63c9cabd8752e51fc876fbad9f8678d12607955a96796235384793e87127a8e6"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 10488,
-      "sha256": "8412845f14c9e55b77611251c23582d702fefe85adcd163b523730d66a3f346a"
+      "bytes": 11141,
+      "sha256": "e1b15b197dbfb7c179ac05da3fdabe728c239ae32d7edcae0fcf194c2679e0f7"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -88,8 +88,8 @@
     },
     {
       "path": "scripts/export-submission-pack.mjs",
-      "bytes": 7890,
-      "sha256": "80e8ed507bdc579afe215a4cf30cfdcc9eace52047ad6d82c3e2233d27be1fe1"
+      "bytes": 10191,
+      "sha256": "9d2117a04c47d5b62ea23ceb60d7844e64f71e525b3e478e46fe8af3d72e58f9"
     }
   ],
   "requiredLocalChecks": [
