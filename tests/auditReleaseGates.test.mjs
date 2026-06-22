@@ -12,6 +12,7 @@ assert.equal(safePublicUrl("https://ooyxloo.github.io/signal-garden/").status, "
 
 const result = await auditReleaseGates({
   publicAppUrl: "https://ooyxloo.github.io/signal-garden/",
+  sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
   appListingUrl: "https://developers.reddit.com/apps/signal-garden",
   demoPostUrl: "https://www.reddit.com/r/test/comments/signal_garden/",
 });
@@ -20,6 +21,7 @@ assert.equal(result.project, "signal-garden");
 assert.equal(result.ok, true);
 assert.ok(result.gates.some((gate) => gate.id === "branch" && gate.status === "ready"));
 assert.ok(result.gates.some((gate) => gate.id === "public-app-url" && gate.status === "ready"));
+assert.ok(result.gates.some((gate) => gate.id === "source-repo-url" && gate.status === "ready"));
 assert.ok(result.gates.some((gate) => gate.id === "app-listing-url" && gate.status === "ready"));
 assert.ok(result.gates.some((gate) => gate.id === "demo-post-url" && gate.status === "ready"));
 assert.ok(result.nextCommands.some((command) => command.includes("export:submission-pack")));
@@ -36,6 +38,7 @@ const cliResult = JSON.parse(stdout);
 assert.equal(cliResult.project, "signal-garden");
 assert.equal(cliResult.ok, true);
 assert.ok(cliResult.gates.some((gate) => gate.id === "public-app-url" && gate.status === "waiting"));
+assert.ok(cliResult.gates.some((gate) => gate.id === "source-repo-url" && gate.status === "waiting"));
 assert.ok(cliResult.gates.some((gate) => gate.id === "origin" && ["ready", "waiting"].includes(gate.status)));
 
 console.log("signal garden release gate audit tests passed");

@@ -40,6 +40,7 @@ function parseArgs(argv) {
     help: false,
     json: false,
     publicAppUrl: "",
+    sourceRepoUrl: "",
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -65,7 +66,7 @@ function helpText() {
   return [
     "Usage:",
     "  npm run audit:release -- --json",
-    "  npm run audit:release -- --public-app-url https://... --app-listing-url https://... --demo-post-url https://...",
+    "  npm run audit:release -- --public-app-url https://... --source-repo-url https://... --app-listing-url https://... --demo-post-url https://...",
     "",
     "Checks local release readiness and reports which public platform gates are still waiting.",
     "This command does not push, publish, submit, log in, or contact private account pages.",
@@ -119,6 +120,7 @@ async function auditReleaseGates(options = {}) {
     demoPostUrl: "",
     expectedRepo: "OOYXLOO/signal-garden",
     publicAppUrl: "",
+    sourceRepoUrl: "",
     ...options,
   };
   const failures = [];
@@ -162,6 +164,8 @@ async function auditReleaseGates(options = {}) {
 
   const publicApp = safePublicUrl(config.publicAppUrl);
   gates.push(createGate("public-app-url", "Public app URL", publicApp.status, publicApp.detail));
+  const sourceRepo = safePublicUrl(config.sourceRepoUrl);
+  gates.push(createGate("source-repo-url", "Source repository URL", sourceRepo.status, sourceRepo.detail));
   const listing = safePublicUrl(config.appListingUrl);
   gates.push(createGate("app-listing-url", "App listing URL", listing.status, listing.detail));
   const demoPost = safePublicUrl(config.demoPostUrl);
@@ -189,7 +193,7 @@ async function auditReleaseGates(options = {}) {
       "npm audit --audit-level=moderate",
       "powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 -SetOrigin -Push",
       "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
-      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
+      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
     ],
   };
 }

@@ -42,6 +42,8 @@ try {
     "2026-06-19",
     "--plan",
     "2-2-b.2-6-b",
+    "--source-repo-url",
+    "https://github.com/OOYXLOO/signal-garden",
     "--app-listing-url",
     "https://developers.reddit.com/apps/signal-garden",
     "--demo-post-url",
@@ -53,7 +55,7 @@ try {
   assert.ok(failure);
   assert.match(`${failure.stderr}${failure.stdout}`, /must be public/);
 
-  const { stdout } = await run(process.execPath, [
+  const missingSource = await run(process.execPath, [
     script,
     "--public-app-url",
     baseUrl,
@@ -66,6 +68,28 @@ try {
     "--demo-post-url",
     "https://www.reddit.com/r/test/comments/signal_garden/",
     "--allow-local",
+  ]).then(
+    () => null,
+    (error) => error,
+  );
+  assert.ok(missingSource);
+  assert.match(`${missingSource.stderr}${missingSource.stdout}`, /source repository URL is required/);
+
+  const { stdout } = await run(process.execPath, [
+    script,
+    "--public-app-url",
+    baseUrl,
+    "--day",
+    "2026-06-19",
+    "--plan",
+    "2-2-b.2-6-b",
+    "--source-repo-url",
+    "https://github.com/OOYXLOO/signal-garden",
+    "--app-listing-url",
+    "https://developers.reddit.com/apps/signal-garden",
+    "--demo-post-url",
+    "https://www.reddit.com/r/test/comments/signal_garden/",
+    "--allow-local",
   ]);
   assert.match(stdout, /# Signal Garden Public Submission Pack/);
   assert.match(stdout, /Public URL Audit/);
@@ -73,15 +97,19 @@ try {
   assert.match(stdout, /Open the public app URL/);
   assert.match(stdout, /Open the sample route/);
   assert.match(stdout, /Open the exact review link/);
+  assert.match(stdout, /Open the source repository/);
   assert.match(stdout, /Attach media in this order/);
   assert.match(stdout, /npm run audit:public/);
   assert.match(stdout, /--base-url 'http:\/\/127\.0\.0\.1:/);
   assert.match(stdout, /--plan '2-2-b\.2-6-b'/);
+  assert.match(stdout, /--source-repo-url 'https:\/\/github\.com\/OOYXLOO\/signal-garden'/);
   assert.match(stdout, /npm run audit:submission/);
   assert.match(stdout, /Review link:/);
+  assert.match(stdout, /Source repository: https:\/\/github\.com\/OOYXLOO\/signal-garden/);
   assert.match(stdout, /day=2026-06-19/);
   assert.match(stdout, /plan=2-2-b\.2-6-b/);
   assert.match(stdout, /Short Description/);
+  assert.match(stdout, /Source Repository/);
   assert.match(stdout, /Launch Packet/);
   assert.match(stdout, /Developer Platform Feedback/);
 } finally {

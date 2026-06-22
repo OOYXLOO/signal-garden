@@ -95,8 +95,13 @@ export async function createSubmissionManifest() {
       "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
     submissionPackCommand:
-      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
-    publicGatePlaceholders: ["public app listing URL", "public demo post URL", "public review URL"],
+      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
+    publicGatePlaceholders: [
+      "public source repository URL",
+      "public app listing URL",
+      "public demo post URL",
+      "public review URL",
+    ],
     guardrails: [
       "No private account pages or credentials in media.",
       "No localhost URLs in strict launch packet output.",

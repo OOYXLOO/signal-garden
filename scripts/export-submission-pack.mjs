@@ -20,6 +20,7 @@ function parseArgs(argv) {
     output: "",
     plan: "",
     publicAppUrl: "",
+    sourceRepoUrl: "",
     timeoutMs: 20_000,
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -44,7 +45,7 @@ function parseArgs(argv) {
 function helpText() {
   return [
     "Usage:",
-    "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --plan <token> --app-listing-url https://... --demo-post-url https://...",
+    "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --plan <token> --source-repo-url https://... --app-listing-url https://... --demo-post-url https://...",
     "",
     "Creates a copyable public submission packet after the public app URL exists.",
     "The command audits the public app URL and sample route before writing output.",
@@ -103,6 +104,7 @@ function createGateRunbook({
   publicAppUrl,
   sampleRouteUrl,
   reviewUrl,
+  sourceRepoUrl,
   appListingUrl,
   demoPostUrl,
   feedbackUrl,
@@ -117,6 +119,8 @@ function createGateRunbook({
     psArg(day),
     "--plan",
     psArg(planToken),
+    "--source-repo-url",
+    psArg(sourceRepoUrl),
     "--app-listing-url",
     psArg(appListingUrl),
     "--demo-post-url",
@@ -130,15 +134,17 @@ function createGateRunbook({
     `   Evidence: ${sampleRouteUrl}`,
     "3. Open the exact review link and confirm the route replays on the same daily board without localhost or account-only links.",
     `   Evidence: ${reviewUrl}`,
-    "4. Paste the app listing URL only after the user-approved Devvit listing is public.",
+    "4. Open the source repository and confirm the README, docs, demo media, and verification scripts are public or intentionally visible to reviewers.",
+    `   Evidence: ${sourceRepoUrl}`,
+    "5. Paste the app listing URL only after the user-approved Devvit listing is public.",
     `   Evidence: ${appListingUrl}`,
-    "5. Paste the public demo post URL only after the user-approved Reddit demo post is public.",
+    "6. Paste the public demo post URL only after the user-approved Reddit demo post is public.",
     `   Evidence: ${demoPostUrl}`,
     feedbackUrl
-      ? `6. Paste the platform feedback URL only if that target flow asks for it: ${feedbackUrl}`
-      : "6. Leave the feedback URL blank unless the target flow asks for a public platform feedback form.",
-    "7. Attach media in this order: cover, desktop preview, mobile preview, final captioned demo.",
-    "8. Re-run the final commands before submission and keep their output with the project notes:",
+      ? `7. Paste the platform feedback URL only if that target flow asks for it: ${feedbackUrl}`
+      : "7. Leave the feedback URL blank unless the target flow asks for a public platform feedback form.",
+    "8. Attach media in this order: cover, desktop preview, mobile preview, final captioned demo.",
+    "9. Re-run the final commands before submission and keep their output with the project notes:",
     `   npm run audit:public -- --base-url ${psArg(publicAppUrl)} --day ${psArg(day)}`,
     `   ${submissionPackCommand}`,
     "   npm run audit:submission",
@@ -161,6 +167,9 @@ async function createSubmissionPack(options) {
     throw new Error("--plan did not decode to a playable route for the selected day");
   }
   const publicAppUrl = normalizeBaseUrl(options.publicAppUrl, options.allowLocal);
+  const sourceRepoUrl = assertPublicHttpUrl("source repository URL", options.sourceRepoUrl, {
+    allowLocal: options.allowLocal,
+  });
   const appListingUrl = assertPublicHttpUrl("app listing URL", options.appListingUrl, {
     allowLocal: options.allowLocal,
   });
@@ -218,6 +227,7 @@ async function createSubmissionPack(options) {
     publicAppUrl: publicAppUrl.toString(),
     sampleRouteUrl: publicAudit.sampleRouteUrl,
     reviewUrl,
+    sourceRepoUrl,
     appListingUrl,
     demoPostUrl,
     feedbackUrl,
@@ -233,6 +243,7 @@ async function createSubmissionPack(options) {
     `- Public app: ${publicAppUrl.toString()}`,
     `- Sample route: ${publicAudit.sampleRouteUrl}`,
     `- Review link: ${reviewUrl}`,
+    `- Source repository: ${sourceRepoUrl}`,
     `- App listing: ${appListingUrl}`,
     `- Demo post: ${demoPostUrl}`,
     feedbackUrl ? `- Feedback form: ${feedbackUrl}` : "- Feedback form: add only if the target platform asks for it.",
@@ -260,6 +271,10 @@ async function createSubmissionPack(options) {
     "### Long Description",
     "",
     longDescription,
+    "",
+    "### Source Repository",
+    "",
+    sourceRepoUrl,
     "",
     "### What Makes It Social",
     "",
