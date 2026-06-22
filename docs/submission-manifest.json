@@ -48,8 +48,8 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 13227,
-      "sha256": "ce24fa15e049413b23607bbe0b06d1c0ed02b2c5baa458ff420ff882da1a4df7"
+      "bytes": 13338,
+      "sha256": "1c9b7d1920b8724277cc939585f9d3881db7174917907cb19f11b37a6e174819"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -83,8 +83,8 @@
     },
     {
       "path": "scripts/export-launch-packet.mjs",
-      "bytes": 5807,
-      "sha256": "dcb1686f7935ff34a32f96f00cb8b93d1a91a7f3d990860551f118174e5998bd"
+      "bytes": 6100,
+      "sha256": "017279c66f82edc16150e88a625edf23933612cced37bda589ceb4a30b2add22"
     },
     {
       "path": "scripts/export-submission-pack.mjs",
@@ -103,7 +103,7 @@
     "npm run audit:submission",
     "npm audit --audit-level=moderate"
   ],
-  "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
+  "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
   "publicGatePlaceholders": [

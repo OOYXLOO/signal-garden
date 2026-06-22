@@ -19,6 +19,7 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-submi
 assert.ok(manifest.evidence.every((entry) => typeof entry.bytes === "number" && entry.bytes > 0));
 assert.ok(manifest.evidence.every((entry) => /^[a-f0-9]{64}$/.test(entry.sha256)));
 assert.match(manifest.launchPacketCommand, /export:launch-packet/);
+assert.match(manifest.launchPacketCommand, /--source-repo-url/);
 assert.match(manifest.publicUrlAuditCommand, /audit:public/);
 assert.match(manifest.submissionPackCommand, /export:submission-pack/);
 assert.ok(manifest.requiredLocalChecks.includes("npm run audit:submission"));

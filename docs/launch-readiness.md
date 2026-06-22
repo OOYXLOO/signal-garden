@@ -73,7 +73,7 @@ The optional recording command should only target `127.0.0.1` and write generate
 After the user-approved app listing and public demo post exist, generate a final copyable launch packet with real public URLs:
 
 ```powershell
-npm run export:launch-packet -- --day 2026-06-21 --plan <review-plan-token> --review-base-url <public-app-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict
+npm run export:launch-packet -- --day 2026-06-21 --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict
 ```
 
 `--strict` fails if the route, review URL, app listing URL, or demo post URL is missing or points to localhost.
@@ -141,7 +141,7 @@ Do not automate account login, human verification, private console pages, billin
 - Demo discussion packet: copy the app launch packet after a complete route exists.
 - Reddit post draft: copy only after the user is ready to create a public demo post; the app generates text but does not post it.
 - Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
-- Final launch packet: use `npm run export:launch-packet -- --strict` after real public URLs exist.
+- Final launch packet: use `npm run export:launch-packet -- --strict` with public app, source repository, app listing, and demo post URLs after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, demo post, and route token exist.
 - Gate runbook: use the `Gate Runbook` section from the exported submission packet as the final public evidence checklist.
 - Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.

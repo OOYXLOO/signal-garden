@@ -94,6 +94,7 @@ const textExpectations = [
       "launch packet",
       "submission readiness",
       "export:launch-packet",
+      "--source-repo-url",
       "top route",
       "sample=1",
       "sample preview",
@@ -220,6 +221,9 @@ async function auditSubmissionManifest() {
   }
   if (!String(manifest.launchPacketCommand || "").includes("export:launch-packet")) {
     failures.push(`${manifestPath} missing launch packet command`);
+  }
+  if (!String(manifest.launchPacketCommand || "").includes("--source-repo-url")) {
+    failures.push(`${manifestPath} launch packet command missing source repo URL option`);
   }
   if (!String(manifest.publicUrlAuditCommand || "").includes("audit:public")) {
     failures.push(`${manifestPath} missing public URL audit command`);
