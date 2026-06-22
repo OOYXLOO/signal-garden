@@ -21,6 +21,7 @@ const evidenceFiles = [
   "docs/devpost-field-pack.md",
   "docs/criteria-fit.md",
   "docs/platform-feedback-pack.md",
+  "docs/submission-runbook.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
   "docs/devvit-readiness-report.md",
@@ -35,6 +36,7 @@ const evidenceFiles = [
   "scripts/export-platform-feedback.mjs",
   "scripts/export-demo-post.mjs",
   "scripts/export-devvit-readiness.mjs",
+  "scripts/export-submission-runbook.mjs",
 ];
 
 function parseArgs(argv) {
@@ -109,6 +111,7 @@ export async function createSubmissionManifest() {
       "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
     devvitReadinessCommand:
       "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
+    submissionRunbookCommand: "npm run export:submission-runbook -- --output docs/submission-runbook.md",
     devpostFieldsCommand:
       "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
     demoPostCommand:

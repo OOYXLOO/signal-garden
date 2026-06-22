@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 7321,
-      "sha256": "624fddc474cc96c6f5769339c91049d02e0a930fa52ed5b047712a20f8903421"
+      "bytes": 7456,
+      "sha256": "86b12a85db6a2190fca644a1ed3d80466421c76953d917b4dd8d9a9107b117c9"
     },
     {
       "path": "docs/cover.png",
@@ -75,6 +75,11 @@
       "path": "docs/platform-feedback-pack.md",
       "bytes": 9358,
       "sha256": "85acd55f07863a397ac90e4b7456fdd62b082749199f7d68ecc55f93efd5606c"
+    },
+    {
+      "path": "docs/submission-runbook.md",
+      "bytes": 4693,
+      "sha256": "94b6dd332b10e5bb7ac655aaea11fe6d4a2bffe5c988e9f81c18291c594735bf"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
@@ -145,6 +150,11 @@
       "path": "scripts/export-devvit-readiness.mjs",
       "bytes": 7877,
       "sha256": "92bebcdededbd67805e4791b82aac0aa5937638d749d36d7ef5c31b74c450593"
+    },
+    {
+      "path": "scripts/export-submission-runbook.mjs",
+      "bytes": 9352,
+      "sha256": "298489cac1faf04df3fa0c7987cbecfb349df5acbf5d02c4aa3a6f6498b08b76"
     }
   ],
   "requiredLocalChecks": [
@@ -162,6 +172,7 @@
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
+  "submissionRunbookCommand": "npm run export:submission-runbook -- --output docs/submission-runbook.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
   "demoPostCommand": "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",
   "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",

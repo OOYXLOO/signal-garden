@@ -18,7 +18,9 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/audit-public
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-submission-pack.mjs"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-demo-post.mjs"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-devvit-readiness.mjs"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-submission-runbook.mjs"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-readiness-report.md"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "docs/submission-runbook.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reddit-demo-post-draft.md"));
 assert.ok(manifest.evidence.every((entry) => typeof entry.bytes === "number" && entry.bytes > 0));
 assert.ok(manifest.evidence.every((entry) => /^[a-f0-9]{64}$/.test(entry.sha256)));
@@ -27,6 +29,7 @@ assert.match(manifest.launchPacketCommand, /--source-repo-url/);
 assert.match(manifest.publicUrlAuditCommand, /audit:public/);
 assert.match(manifest.demoPostCommand, /export:demo-post/);
 assert.match(manifest.devvitReadinessCommand, /export:devvit-readiness/);
+assert.match(manifest.submissionRunbookCommand, /export:submission-runbook/);
 assert.match(manifest.submissionPackCommand, /export:submission-pack/);
 assert.ok(manifest.requiredLocalChecks.includes("npm run audit:submission"));
 assert.ok(manifest.requiredLocalChecks.includes("npm run audit:pages"));
