@@ -18,6 +18,7 @@ const evidenceFiles = [
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "docs/platform-feedback-pack.md",
+  "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
   "docs/devvit_dependency_watch.md",
   "src/platformFeedback.js",
@@ -27,6 +28,7 @@ const evidenceFiles = [
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-pack.mjs",
   "scripts/export-platform-feedback.mjs",
+  "scripts/export-demo-post.mjs",
 ];
 
 function parseArgs(argv) {
@@ -99,6 +101,8 @@ export async function createSubmissionManifest() {
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
     platformFeedbackCommand:
       "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+    demoPostCommand:
+      "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",
     submissionPackCommand:
       "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
     publicGatePlaceholders: [

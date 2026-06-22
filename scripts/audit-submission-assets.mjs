@@ -15,6 +15,7 @@ const requiredFiles = [
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "docs/platform-feedback-pack.md",
+  "docs/reddit-demo-post-draft.md",
   "docs/devvit_dependency_watch.md",
   "scripts/audit-release-gates.mjs",
 ];
@@ -39,6 +40,22 @@ const textExpectations = [
       "Short Single-Field Version",
       "Medium Single-Field Version",
       "Long Single-Field Version",
+    ],
+  },
+  {
+    file: "docs/reddit-demo-post-draft.md",
+    fragments: [
+      "Signal Garden Reddit Demo Post Draft",
+      "Suggested Title",
+      "Suggested Body",
+      "Play the public build",
+      "Open today's review route",
+      "Source and evidence",
+      "Developer platform feedback pack",
+      "What I would love feedback on",
+      "Suggested First Comment",
+      "Suggested Venues",
+      "Safety Notes",
     ],
   },
   {
@@ -250,6 +267,9 @@ async function auditSubmissionManifest() {
   }
   if (!String(manifest.publicUrlAuditCommand || "").includes("audit:public")) {
     failures.push(`${manifestPath} missing public URL audit command`);
+  }
+  if (!String(manifest.demoPostCommand || "").includes("export:demo-post")) {
+    failures.push(`${manifestPath} missing demo post command`);
   }
   if (!String(manifest.submissionPackCommand || "").includes("export:submission-pack")) {
     failures.push(`${manifestPath} missing submission pack command`);

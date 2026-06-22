@@ -62,6 +62,11 @@
       "sha256": "cb6d53bb06452c6158d9cadd49ffe6c865abc25bfb54485b781d298a3878d955"
     },
     {
+      "path": "docs/reddit-demo-post-draft.md",
+      "bytes": 1701,
+      "sha256": "bf4d61840fda2297cacb7e41611e073188089fe5bf9a6394851b73178f59d0e6"
+    },
+    {
       "path": "docs/devvit_shell_readiness.md",
       "bytes": 4373,
       "sha256": "7e263c68d5664081242b47f423ccb937fe7785400a9ac2f81d6f5cbe9da04651"
@@ -105,6 +110,11 @@
       "path": "scripts/export-platform-feedback.mjs",
       "bytes": 4466,
       "sha256": "13a174896f37c7ef7e144e74e6f184ba511d0141312470a0ee7938972cf25fe2"
+    },
+    {
+      "path": "scripts/export-demo-post.mjs",
+      "bytes": 7378,
+      "sha256": "84d6b6690f5b04adc1fb723b7ae8e010c49bcd85fd79d6cad2989f80f907906e"
     }
   ],
   "requiredLocalChecks": [
@@ -121,6 +131,7 @@
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+  "demoPostCommand": "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",
   "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
   "publicGatePlaceholders": [
     "public source repository URL",
