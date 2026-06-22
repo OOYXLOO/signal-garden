@@ -18,16 +18,28 @@ Local prototype and Devvit shell validation. Current local board: 2026-06-22 Nor
 ## Actionability Matrix
 - Gap: Phaser static assets in Devvit WebView
   Impact: A browser build can pass locally but fail in a repository-page or WebView path when assets assume /assets from the domain root.
+  Evidence: Signal Garden needed a Devvit client build with relative asset paths, a Pages build audit, and a public sample route audit before the same app was safe to review from GitHub Pages and a WebView-shaped directory.
+  Reproduction: Build a Vite/Phaser app once with a root asset base and once with a relative base, then open splash.html and game.html from a nested static path.
   Recommendation: Publish a Vite/Phaser asset checklist with relative base paths, WebView path examples, and an audit command for generated bundles.
+  Acceptance criteria: A starter app can run the checklist, see whether generated HTML references root /assets, and fix the config before uploading.
 - Gap: Splash-to-expanded-game lifecycle
   Impact: Builders have to infer how the small entrypoint hands state, context, and fallback behavior to the full game.
+  Evidence: Signal Garden keeps a splash entrypoint, an expanded game entrypoint, a local game.html fallback, and tests for the Devvit-shaped message so the transition stays inspectable without private account state.
+  Reproduction: Open the splash shell locally, click the launch control, and compare the posted devvit-internal immersiveMode message with the browser fallback path.
   Recommendation: Document the message shape, route handoff, token/context boundaries, and local preview fallback in one minimal sample.
+  Acceptance criteria: A builder can copy one lifecycle sample and understand which values are platform-provided, which are app URLs, and what the local fallback should do.
 - Gap: Comments becoming game state
   Impact: The challenge rewards user contribution, but builders need an example of turning comment replies into validated, ranked game actions.
+  Evidence: Signal Garden parses route links and compact coordinate comments into proposals, recomputes score server-side, skips duplicates/cross-day links, and shows why the top route is leading.
+  Reproduction: Paste a sample route link or a compact route comment into the import flow and verify that the proposal appears in the ranked consensus list with skip reasons for invalid input.
   Recommendation: Add a comment parser example that validates a player route server-side, stores it, ranks it, and reflects a recap into the thread.
+  Acceptance criteria: An official example demonstrates reply parsing, validation, server-side scoring, persistence, ranking, and a recap payload.
 - Gap: Submission evidence handoff
   Impact: Game evidence is split between app listing, demo post, source repo, media, feedback, and Devpost fields.
+  Evidence: Signal Garden now exports a launch packet, Devpost field pack, demo post draft, platform feedback pack, Devvit readiness report, and submission manifest with hashes.
+  Reproduction: Run the export commands, then compare the generated URLs and hashes with the public judge desk and raw docs before final form submission.
   Recommendation: Provide a final submission packet template that names every public URL and media proof before the submit button is pressed.
+  Acceptance criteria: A final packet template lists the required public app, sample route, source repo, app listing, demo post, video/media, feedback, and manifest evidence fields.
 
 ## Feedback Summary
 The current resources are useful, but game builders still have to infer several critical integration steps between a local browser prototype, the expanded game entrypoint, public comment input, persistence, and final evidence handoff.

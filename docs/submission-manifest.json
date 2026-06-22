@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/platform-feedback-pack.md",
-      "bytes": 7216,
-      "sha256": "cb6d53bb06452c6158d9cadd49ffe6c865abc25bfb54485b781d298a3878d955"
+      "bytes": 9358,
+      "sha256": "85acd55f07863a397ac90e4b7456fdd62b082749199f7d68ecc55f93efd5606c"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
@@ -98,8 +98,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 9382,
-      "sha256": "8c513e879bb3ba048ea5821706ee9cb27c9397452405f34e831cabf46a6b8613"
+      "bytes": 11891,
+      "sha256": "82c9b422cd0d6ebd46e5a71e7483eab823fafdbcbfda3adfd6d960be50c4fbfc"
     },
     {
       "path": "scripts/audit-pages-build.mjs",

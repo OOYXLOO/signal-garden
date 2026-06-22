@@ -50,22 +50,46 @@ export function createPlatformFeedbackPack({
       {
         gap: "Phaser static assets in Devvit WebView",
         impact: "A browser build can pass locally but fail in a repository-page or WebView path when assets assume /assets from the domain root.",
+        evidence:
+          "Signal Garden needed a Devvit client build with relative asset paths, a Pages build audit, and a public sample route audit before the same app was safe to review from GitHub Pages and a WebView-shaped directory.",
+        reproduction:
+          "Build a Vite/Phaser app once with a root asset base and once with a relative base, then open splash.html and game.html from a nested static path.",
         recommendation: "Publish a Vite/Phaser asset checklist with relative base paths, WebView path examples, and an audit command for generated bundles.",
+        acceptanceCriteria:
+          "A starter app can run the checklist, see whether generated HTML references root /assets, and fix the config before uploading.",
       },
       {
         gap: "Splash-to-expanded-game lifecycle",
         impact: "Builders have to infer how the small entrypoint hands state, context, and fallback behavior to the full game.",
+        evidence:
+          "Signal Garden keeps a splash entrypoint, an expanded game entrypoint, a local game.html fallback, and tests for the Devvit-shaped message so the transition stays inspectable without private account state.",
+        reproduction:
+          "Open the splash shell locally, click the launch control, and compare the posted devvit-internal immersiveMode message with the browser fallback path.",
         recommendation: "Document the message shape, route handoff, token/context boundaries, and local preview fallback in one minimal sample.",
+        acceptanceCriteria:
+          "A builder can copy one lifecycle sample and understand which values are platform-provided, which are app URLs, and what the local fallback should do.",
       },
       {
         gap: "Comments becoming game state",
         impact: "The challenge rewards user contribution, but builders need an example of turning comment replies into validated, ranked game actions.",
+        evidence:
+          "Signal Garden parses route links and compact coordinate comments into proposals, recomputes score server-side, skips duplicates/cross-day links, and shows why the top route is leading.",
+        reproduction:
+          "Paste a sample route link or a compact route comment into the import flow and verify that the proposal appears in the ranked consensus list with skip reasons for invalid input.",
         recommendation: "Add a comment parser example that validates a player route server-side, stores it, ranks it, and reflects a recap into the thread.",
+        acceptanceCriteria:
+          "An official example demonstrates reply parsing, validation, server-side scoring, persistence, ranking, and a recap payload.",
       },
       {
         gap: "Submission evidence handoff",
         impact: "Game evidence is split between app listing, demo post, source repo, media, feedback, and Devpost fields.",
+        evidence:
+          "Signal Garden now exports a launch packet, Devpost field pack, demo post draft, platform feedback pack, Devvit readiness report, and submission manifest with hashes.",
+        reproduction:
+          "Run the export commands, then compare the generated URLs and hashes with the public judge desk and raw docs before final form submission.",
         recommendation: "Provide a final submission packet template that names every public URL and media proof before the submit button is pressed.",
+        acceptanceCriteria:
+          "A final packet template lists the required public app, sample route, source repo, app listing, demo post, video/media, feedback, and manifest evidence fields.",
       },
     ],
     feedbackSummary:
@@ -122,7 +146,10 @@ export function formatPlatformFeedbackPack(pack) {
     ...(pack.actionabilityMatrix || []).flatMap((item) => [
       `- Gap: ${item.gap}`,
       `  Impact: ${item.impact}`,
+      `  Evidence: ${item.evidence}`,
+      `  Reproduction: ${item.reproduction}`,
       `  Recommendation: ${item.recommendation}`,
+      `  Acceptance criteria: ${item.acceptanceCriteria}`,
     ]),
     "",
     "## Feedback Summary",
