@@ -244,8 +244,8 @@ export function createSubmissionReadiness({
       state: shareUrl ? "waiting" : "todo",
       ready: false,
       detail: shareUrl
-        ? "Add public app listing and public demo post URLs after platform gates."
-        : "Needs a route plus public app listing and demo post URLs after platform gates.",
+        ? "Add public source repository, app listing, and public demo post URLs after platform gates."
+        : "Needs a route plus public source repository, app listing, and demo post URLs after platform gates.",
     },
   ];
 

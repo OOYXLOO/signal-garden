@@ -28,6 +28,7 @@ const packet = createLaunchPacket({
   appListingUrl: "https://developers.reddit.com/apps/signal-garden",
   demoPostUrl: "https://reddit.com/r/test/comments/signal_garden",
   feedbackUrl: "https://forms.gle/example",
+  sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
 });
 
 assert.equal(packet.title, "Signal Garden 2026-06-19: Harbor loop");
@@ -51,6 +52,7 @@ assert.match(packet.dailyRecap, /Signal Garden 2026-06-19 recap/);
 const formatted = formatLaunchPacket(packet);
 assert.match(formatted, /# Signal Garden 2026-06-19: Harbor loop/);
 assert.match(formatted, /Demo post: https:\/\/reddit\.com\/r\/test\/comments\/signal_garden/);
+assert.match(formatted, /Source repository: https:\/\/github\.com\/OOYXLOO\/signal-garden/);
 assert.match(formatted, /App listing: https:\/\/developers\.reddit\.com\/apps\/signal-garden/);
 assert.match(formatted, /Review link: https:\/\/example\.test\/play/);
 assert.match(formatted, /## Why It Fits Reddit/);
@@ -67,5 +69,6 @@ assert.match(formatted, /Dependency hygiene/);
 
 const emptyRoutePacket = formatLaunchPacket(createLaunchPacket({ puzzle, result: null, plan: [], consensus: null }));
 assert.match(emptyRoutePacket, /create a route first/);
+assert.match(emptyRoutePacket, /Source repository: add after the public source repository exists/);
 
 console.log("signal garden launch packet tests passed");

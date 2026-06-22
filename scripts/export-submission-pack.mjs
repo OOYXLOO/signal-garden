@@ -215,6 +215,7 @@ async function createSubmissionPack(options) {
       appListingUrl,
       demoPostUrl,
       feedbackUrl,
+      sourceRepoUrl,
     }),
   );
   const fieldPack = await readFile(resolve(root, "docs/submission-field-pack.md"), "utf8");

@@ -53,8 +53,8 @@
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 11296,
-      "sha256": "f97920a03145ac6b5aa2494a8a967129e7003938432e0a4ce5d5525abcf9a371"
+      "bytes": 11358,
+      "sha256": "8329c812e50e839df320e5f4543510f600fffca62dd68138f424c9f381073ae4"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -88,8 +88,8 @@
     },
     {
       "path": "scripts/export-submission-pack.mjs",
-      "bytes": 10767,
-      "sha256": "6fba4b9b53b002a37a38eb782dd8b1b4bb69d2965eb713f445f7fc4626b9b8da"
+      "bytes": 10788,
+      "sha256": "5a1aaa5427309d5b6c07c92cd699ab2072fc78d1ddd411eb3a1990e9a9a23002"
     }
   ],
   "requiredLocalChecks": [

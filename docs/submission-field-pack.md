@@ -33,7 +33,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A submission readiness checklist summarizes the playable board, sample route, Review link, public app URL status, retention surface, contribution loop, launch packet, and remaining platform URL placeholders.
 - A gate runbook in the exported submission pack keeps the public app, sample route, exact Review link, source repository, app listing, demo post, media attachments, and final audit commands in a single execution order.
-- A launch packet combines the comment challenge, review snapshot, daily recap, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
+- A launch packet combines the comment challenge, review snapshot, daily recap, source repository placeholder, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
 - Contributors get a compact daily board based on complete routes and best score.
 - A daily recap can be copied back into a discussion thread.
 - The top route can be applied by the community.
@@ -65,7 +65,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Submission readiness generated from the current route, sample URL, Review link, return map, consensus, and launch packet state.
-- Launch packet generated from the current route, Review link, consensus, top route rationale, Reddit fit checks, and platform feedback notes.
+- Launch packet generated from the current route, Review link, consensus, top route rationale, source repository placeholder, Reddit fit checks, and platform feedback notes.
 - Strict launch packet CLI export for injecting public app listing, demo post, and review URLs after the platform gate.
 - GitHub Pages workflow plus artifact audit for publishing the static browser build from a repository-page path after the repository gate.
 - Public URL audit for checking the deployed app and `sample=1` reviewer walkthrough before a submission pass.

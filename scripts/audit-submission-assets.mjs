@@ -36,6 +36,7 @@ const textExpectations = [
       "comment challenge",
       "review snapshot",
       "launch packet",
+      "source repository placeholder",
       "launch packet CLI export",
       "submission readiness",
       "top route ghosting",

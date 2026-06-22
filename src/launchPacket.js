@@ -24,6 +24,7 @@ export function createLaunchPacket({
   appListingUrl = "",
   demoPostUrl = "",
   feedbackUrl = DEFAULT_FEEDBACK_URL,
+  sourceRepoUrl = "",
 } = {}) {
   if (!puzzle) {
     throw new Error("createLaunchPacket requires a puzzle");
@@ -57,6 +58,7 @@ export function createLaunchPacket({
     hook: "A daily mirror-routing relay where every player route can become the next community proposal.",
     demoPostUrl: compactLine(demoPostUrl),
     appListingUrl: compactLine(appListingUrl),
+    sourceRepoUrl: compactLine(sourceRepoUrl),
     feedbackUrl: compactLine(feedbackUrl),
     currentRoute: resultSummary(puzzle, result, plan),
     reviewLink: hasRoute ? shareUrl : "",
@@ -89,6 +91,9 @@ export function formatLaunchPacket(packet) {
     "",
     "## Demo Post Setup",
     packet.demoPostUrl ? `Demo post: ${packet.demoPostUrl}` : "Demo post: add after the public demo post exists.",
+    packet.sourceRepoUrl
+      ? `Source repository: ${packet.sourceRepoUrl}`
+      : "Source repository: add after the public source repository exists.",
     packet.appListingUrl ? `App listing: ${packet.appListingUrl}` : "App listing: add after the app listing exists.",
     "",
     "## Why It Fits Reddit",

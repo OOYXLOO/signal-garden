@@ -119,6 +119,7 @@ assert.match(readinessText, /Submission readiness/);
 assert.match(readinessText, /Sample route: preview/);
 assert.match(readinessText, /Public app URL: ready/);
 assert.match(readinessText, /Platform URLs: waiting/);
+assert.match(readinessText, /public source repository/);
 
 const draftReadiness = createSubmissionReadiness({
   puzzle,
