@@ -6,11 +6,15 @@ Players place a small number of mirrors on a shared board, guide a signal throug
 
 ## Reviewer Quickstart
 
+Public app: https://ooyxloo.github.io/signal-garden/
+
 1. Open the deployed app, or run the local dev server below.
 2. Use a sample route URL such as `?day=2026-06-19&sample=1` to load a complete review path without manual moves.
 3. Check the Reviewer loop panel for sample route, current review link, proposal ranking, and launch packet readiness.
 4. Load the sample comment thread to see linked routes and coordinate-only route comments become ranked proposals.
 5. Copy the Launch packet or Evidence receipt when a platform submission needs the public app, source repository, app listing, and demo post fields.
+
+See `docs/public-verification.md` for the current public deployment, source, and check status.
 
 ## Local Run
 
