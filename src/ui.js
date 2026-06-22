@@ -542,6 +542,7 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
     consensus,
     gardenLog,
     launchPacket: refs.launchPacket.value,
+    currentHref: window.location.href,
   });
   refs.submissionReadinessTitle.textContent = readiness.summary;
   refs.submissionReadinessOutput.value = formatSubmissionReadiness(readiness);

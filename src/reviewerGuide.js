@@ -131,6 +131,40 @@ function retentionReadiness(gardenLog) {
   );
 }
 
+function isPublicAppUrl(currentHref = "") {
+  if (!currentHref) {
+    return false;
+  }
+  try {
+    const url = new URL(currentHref);
+    const hostname = url.hostname.toLowerCase();
+    return (
+      url.protocol === "https:" &&
+      !["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(hostname) &&
+      !hostname.endsWith(".local") &&
+      !hostname.endsWith(".test") &&
+      !hostname.endsWith(".invalid")
+    );
+  } catch {
+    return false;
+  }
+}
+
+function publicAppReadiness(currentHref = "") {
+  if (isPublicAppUrl(currentHref)) {
+    const url = new URL(currentHref);
+    url.search = "";
+    url.hash = "";
+    return readinessState("Public app URL", true, `${url.toString()} is a public HTTPS app surface.`);
+  }
+  return {
+    label: "Public app URL",
+    state: "waiting",
+    ready: false,
+    detail: "Publish the static app through GitHub Pages or another HTTPS host before final submission.",
+  };
+}
+
 export function createSubmissionReadiness({
   puzzle,
   result,
@@ -140,6 +174,7 @@ export function createSubmissionReadiness({
   consensus = null,
   gardenLog = null,
   launchPacket = "",
+  currentHref = "",
 } = {}) {
   if (!puzzle) {
     throw new Error("createSubmissionReadiness requires a puzzle");
@@ -158,6 +193,7 @@ export function createSubmissionReadiness({
       "preview",
     ),
     routeReadiness(puzzle, result, plan),
+    publicAppReadiness(currentHref),
     retentionReadiness(gardenLog),
     consensusReadiness(consensus),
     readinessState(
@@ -166,12 +202,12 @@ export function createSubmissionReadiness({
       launchPacket ? "Copyable handoff is generated inside the app." : "Generate the launch packet after a board renders.",
     ),
     {
-      label: "Public URLs",
+      label: "Platform URLs",
       state: shareUrl ? "waiting" : "todo",
       ready: false,
       detail: shareUrl
-        ? "Add public app, app listing, and demo post URLs after platform gates."
-        : "Needs a route plus public app, listing, and demo post URLs after platform gates.",
+        ? "Add public app listing and public demo post URLs after platform gates."
+        : "Needs a route plus public app listing and demo post URLs after platform gates.",
     },
   ];
 

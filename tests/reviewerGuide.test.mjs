@@ -54,6 +54,7 @@ const readiness = createSubmissionReadiness({
   plan: puzzle.solution,
   shareUrl: "https://example.test/play?day=2026-06-19&plan=2-2-b.2-6-b",
   sampleRouteUrl: sampleUrl,
+  currentHref: "https://ooyxloo.github.io/signal-garden/?day=2026-06-19&sample=1",
   consensus: {
     completed: 1,
     proposalCount: 1,
@@ -66,34 +67,38 @@ const readiness = createSubmissionReadiness({
   gardenLog,
   launchPacket: "Signal Garden launch packet",
 });
-assert.equal(readiness.total, 7);
-assert.equal(readiness.readyCount, 6);
-assert.match(readiness.summary, /6\/7 surfaces ready/);
+assert.equal(readiness.total, 8);
+assert.equal(readiness.readyCount, 7);
+assert.match(readiness.summary, /7\/8 surfaces ready/);
 assert.deepEqual(
   readiness.items.map((item) => item.label),
   [
     "Playable board",
     "Sample route",
     "Current Review link",
+    "Public app URL",
     "Retention loop",
     "Contribution loop",
     "Launch packet",
-    "Public URLs",
+    "Platform URLs",
   ],
 );
 const readinessText = formatSubmissionReadiness(readiness);
 assert.match(readinessText, /Submission readiness/);
 assert.match(readinessText, /Sample route: preview/);
-assert.match(readinessText, /Public URLs: waiting/);
+assert.match(readinessText, /Public app URL: ready/);
+assert.match(readinessText, /Platform URLs: waiting/);
 
 const draftReadiness = createSubmissionReadiness({
   puzzle,
   result: null,
   plan: [],
   sampleRouteUrl: sampleUrl,
+  currentHref: "http://127.0.0.1:8796/?sample=1",
   gardenLog,
 });
 assert.equal(draftReadiness.readyCount, 3);
 assert.match(formatSubmissionReadiness(draftReadiness), /Trace a route before copying/);
+assert.match(formatSubmissionReadiness(draftReadiness), /Public app URL: waiting/);
 
 console.log("signal garden reviewer guide tests passed");

@@ -16,7 +16,7 @@ The current interface also includes a seven-day return map that shows complete, 
 The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, and a Devvit shell for pre-account validation.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
-The app now also includes a submission readiness checklist that keeps the playable board, sample route, Review link, return map, contribution loop, launch packet, and public URL placeholders visible in one compact handoff surface.
+The app now also includes a submission readiness checklist that keeps the playable board, sample route, Review link, public app URL status, return map, contribution loop, launch packet, and platform URL placeholders visible in one compact handoff surface.
 
 ## What Makes It Social
 
@@ -30,7 +30,7 @@ The app now also includes a submission readiness checklist that keeps the playab
 - A developer feedback draft packages setup notes, mobile WebView checks, public review-link flow, and comment-loop feedback for a later user-approved platform feedback pass.
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
-- A submission readiness checklist summarizes the playable board, sample route, Review link, retention surface, contribution loop, launch packet, and remaining public URL placeholders.
+- A submission readiness checklist summarizes the playable board, sample route, Review link, public app URL status, retention surface, contribution loop, launch packet, and remaining platform URL placeholders.
 - A launch packet combines the comment challenge, review snapshot, daily recap, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
 - Contributors get a compact daily board based on complete routes and best score.
 - A daily recap can be copied back into a discussion thread.
