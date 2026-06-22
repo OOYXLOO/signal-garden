@@ -48,13 +48,13 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 14116,
-      "sha256": "443649acb0a92a6764d52d0f4f5c5be4d403cf4617d5dce1389f3cefbe7597a6"
+      "bytes": 14783,
+      "sha256": "14303221ec4136b3efe5f3141da924cadd1a618ae4eea8d81c26cadd5ce05ff3"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 12005,
-      "sha256": "06f28791416b72c190aba446c46ee3a4735428302445885890fc9ab24f2fde8b"
+      "bytes": 12139,
+      "sha256": "3efd1bd3ec252136fcf2a3ff2bf742e0bcfec701619340345830b7e6148d09d8"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -88,8 +88,8 @@
     },
     {
       "path": "scripts/export-submission-pack.mjs",
-      "bytes": 11541,
-      "sha256": "ef1629659f5e4f2a8d09be8b3fa81191b296cd00a662608e3172ff3b4ebc8a6d"
+      "bytes": 11933,
+      "sha256": "45c6dfb3b7344f843a48c2600e36734057851de9c1973760b763f094830fae48"
     }
   ],
   "requiredLocalChecks": [
@@ -105,7 +105,7 @@
   ],
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
-  "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
+  "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
   "publicGatePlaceholders": [
     "public source repository URL",
     "public app listing URL",

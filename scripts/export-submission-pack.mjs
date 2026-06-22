@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { auditPublicUrl } from "./audit-public-url.mjs";
-import { createPuzzleForDayKey, decodePlanToken, traceSignal } from "../src/game/puzzle.js";
+import { createPuzzleForDayKey, decodePlanToken, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 import { summarizeConsensus } from "../src/game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "../src/launchPacket.js";
 import { createEvidenceReceipt, formatEvidenceReceipt } from "../src/reviewerGuide.js";
@@ -22,6 +22,7 @@ function parseArgs(argv) {
     output: "",
     plan: "",
     publicAppUrl: "",
+    sampleRoute: false,
     sourceRepoUrl: "",
     timeoutMs: 20_000,
   };
@@ -31,6 +32,8 @@ function parseArgs(argv) {
       options.help = true;
     } else if (arg === "--allow-local") {
       options.allowLocal = true;
+    } else if (arg === "--sample-route") {
+      options.sampleRoute = true;
     } else if (arg.startsWith("--")) {
       const key = arg.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
       if (!(key in options)) throw new Error(`Unknown option: ${arg}`);
@@ -48,6 +51,7 @@ function helpText() {
   return [
     "Usage:",
     "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --plan <token> --source-repo-url https://... --app-listing-url https://... --demo-post-url https://...",
+    "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --sample-route --source-repo-url https://... --app-listing-url https://... --demo-post-url https://...",
     "",
     "Creates a copyable public submission packet after the public app URL exists.",
     "The command audits the public app URL and sample route before writing output.",
@@ -157,17 +161,15 @@ async function createSubmissionPack(options) {
   if (!options.day || !/^\d{4}-\d{2}-\d{2}$/.test(options.day)) {
     throw new Error("--day must be YYYY-MM-DD");
   }
-  if (!options.plan) {
-    throw new Error("--plan is required");
-  }
   const puzzle = createPuzzleForDayKey(options.day);
   if (!puzzle) {
     throw new Error("--day must be a real date in YYYY-MM-DD format");
   }
-  const plan = decodePlanToken(options.plan, puzzle);
+  const plan = options.plan ? decodePlanToken(options.plan, puzzle) : options.sampleRoute ? puzzle.solution : [];
   if (!plan.length) {
-    throw new Error("--plan did not decode to a playable route for the selected day");
+    throw new Error("--plan did not decode to a playable route for the selected day; use --sample-route for the built-in review route");
   }
+  const planToken = options.plan || encodePlanToken(plan);
   const publicAppUrl = normalizeBaseUrl(options.publicAppUrl, options.allowLocal);
   const sourceRepoUrl = assertPublicHttpUrl("source repository URL", options.sourceRepoUrl, {
     allowLocal: options.allowLocal,
@@ -192,7 +194,7 @@ async function createSubmissionPack(options) {
     throw new Error(`public URL audit failed: ${publicAudit.failures.join("; ")}`);
   }
 
-  const reviewUrl = createReviewUrl(publicAppUrl, options.day, options.plan);
+  const reviewUrl = createReviewUrl(publicAppUrl, options.day, planToken);
   const result = traceSignal(puzzle, plan);
   const proposal = {
     id: "submission-pack-preview",
@@ -255,7 +257,7 @@ async function createSubmissionPack(options) {
     demoPostUrl,
     feedbackUrl,
     day: options.day,
-    planToken: options.plan,
+    planToken,
   });
 
   return [

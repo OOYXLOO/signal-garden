@@ -55,6 +55,7 @@ npm run audit:pages
 npm run audit:release
 npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>
 npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
+npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run audit:submission
 npm audit --audit-level=moderate
@@ -109,6 +110,7 @@ The browser build is ready for a repository-page path such as `https://<owner>.g
 - `npm run audit:release -- --json` reports which local release checks are ready and which public platform gates are still waiting.
 - `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` fails if the deployed page or its `sample=1` route is unavailable or looks like an error page.
 - `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` creates the final copyable packet after public URL checks pass.
+- `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` creates the same packet with the built-in complete review route when a final route token has not been copied yet.
 - The exported `Gate Runbook` section orders the public app check, sample route check, exact Review link check, source repository check, app listing URL, demo post URL, media attachments, and final audit commands.
 
 ## User-Present Gates
@@ -143,7 +145,7 @@ Do not automate account login, human verification, private console pages, billin
 - Reddit post draft: copy only after the user is ready to create a public demo post; the app generates text but does not post it.
 - Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
 - Final launch packet: use `npm run export:launch-packet -- --strict` with public app, source repository, app listing, and demo post URLs after real public URLs exist.
-- Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, demo post, and route token exist.
+- Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, and demo post exist; pass either a copied route token with `--plan` or the built-in complete review route with `--sample-route`.
 - Evidence receipt: copy the app receipt or the `Evidence Receipt` section from the exported submission pack as a compact reviewer proof block.
 - Gate runbook: use the `Gate Runbook` section from the exported submission packet as the final public evidence checklist.
 - Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.
