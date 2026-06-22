@@ -8,11 +8,13 @@ Last checked: 2026-06-22
 - GitHub Pages: https://ooyxloo.github.io/signal-garden/
 - Sample reviewer route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1
 
-## Current Public Head
+## Verified Source Baseline
 
 - Branch: `master`
-- Commit: `0bbab8eddeab39303894ab7ee1ed683800626252`
-- Commit message: `Sync lockfile for CI`
+- Baseline commit before this verification note: `0bbab8eddeab39303894ab7ee1ed683800626252`
+- Baseline commit message: `Sync lockfile for CI`
+
+The latest repository head is intentionally left to GitHub's commit history so this document does not become stale after documentation-only commits.
 
 ## Verified Checks
 
