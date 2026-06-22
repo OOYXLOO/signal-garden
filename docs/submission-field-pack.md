@@ -99,7 +99,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - After real public URLs exist, run the strict launch packet export before copying final submission text.
 - If using GitHub Pages as the public review surface, run `npm run build` and `npm run audit:pages` before the final URL pass.
 - After the public app URL exists, run `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>`.
-- After public app, app listing, demo post, and review route token exist, run `npm run export:submission-pack`.
+- After public app, source repository, app listing, demo post, and review route token exist, run `npm run export:submission-pack` with `--source-repo-url`.
 - Use the Gate Runbook section in the exported submission pack as the final public evidence checklist, including the source repository check.
 - Load or paste a comment thread with multiple Review links and show the imported routes plus skip reasons in consensus.
 - Show the contributor board and copy the daily recap.

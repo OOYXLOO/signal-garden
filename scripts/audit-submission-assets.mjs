@@ -46,6 +46,7 @@ const textExpectations = [
       "submission pack",
       "gate runbook",
       "source repository",
+      "After public app, source repository",
       "developer feedback draft",
       "dependency hygiene",
       "return map",
