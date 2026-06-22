@@ -124,8 +124,9 @@ async function main() {
     await page.locator("#import-route").click();
     await page.waitForFunction(() => document.querySelector("#proposal-summary")?.textContent.includes("Imported 2/4"));
     await page.waitForFunction(() => document.querySelector("#top-route-rationale span")?.textContent.includes("Why"));
+    await page.waitForFunction(() => document.querySelector("#contribution-quality-value")?.textContent.includes("100/100"));
     await showCaption(page, "Paste a review link from a comment: it becomes another scored community proposal.", durations.import);
-    await showCaption(page, "The top-route rationale, contributor board, and daily recap turn today's routes into a discussion loop.", durations.recap);
+    await showCaption(page, "Community quality scores the proof: route evidence, completed routes, contributor spread, and recap handoff.", durations.recap);
   }
   await page.locator("#clear-plan").click();
   await showCaption(page, "Clear the board: the top route ghost remains as the community target while the local draft resets.", durations.clear);
@@ -142,6 +143,7 @@ async function main() {
     status: document.querySelector("#status-value")?.textContent,
     summary: document.querySelector("#proposal-summary")?.textContent,
     rationale: document.querySelector("#top-route-rationale")?.textContent,
+    quality: document.querySelector("#contribution-quality")?.textContent,
     contributors: document.querySelector("#contributor-list")?.textContent,
     recap: document.querySelector("#daily-recap")?.value,
     briefing: document.querySelector("#briefing-output")?.value,
@@ -166,7 +168,13 @@ async function main() {
   if (state.rivalPlanLength <= 0) {
     throw new Error(`Missing top route ghost state: ${JSON.stringify(state)}`);
   }
-  if (final && (!state.contributors?.includes("alice") || !state.recap?.includes("Contributor lead") || !state.rationale?.includes("leads"))) {
+  if (
+    final &&
+    (!state.contributors?.includes("alice") ||
+      !state.recap?.includes("Contributor lead") ||
+      !state.rationale?.includes("leads") ||
+      !state.quality?.includes("100/100"))
+  ) {
     throw new Error(`Incomplete contributor recap state: ${JSON.stringify(state)}`);
   }
 
