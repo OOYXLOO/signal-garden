@@ -23,6 +23,7 @@ npm run build:devvit
 npm run audit:local
 npm run audit:devvit
 npm run audit:pages
+npm run audit:release
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run record:demo
 npm run export:launch-packet -- --help
@@ -73,6 +74,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
+- Release gate audit that reports local release readiness and marks public app, listing, demo post, and remote repository gates as ready, waiting, or blocked.
 - Submission pack export that combines public URL checks, submission fields, media checklist, and launch packet copy.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.

@@ -15,6 +15,7 @@ const requiredFiles = [
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
   "docs/devvit_dependency_watch.md",
+  "scripts/audit-release-gates.mjs",
 ];
 
 const pngExpectations = [
@@ -95,6 +96,7 @@ const textExpectations = [
       "Static Review Surface",
       "audit:pages",
       "audit:public",
+      "audit:release",
       "export:submission-pack",
       "developer feedback draft",
       "return map",

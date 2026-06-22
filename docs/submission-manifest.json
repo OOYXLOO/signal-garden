@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 7696,
-      "sha256": "7dfe43fc51273a08d47f0ea4adcf595a45eba0ee8b34281ac66f6b013095d1fb"
+      "bytes": 7877,
+      "sha256": "aebcf363bbfbf1145c4c6df201d28e99f774381571d0d7e7e80c1364d73856f7"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -38,8 +38,8 @@
     },
     {
       "path": "docs/demo-script.md",
-      "bytes": 4144,
-      "sha256": "38e9ed9a43638fe123110c9af212ef3059ec28f0aac97f7aa5809739902ad343"
+      "bytes": 4154,
+      "sha256": "1e133d1f065e3d9c6a29fd8b4f9e8d7a7580cb010a891e568c4971a780c89aea"
     },
     {
       "path": "docs/gallery_assets.md",
@@ -48,8 +48,8 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 12093,
-      "sha256": "7373a8d6a87f953ce88353864a82a689d12de568ddd68f9594433cb56073fa6f"
+      "bytes": 12448,
+      "sha256": "b2fdd852da83d86a79e8bf7f9ce986e7fa2537bc3e52dcae1b392ac44219dcb7"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -77,6 +77,11 @@
       "sha256": "177025cc13a18b1d40f7660530aacf997f5a02af9e1a791028997fdc39cf349f"
     },
     {
+      "path": "scripts/audit-release-gates.mjs",
+      "bytes": 8097,
+      "sha256": "3d475530677383d29ec6d3e7c61bf9850c9ecb1e1cfcb79ddcd8d396a6669626"
+    },
+    {
       "path": "scripts/export-launch-packet.mjs",
       "bytes": 5807,
       "sha256": "dcb1686f7935ff34a32f96f00cb8b93d1a91a7f3d990860551f118174e5998bd"
@@ -94,6 +99,7 @@
     "npm run audit:local",
     "npm run audit:devvit",
     "npm run audit:pages",
+    "npm run audit:release",
     "npm run audit:submission",
     "npm audit --audit-level=moderate"
   ],

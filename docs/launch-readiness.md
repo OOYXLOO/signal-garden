@@ -35,6 +35,7 @@ Observed public requirements and signals on 2026-06-20:
 - `.github/workflows/deploy-pages.yml`: GitHub Pages deployment workflow for the static browser build.
 - `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
 - `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
+- `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, app listing URL, and demo post URL gates as ready, waiting, or blocked.
 - `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist.
 - `scripts/github-pages-release-check.ps1`: runs the local quality checks, can set the GitHub remote after the repository exists, can push the current branch, and can audit the public Pages URL after it is live.
 
@@ -50,6 +51,7 @@ npm run audit:local
 npm run audit:devvit
 npm run build
 npm run audit:pages
+npm run audit:release
 npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>
 npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
@@ -103,6 +105,7 @@ The browser build is ready for a repository-page path such as `https://<owner>.g
 - `vite.config.js` uses relative asset paths for the standard static build.
 - `.github/workflows/deploy-pages.yml` builds `dist/` and deploys it through GitHub Pages when the repository is configured for GitHub Actions Pages.
 - `npm run audit:pages` fails if `dist/index.html` contains root-relative asset URLs that would break on a project page.
+- `npm run audit:release -- --json` reports which local release checks are ready and which public platform gates are still waiting.
 - `npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>` fails if the deployed page or its `sample=1` route is unavailable or looks like an error page.
 - `npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>` creates the final copyable packet after public URL checks pass.
 
@@ -120,7 +123,7 @@ These steps require the account owner to be present and approving each action:
 8. Upload or attach public media assets.
 9. Submit the Devpost entry.
 
-Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC, or settings changes.
+Do not automate account login, human verification, private console pages, billing, identity checks, or settings changes.
 
 ## Submission Field Mapping
 

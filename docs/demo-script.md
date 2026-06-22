@@ -61,4 +61,4 @@ Daily Phaser puzzle with seven verified board templates, objective progress, rou
 
 - Keep public project fields focused on the game, community loop, and technical implementation.
 - Do not claim a live Reddit deployment until the account owner completes the Devvit/Reddit gate.
-- Do not include private account pages, tokens, cookies, billing pages, or console screenshots in the video.
+- Do not include private account pages, credentials, session data, billing pages, or console screenshots in the video.

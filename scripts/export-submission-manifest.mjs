@@ -21,6 +21,7 @@ const evidenceFiles = [
   "docs/devvit_dependency_watch.md",
   "scripts/audit-pages-build.mjs",
   "scripts/audit-public-url.mjs",
+  "scripts/audit-release-gates.mjs",
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-pack.mjs",
 ];
@@ -86,6 +87,7 @@ export async function createSubmissionManifest() {
       "npm run audit:local",
       "npm run audit:devvit",
       "npm run audit:pages",
+      "npm run audit:release",
       "npm run audit:submission",
       "npm audit --audit-level=moderate",
     ],
