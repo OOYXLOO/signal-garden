@@ -86,6 +86,10 @@ function sampleRouteUrl(baseUrl, day) {
   return url;
 }
 
+function judgeDeskUrl(baseUrl) {
+  return new URL("judge.html", baseUrl);
+}
+
 async function fetchText(url, timeoutMs) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -131,11 +135,14 @@ export async function auditPublicUrl(options) {
   const day = validateDay(options.day);
   const baseUrl = normalizeBaseUrl(options.baseUrl, options);
   const reviewUrl = sampleRouteUrl(baseUrl, day);
+  const judgeUrl = judgeDeskUrl(baseUrl);
   const base = await fetchText(baseUrl, options.timeoutMs);
   const sample = await fetchText(reviewUrl, options.timeoutMs);
+  const judge = await fetchText(judgeUrl, options.timeoutMs);
   const failures = [
     ...auditHtml("base URL", base),
     ...auditHtml("sample route URL", sample),
+    ...auditHtml("judge desk URL", judge),
   ];
 
   if (sample.finalUrl.includes("plan=")) {
@@ -147,15 +154,30 @@ export async function auditPublicUrl(options) {
   if (reviewUrl.searchParams.get("day") !== day) {
     failures.push("sample route URL missing requested day");
   }
+  for (const fragment of [
+    "Signal Garden",
+    "Judge Desk",
+    "Open sample route",
+    "demo-final-captioned.webm",
+    "submission-manifest.json",
+    "https://github.com/OOYXLOO/signal-garden",
+  ]) {
+    if (!judge.text.includes(fragment)) {
+      failures.push(`judge desk URL missing text: ${fragment}`);
+    }
+  }
 
   return {
     ok: failures.length === 0,
     baseUrl: baseUrl.toString(),
     sampleRouteUrl: reviewUrl.toString(),
+    judgeDeskUrl: judgeUrl.toString(),
     baseStatus: base.status,
     sampleStatus: sample.status,
+    judgeStatus: judge.status,
     baseTitle: base.title,
     sampleTitle: sample.title,
+    judgeTitle: judge.title,
     failures,
   };
 }
@@ -172,6 +194,7 @@ async function main() {
   } else if (result.ok) {
     console.log(`PASS public base URL ${result.baseStatus}: ${result.baseUrl}`);
     console.log(`PASS public sample route ${result.sampleStatus}: ${result.sampleRouteUrl}`);
+    console.log(`PASS public judge desk ${result.judgeStatus}: ${result.judgeDeskUrl}`);
   }
   if (!result.ok) {
     for (const failure of result.failures) {

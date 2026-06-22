@@ -12,7 +12,7 @@ function listen(server) {
   });
 }
 
-const html = [
+const appHtml = [
   "<!doctype html>",
   "<html>",
   "<head>",
@@ -26,9 +26,28 @@ const html = [
   "</html>",
 ].join("");
 
+const judgeHtml = [
+  "<!doctype html>",
+  "<html>",
+  "<head>",
+  "<title>Signal Garden Judge Desk</title>",
+  '<link rel="icon" href="./favicon.svg">',
+  "</head>",
+  "<body>",
+  "<main>",
+  "<h1>Signal Garden Judge Desk</h1>",
+  "<a>Open sample route</a>",
+  "<a>https://github.com/OOYXLOO/signal-garden</a>",
+  "<a>demo-final-captioned.webm</a>",
+  "<a>submission-manifest.json</a>",
+  "</main>",
+  "</body>",
+  "</html>",
+].join("");
+
 const server = createServer((request, response) => {
   response.writeHead(200, { "content-type": "text/html; charset=utf-8" });
-  response.end(html);
+  response.end(request.url.includes("judge.html") ? judgeHtml : appHtml);
 });
 
 const address = await listen(server);
@@ -55,8 +74,10 @@ try {
   assert.equal(result.ok, true);
   assert.equal(result.baseStatus, 200);
   assert.equal(result.sampleStatus, 200);
+  assert.equal(result.judgeStatus, 200);
   assert.match(result.sampleRouteUrl, /day=2026-06-19/);
   assert.match(result.sampleRouteUrl, /sample=1/);
+  assert.match(result.judgeDeskUrl, /judge\.html$/);
   assert.equal(result.failures.length, 0);
 } finally {
   server.close();

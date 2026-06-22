@@ -8,13 +8,18 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 9474,
-      "sha256": "eae19293c373032dd3b0c23988722dc972f8bf280d6996d1384a8762fc692181"
+      "bytes": 9722,
+      "sha256": "647de4107428b95ba87e1411ce91a5fdeb48063dfe644c3a7e09b1b72d3df247"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
       "bytes": 1102,
       "sha256": "a1843b8aa4d489a6f0da7160ba714f6715580e4e81f1bd7b982da5bd703810b2"
+    },
+    {
+      "path": "public/judge.html",
+      "bytes": 6912,
+      "sha256": "9c6c3db2805d99700ac724ff72cbf996a80b7e352497934c770662ebfe83cd36"
     },
     {
       "path": "docs/cover.png",
@@ -83,13 +88,13 @@
     },
     {
       "path": "scripts/audit-pages-build.mjs",
-      "bytes": 1397,
-      "sha256": "972006addcf8000267a99b375e24837ee19d1f2dc62a4db467a8ac18b5a96b3e"
+      "bytes": 2062,
+      "sha256": "48bbce9950340ea623969b3457aa1ce496640938a71c00a482d4ae5246f12afd"
     },
     {
       "path": "scripts/audit-public-url.mjs",
-      "bytes": 5704,
-      "sha256": "177025cc13a18b1d40f7660530aacf997f5a02af9e1a791028997fdc39cf349f"
+      "bytes": 6444,
+      "sha256": "093505dc7334e1d942828115c9d7a06e3a9066e9f070a1256147f026567b8417"
     },
     {
       "path": "scripts/audit-release-gates.mjs",

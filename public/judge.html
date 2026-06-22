@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal Garden Judge Desk</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #111317;
+        color: #f3f0e8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          linear-gradient(180deg, rgba(40, 52, 55, 0.92), rgba(17, 19, 23, 0.98)),
+          url("https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/cover.png") center top /
+            min(100vw, 1200px) auto no-repeat;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(1120px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+
+      .hero {
+        min-height: 58vh;
+        display: grid;
+        align-content: end;
+        padding: 12vh 0 40px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #8be4d2;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin: 0;
+        font-size: clamp(2.35rem, 6vw, 4.8rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 720px;
+        margin: 18px 0 0;
+        color: #ddd7c7;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff9ed;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        background: #dfe96f;
+        border-color: #dfe96f;
+        color: #15170f;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .panel {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        background: rgba(15, 18, 21, 0.82);
+        padding: 18px;
+      }
+
+      .panel h2 {
+        margin: 0 0 12px;
+        font-size: 1rem;
+        letter-spacing: 0;
+      }
+
+      .panel p,
+      .panel li {
+        color: #d9d2c3;
+        font-size: 0.94rem;
+        line-height: 1.62;
+      }
+
+      .panel p {
+        margin: 0;
+      }
+
+      .panel ul,
+      .panel ol {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+
+      .links {
+        display: grid;
+        gap: 8px;
+      }
+
+      .links a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.07);
+        text-decoration: none;
+      }
+
+      .links a:hover,
+      .button:hover {
+        outline: 2px solid rgba(139, 228, 210, 0.65);
+        outline-offset: 2px;
+      }
+
+      .wide {
+        grid-column: span 2;
+      }
+
+      @media (max-width: 840px) {
+        .hero {
+          min-height: 52vh;
+          padding-top: 18vh;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .wide {
+          grid-column: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Judge Desk</p>
+        <h1 id="page-title">Signal Garden</h1>
+        <p class="lede">
+          Daily community relay puzzle for reviewing a playable Phaser build, shareable route evidence,
+          comment-thread contribution flow, and a Devvit-shaped migration boundary from one public desk.
+        </p>
+        <nav class="actions" aria-label="Primary review links">
+          <a class="button primary" href="./">Play public app</a>
+          <a class="button" href="./?day=2026-06-22&amp;sample=1">Open sample route</a>
+          <a class="button" href="https://github.com/OOYXLOO/signal-garden">Review source</a>
+        </nav>
+      </section>
+
+      <section class="grid" aria-label="Review evidence">
+        <article class="panel">
+          <h2>First Minute</h2>
+          <ol>
+            <li>Open the public app.</li>
+            <li>Use the sample route for a solved board.</li>
+            <li>Check the first-session guide and reviewer loop.</li>
+            <li>Copy the launch packet or evidence receipt.</li>
+          </ol>
+        </article>
+
+        <article class="panel">
+          <h2>What To Verify</h2>
+          <ul>
+            <li>Daily puzzle is deterministic by date.</li>
+            <li>Review links reopen the same route.</li>
+            <li>Comment routes become ranked proposals.</li>
+            <li>Top route ghost and rationale are visible.</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h2>Current Boundaries</h2>
+          <p>
+            The public build does not require production credentials, private account data, payment data,
+            or platform tokens. Live platform posting remains an external handoff.
+          </p>
+        </article>
+
+        <article class="panel wide">
+          <h2>Evidence Links</h2>
+          <div class="links">
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm">Final captioned demo WebM</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-manifest.json">Submission manifest with hashes</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-script.md">Demo script and final caption</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/launch-readiness.md">Launch readiness checklist</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/reddit-demo-post-draft.md">Reddit demo post handoff draft</a>
+            <a href="https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md">Platform feedback handoff pack</a>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Submission Status</h2>
+          <p>
+            Public app, sample route, source repository, final demo, and manifest are ready for review.
+            App listing, public demo post, and final platform form URLs are filled after external posting.
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

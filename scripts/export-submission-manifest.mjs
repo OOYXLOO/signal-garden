@@ -9,6 +9,7 @@ const root = resolve(dirname(scriptPath), "..");
 const evidenceFiles = [
   "README.md",
   ".github/workflows/deploy-pages.yml",
+  "public/judge.html",
   "docs/cover.png",
   "docs/desktop-preview.png",
   "docs/mobile-preview.png",

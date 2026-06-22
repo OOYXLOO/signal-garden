@@ -6,6 +6,7 @@ const root = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "
 
 const requiredFiles = [
   "docs/submission-manifest.json",
+  "public/judge.html",
   "docs/cover.png",
   "docs/desktop-preview.png",
   "docs/mobile-preview.png",
@@ -27,6 +28,20 @@ const pngExpectations = [
 ];
 
 const textExpectations = [
+  {
+    file: "public/judge.html",
+    fragments: [
+      "Signal Garden Judge Desk",
+      "Play public app",
+      "Open sample route",
+      "Review source",
+      "demo-final-captioned.webm",
+      "submission-manifest.json",
+      "launch-readiness.md",
+      "reddit-demo-post-draft.md",
+      "platform-feedback-pack.md",
+    ],
+  },
   {
     file: "docs/platform-feedback-pack.md",
     fragments: [

@@ -12,7 +12,7 @@ function listen(server) {
   });
 }
 
-const html = [
+const appHtml = [
   "<!doctype html>",
   "<html>",
   "<head>",
@@ -26,9 +26,28 @@ const html = [
   "</html>",
 ].join("");
 
+const judgeHtml = [
+  "<!doctype html>",
+  "<html>",
+  "<head>",
+  "<title>Signal Garden Judge Desk</title>",
+  '<link rel="icon" href="./favicon.svg">',
+  "</head>",
+  "<body>",
+  "<main>",
+  "<h1>Signal Garden Judge Desk</h1>",
+  "<a>Open sample route</a>",
+  "<a>https://github.com/OOYXLOO/signal-garden</a>",
+  "<a>demo-final-captioned.webm</a>",
+  "<a>submission-manifest.json</a>",
+  "</main>",
+  "</body>",
+  "</html>",
+].join("");
+
 const server = createServer((request, response) => {
   response.writeHead(200, { "content-type": "text/html; charset=utf-8" });
-  response.end(html);
+  response.end(request.url.includes("judge.html") ? judgeHtml : appHtml);
 });
 const address = await listen(server);
 const baseUrl = `http://127.0.0.1:${address.port}/signal-garden/`;

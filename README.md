@@ -14,6 +14,8 @@ Public app: https://ooyxloo.github.io/signal-garden/
 4. Load the sample comment thread to see linked routes and coordinate-only route comments become ranked proposals.
 5. Copy the Launch packet or Evidence receipt when a platform submission needs the public app, source repository, app listing, and demo post fields.
 
+For a one-page public review desk, open `https://ooyxloo.github.io/signal-garden/judge.html`.
+
 See `docs/public-verification.md` for the current public deployment, source, and check status.
 
 ## Local Run
@@ -90,6 +92,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Platform feedback CLI export for preparing user-approved developer/platform feedback after the public app URL exists.
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
+- Public judge desk that links the playable app, sample route, source repository, final captioned demo, manifest, and handoff docs from one static page.
 - Release gate audit that reports local release readiness and marks public app, source repository, listing, demo post, and remote repository gates as ready, waiting, or blocked.
 - Submission pack export that combines public URL checks, source repository evidence, submission fields, media checklist, launch packet copy, and an optional built-in sample review route.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
