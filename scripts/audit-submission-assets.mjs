@@ -105,6 +105,7 @@ const textExpectations = [
       "export:submission-pack",
       "Gate Runbook",
       "source repository",
+      "inferred from origin",
       "developer feedback draft",
       "return map",
       "sample week preview",

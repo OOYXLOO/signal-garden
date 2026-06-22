@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { auditReleaseGates, formatText, safePublicUrl } from "../scripts/audit-release-gates.mjs";
+import { auditReleaseGates, formatText, safePublicUrl, sourceRepoUrlFromOrigin } from "../scripts/audit-release-gates.mjs";
 
 const run = promisify(execFile);
 const script = new URL("../scripts/audit-release-gates.mjs", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
@@ -9,6 +9,11 @@ const script = new URL("../scripts/audit-release-gates.mjs", import.meta.url).pa
 assert.deepEqual(safePublicUrl(""), { status: "waiting", detail: "not supplied yet" });
 assert.equal(safePublicUrl("http://127.0.0.1:8796/").status, "blocked");
 assert.equal(safePublicUrl("https://ooyxloo.github.io/signal-garden/").status, "ready");
+assert.equal(
+  sourceRepoUrlFromOrigin("https://github.com/OOYXLOO/signal-garden.git", "OOYXLOO/signal-garden"),
+  "https://github.com/OOYXLOO/signal-garden",
+);
+assert.equal(sourceRepoUrlFromOrigin("git@github.com:OOYXLOO/signal-garden.git"), "https://github.com/OOYXLOO/signal-garden");
 
 const result = await auditReleaseGates({
   publicAppUrl: "https://ooyxloo.github.io/signal-garden/",

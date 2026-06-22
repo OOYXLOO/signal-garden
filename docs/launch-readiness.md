@@ -35,7 +35,7 @@ Observed public requirements and signals on 2026-06-20:
 - `.github/workflows/deploy-pages.yml`: GitHub Pages deployment workflow for the static browser build.
 - `scripts/audit-pages-build.mjs`: checks that the built static artifact uses project-page-safe relative asset paths.
 - `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
-- `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, source repository URL, app listing URL, and demo post URL gates as ready, waiting, or blocked.
+- `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, source repository URL, app listing URL, and demo post URL gates as ready, waiting, or blocked. If `origin` points to the expected GitHub repository, the source repository URL is inferred from origin.
 - `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist, including a Gate Runbook for the ordered public evidence pass.
 - `scripts/github-pages-release-check.ps1`: runs the local quality checks, can set the GitHub remote after the repository exists, can push the current branch, and can audit the public Pages URL after it is live.
 

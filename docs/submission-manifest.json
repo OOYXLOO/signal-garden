@@ -48,8 +48,8 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 13338,
-      "sha256": "1c9b7d1920b8724277cc939585f9d3881db7174917907cb19f11b37a6e174819"
+      "bytes": 13443,
+      "sha256": "4e59838db7a1532be87f460aedd177a4cf66888b6771d77ccde26ac3782a0012"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -78,8 +78,8 @@
     },
     {
       "path": "scripts/audit-release-gates.mjs",
-      "bytes": 8382,
-      "sha256": "e2d5ec1f99962e37c58c640b82689b36bb2de158d9cc835534e30ceeba0693a0"
+      "bytes": 9382,
+      "sha256": "36de92e25bd73cfb3cefa53ec3eb5d83e4fa890468a33b18a58082199116f9ed"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
