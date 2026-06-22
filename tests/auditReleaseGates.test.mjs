@@ -30,6 +30,7 @@ assert.ok(result.gates.some((gate) => gate.id === "source-repo-url" && gate.stat
 assert.ok(result.gates.some((gate) => gate.id === "app-listing-url" && gate.status === "ready"));
 assert.ok(result.gates.some((gate) => gate.id === "demo-post-url" && gate.status === "ready"));
 assert.ok(result.nextCommands.some((command) => command.includes("export:submission-pack")));
+assert.ok(result.nextCommands.some((command) => command.includes("--sample-route")));
 assert.match(formatText(result), /PASS release gate audit/);
 
 const localResult = await auditReleaseGates({
