@@ -4,6 +4,14 @@ Signal Garden is a daily community relay puzzle prototype built with Phaser.
 
 Players place a small number of mirrors on a shared board, guide a signal through three beacons, and copy a compact briefing that can be used for community discussion or a later platform adapter.
 
+## Reviewer Quickstart
+
+1. Open the deployed app, or run the local dev server below.
+2. Use a sample route URL such as `?day=2026-06-19&sample=1` to load a complete review path without manual moves.
+3. Check the Reviewer loop panel for sample route, current review link, proposal ranking, and launch packet readiness.
+4. Load the sample comment thread to see linked routes and coordinate-only route comments become ranked proposals.
+5. Copy the Launch packet or Evidence receipt when a platform submission needs the public app, source repository, app listing, and demo post fields.
+
 ## Local Run
 
 ```powershell
