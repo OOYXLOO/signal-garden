@@ -35,6 +35,9 @@ const pack = createPlatformFeedbackPack({
 assert.equal(pack.projectName, "Signal Garden");
 assert.match(pack.buildSummary, /daily Phaser relay puzzle/);
 assert.match(pack.stageSummary, /Route state: complete/);
+assert.equal(pack.surveyHandoffChecklist.length, 4);
+assert.equal(pack.actionabilityMatrix.length, 4);
+assert.match(pack.actionabilityMatrix[0].recommendation, /asset checklist/);
 assert.match(pack.feedbackSummary, /integration steps/);
 assert.match(pack.improvement, /end-to-end Phaser game example/);
 assert.match(pack.variants.short, /Phaser\/Vite asset checklist/);
@@ -49,6 +52,9 @@ for (const text of Object.values(pack.variants)) {
 
 const formatted = formatPlatformFeedbackPack(pack);
 assert.match(formatted, /Developer Platform Feedback/);
+assert.match(formatted, /Survey Handoff Checklist/);
+assert.match(formatted, /Actionability Matrix/);
+assert.match(formatted, /Recommendation:/);
 assert.match(formatted, /What Was Confusing Or Missing/);
 assert.match(formatted, /Short Single-Field Version/);
 assert.match(formatted, /chars=\d+ words=\d+/);

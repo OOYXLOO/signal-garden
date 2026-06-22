@@ -17,6 +17,7 @@ const evidenceFiles = [
   "docs/gallery_assets.md",
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
+  "docs/platform-feedback-pack.md",
   "docs/devvit_shell_readiness.md",
   "docs/devvit_dependency_watch.md",
   "src/platformFeedback.js",

@@ -57,6 +57,11 @@
       "sha256": "a31b43c5568683a22386ea3d7b4383f20c9bb6ac3887c1295d3590c1cad80390"
     },
     {
+      "path": "docs/platform-feedback-pack.md",
+      "bytes": 7216,
+      "sha256": "cb6d53bb06452c6158d9cadd49ffe6c865abc25bfb54485b781d298a3878d955"
+    },
+    {
       "path": "docs/devvit_shell_readiness.md",
       "bytes": 4373,
       "sha256": "7e263c68d5664081242b47f423ccb937fe7785400a9ac2f81d6f5cbe9da04651"
@@ -68,8 +73,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 6916,
-      "sha256": "c3a3267439b6ad54b29ce8c2088fa52f7fd5661f606748ef07398786a184e342"
+      "bytes": 9382,
+      "sha256": "8c513e879bb3ba048ea5821706ee9cb27c9397452405f34e831cabf46a6b8613"
     },
     {
       "path": "scripts/audit-pages-build.mjs",

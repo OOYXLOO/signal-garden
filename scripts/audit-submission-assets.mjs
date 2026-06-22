@@ -14,6 +14,7 @@ const requiredFiles = [
   "docs/gallery_assets.md",
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
+  "docs/platform-feedback-pack.md",
   "docs/devvit_dependency_watch.md",
   "scripts/audit-release-gates.mjs",
 ];
@@ -25,6 +26,21 @@ const pngExpectations = [
 ];
 
 const textExpectations = [
+  {
+    file: "docs/platform-feedback-pack.md",
+    fragments: [
+      "Signal Garden Developer Platform Feedback",
+      "Survey Handoff Checklist",
+      "Actionability Matrix",
+      "Phaser static assets in Devvit WebView",
+      "Splash-to-expanded-game lifecycle",
+      "Comments becoming game state",
+      "Submission evidence handoff",
+      "Short Single-Field Version",
+      "Medium Single-Field Version",
+      "Long Single-Field Version",
+    ],
+  },
   {
     file: "docs/submission-field-pack.md",
     fragments: [

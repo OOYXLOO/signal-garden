@@ -40,6 +40,34 @@ export function createPlatformFeedbackPack({
     projectName: "Signal Garden",
     buildSummary,
     stageSummary,
+    surveyHandoffChecklist: [
+      "Use the public app URL and one sample route so reviewers can reproduce the exact game state before reading the feedback.",
+      "Mention the concrete implementation surfaces: Phaser/Vite build, Devvit-shaped client/server shell, splash entrypoint, comment route import, proposal ranking, Redis-shaped persistence, and mobile smoke checks.",
+      "Keep each recommendation actionable: name the missing doc/example, explain the integration risk it removes, and describe the expected output shape.",
+      "Avoid private account details; only include public repo, public app, public sample route, and generated evidence text.",
+    ],
+    actionabilityMatrix: [
+      {
+        gap: "Phaser static assets in Devvit WebView",
+        impact: "A browser build can pass locally but fail in a repository-page or WebView path when assets assume /assets from the domain root.",
+        recommendation: "Publish a Vite/Phaser asset checklist with relative base paths, WebView path examples, and an audit command for generated bundles.",
+      },
+      {
+        gap: "Splash-to-expanded-game lifecycle",
+        impact: "Builders have to infer how the small entrypoint hands state, context, and fallback behavior to the full game.",
+        recommendation: "Document the message shape, route handoff, token/context boundaries, and local preview fallback in one minimal sample.",
+      },
+      {
+        gap: "Comments becoming game state",
+        impact: "The challenge rewards user contribution, but builders need an example of turning comment replies into validated, ranked game actions.",
+        recommendation: "Add a comment parser example that validates a player route server-side, stores it, ranks it, and reflects a recap into the thread.",
+      },
+      {
+        gap: "Submission evidence handoff",
+        impact: "Game evidence is split between app listing, demo post, source repo, media, feedback, and Devpost fields.",
+        recommendation: "Provide a final submission packet template that names every public URL and media proof before the submit button is pressed.",
+      },
+    ],
     feedbackSummary:
       "The current resources are useful, but game builders still have to infer several critical integration steps between a local browser prototype, the expanded game entrypoint, public comment input, persistence, and final evidence handoff.",
     workedWell:
@@ -86,6 +114,16 @@ export function formatPlatformFeedbackPack(pack) {
     "",
     "## Current Stage",
     pack.stageSummary,
+    "",
+    "## Survey Handoff Checklist",
+    ...(pack.surveyHandoffChecklist || []).map((item) => `- ${item}`),
+    "",
+    "## Actionability Matrix",
+    ...(pack.actionabilityMatrix || []).flatMap((item) => [
+      `- Gap: ${item.gap}`,
+      `  Impact: ${item.impact}`,
+      `  Recommendation: ${item.recommendation}`,
+    ]),
     "",
     "## Feedback Summary",
     pack.feedbackSummary,
