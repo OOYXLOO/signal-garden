@@ -14,6 +14,8 @@ const pack = createFeedbackFormPackFromOptions({
 });
 
 assert.equal(pack.formTitle, "Developer Feedback Survey");
+assert.ok(pack.submissionChecklist.length >= 5);
+assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Judge desk"));
 assert.equal(pack.fields.length, 16);
 assert.equal(pack.fields[0].answer, "8");
 assert.equal(pack.fields[4].answer, "4");
@@ -27,11 +29,16 @@ assert.ok(pack.fields.some((field) => field.answer.includes("Concrete reproducti
 
 const markdown = formatDeveloperFeedbackSurveyPack(pack);
 assert.match(markdown, /Signal Garden Developer Feedback Form Pack/);
+assert.match(markdown, /Submission Checklist/);
+assert.match(markdown, /Public Evidence Links/);
+assert.match(markdown, /Answer Index/);
+assert.match(markdown, /\| # \| Question \| chars \| words \| note \|/);
 assert.match(markdown, /How likely are you to recommend/);
 assert.match(markdown, /What is your username/);
 assert.match(markdown, /copy-only and does not submit/);
 assert.match(markdown, /OOYXLOO/);
-assert.doesNotMatch(markdown, /password|OTP|cookie|KYC/i);
+assert.match(markdown, /Do not paste credentials/);
+assert.doesNotMatch(markdown, /password\s*[:=]|otp\s*[:=]|sk-[a-z0-9]{20,}|AKIA[0-9A-Z]{16}/i);
 
 const { stdout } = await run(process.execPath, [script, "--sample-route", "--username", "OOYXLOO"]);
 assert.match(stdout, /Developer Feedback Survey/);

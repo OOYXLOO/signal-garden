@@ -6,6 +6,45 @@ Source form: https://docs.google.com/forms/d/e/1FAIpQLScfeZ3BcPpusRRD4CDlDDbyyH8
 
 This pack follows the public Google Form question order. It is copy-only and does not submit the form.
 
+## Submission Checklist
+
+- Open the public form and keep this pack side-by-side.
+- Confirm the public app, sample route, judge desk, source repository, Devvit readiness report, and platform feedback pack are reachable before copying answers.
+- Use the Answer Index to spot long answers before pasting into constrained fields.
+- Replace the username field if the submitting Reddit username differs.
+- Do not paste credentials, cookies, OTPs, payment data, private account pages, or identity material into the form.
+
+## Public Evidence Links
+
+- Public app: https://ooyxloo.github.io/signal-garden/
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1
+- Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+- Source repository: https://github.com/OOYXLOO/signal-garden
+- Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
+- Platform feedback pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md
+- Submission runbook: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-runbook.md
+
+## Answer Index
+
+| # | Question | chars | words | note |
+| --- | --- | ---: | ---: | --- |
+| 1 | How likely are you to recommend Reddit's Developer Platform to another dev? | 1 | 1 | Use the 1-10 scale. This is positive but leaves room for the concrete integration gaps below. |
+| 2 | Why or why not? | 482 | 68 |  |
+| 3 | If we ran another Hackathon, what would you like the category to be? | 174 | 20 |  |
+| 4 | How did you hear about the hackathon? | 8 | 2 |  |
+| 5 | How satisfied are you with the developer experience? | 1 | 1 | Use the 1-5 scale. |
+| 6 | Why did you choose this rating? | 419 | 64 |  |
+| 7 | How satisfied are you with the devvit documentation? | 1 | 1 | Use the 1-5 scale. |
+| 8 | Why did you choose this rating? | 748 | 109 |  |
+| 9 | How satisfied are you with support in our communities? | 1 | 1 | Use the 1-5 scale. This reflects mostly self-serve/public-doc usage. |
+| 10 | Why did you choose this rating? | 332 | 49 |  |
+| 11 | Do you plan on continuing to develop your project? | 3 | 1 |  |
+| 12 | Why or why not? | 338 | 57 |  |
+| 13 | Would you be open to joining us for a feedback session? (If yes, please make sure to submit your username in the next question) | 2 | 1 | Choose Yes instead only if the account owner is personally willing to attend or schedule a session. |
+| 14 | What is your username (please share this to be eligible for the feedback award) | 7 | 1 | Replace with the submitting Reddit username if different. |
+| 15 | What would get you most excited to start working on a new app? | 313 | 37 |  |
+| 16 | Please share anything else you would like for the team to know | 1716 | 257 |  |
+
 ## 1. How likely are you to recommend Reddit's Developer Platform to another dev?
 
 8

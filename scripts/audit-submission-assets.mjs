@@ -59,6 +59,9 @@ const textExpectations = [
     fragments: [
       "Signal Garden Developer Feedback Form Pack",
       "Developer Feedback Survey",
+      "Submission Checklist",
+      "Public Evidence Links",
+      "Answer Index",
       "How likely are you to recommend",
       "How satisfied are you with the developer experience",
       "How satisfied are you with the devvit documentation",

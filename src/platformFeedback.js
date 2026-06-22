@@ -148,6 +148,31 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OO
     formTitle: "Developer Feedback Survey",
     sourceForm:
       "https://docs.google.com/forms/d/e/1FAIpQLScfeZ3BcPpusRRD4CDlDDbyyH8gHtzYcIeWF2KqH-t9jqAmHw/viewform?usp=send_form",
+    submissionChecklist: [
+      "Open the public form and keep this pack side-by-side.",
+      "Confirm the public app, sample route, judge desk, source repository, Devvit readiness report, and platform feedback pack are reachable before copying answers.",
+      "Use the Answer Index to spot long answers before pasting into constrained fields.",
+      "Replace the username field if the submitting Reddit username differs.",
+      "Do not paste credentials, cookies, OTPs, payment data, private account pages, or identity material into the form.",
+    ],
+    publicEvidenceLinks: [
+      { label: "Public app", url: "https://ooyxloo.github.io/signal-garden/" },
+      { label: "Sample route", url: "https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1" },
+      { label: "Judge desk", url: "https://ooyxloo.github.io/signal-garden/judge.html" },
+      { label: "Source repository", url: "https://github.com/OOYXLOO/signal-garden" },
+      {
+        label: "Devvit readiness report",
+        url: "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md",
+      },
+      {
+        label: "Platform feedback pack",
+        url: "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md",
+      },
+      {
+        label: "Submission runbook",
+        url: "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-runbook.md",
+      },
+    ],
     fields: [
       {
         question: "How likely are you to recommend Reddit's Developer Platform to another dev?",
@@ -231,6 +256,13 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OO
   };
 }
 
+function markdownTableCell(value) {
+  return String(value || "")
+    .replaceAll("|", "\\|")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function formatDeveloperFeedbackSurveyPack(surveyPack) {
   const lines = [
     "# Signal Garden Developer Feedback Form Pack",
@@ -241,6 +273,27 @@ export function formatDeveloperFeedbackSurveyPack(surveyPack) {
     "",
     "This pack follows the public Google Form question order. It is copy-only and does not submit the form.",
   ];
+
+  if (surveyPack.submissionChecklist?.length) {
+    lines.push("", "## Submission Checklist", "", ...surveyPack.submissionChecklist.map((item) => `- ${item}`));
+  }
+
+  if (surveyPack.publicEvidenceLinks?.length) {
+    lines.push(
+      "",
+      "## Public Evidence Links",
+      "",
+      ...surveyPack.publicEvidenceLinks.map((item) => `- ${item.label}: ${item.url}`),
+    );
+  }
+
+  lines.push("", "## Answer Index", "", "| # | Question | chars | words | note |", "| --- | --- | ---: | ---: | --- |");
+  for (const [index, field] of (surveyPack.fields || []).entries()) {
+    const count = countFeedbackText(field.answer || "");
+    lines.push(
+      `| ${index + 1} | ${markdownTableCell(field.question)} | ${count.chars} | ${count.words} | ${markdownTableCell(field.note)} |`,
+    );
+  }
 
   for (const [index, field] of (surveyPack.fields || []).entries()) {
     lines.push("", `## ${index + 1}. ${field.question}`, "", field.answer || "");
