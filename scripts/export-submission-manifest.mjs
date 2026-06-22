@@ -23,6 +23,7 @@ const evidenceFiles = [
   "docs/platform-feedback-pack.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
+  "docs/devvit-readiness-report.md",
   "docs/devvit_dependency_watch.md",
   "src/platformFeedback.js",
   "scripts/audit-pages-build.mjs",
@@ -33,6 +34,7 @@ const evidenceFiles = [
   "scripts/export-devpost-fields.mjs",
   "scripts/export-platform-feedback.mjs",
   "scripts/export-demo-post.mjs",
+  "scripts/export-devvit-readiness.mjs",
 ];
 
 function parseArgs(argv) {
@@ -105,6 +107,8 @@ export async function createSubmissionManifest() {
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
     platformFeedbackCommand:
       "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+    devvitReadinessCommand:
+      "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
     devpostFieldsCommand:
       "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
     demoPostCommand:

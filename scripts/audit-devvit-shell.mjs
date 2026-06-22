@@ -15,6 +15,7 @@ const requiredFiles = [
   "src/client/communityClient.js",
   "src/server/signalGardenApi.js",
   "docs/devvit_shell_readiness.md",
+  "docs/devvit-readiness-report.md",
 ];
 
 const failures = [];

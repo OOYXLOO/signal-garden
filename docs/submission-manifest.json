@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 7176,
-      "sha256": "a7ea239fdabc233f2206d7a7e98fb5b9b1ef1b0846871da3780e0fc42363638d"
+      "bytes": 7321,
+      "sha256": "624fddc474cc96c6f5769339c91049d02e0a930fa52ed5b047712a20f8903421"
     },
     {
       "path": "docs/cover.png",
@@ -87,6 +87,11 @@
       "sha256": "7e263c68d5664081242b47f423ccb937fe7785400a9ac2f81d6f5cbe9da04651"
     },
     {
+      "path": "docs/devvit-readiness-report.md",
+      "bytes": 2046,
+      "sha256": "987f1c7867920b7b6dd002cb881b87cc7a683a2aa6b7d052510ab7ad426e1960"
+    },
+    {
       "path": "docs/devvit_dependency_watch.md",
       "bytes": 1761,
       "sha256": "7a7ad29e4f1126af7d3abc8bc881681ebaecce8092d93d7bccc9834e786f4ca2"
@@ -135,6 +140,11 @@
       "path": "scripts/export-demo-post.mjs",
       "bytes": 7378,
       "sha256": "84d6b6690f5b04adc1fb723b7ae8e010c49bcd85fd79d6cad2989f80f907906e"
+    },
+    {
+      "path": "scripts/export-devvit-readiness.mjs",
+      "bytes": 7877,
+      "sha256": "92bebcdededbd67805e4791b82aac0aa5937638d749d36d7ef5c31b74c450593"
     }
   ],
   "requiredLocalChecks": [
@@ -151,6 +161,7 @@
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+  "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
   "demoPostCommand": "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",
   "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
