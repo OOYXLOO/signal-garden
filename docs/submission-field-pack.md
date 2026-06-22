@@ -22,6 +22,7 @@ The app now also includes a submission readiness checklist that keeps the playab
 The app also generates an evidence receipt that ties gameplay proof, community proof, retention proof, handoff proof, public URLs, and safety boundaries into one copyable review block.
 The exported submission pack now includes a gate runbook that orders the public app check, sample route check, exact Review link check, source repository check, app listing URL, demo post URL, media attachments, and final audit commands before a submission pass.
 The public evidence set also includes a criteria fit brief that maps the official public rules and overview signals to specific Signal Garden review surfaces and the remaining platform gates.
+The Devpost field export turns the same evidence into concise form fields: project name, tagline, public URLs, built-with notes, testing instructions, criteria fit summary, and pending external gates.
 
 ## What Makes It Social
 
@@ -41,6 +42,7 @@ The public evidence set also includes a criteria fit brief that maps the officia
 - An evidence receipt summarizes gameplay proof, route proof, community proof, retention proof, launch handoff proof, public URLs, and the no-private-data safety boundary.
 - A gate runbook in the exported submission pack keeps the public app, sample route, exact Review link, source repository, app listing, demo post, media attachments, and final audit commands in a single execution order.
 - A criteria fit brief maps public hackathon signals to concrete review evidence, so the project can be evaluated against replayability, community contribution, Devvit migration, and testing instructions without guessing.
+- A Devpost field pack export reduces final form-filling friction by turning public app/source/judge/criteria evidence into concise copyable fields.
 - A launch packet combines the comment challenge, review snapshot, daily recap, source repository placeholder, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
 - Contributors get a compact daily board based on complete routes and best score.
 - A daily recap can be copied back into a discussion thread.

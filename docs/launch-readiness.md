@@ -20,6 +20,7 @@ Observed public requirements and signals on 2026-06-20:
 
 - `README.md`: project overview, local run, quality checks, and scope.
 - `docs/submission-field-pack.md`: short description, long description, social loop, technical highlights, demo checklist.
+- `docs/devpost-field-pack.md`: concise Devpost-style field pack generated from current public URLs.
 - `docs/demo-script.md`: under-60-second walkthrough plan.
 - Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
 - Platform feedback export: field-specific answers and short, medium, and long single-field variants for a later user-approved feedback pass.
@@ -39,6 +40,7 @@ Observed public requirements and signals on 2026-06-20:
 - `scripts/audit-public-url.mjs`: checks the deployed public URL and `sample=1` reviewer walkthrough URL after a public app URL exists.
 - `scripts/audit-release-gates.mjs`: reports local release readiness and marks the repository, public app URL, source repository URL, app listing URL, and demo post URL gates as ready, waiting, or blocked. If `origin` points to the expected GitHub repository, the source repository URL is inferred from origin.
 - `scripts/export-submission-pack.mjs`: generates one final copyable submission packet after public URLs exist, including a Gate Runbook for the ordered public evidence pass.
+- `scripts/export-devpost-fields.mjs`: generates concise Devpost-style fields after the public app and source repository exist.
 - `scripts/export-platform-feedback.mjs`: generates copyable developer/platform feedback fields without submitting any form.
 - `scripts/github-pages-release-check.ps1`: runs the local quality checks, can set the GitHub remote after the repository exists, can push the current branch, and can audit the public Pages URL after it is live.
 
@@ -58,6 +60,7 @@ npm run audit:release
 npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>
 npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
 npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>
+npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>
 npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run audit:submission
@@ -150,6 +153,7 @@ Do not automate account login, human verification, private console pages, billin
 - Platform feedback export: run `npm run export:platform-feedback` when the user wants field-specific answers and short/medium/long variants outside the app UI.
 - Final launch packet: use `npm run export:launch-packet -- --strict` with public app, source repository, app listing, and demo post URLs after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, and demo post exist; pass either a copied route token with `--plan` or the built-in complete review route with `--sample-route`.
+- Devpost fields: use `npm run export:devpost-fields` after the public app and source repository exist; use `--strict` only after app listing, demo post, and video URL are available.
 - Evidence receipt: copy the app receipt or the `Evidence Receipt` section from the exported submission pack as a compact reviewer proof block.
 - Gate runbook: use the `Gate Runbook` section from the exported submission packet as the final public evidence checklist.
 - Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.
@@ -186,6 +190,7 @@ Do not automate account login, human verification, private console pages, billin
 - The standard static build uses relative asset paths, avoiding root `/assets` assumptions on GitHub Pages project URLs.
 - The public URL audit passes for both the base app URL and the `sample=1` reviewer walkthrough URL.
 - The exported submission pack contains public URLs, source repository evidence, submission fields, media assets, demo checklist, and launch packet copy.
+- The exported Devpost field pack contains project name, tagline, public URLs, built-with notes, testing instructions, criteria fit summary, and pending external gates.
 - The exported submission pack contains an Evidence Receipt section with public URL evidence slots and proof claims for gameplay, route, community, retention, handoff, and safety boundaries.
 - The exported submission pack contains a Gate Runbook that keeps public evidence checks in the right order.
 - The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.

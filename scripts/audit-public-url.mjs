@@ -131,6 +131,17 @@ function auditHtml(name, result) {
   return failures;
 }
 
+const defaultJudgeFragments = [
+  "Signal Garden",
+  "Judge Desk",
+  "Open sample route",
+  "demo-final-captioned.webm",
+  "submission-manifest.json",
+  "criteria-fit.md",
+  "devpost-field-pack.md",
+  "https://github.com/OOYXLOO/signal-garden",
+];
+
 export async function auditPublicUrl(options) {
   const day = validateDay(options.day);
   const baseUrl = normalizeBaseUrl(options.baseUrl, options);
@@ -154,15 +165,7 @@ export async function auditPublicUrl(options) {
   if (reviewUrl.searchParams.get("day") !== day) {
     failures.push("sample route URL missing requested day");
   }
-  for (const fragment of [
-    "Signal Garden",
-    "Judge Desk",
-    "Open sample route",
-    "demo-final-captioned.webm",
-    "submission-manifest.json",
-    "criteria-fit.md",
-    "https://github.com/OOYXLOO/signal-garden",
-  ]) {
+  for (const fragment of options.judgeFragments || defaultJudgeFragments) {
     if (!judge.text.includes(fragment)) {
       failures.push(`judge desk URL missing text: ${fragment}`);
     }

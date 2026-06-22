@@ -60,6 +60,7 @@ for (const fragment of [
   "demo-final-captioned.webm",
   "submission-manifest.json",
   "criteria-fit.md",
+  "devpost-field-pack.md",
   "https://github.com/OOYXLOO/signal-garden",
 ]) {
   if (!judgeHtml.includes(fragment)) {

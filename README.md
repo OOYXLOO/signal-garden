@@ -18,6 +18,7 @@ For a one-page public review desk, open `https://ooyxloo.github.io/signal-garden
 
 See `docs/public-verification.md` for the current public deployment, source, and check status.
 See `docs/criteria-fit.md` for the public rules-to-evidence map used during submission review.
+See `docs/devpost-field-pack.md` for a concise copyable field pack generated from the current public URLs.
 
 ## Local Run
 
@@ -40,6 +41,7 @@ npm run audit:devvit
 npm run audit:pages
 npm run audit:release
 npm run export:platform-feedback -- --day 2026-06-19 --sample-route --review-base-url <public-app-url>
+npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run record:demo
 npm run export:launch-packet -- --help
@@ -95,6 +97,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
 - Public judge desk that links the playable app, sample route, source repository, final captioned demo, manifest, and handoff docs from one static page.
 - Criteria fit brief that maps public hackathon signals to concrete product evidence and remaining platform gates.
+- Devpost field pack export that turns the public app, source repository, judge desk, criteria brief, and current gate status into concise copyable form fields.
 - Release gate audit that reports local release readiness and marks public app, source repository, listing, demo post, and remote repository gates as ready, waiting, or blocked.
 - Submission pack export that combines public URL checks, source repository evidence, submission fields, media checklist, launch packet copy, and an optional built-in sample review route.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.

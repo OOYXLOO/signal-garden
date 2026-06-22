@@ -41,6 +41,7 @@ const judgeHtml = [
   "<a>demo-final-captioned.webm</a>",
   "<a>submission-manifest.json</a>",
   "<a>criteria-fit.md</a>",
+  "<a>devpost-field-pack.md</a>",
   "</main>",
   "</body>",
   "</html>",

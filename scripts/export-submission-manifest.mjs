@@ -18,6 +18,7 @@ const evidenceFiles = [
   "docs/gallery_assets.md",
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
+  "docs/devpost-field-pack.md",
   "docs/criteria-fit.md",
   "docs/platform-feedback-pack.md",
   "docs/reddit-demo-post-draft.md",
@@ -29,6 +30,7 @@ const evidenceFiles = [
   "scripts/audit-release-gates.mjs",
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-pack.mjs",
+  "scripts/export-devpost-fields.mjs",
   "scripts/export-platform-feedback.mjs",
   "scripts/export-demo-post.mjs",
 ];

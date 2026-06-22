@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 9932,
-      "sha256": "09989e6e99d08f5855526e7819b7a1572cccb15fbd93a4d75981e5653e93a60d"
+      "bytes": 10329,
+      "sha256": "ad33ddd7d0af63cf14975a7b9627b457abfc91aab9b3f483471be99b956b956c"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 7041,
-      "sha256": "aebbfad0448f4545cc633e475ed01956515f34d61b8ac9e89b07e1ab00e5f3a9"
+      "bytes": 7176,
+      "sha256": "a7ea239fdabc233f2206d7a7e98fb5b9b1ef1b0846871da3780e0fc42363638d"
     },
     {
       "path": "docs/cover.png",
@@ -53,13 +53,18 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 15458,
-      "sha256": "4db460b75623a5479c5c082c4636afd0c0269c36bedc75345b77092b7085a0c0"
+      "bytes": 16168,
+      "sha256": "4b202b88c47c2a8a5d137da0585ec83c8e92e7869409ded99a51afb9fcc444ed"
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 13695,
-      "sha256": "432d0605d1fce4767f44d77462689d3138f5bce35609d60daadd907cc7ada842"
+      "bytes": 14045,
+      "sha256": "897800b41d097348eb985a1623ea38d29f0dd666e0f23472eb01992408bdea19"
+    },
+    {
+      "path": "docs/devpost-field-pack.md",
+      "bytes": 3341,
+      "sha256": "bcba93be6e1f88a511808578247d97c92c5c46b6e54f7ff3ce77ae028475be41"
     },
     {
       "path": "docs/criteria-fit.md",
@@ -93,13 +98,13 @@
     },
     {
       "path": "scripts/audit-pages-build.mjs",
-      "bytes": 2083,
-      "sha256": "5d7470158981a99579562dc10c1e65dc0d54042498c68d15c7e97cac2a7bf5e1"
+      "bytes": 2110,
+      "sha256": "30623295dd67ecb194ea2344bec18d557ad9ac0290ccf86b951b892b66dc300e"
     },
     {
       "path": "scripts/audit-public-url.mjs",
-      "bytes": 6467,
-      "sha256": "ce3f87244b6af52f8d6ed719735c8c443b6274db74c9868ed622a8c01dfd3f1d"
+      "bytes": 6558,
+      "sha256": "d8355c99e936e4e8dae7de1343fe0225d591027a37e9a0c35548fc54ab0cfda4"
     },
     {
       "path": "scripts/audit-release-gates.mjs",
@@ -115,6 +120,11 @@
       "path": "scripts/export-submission-pack.mjs",
       "bytes": 11933,
       "sha256": "45c6dfb3b7344f843a48c2600e36734057851de9c1973760b763f094830fae48"
+    },
+    {
+      "path": "scripts/export-devpost-fields.mjs",
+      "bytes": 9885,
+      "sha256": "bf4e99ab09ee25b1ed9db848af4f446eff06899342c03abdf9ad383bd70feeda"
     },
     {
       "path": "scripts/export-platform-feedback.mjs",
