@@ -5,6 +5,8 @@ import { auditPublicUrl } from "./audit-public-url.mjs";
 import { createPuzzleForDayKey, decodePlanToken, traceSignal } from "../src/game/puzzle.js";
 import { summarizeConsensus } from "../src/game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "../src/launchPacket.js";
+import { createEvidenceReceipt, formatEvidenceReceipt } from "../src/reviewerGuide.js";
+import { createGardenLog, createSampleGardenArchive } from "../src/state/store.js";
 
 const scriptPath = fileURLToPath(import.meta.url);
 const root = resolve(dirname(scriptPath), "..");
@@ -218,6 +220,26 @@ async function createSubmissionPack(options) {
       sourceRepoUrl,
     }),
   );
+  const sampleGardenLog = createGardenLog({
+    currentPuzzleId: puzzle.id,
+    archive: createSampleGardenArchive(puzzle.id),
+  });
+  const evidenceReceipt = formatEvidenceReceipt(
+    createEvidenceReceipt({
+      puzzle,
+      result,
+      plan,
+      shareUrl: reviewUrl,
+      sampleRouteUrl: publicAudit.sampleRouteUrl,
+      consensus,
+      gardenLog: sampleGardenLog,
+      launchPacket,
+      publicAppUrl: publicAppUrl.toString(),
+      sourceRepoUrl,
+      appListingUrl,
+      demoPostUrl,
+    }),
+  );
   const fieldPack = await readFile(resolve(root, "docs/submission-field-pack.md"), "utf8");
   const shortDescription = extractSection(fieldPack, "Short Description");
   const longDescription = extractSection(fieldPack, "Long Description");
@@ -254,6 +276,10 @@ async function createSubmissionPack(options) {
     `- Base URL: HTTP ${publicAudit.baseStatus}, ${publicAudit.baseTitle || "untitled"}`,
     `- Sample route URL: HTTP ${publicAudit.sampleStatus}, ${publicAudit.sampleTitle || "untitled"}`,
     "- Localhost guard: passed by this command before generating the pack.",
+    "",
+    "## Evidence Receipt",
+    "",
+    evidenceReceipt,
     "",
     "## Gate Runbook",
     "",

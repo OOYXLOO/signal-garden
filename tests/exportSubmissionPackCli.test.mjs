@@ -93,6 +93,11 @@ try {
   ]);
   assert.match(stdout, /# Signal Garden Public Submission Pack/);
   assert.match(stdout, /Public URL Audit/);
+  assert.match(stdout, /Evidence Receipt/);
+  assert.match(stdout, /Evidence claims/);
+  assert.match(stdout, /6\/6 public URL evidence slots ready/);
+  assert.match(stdout, /Community proof: 1\/1 saved routes complete/);
+  assert.match(stdout, /Retention proof:/);
   assert.match(stdout, /Gate Runbook/);
   assert.match(stdout, /Open the public app URL/);
   assert.match(stdout, /Open the sample route/);

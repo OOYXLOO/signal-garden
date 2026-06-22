@@ -17,6 +17,7 @@ The current build includes seven verified puzzle templates, objective progress c
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
 The app now also includes a submission readiness checklist that keeps the playable board, sample route, Review link, public app URL status, return map, contribution loop, launch packet, and platform URL placeholders visible in one compact handoff surface.
+The app also generates an evidence receipt that ties gameplay proof, community proof, retention proof, handoff proof, public URLs, and safety boundaries into one copyable review block.
 The exported submission pack now includes a gate runbook that orders the public app check, sample route check, exact Review link check, source repository check, app listing URL, demo post URL, media attachments, and final audit commands before a submission pass.
 
 ## What Makes It Social
@@ -32,6 +33,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - A review snapshot packages the current route, consensus state, top saved route, and judge checks.
 - A reviewer fast path packages the sample route, current review link, top-route ghost, lead rationale, and comment import loop in one compact block.
 - A submission readiness checklist summarizes the playable board, sample route, Review link, public app URL status, retention surface, contribution loop, launch packet, and remaining platform URL placeholders.
+- An evidence receipt summarizes gameplay proof, route proof, community proof, retention proof, launch handoff proof, public URLs, and the no-private-data safety boundary.
 - A gate runbook in the exported submission pack keeps the public app, sample route, exact Review link, source repository, app listing, demo post, media attachments, and final audit commands in a single execution order.
 - A launch packet combines the comment challenge, review snapshot, daily recap, source repository placeholder, demo post placeholders, app listing placeholders, and developer platform feedback topics in one copyable block.
 - Contributors get a compact daily board based on complete routes and best score.
@@ -65,6 +67,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - Review snapshot generated from the current route, Review link, consensus, and reproducibility checks.
 - Reviewer fast path generated from the current route, sample URL, Review link, consensus, and Reddit reply loop.
 - Submission readiness generated from the current route, sample URL, Review link, return map, consensus, and launch packet state.
+- Evidence receipt generated from route state, sample URL, Review link, consensus, return map, launch packet, public URLs, and safety boundary claims.
 - Launch packet generated from the current route, Review link, consensus, top route rationale, source repository placeholder, Reddit fit checks, and platform feedback notes.
 - Strict launch packet CLI export for injecting public app listing, demo post, and review URLs after the platform gate.
 - GitHub Pages workflow plus artifact audit for publishing the static browser build from a repository-page path after the repository gate.
@@ -95,6 +98,7 @@ The exported submission pack now includes a gate runbook that orders the public 
 - Copy the review snapshot for a judge or gallery note.
 - Copy the reviewer fast path for a quick judge or playtester handoff.
 - Copy the submission readiness checklist to verify the handoff surface before final submission text.
+- Copy the evidence receipt so a reviewer can see public URLs, proof claims, and safety boundaries without hunting through the repository.
 - Copy the launch packet for the public demo post, app listing, discussion follow-up, and platform feedback pass.
 - After real public URLs exist, run the strict launch packet export before copying final submission text.
 - If using GitHub Pages as the public review surface, run `npm run build` and `npm run audit:pages` before the final URL pass.

@@ -23,6 +23,7 @@ Observed public requirements and signals on 2026-06-20:
 - `docs/demo-script.md`: under-60-second walkthrough plan.
 - Launch packet export in the app: demo post setup, app listing placeholder, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback topics.
 - Submission readiness panel in the app: playable board, sample route, Review link, public app URL status, return map, contribution loop, launch packet, and remaining platform URL placeholders in one copyable checklist.
+- Evidence receipt in the app and exported submission pack: gameplay proof, route proof, community proof, retention proof, launch handoff proof, public URL evidence slots, and safety boundary claims.
 - Seven-day return map in the Loop panel: visible local archive, streak, complete, draft, open day states, and non-persistent sample week preview for retention review.
 - `docs/demo-final-captioned.webm`: current 53-second captioned demo candidate.
 - `docs/cover.png`: gallery cover.
@@ -143,6 +144,7 @@ Do not automate account login, human verification, private console pages, billin
 - Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
 - Final launch packet: use `npm run export:launch-packet -- --strict` with public app, source repository, app listing, and demo post URLs after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, demo post, and route token exist.
+- Evidence receipt: copy the app receipt or the `Evidence Receipt` section from the exported submission pack as a compact reviewer proof block.
 - Gate runbook: use the `Gate Runbook` section from the exported submission packet as the final public evidence checklist.
 - Submission manifest: refresh `docs/submission-manifest.json` after media or copy changes, then run `npm run audit:submission`.
 - Demo post: add only after a user-approved public Reddit post exists.
@@ -166,6 +168,7 @@ Do not automate account login, human verification, private console pages, billin
 - The Reddit post draft includes a title, body, route review link or sample route, community target, and first-comment prompt.
 - The developer feedback draft includes Devvit Web setup notes, Phaser static asset notes, dependency hygiene observations, mobile WebView checks, public review-link flow, and comment-loop feedback.
 - The submission readiness panel marks the sample route, route link, public app URL, return map, contribution loop, launch packet, and platform URL placeholders clearly.
+- The evidence receipt summarizes public URL evidence slots plus gameplay, route, community, retention, handoff, and safety proof claims.
 - The launch packet includes demo post/app listing placeholders, Reddit fit checks, comment challenge, review snapshot, daily recap, and developer platform feedback topics.
 - The contributor board and daily recap update after saved or imported routes.
 - Archive rows with saved routes include Review links.
@@ -176,6 +179,7 @@ Do not automate account login, human verification, private console pages, billin
 - The standard static build uses relative asset paths, avoiding root `/assets` assumptions on GitHub Pages project URLs.
 - The public URL audit passes for both the base app URL and the `sample=1` reviewer walkthrough URL.
 - The exported submission pack contains public URLs, source repository evidence, submission fields, media assets, demo checklist, and launch packet copy.
+- The exported submission pack contains an Evidence Receipt section with public URL evidence slots and proof claims for gameplay, route, community, retention, handoff, and safety boundaries.
 - The exported submission pack contains a Gate Runbook that keeps public evidence checks in the right order.
 - The Devvit shell includes the same reviewer fast path, launch packet, review snapshot, missions, and rival target DOM contracts as the browser page.
 - The Devvit menu endpoint can return `navigateTo` when a platform post helper is injected.

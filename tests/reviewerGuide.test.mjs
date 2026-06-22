@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import {
   buildSampleRouteUrl,
+  createEvidenceReceipt,
   createReviewerFastPath,
   createReviewerLoopChecks,
   createSubmissionReadiness,
+  formatEvidenceReceipt,
   formatSubmissionReadiness,
 } from "../src/reviewerGuide.js";
 import { createDailyPuzzle, traceSignal } from "../src/game/puzzle.js";
@@ -132,5 +134,37 @@ const draftReadiness = createSubmissionReadiness({
 assert.equal(draftReadiness.readyCount, 3);
 assert.match(formatSubmissionReadiness(draftReadiness), /Trace a route before copying/);
 assert.match(formatSubmissionReadiness(draftReadiness), /Public app URL: waiting/);
+
+const evidenceReceipt = createEvidenceReceipt({
+  puzzle,
+  result,
+  plan: puzzle.solution,
+  shareUrl: "https://example.test/play?day=2026-06-19&plan=2-2-b.2-6-b",
+  sampleRouteUrl: sampleUrl,
+  consensus: {
+    completed: 1,
+    proposalCount: 1,
+    best: {
+      score: result.score,
+      beacons: 3,
+      moves: 2,
+    },
+  },
+  gardenLog,
+  launchPacket: "Signal Garden launch packet",
+  publicAppUrl: "https://ooyxloo.github.io/signal-garden/",
+  sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
+  appListingUrl: "https://developers.reddit.com/apps/signal-garden",
+  demoPostUrl: "https://www.reddit.com/r/test/comments/signal_garden/",
+});
+assert.equal(evidenceReceipt.summary, "6/6 public URL evidence slots ready");
+assert.match(evidenceReceipt.claims.join(" "), /Playable puzzle/);
+assert.match(evidenceReceipt.claims.join(" "), /Community proof: 1\/1 saved routes complete/);
+assert.match(evidenceReceipt.claims.join(" "), /Retention proof:/);
+const evidenceReceiptText = formatEvidenceReceipt(evidenceReceipt);
+assert.match(evidenceReceiptText, /Evidence claims/);
+assert.match(evidenceReceiptText, /Public URLs/);
+assert.match(evidenceReceiptText, /Source repository: https:\/\/github\.com\/OOYXLOO\/signal-garden/);
+assert.match(evidenceReceiptText, /Safety proof/);
 
 console.log("signal garden reviewer guide tests passed");

@@ -3,7 +3,15 @@ import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide, createTopRouteRationale } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
-import { buildSampleRouteUrl, createReviewerFastPath, createReviewerLoopChecks, createSubmissionReadiness, formatSubmissionReadiness } from "./reviewerGuide.js";
+import {
+  buildSampleRouteUrl,
+  createEvidenceReceipt,
+  createReviewerFastPath,
+  createReviewerLoopChecks,
+  createSubmissionReadiness,
+  formatEvidenceReceipt,
+  formatSubmissionReadiness,
+} from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute, wantsSampleWeek } from "./share.js";
 import { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
 
@@ -82,6 +90,8 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     submissionReadinessList: document.querySelector("#submission-readiness-list"),
     submissionReadinessOutput: document.querySelector("#submission-readiness-output"),
     copySubmissionReadiness: document.querySelector("#copy-submission-readiness"),
+    evidenceReceipt: document.querySelector("#evidence-receipt"),
+    copyEvidenceReceipt: document.querySelector("#copy-evidence-receipt"),
     launchPacket: document.querySelector("#launch-packet"),
     copyLaunchPacket: document.querySelector("#copy-launch-packet"),
   };
@@ -227,6 +237,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       refs.copySubmissionReadiness.textContent = "Readiness copied";
       window.setTimeout(() => {
         refs.copySubmissionReadiness.textContent = "Copy readiness";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
+  refs.copyEvidenceReceipt.addEventListener("click", async () => {
+    refs.evidenceReceipt.select();
+    try {
+      await navigator.clipboard.writeText(refs.evidenceReceipt.value);
+      refs.copyEvidenceReceipt.textContent = "Receipt copied";
+      window.setTimeout(() => {
+        refs.copyEvidenceReceipt.textContent = "Copy evidence receipt";
       }, 1200);
     } catch {
       document.execCommand("copy");
@@ -555,6 +577,7 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
     refs.submissionReadinessTitle.textContent = "Loading";
     refs.submissionReadinessList.replaceChildren();
     refs.submissionReadinessOutput.value = "";
+    refs.evidenceReceipt.value = "";
     return;
   }
 
@@ -579,6 +602,19 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
   });
   refs.submissionReadinessTitle.textContent = readiness.summary;
   refs.submissionReadinessOutput.value = formatSubmissionReadiness(readiness);
+  refs.evidenceReceipt.value = formatEvidenceReceipt(
+    createEvidenceReceipt({
+      puzzle: latest.puzzle,
+      result: latest.result,
+      plan: latest.plan,
+      shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+      sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
+      consensus,
+      gardenLog,
+      launchPacket: refs.launchPacket.value,
+      publicAppUrl: publicAppReadinessUrl(window.location.href),
+    }),
+  );
   refs.submissionReadinessList.replaceChildren(
     ...readiness.items.map((check) => {
       const item = document.createElement("li");
@@ -593,6 +629,27 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
       return item;
     }),
   );
+}
+
+function publicAppReadinessUrl(currentHref = "") {
+  try {
+    const url = new URL(currentHref);
+    const hostname = url.hostname.toLowerCase();
+    const isPublic =
+      url.protocol === "https:" &&
+      !["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(hostname) &&
+      !hostname.endsWith(".local") &&
+      !hostname.endsWith(".test") &&
+      !hostname.endsWith(".invalid");
+    if (!isPublic) {
+      return "";
+    }
+    url.search = "";
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return "";
+  }
 }
 
 function renderArchive(refs, currentPuzzleId) {

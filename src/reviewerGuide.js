@@ -266,3 +266,82 @@ export function formatSubmissionReadiness(readiness) {
   }
   return lines.join("\n");
 }
+
+function urlEvidence(label, value, fallback) {
+  return {
+    label,
+    value: value || fallback,
+    ready: Boolean(value),
+  };
+}
+
+export function createEvidenceReceipt({
+  puzzle,
+  result,
+  plan = [],
+  shareUrl = "",
+  sampleRouteUrl = "",
+  consensus = null,
+  gardenLog = null,
+  launchPacket = "",
+  publicAppUrl = "",
+  sourceRepoUrl = "",
+  appListingUrl = "",
+  demoPostUrl = "",
+} = {}) {
+  if (!puzzle) {
+    throw new Error("createEvidenceReceipt requires a puzzle");
+  }
+
+  const completed = Number(consensus?.completed || 0);
+  const proposalCount = Number(consensus?.proposalCount || 0);
+  const activeReturnSlots = Array.isArray(gardenLog?.slots)
+    ? gardenLog.slots.filter((slot) => slot.state !== "open").length
+    : 0;
+  const routeStatus = result?.complete ? "complete" : result?.status || "drafting";
+  const routeScore = Number(result?.score || 0);
+  const routeBeacons = result?.hitBeacons?.length || 0;
+  const publicUrls = [
+    urlEvidence("Public app", publicAppUrl, "waiting for deployed app URL"),
+    urlEvidence("Sample route", sampleRouteUrl, "waiting for sample route URL"),
+    urlEvidence("Review link", shareUrl, "waiting for traced route"),
+    urlEvidence("Source repository", sourceRepoUrl, "waiting for public source repository"),
+    urlEvidence("App listing", appListingUrl, "waiting for app listing"),
+    urlEvidence("Demo post", demoPostUrl, "waiting for public demo post"),
+  ];
+  const claims = [
+    `Playable puzzle: ${puzzle.beacons.length} beacons, ${puzzle.moveLimit} mirrors, deterministic day ${puzzle.id}.`,
+    `Route proof: ${routeStatus}, ${routeScore} pts, ${routeBeacons}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`,
+    proposalCount
+      ? `Community proof: ${completed}/${proposalCount} saved routes complete, with a ranked top route.`
+      : consensus?.preview
+        ? "Community proof: sample preview demonstrates ranking without stored data."
+        : "Community proof: waiting for saved or imported route proposals.",
+    gardenLog?.slots?.length
+      ? `Retention proof: ${activeReturnSlots}/${gardenLog.slots.length} return-map slots show activity or preview state.`
+      : "Retention proof: waiting for return-map render.",
+    launchPacket ? "Handoff proof: launch packet is generated from the current board state." : "Handoff proof: waiting for launch packet render.",
+    "Safety proof: public evidence avoids credentials, private data, billing, identity checks, and platform secrets.",
+  ];
+  const readyUrlCount = publicUrls.filter((item) => item.ready).length;
+
+  return {
+    title: `Signal Garden ${puzzle.id}: evidence receipt`,
+    summary: `${readyUrlCount}/${publicUrls.length} public URL evidence slots ready`,
+    claims,
+    publicUrls,
+  };
+}
+
+export function formatEvidenceReceipt(receipt) {
+  return [
+    receipt.title,
+    receipt.summary,
+    "",
+    "Evidence claims:",
+    ...receipt.claims.map((claim) => `- ${claim}`),
+    "",
+    "Public URLs:",
+    ...receipt.publicUrls.map((item) => `- ${item.label}: ${item.value}`),
+  ].join("\n");
+}
