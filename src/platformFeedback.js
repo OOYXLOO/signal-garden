@@ -1,3 +1,16 @@
+const SIGNAL_GARDEN_PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
+
+function todayUtcDay(date = new Date()) {
+  return date.toISOString().slice(0, 10);
+}
+
+function signalGardenSampleRouteUrl(day = todayUtcDay()) {
+  const url = new URL(SIGNAL_GARDEN_PUBLIC_APP_URL);
+  url.searchParams.set("day", day);
+  url.searchParams.set("sample", "1");
+  return url.toString();
+}
+
 export function createPlatformFeedbackPack({
   puzzle,
   result,
@@ -38,6 +51,9 @@ export function createPlatformFeedbackPack({
 
   return {
     projectName: "Signal Garden",
+    puzzleId: puzzle.id,
+    shareUrl,
+    sampleRouteUrl,
     buildSummary,
     stageSummary,
     surveyHandoffChecklist: [
@@ -126,18 +142,21 @@ export function countFeedbackText(value) {
 }
 
 export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OOYXLOO" } = {}) {
+  const fallbackDay = todayUtcDay();
   const pack = feedbackPack || createPlatformFeedbackPack({
     puzzle: {
-      id: "2026-06-22",
-      title: "North arcade",
+      id: fallbackDay,
+      title: "Sample board",
       beacons: [1, 2, 3],
       moveLimit: 5,
     },
     result: { complete: true, status: "complete", score: 1008, hitBeacons: [1, 2, 3], moves: [1, 2] },
     plan: [1, 2],
-    shareUrl: "https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1",
+    shareUrl: signalGardenSampleRouteUrl(fallbackDay),
+    sampleRouteUrl: signalGardenSampleRouteUrl(fallbackDay),
     consensus: { completed: 1, proposalCount: 1 },
   });
+  const publicSampleRouteUrl = pack.sampleRouteUrl || signalGardenSampleRouteUrl(pack.puzzleId);
   const actionability = (pack.actionabilityMatrix || [])
     .map((item) => `${item.gap}: ${item.recommendation}`)
     .join(" ");
@@ -165,7 +184,7 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OO
     ],
     publicEvidenceLinks: [
       { label: "Public app", url: "https://ooyxloo.github.io/signal-garden/" },
-      { label: "Sample route", url: "https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1" },
+      { label: "Sample route", url: publicSampleRouteUrl },
       { label: "Judge desk", url: "https://ooyxloo.github.io/signal-garden/judge.html" },
       { label: "Source repository", url: "https://github.com/OOYXLOO/signal-garden" },
       {

@@ -108,8 +108,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 21443,
-      "sha256": "229fb8fe0b60e4be41516c7742f24d195937ad3d6e513ec9c785d9457a86d2cd"
+      "bytes": 22007,
+      "sha256": "06ec2db3c2052a483ce3e4bc6037bc684dcf86139c369dc70c44e782c2b210cf"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -148,8 +148,8 @@
     },
     {
       "path": "scripts/export-feedback-form-pack.mjs",
-      "bytes": 3956,
-      "sha256": "d39dceb873b644b7c870ca5de09adc6eb7736c035964c80965846b1a25a708b1"
+      "bytes": 4293,
+      "sha256": "aeddbd6fe8f5a1a62b76ab52724fa20a788dc555c9528dd0d553ff7ea798db9a"
     },
     {
       "path": "scripts/export-demo-post.mjs",

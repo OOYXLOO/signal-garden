@@ -8,9 +8,22 @@ import {
   formatDeveloperFeedbackSurveyPack,
 } from "../src/platformFeedback.js";
 
+const PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
+
+export function todayUtcDay(date = new Date()) {
+  return date.toISOString().slice(0, 10);
+}
+
+function createSampleRouteUrl(day) {
+  const url = new URL(PUBLIC_APP_URL);
+  url.searchParams.set("day", day);
+  url.searchParams.set("sample", "1");
+  return url.toString();
+}
+
 function parseArgs(argv) {
   const options = {
-    day: "2026-06-22",
+    day: todayUtcDay(),
     help: false,
     output: "",
     plan: "",
@@ -65,7 +78,8 @@ function assertPublicHttpUrl(name, value) {
 }
 
 export function createFeedbackFormPackFromOptions(options) {
-  const puzzle = createPuzzleForDayKey(options.day);
+  const day = options.day || todayUtcDay();
+  const puzzle = createPuzzleForDayKey(day);
   if (!puzzle) {
     throw new Error("--day must be a real date in YYYY-MM-DD format");
   }
@@ -74,7 +88,7 @@ export function createFeedbackFormPackFromOptions(options) {
     plan = puzzle.solution;
   }
   const result = traceSignal(puzzle, plan);
-  const reviewUrl = assertPublicHttpUrl("review URL", options.reviewUrl || "https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1");
+  const reviewUrl = assertPublicHttpUrl("review URL", options.reviewUrl || createSampleRouteUrl(day));
   const proposal = plan.length
     ? {
         id: "feedback-form-preview",

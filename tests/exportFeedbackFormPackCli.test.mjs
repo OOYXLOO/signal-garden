@@ -8,7 +8,7 @@ const run = promisify(execFile);
 const script = new URL("../scripts/export-feedback-form-pack.mjs", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 
 const pack = createFeedbackFormPackFromOptions({
-  day: "2026-06-22",
+  day: "2026-06-24",
   sampleRoute: true,
   username: "OOYXLOO",
 });
@@ -19,6 +19,8 @@ assert.ok(pack.submissionChecklist.some((item) => item.includes("registered for 
 assert.ok(pack.eligibilityChecklist.some((item) => item.includes("Devpost project entry")));
 assert.ok(pack.eligibilityChecklist.some((item) => item.includes("actionable comments")));
 assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Judge desk"));
+assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-24")));
+assert.ok(!pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-22")));
 assert.equal(pack.fields.length, 16);
 assert.equal(pack.fields[0].answer, "8");
 assert.equal(pack.fields[4].answer, "4");
@@ -46,11 +48,13 @@ assert.match(markdown, /OOYXLOO/);
 assert.match(markdown, /Do not paste credentials/);
 assert.doesNotMatch(markdown, /password\s*[:=]|otp\s*[:=]|sk-[a-z0-9]{20,}|AKIA[0-9A-Z]{16}/i);
 
-const { stdout } = await run(process.execPath, [script, "--sample-route", "--username", "OOYXLOO"]);
+const { stdout } = await run(process.execPath, [script, "--day", "2026-06-25", "--sample-route", "--username", "OOYXLOO"]);
 assert.match(stdout, /Developer Feedback Survey/);
 assert.match(stdout, /How satisfied are you with the developer experience/);
 assert.match(stdout, /Concrete reproduction notes/);
 assert.match(stdout, /OOYXLOO/);
+assert.match(stdout, /day=2026-06-25&sample=1/);
+assert.doesNotMatch(stdout, /day=2026-06-22&sample=1/);
 
 const help = await run(process.execPath, [script, "--help"]);
 assert.match(help.stdout, /export:feedback-form-pack/);
