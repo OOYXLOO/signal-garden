@@ -817,6 +817,104 @@ textarea.compact-textarea {
   line-height: 1.35;
 }
 
+.quality-card {
+  margin: 12px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 12px;
+  background: #fffdf8;
+}
+
+.quality-card.ready {
+  border-color: rgba(31, 122, 115, 0.38);
+  background: var(--teal-soft);
+}
+
+.quality-card.preview {
+  border-color: rgba(185, 133, 19, 0.38);
+  background: #fff1cf;
+}
+
+.quality-card.todo {
+  border-color: rgba(198, 85, 63, 0.28);
+  background: var(--coral-soft);
+}
+
+.quality-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.quality-card strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--violet);
+  font-size: 22px;
+  line-height: 1.05;
+}
+
+.quality-card.ready strong {
+  color: var(--teal);
+}
+
+.quality-card.preview strong {
+  color: var(--amber);
+}
+
+.quality-card.todo strong {
+  color: var(--coral);
+}
+
+.quality-card p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.quality-card ol {
+  display: grid;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quality-card li {
+  min-width: 0;
+  border-left: 4px solid var(--coral);
+  padding: 2px 0 3px 9px;
+}
+
+.quality-card li.ready {
+  border-left-color: var(--teal);
+}
+
+.quality-card li span,
+.quality-card li strong,
+.quality-card li em {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.quality-card li strong {
+  margin-top: 2px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.quality-card li em {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.3;
+}
+
 textarea.launch-packet {
   min-height: 160px;
 }

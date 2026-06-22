@@ -39,6 +39,7 @@ assert.match(fastPath, /Route state: complete/);
 assert.match(fastPath, /Community state: 1\/1 saved routes complete/);
 assert.match(fastPath, /Lead rationale:/);
 assert.match(fastPath, /Completes all 3 beacons/);
+assert.match(fastPath, /Contribution quality: 80\/100/);
 assert.match(fastPath, /Sample route: https:\/\/example\.test\/play/);
 assert.match(fastPath, /Current review link:/);
 assert.match(fastPath, /1-minute check:/);
@@ -65,13 +66,14 @@ const loopChecks = createReviewerLoopChecks({
 });
 assert.deepEqual(
   loopChecks.map((check) => check.label),
-  ["Open sample", "Trace route", "Rank proposal", "Copy packet"],
+  ["Open sample", "Trace route", "Rank proposal", "Quality proof", "Copy packet"],
 );
 assert.deepEqual(
   loopChecks.map((check) => check.state),
-  ["preview", "ready", "ready", "ready"],
+  ["preview", "ready", "ready", "ready", "ready"],
 );
 assert.match(loopChecks[2].detail, /1\/1 ranked proposals/);
+assert.match(loopChecks[3].detail, /80\/100/);
 
 const draftLoopChecks = createReviewerLoopChecks({ puzzle, sampleRouteUrl: sampleUrl });
 assert.equal(draftLoopChecks.filter((check) => check.ready).length, 1);
@@ -120,6 +122,7 @@ const readinessText = formatSubmissionReadiness(readiness);
 assert.match(readinessText, /Submission readiness/);
 assert.match(readinessText, /Sample route: preview/);
 assert.match(readinessText, /Public app URL: ready/);
+assert.match(readinessText, /80\/100 contribution quality/);
 assert.match(readinessText, /Platform URLs: waiting/);
 assert.match(readinessText, /public source repository/);
 
@@ -160,6 +163,7 @@ const evidenceReceipt = createEvidenceReceipt({
 assert.equal(evidenceReceipt.summary, "6/6 public URL evidence slots ready");
 assert.match(evidenceReceipt.claims.join(" "), /Playable puzzle/);
 assert.match(evidenceReceipt.claims.join(" "), /Community proof: 1\/1 saved routes complete/);
+assert.match(evidenceReceipt.claims.join(" "), /80\/100 contribution quality/);
 assert.match(evidenceReceipt.claims.join(" "), /Retention proof:/);
 const evidenceReceiptText = formatEvidenceReceipt(evidenceReceipt);
 assert.match(evidenceReceiptText, /Evidence claims/);

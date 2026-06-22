@@ -131,11 +131,20 @@ if (!indexHtml.includes('id="reviewer-fast-path"')) {
 if (!indexHtml.includes('id="reviewer-loop-checks"')) {
   failures.push("index.html missing reviewer loop checks");
 }
+if (!indexHtml.includes('id="contribution-quality"')) {
+  failures.push("index.html missing contribution quality proof");
+}
 if (!indexHtml.includes('id="submission-readiness-list"')) {
   failures.push("index.html missing submission readiness list");
 }
 if (!indexHtml.includes('id="submission-readiness-output"')) {
   failures.push("index.html missing submission readiness output");
+}
+if (!indexHtml.includes('id="evidence-receipt"')) {
+  failures.push("index.html missing evidence receipt");
+}
+if (!indexHtml.includes('id="copy-evidence-receipt"')) {
+  failures.push("index.html missing evidence receipt copy control");
 }
 if (!indexHtml.includes('id="launch-packet"')) {
   failures.push("index.html missing launch packet");
@@ -188,11 +197,20 @@ if (!devvitGameHtml.includes('id="reviewer-fast-path"')) {
 if (!devvitGameHtml.includes('id="reviewer-loop-checks"')) {
   failures.push("devvit game.html missing reviewer loop checks");
 }
+if (!devvitGameHtml.includes('id="contribution-quality"')) {
+  failures.push("devvit game.html missing contribution quality proof");
+}
 if (!devvitGameHtml.includes('id="submission-readiness-list"')) {
   failures.push("devvit game.html missing submission readiness list");
 }
 if (!devvitGameHtml.includes('id="submission-readiness-output"')) {
   failures.push("devvit game.html missing submission readiness output");
+}
+if (!devvitGameHtml.includes('id="evidence-receipt"')) {
+  failures.push("devvit game.html missing evidence receipt");
+}
+if (!devvitGameHtml.includes('id="copy-evidence-receipt"')) {
+  failures.push("devvit game.html missing evidence receipt copy control");
 }
 if (!devvitGameHtml.includes('id="launch-packet"')) {
   failures.push("devvit game.html missing launch packet");

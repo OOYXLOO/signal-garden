@@ -320,3 +320,84 @@ export function createDailyRecap(puzzle, consensus) {
   lines.push("Try a route, paste a review link, and help the garden choose today's best signal.");
   return lines.join("\n");
 }
+
+export function createContributionQuality(puzzle, consensus = null) {
+  const proposalCount = Number(consensus?.proposalCount || 0);
+  const completed = Number(consensus?.completed || 0);
+  const contributors = Array.isArray(consensus?.contributors) ? consensus.contributors : [];
+  const contributorCount = contributors.length;
+  const best = consensus?.best || null;
+  const preview = Boolean(consensus?.preview);
+  const bestComplete = Boolean(best?.complete || best?.beacons >= (puzzle?.beacons?.length || 0));
+  const criteria = [
+    {
+      label: "Route evidence",
+      weight: 25,
+      ready: proposalCount > 0 || preview,
+      detail: proposalCount
+        ? `${proposalCount} route proposal${proposalCount === 1 ? "" : "s"} saved or imported.`
+        : preview
+          ? "Sample preview route proves the loop without stored data."
+          : "Import or save a review link to create route evidence.",
+    },
+    {
+      label: "Complete route",
+      weight: 30,
+      ready: completed > 0 || (preview && bestComplete),
+      detail: completed
+        ? `${completed}/${proposalCount} proposal${proposalCount === 1 ? "" : "s"} complete.`
+        : preview && bestComplete
+          ? "Sample route completes the board."
+          : "A complete route gives the thread a credible target.",
+    },
+    {
+      label: "Contributor spread",
+      weight: 20,
+      ready: contributorCount >= 2 || (preview && contributorCount >= 1),
+      detail:
+        contributorCount >= 2
+          ? `${contributorCount} contributors represented in the ranked list.`
+          : contributorCount === 1
+            ? "One contributor is present; import another route to show thread diversity."
+            : "No contributor record yet.",
+    },
+    {
+      label: "Recap handoff",
+      weight: 25,
+      ready: Boolean(best || preview),
+      detail: best
+        ? `Daily recap can explain why ${best.author} leads.`
+        : preview
+          ? "Sample recap can be copied after opening the preview route."
+          : "A recap needs at least one ranked route.",
+    },
+  ];
+  const score = criteria.reduce((total, item) => total + (item.ready ? item.weight : 0), 0);
+  const state = preview && score >= 40 ? "preview" : score >= 80 ? "ready" : score >= 40 ? "preview" : "todo";
+  const label =
+    state === "ready"
+      ? "Community proof ready"
+      : state === "preview"
+        ? "Community proof preview"
+        : "Community proof open";
+  const detail =
+    state === "ready"
+      ? contributorCount
+        ? `The loop has ${completed}/${proposalCount} complete routes across ${contributorCount} contributor view${contributorCount === 1 ? "" : "s"}.`
+        : `The loop has ${completed}/${proposalCount} complete routes; contributor metadata is optional.`
+      : state === "preview"
+        ? "The loop is demonstrable, but it still needs more saved/imported community evidence before final submission."
+        : "Save or import comment routes so reviewers can inspect the contribution loop.";
+
+  return {
+    label,
+    state,
+    score,
+    completionRate: proposalCount ? completed / proposalCount : 0,
+    proposalCount,
+    completed,
+    contributorCount,
+    criteria,
+    detail,
+  };
+}

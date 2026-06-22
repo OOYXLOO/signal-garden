@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, createTopRouteRationale, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
+import { createCommunityTarget, createContributionQuality, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, createTopRouteRationale, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
 import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteCues, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
@@ -124,6 +124,11 @@ assert.equal(consensus.contributors[0].completed, 1);
 assert.equal(summarizeContributors([weakProposal, solvedProposal]).length, 2);
 assert.match(createDailyRecap(puzzle, consensus), /Contributor lead: reader-b/);
 assert.match(createDailyRecap(puzzle, consensus), /Lead rationale: Completes all 3 beacons/);
+const quality = createContributionQuality(puzzle, consensus);
+assert.equal(quality.score, 100);
+assert.equal(quality.state, "ready");
+assert.match(quality.detail, /1\/2 complete routes/);
+assert.deepEqual(quality.criteria.map((item) => item.label), ["Route evidence", "Complete route", "Contributor spread", "Recap handoff"]);
 const rationale = createTopRouteRationale(puzzle, consensus);
 assert.equal(rationale.label, "Why reader-b leads");
 assert.match(rationale.summary, /beacons/);
@@ -144,6 +149,8 @@ const previewConsensus = createPreviewConsensus(puzzle, puzzle.solution);
 assert.equal(previewConsensus.preview, true);
 assert.equal(previewConsensus.proposalCount, 1);
 assert.equal(previewConsensus.best.author, "sample-review");
+assert.equal(createContributionQuality(puzzle, previewConsensus).state, "preview");
+assert.equal(createContributionQuality(puzzle, summarizeConsensus(puzzle, [])).state, "todo");
 assert.deepEqual(createRivalRouteGuide(puzzle, previewConsensus).plan, puzzle.solution);
 assert.match(createCommunityTarget(puzzle, empty, previewConsensus).detail, /Sample preview route/);
 assert.match(createDailyRecap(puzzle, previewConsensus), /sample preview/);

@@ -1,4 +1,4 @@
-import { createTopRouteRationale } from "./game/proposals.js";
+import { createContributionQuality, createTopRouteRationale } from "./game/proposals.js";
 
 export function buildSampleRouteUrl(currentHref, puzzle) {
   if (!puzzle?.id) {
@@ -39,6 +39,11 @@ function rationaleSummary(consensus, puzzle) {
   return `Lead rationale: ${rationale.points.slice(0, 2).join(" ")}`;
 }
 
+function contributionQualitySummary(consensus, puzzle) {
+  const quality = createContributionQuality(puzzle, consensus);
+  return `Contribution quality: ${quality.score}/100 - ${quality.detail}`;
+}
+
 function loopCheck(label, ready, detail, state = "ready") {
   return {
     label,
@@ -68,11 +73,13 @@ export function createReviewerLoopChecks({
     : consensus?.preview
       ? "Sample preview shows the ranked proposal loop without stored data."
       : "Save or import a route to show comment replies becoming ranked proposals.";
+  const quality = createContributionQuality(puzzle, consensus);
 
   return [
     loopCheck("Open sample", Boolean(sampleRouteUrl), sampleRouteUrl ? "Labeled sample route link is ready." : "Use ?sample=1 to load a labeled route.", "preview"),
     loopCheck("Trace route", Boolean(plan.length), routeDetail),
     loopCheck("Rank proposal", Boolean(consensus?.proposalCount || consensus?.preview), proposalDetail, consensus?.preview ? "preview" : "ready"),
+    loopCheck("Quality proof", quality.score >= 40, `${quality.score}/100 - ${quality.detail}`, quality.state === "ready" ? "ready" : "preview"),
     loopCheck("Copy packet", Boolean(launchPacket), launchPacket ? "Launch packet is generated for handoff." : "Render the board to generate a handoff packet."),
   ];
 }
@@ -94,6 +101,7 @@ export function createReviewerFastPath({
     `Route state: ${routeSummary(puzzle, result, plan)}`,
     `Community state: ${consensusSummary(consensus, puzzle)}`,
     rationaleSummary(consensus, puzzle),
+    contributionQualitySummary(consensus, puzzle),
     sampleRouteUrl
       ? `Sample route: ${sampleRouteUrl}`
       : "Sample route: open the app with day=<date>&sample=1 to load a complete labeled preview.",
@@ -136,16 +144,18 @@ function routeReadiness(puzzle, result, plan = []) {
   );
 }
 
-function consensusReadiness(consensus) {
+function consensusReadiness(puzzle, consensus) {
+  const quality = createContributionQuality(puzzle, consensus);
+  const qualityDetail = consensus?.proposalCount || consensus?.preview ? ` ${quality.score}/100 contribution quality.` : "";
   if (consensus?.proposalCount) {
     return readinessState(
       "Contribution loop",
       true,
-      `${consensus.completed}/${consensus.proposalCount} proposals complete; imported links can rank.`,
+      `${consensus.completed}/${consensus.proposalCount} proposals complete; imported links can rank.${qualityDetail}`,
     );
   }
   if (consensus?.preview) {
-    return readinessState("Contribution loop", true, "Sample preview shows ranking without writing stored data.", "preview");
+    return readinessState("Contribution loop", true, `Sample preview shows ranking without writing stored data.${qualityDetail}`, "preview");
   }
   return readinessState(
     "Contribution loop",
@@ -233,7 +243,7 @@ export function createSubmissionReadiness({
     routeReadiness(puzzle, result, plan),
     publicAppReadiness(currentHref),
     retentionReadiness(gardenLog),
-    consensusReadiness(consensus),
+    consensusReadiness(puzzle, consensus),
     readinessState(
       "Launch packet",
       Boolean(launchPacket),
@@ -301,6 +311,7 @@ export function createEvidenceReceipt({
   const routeStatus = result?.complete ? "complete" : result?.status || "drafting";
   const routeScore = Number(result?.score || 0);
   const routeBeacons = result?.hitBeacons?.length || 0;
+  const contributionQuality = createContributionQuality(puzzle, consensus);
   const publicUrls = [
     urlEvidence("Public app", publicAppUrl, "waiting for deployed app URL"),
     urlEvidence("Sample route", sampleRouteUrl, "waiting for sample route URL"),
@@ -313,9 +324,9 @@ export function createEvidenceReceipt({
     `Playable puzzle: ${puzzle.beacons.length} beacons, ${puzzle.moveLimit} mirrors, deterministic day ${puzzle.id}.`,
     `Route proof: ${routeStatus}, ${routeScore} pts, ${routeBeacons}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`,
     proposalCount
-      ? `Community proof: ${completed}/${proposalCount} saved routes complete, with a ranked top route.`
+      ? `Community proof: ${completed}/${proposalCount} saved routes complete, with a ranked top route and ${contributionQuality.score}/100 contribution quality.`
       : consensus?.preview
-        ? "Community proof: sample preview demonstrates ranking without stored data."
+        ? `Community proof: sample preview demonstrates ranking without stored data and ${contributionQuality.score}/100 contribution quality.`
         : "Community proof: waiting for saved or imported route proposals.",
     gardenLog?.slots?.length
       ? `Retention proof: ${activeReturnSlots}/${gardenLog.slots.length} return-map slots show activity or preview state.`

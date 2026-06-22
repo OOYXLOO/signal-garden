@@ -1,7 +1,15 @@
 import { createCommunityClient } from "./client/communityClient.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
-import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide, createTopRouteRationale } from "./game/proposals.js";
+import {
+  createCommunityTarget,
+  createContributionQuality,
+  createDailyMissions,
+  createDailyRecap,
+  createPreviewConsensus,
+  createRivalRouteGuide,
+  createTopRouteRationale,
+} from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
 import {
   buildSampleRouteUrl,
@@ -64,6 +72,10 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     importRoute: document.querySelector("#import-route"),
     saveProposal: document.querySelector("#save-proposal"),
     proposalSummary: document.querySelector("#proposal-summary"),
+    contributionQualityCard: document.querySelector("#contribution-quality"),
+    contributionQualityValue: document.querySelector("#contribution-quality-value"),
+    contributionQualityDetail: document.querySelector("#contribution-quality-detail"),
+    contributionQualityList: document.querySelector("#contribution-quality-list"),
     topRouteRationale: document.querySelector("#top-route-rationale"),
     topRouteRationaleSummary: document.querySelector("#top-route-rationale-summary"),
     topRouteRationaleList: document.querySelector("#top-route-rationale-list"),
@@ -756,6 +768,7 @@ function renderConsensus(refs, consensus, puzzle) {
     refs.proposalList.firstChild.textContent = "Save a plan to start the local consensus list.";
   }
   renderContributors(refs, consensus.contributors || []);
+  renderContributionQuality(refs, createContributionQuality(puzzle, consensus));
   renderTopRouteRationale(refs, createTopRouteRationale(puzzle, consensus));
   refs.dailyRecap.value = puzzle ? createDailyRecap(puzzle, consensus) : "";
   return consensus;
@@ -798,6 +811,26 @@ function renderContributors(refs, contributors) {
   if (!contributors.length) {
     refs.contributorList.firstChild.textContent = "Import or save routes to start the contributor board.";
   }
+}
+
+function renderContributionQuality(refs, quality) {
+  refs.contributionQualityCard.className = `quality-card ${quality.state}`;
+  refs.contributionQualityValue.textContent = `${quality.score}/100`;
+  refs.contributionQualityDetail.textContent = quality.detail;
+  refs.contributionQualityList.replaceChildren(
+    ...quality.criteria.map((item) => {
+      const row = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      const detail = document.createElement("em");
+      row.className = item.ready ? "ready" : "todo";
+      label.textContent = item.label;
+      value.textContent = item.ready ? "ready" : "open";
+      detail.textContent = item.detail;
+      row.append(label, value, detail);
+      return row;
+    }),
+  );
 }
 
 function renderTopRouteRationale(refs, rationale) {
