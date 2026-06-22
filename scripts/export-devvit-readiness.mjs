@@ -112,6 +112,16 @@ export async function createDevvitReadinessReport({ date } = {}) {
     check("expanded-mode", "Splash requests Devvit expanded mode with browser fallback", splash.includes("devvit-internal") && splash.includes("immersiveMode") && splash.includes("game.html"), "expanded-mode message plus game.html fallback"),
     check("fetch-client", "Game entry uses same-origin community API calls", gameEntry.includes("SIGNAL_GARDEN_MANUAL_START") && gameEntry.includes("createFetchCommunityClient") && gameEntry.includes("window.location.origin"), "manual startup with same-origin fetch client"),
     check("server-routes", "Server shell exposes init, proposal, archive, and menu routes", server.includes("createSignalGardenApi") && server.includes("/internal/menu/post-create") && server.includes("submitCustomPost"), "shared API plus menu post-create route"),
+    check(
+      "custom-post-payload",
+      "Menu-created custom posts include Devvit-ready entry, fallback, post data, and styles",
+      server.includes('entry: DEFAULT_POST_ENTRY') &&
+        server.includes("postData") &&
+        server.includes("textFallback") &&
+        server.includes("userGeneratedContent") &&
+        server.includes("height: POST_HEIGHT"),
+      "submitCustomPost payload includes entry, postData, textFallback, userGeneratedContent, and TALL height",
+    ),
     check("redis-boundary", "Redis migration boundary is isolated", server.includes("signalGardenRedis") && server.includes("createRedisProposalStore") && server.includes("MemoryProposalStore"), "global Redis injection with memory fallback"),
   ];
 

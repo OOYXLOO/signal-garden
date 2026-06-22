@@ -13,6 +13,9 @@ const api = createSignalGardenApi({
   store: createStore(),
 });
 
+const DEFAULT_POST_ENTRY = "default";
+const POST_HEIGHT = "TALL";
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -22,6 +25,10 @@ function json(data, status = 200) {
   });
 }
 
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 async function createDailyRelayPost() {
   const reddit = globalThis.signalGardenReddit;
   if (!reddit?.submitCustomPost) {
@@ -29,8 +36,22 @@ async function createDailyRelayPost() {
   }
 
   try {
+    const day = globalThis.signalGardenContext?.day || todayKey();
     const post = await reddit.submitCustomPost({
-      title: "Signal Garden daily relay",
+      title: `Signal Garden daily relay - ${day}`,
+      entry: DEFAULT_POST_ENTRY,
+      postData: {
+        day,
+        source: "signal-garden-menu",
+      },
+      textFallback:
+        "Signal Garden is a daily relay puzzle. Open the custom post to route the signal, share a route, and compare community proposals.",
+      userGeneratedContent: true,
+      styles: {
+        backgroundColor: "#111317FF",
+        backgroundColorDark: "#111317FF",
+        height: POST_HEIGHT,
+      },
     });
     const subreddit = globalThis.signalGardenContext?.subredditName || "signal-garden";
     return json({

@@ -93,13 +93,13 @@
     },
     {
       "path": "docs/devvit_shell_readiness.md",
-      "bytes": 4373,
-      "sha256": "7e263c68d5664081242b47f423ccb937fe7785400a9ac2f81d6f5cbe9da04651"
+      "bytes": 4725,
+      "sha256": "53ca7b1101f72f52407b19d1aa1e8a0592113ebbc4d3032f8c69ab31ffae3451"
     },
     {
       "path": "docs/devvit-readiness-report.md",
-      "bytes": 2046,
-      "sha256": "987f1c7867920b7b6dd002cb881b87cc7a683a2aa6b7d052510ab7ad426e1960"
+      "bytes": 2248,
+      "sha256": "3baf365b9d8b154bb03a7ca2fc5ea53db775ef2a90fc3f50b74c9e6071dc30af"
     },
     {
       "path": "docs/devvit_dependency_watch.md",
@@ -158,8 +158,8 @@
     },
     {
       "path": "scripts/export-devvit-readiness.mjs",
-      "bytes": 7877,
-      "sha256": "92bebcdededbd67805e4791b82aac0aa5937638d749d36d7ef5c31b74c450593"
+      "bytes": 8366,
+      "sha256": "4deb4cb072d299bd8b9d4dfb307d909bace1877dace74f3c2521b56e18e7706b"
     },
     {
       "path": "scripts/export-submission-runbook.mjs",

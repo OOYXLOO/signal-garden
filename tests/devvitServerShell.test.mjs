@@ -76,11 +76,11 @@ const archiveResponse = await shell.fetch(new Request("http://local.test/api/arc
 const archive = await archiveResponse.json();
 assert.equal(archive.consensus.proposalCount, 1);
 
-let createdPostTitle = "";
-globalThis.signalGardenContext = { subredditName: "signal-garden-test" };
+let createdPostInput = null;
+globalThis.signalGardenContext = { day: "2026-06-22", subredditName: "signal-garden-test" };
 globalThis.signalGardenReddit = {
   async submitCustomPost(input) {
-    createdPostTitle = input.title;
+    createdPostInput = input;
     return { id: "abc123" };
   },
 };
@@ -91,7 +91,16 @@ const menuResponse = await shell.fetch(
 );
 assert.equal(menuResponse.status, 200);
 const menu = await menuResponse.json();
-assert.equal(createdPostTitle, "Signal Garden daily relay");
+assert.equal(createdPostInput.title, "Signal Garden daily relay - 2026-06-22");
+assert.equal(createdPostInput.entry, "default");
+assert.deepEqual(createdPostInput.postData, {
+  day: "2026-06-22",
+  source: "signal-garden-menu",
+});
+assert.match(createdPostInput.textFallback, /daily relay puzzle/);
+assert.equal(createdPostInput.userGeneratedContent, true);
+assert.equal(createdPostInput.styles.height, "TALL");
+assert.equal(createdPostInput.styles.backgroundColor, "#111317FF");
 assert.equal(menu.navigateTo, "https://reddit.com/r/signal-garden-test/comments/abc123");
 
 delete globalThis.signalGardenReddit;

@@ -19,6 +19,7 @@ This report is generated from repository config, source files, and public handof
 | PASS | Splash requests Devvit expanded mode with browser fallback | expanded-mode message plus game.html fallback |
 | PASS | Game entry uses same-origin community API calls | manual startup with same-origin fetch client |
 | PASS | Server shell exposes init, proposal, archive, and menu routes | shared API plus menu post-create route |
+| PASS | Menu-created custom posts include Devvit-ready entry, fallback, post data, and styles | submitCustomPost payload includes entry, postData, textFallback, userGeneratedContent, and TALL height |
 | PASS | Redis migration boundary is isolated | global Redis injection with memory fallback |
 
 ## Account-Owner Gates
