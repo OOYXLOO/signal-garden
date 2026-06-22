@@ -103,7 +103,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
-- Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled sample preview consensus and sample week preview when no proposal or archive exists yet.
+- Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled multi-contributor sample preview consensus and sample week preview when no proposal or archive exists yet.
 - Comment thread route import that turns pasted review links, briefings, or short coordinate replies such as `r3c3\ r7c3\` into ranked community proposals, with import counts, skip reasons for duplicate or cross-day routes, a one-click sample thread loader, and an explainable top route rationale after ranking.
 - Submission readiness panel that summarizes the playable board, sample route, current Review link, public app URL status, return map, contribution loop, launch packet, and remaining platform URL placeholders in one copyable checklist.
 - Recent local archive and streak state for the daily return loop, with review links for saved routes.

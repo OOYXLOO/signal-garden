@@ -61,17 +61,47 @@ export function createPreviewConsensus(puzzle, plan = [], author = "sample-revie
   if (!plan.length) {
     return null;
   }
+  const previewPlans = createPreviewProposalPlans(plan);
+  const proposals = previewPlans.map((preview, index) =>
+    createProposal({
+      puzzle,
+      plan: preview.plan,
+      author: index === 0 ? author : preview.author,
+      createdAt: `${puzzle.id}T00:0${index}:00.000Z`,
+    }),
+  );
   return {
-    ...summarizeConsensus(puzzle, [
-      createProposal({
-        puzzle,
-        plan,
-        author,
-        createdAt: `${puzzle.id}T00:00:00.000Z`,
-      }),
-    ]),
+    ...summarizeConsensus(puzzle, proposals),
     preview: true,
   };
+}
+
+function createPreviewProposalPlans(plan = []) {
+  const cloned = plan.map((move) => ({ ...move }));
+  const partial = cloned.slice(0, Math.max(1, cloned.length - 1));
+  const variant = cloned.length
+    ? [
+        {
+          ...cloned[0],
+          mirror: cloned[0].mirror === "slash" ? "backslash" : "slash",
+        },
+        ...cloned.slice(1),
+      ]
+    : [];
+  const previews = [
+    { author: "sample-review", plan: cloned },
+    { author: "sample-helper", plan: partial },
+    { author: "sample-tinkerer", plan: variant },
+  ];
+  const seen = new Set();
+  return previews.filter((preview) => {
+    const key = JSON.stringify(preview.plan);
+    if (!preview.plan.length || seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
 }
 
 export function createCommunityTarget(puzzle, result, consensus) {

@@ -147,7 +147,8 @@ assert.deepEqual(createRivalRouteGuide(puzzle, consensus).plan, solvedProposal.p
 assert.equal(createRivalRouteGuide(puzzle, consensus).visited.length, solved.visited.length);
 const previewConsensus = createPreviewConsensus(puzzle, puzzle.solution);
 assert.equal(previewConsensus.preview, true);
-assert.equal(previewConsensus.proposalCount, 1);
+assert.ok(previewConsensus.proposalCount >= 2);
+assert.ok(previewConsensus.contributors.length >= 2);
 assert.equal(previewConsensus.best.author, "sample-review");
 assert.equal(createContributionQuality(puzzle, previewConsensus).state, "preview");
 assert.equal(createContributionQuality(puzzle, summarizeConsensus(puzzle, [])).state, "todo");

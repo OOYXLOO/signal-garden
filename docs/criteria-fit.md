@@ -31,7 +31,7 @@ Reference pages:
 | New Reddit game concept | Daily signal-routing community puzzle with mirror placement, beacons, receiver, and route proposals | Implemented in browser build and Devvit shell |
 | Built for Reddit community loops | Review links, Reddit post draft, comment challenge prompt, comment route import, proposal ranking, daily recap | Implemented locally and documented for user-approved posting |
 | Replayable or retentive hook | Deterministic daily boards, seven verified puzzle templates, return map, streak/archive state, sample week preview, next-day return pledge prompt | Implemented in app and submission field pack |
-| User contribution | Routes become proposals, contributor board aggregates authors, top route can be applied and explained | Implemented in app and tests |
+| User contribution | Routes become proposals, contributor board aggregates authors, sample preview shows multiple contributors, top route can be applied and explained | Implemented in app and tests |
 | Not a common clone | Community relay puzzle based on route sharing and ranked comment proposals, not a shooter, platformer, trivia app, or story clone | Documented and visible in app |
 | Evaluatable without running a platform account | Public app, sample route, judge desk, final captioned demo, manifest, README, launch readiness docs | Public and audited |
 | Devvit migration path | Devvit-shaped client/server shell, splash-to-expanded-game notes, Redis-shaped proposal store, dependency watch | Implemented as pre-account validation |
