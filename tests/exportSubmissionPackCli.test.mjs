@@ -135,6 +135,9 @@ try {
   assert.match(stdout, /day=2026-06-19/);
   assert.match(stdout, /plan=2-2-b\.2-6-b/);
   assert.match(stdout, /Short Description/);
+  assert.match(stdout, /The proposal layer recomputes scores/);
+  assert.match(stdout, /Each route can be shared as a link/);
+  assert.match(stdout, /Shared deterministic puzzle engine/);
   assert.match(stdout, /Source Repository/);
   assert.match(stdout, /Launch Packet/);
   assert.match(stdout, /Developer Platform Feedback/);

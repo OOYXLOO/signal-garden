@@ -321,6 +321,9 @@ async function auditSubmissionManifest() {
   if (!String(manifest.publicUrlAuditCommand || "").includes("audit:public")) {
     failures.push(`${manifestPath} missing public URL audit command`);
   }
+  if (!String(manifest.devpostFieldsCommand || "").includes("export:devpost-fields")) {
+    failures.push(`${manifestPath} missing Devpost fields command`);
+  }
   if (!String(manifest.demoPostCommand || "").includes("export:demo-post")) {
     failures.push(`${manifestPath} missing demo post command`);
   }

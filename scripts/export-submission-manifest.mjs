@@ -105,6 +105,8 @@ export async function createSubmissionManifest() {
     publicUrlAuditCommand: "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
     platformFeedbackCommand:
       "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+    devpostFieldsCommand:
+      "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
     demoPostCommand:
       "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",
     submissionPackCommand:

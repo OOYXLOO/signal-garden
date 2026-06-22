@@ -107,7 +107,10 @@ try {
   assert.match(stdout, /Criteria fit brief:/);
   assert.match(stdout, /Built With/);
   assert.match(stdout, /What Makes It Social/);
+  assert.match(stdout, /Each route can be shared as a link/);
   assert.match(stdout, /Testing Instructions/);
+  assert.match(stdout, /Shared deterministic puzzle engine/);
+  assert.match(stdout, /The proposal layer recomputes scores/);
   assert.match(stdout, /Criteria Fit Summary/);
   assert.match(stdout, /Pending External Gates/);
   assert.match(stdout, /Devvit app listing URL/);

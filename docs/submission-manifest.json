@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/devpost-field-pack.md",
-      "bytes": 3341,
-      "sha256": "bcba93be6e1f88a511808578247d97c92c5c46b6e54f7ff3ce77ae028475be41"
+      "bytes": 13350,
+      "sha256": "daa80af4effaedf498957fec5016b5d087c8c77c8e102f33989107c555bfe315"
     },
     {
       "path": "docs/criteria-fit.md",
@@ -108,8 +108,8 @@
     },
     {
       "path": "scripts/audit-release-gates.mjs",
-      "bytes": 9618,
-      "sha256": "be317a94cfb79e5e3f7668ae545642a7e4749cc24103c3dd4ba6ff22c55d7f62"
+      "bytes": 9847,
+      "sha256": "996b9a7bf3bd5e381d58b232a0c5e7e57a26727923e8281e400a86cab1c174c4"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
@@ -118,13 +118,13 @@
     },
     {
       "path": "scripts/export-submission-pack.mjs",
-      "bytes": 11933,
-      "sha256": "45c6dfb3b7344f843a48c2600e36734057851de9c1973760b763f094830fae48"
+      "bytes": 12098,
+      "sha256": "e42c5e91b9c21247c202a2453043617d12cdc94bf24d20c0f1d60f053f7b9ba1"
     },
     {
       "path": "scripts/export-devpost-fields.mjs",
-      "bytes": 9885,
-      "sha256": "bf4e99ab09ee25b1ed9db848af4f446eff06899342c03abdf9ad383bd70feeda"
+      "bytes": 10050,
+      "sha256": "605292f5ab4a35d49067d7e33ffd4366dc52d44602209b3b05e05ab8b1a2e9ed"
     },
     {
       "path": "scripts/export-platform-feedback.mjs",
@@ -151,6 +151,7 @@
   "launchPacketCommand": "npm run export:launch-packet -- --day <YYYY-MM-DD> --plan <review-plan-token> --review-base-url <public-app-url> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> --strict",
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
+  "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
   "demoPostCommand": "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",
   "submissionPackCommand": "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url> OR --sample-route",
   "publicGatePlaceholders": [

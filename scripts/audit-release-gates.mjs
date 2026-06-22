@@ -17,6 +17,7 @@ const requiredScripts = [
   "export:launch-packet",
   "export:submission-manifest",
   "export:submission-pack",
+  "export:devpost-fields",
 ];
 
 const requiredFiles = [
@@ -29,6 +30,7 @@ const requiredFiles = [
   "scripts/audit-public-url.mjs",
   "scripts/export-launch-packet.mjs",
   "scripts/export-submission-pack.mjs",
+  "scripts/export-devpost-fields.mjs",
   "scripts/github-pages-release-check.ps1",
 ];
 
@@ -151,7 +153,7 @@ async function auditReleaseGates(options = {}) {
   }
 
   const manifest = JSON.parse(await readFile(resolve(root, "docs/submission-manifest.json"), "utf8"));
-  for (const command of ["audit:public", "export:launch-packet", "export:submission-pack"]) {
+  for (const command of ["audit:public", "export:launch-packet", "export:submission-pack", "export:devpost-fields"]) {
     const text = JSON.stringify(manifest);
     if (!text.includes(command)) failures.push(`submission manifest missing command marker: ${command}`);
   }
@@ -215,6 +217,7 @@ async function auditReleaseGates(options = {}) {
       "npm audit --audit-level=moderate",
       "powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 -SetOrigin -Push",
       "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
+      "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
       "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
       "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
     ],
