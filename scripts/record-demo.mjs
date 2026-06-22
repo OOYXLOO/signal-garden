@@ -31,6 +31,7 @@ const shortDurations = {
 
 const finalDurations = {
   intro: 4000,
+  guide: 3600,
   board: 3400,
   feedback: 3800,
   route: 3800,
@@ -100,6 +101,8 @@ async function main() {
     durations.intro,
   );
   if (final) {
+    await page.waitForFunction(() => document.querySelector("#onboarding-steps")?.textContent.includes("Open sample route"));
+    await showCaption(page, "Start here turns the first visit into four review actions: trace, sample route, community loop, and handoff proof.", durations.guide);
     await showCaption(page, "The first screen shows the daily seed, objective progress, three beacons, and the five-move limit.", durations.board);
   }
 
@@ -144,6 +147,7 @@ async function main() {
     summary: document.querySelector("#proposal-summary")?.textContent,
     rationale: document.querySelector("#top-route-rationale")?.textContent,
     quality: document.querySelector("#contribution-quality")?.textContent,
+    guide: document.querySelector("#onboarding-steps")?.textContent,
     contributors: document.querySelector("#contributor-list")?.textContent,
     recap: document.querySelector("#daily-recap")?.value,
     briefing: document.querySelector("#briefing-output")?.value,
@@ -173,7 +177,8 @@ async function main() {
     (!state.contributors?.includes("alice") ||
       !state.recap?.includes("Contributor lead") ||
       !state.rationale?.includes("leads") ||
-      !state.quality?.includes("100/100"))
+      !state.quality?.includes("100/100") ||
+      !state.guide?.includes("Copy handoff proof"))
   ) {
     throw new Error(`Incomplete contributor recap state: ${JSON.stringify(state)}`);
   }

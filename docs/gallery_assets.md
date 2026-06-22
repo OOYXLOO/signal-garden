@@ -28,11 +28,11 @@ Generated: 2026-06-20
 6. `docs/demo-final-captioned.webm`
    - Final captioned demo candidate.
    - 1366x900, under 60 seconds after `npm run audit:submission`.
-   - Covers the daily hook, objective progress, board constraints, explainable route feedback, completion, proposal save, review-link briefing, comment-thread import, community quality proof, top proposal apply, archive review, and adapter boundary.
+   - Covers the daily hook, first-session guide, objective progress, board constraints, explainable route feedback, completion, proposal save, review-link briefing, comment-thread import, community quality proof, top proposal apply, archive review, and adapter boundary.
 
 ## Caption
 
-Daily browser puzzle prototype with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, community quality proof, shareable route links, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export with an exact review link, and a captioned demo candidate.
+Daily browser puzzle prototype with seven verified board templates, objective progress, first-session guide, route replay, adapter-backed proposal consensus, community quality proof, shareable route links, recent archive state, optional progressive hints, explainable route feedback, a compact briefing export with an exact review link, and a captioned demo candidate.
 
 ## Guardrails
 

@@ -33,18 +33,18 @@
     },
     {
       "path": "docs/demo-final-captioned.webm",
-      "bytes": 3763604,
-      "sha256": "57f7d4c7f15b0bcf9ce086b188c6f15b110b28659b9a818eace135498fc2bf78"
+      "bytes": 4026933,
+      "sha256": "adf292bcf1f5dae32be6d07329783a5718e7450b69ec87194dd8ace1e3a3bff1"
     },
     {
       "path": "docs/demo-script.md",
-      "bytes": 4182,
-      "sha256": "c476240ad3f988a3cbe5c161db638868e5aaf24cee47c16cb0b66b1c5079fb8f"
+      "bytes": 4407,
+      "sha256": "a837a281a23a671a8550e55183a51d2c28a6261bc2670aa18cb49a1231794332"
     },
     {
       "path": "docs/gallery_assets.md",
-      "bytes": 1806,
-      "sha256": "0e088d4c0b7f4504ba5fded6637eaee726827c576a32275cd3cead4839546ec8"
+      "bytes": 1848,
+      "sha256": "3c69b1548f83b368b15c4114d1ffc8ef59cdf2095d4a434d1f9324407ddd40b6"
     },
     {
       "path": "docs/launch-readiness.md",

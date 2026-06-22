@@ -14,48 +14,52 @@ Signal Garden is a daily community relay puzzle. Each player proposes a route by
    - Say: "Signal Garden is a daily relay puzzle built with Phaser."
    - Show the date chip, board title, objective progress, move limit, hint button, and three beacons.
 
-2. Place or apply a complete plan.
+2. Show the first-session guide.
+   - Say: "Start here turns the first visit into four review actions."
+   - Show `Trace the beam`, `Open sample route`, `Show community loop`, and `Copy handoff proof`.
+
+3. Place or apply a complete plan.
    - Say: "Players guide one signal through all three beacons before it reaches the receiver."
    - Show the path updating instantly and the objective chips turning complete.
 
-3. Replay the route.
+4. Replay the route.
    - Say: "Replay makes the path readable during review."
    - Show the signal marker moving along the current route.
 
-4. Show one failed route.
+5. Show one failed route.
    - Say: "Failed routes explain what happened instead of leaving the player guessing."
    - Show the status hint and board marker for an incomplete path.
 
-5. Save the proposal.
+6. Save the proposal.
    - Say: "Each route becomes a proposal. The app recomputes the score, ranks the best plan, explains why it leads, and shows the top route as a board ghost."
    - Show the consensus summary changing to `1/1 saved proposals complete`.
 
-6. Copy the share link and briefing.
+7. Copy the share link and briefing.
    - Say: "A share link and briefing carry the exact route into a post, comment, or review thread."
    - Show the review link inside the briefing output and the copy button changing to `Link copied`.
 
-7. Import a comment thread.
+8. Import a comment thread.
    - Say: "Pasted review links become scored community proposals, while duplicate or cross-day routes are explained instead of silently failing."
    - Click `Load sample thread`, import it, then show the import summary, skip reasons, top route rationale, and the contributor board updating.
 
-8. Show community quality, the comment prompt, Reddit post draft, review snapshot, submission readiness, launch packet, and daily recap.
+9. Show community quality, the comment prompt, Reddit post draft, review snapshot, submission readiness, launch packet, and daily recap.
    - Say: "Community quality scores whether the reply loop has route evidence, completed routes, contributor spread, and recap handoff."
    - Show the Community quality panel, comment prompt with a Review link, the Reddit post draft, the review snapshot, the readiness checklist, the launch packet sections, then the recap text with route count and contributor lead.
 
-9. Clear and apply the top proposal.
+10. Clear and apply the top proposal.
    - Say: "The top proposal is not a hidden answer. It is the best saved community plan."
    - Show the top route ghost remaining after the local draft is cleared, then show the board returning to the saved route.
 
-10. Show the loop panel.
+11. Show the loop panel.
    - Say: "The local archive and streak make the daily board feel persistent."
    - Point out daily seed, local streak, status, and the archive Review link.
 
-11. Close on the platform path.
+12. Close on the platform path.
    - Say: "The browser version is testable today, and the Devvit shell keeps the client and server adapter ready for a Reddit surface."
 
 ## Submission Caption
 
-Daily Phaser puzzle with seven verified board templates, objective progress, route replay, adapter-backed proposal consensus, community quality proof, top route ghosting, top route rationale, comment challenge prompts, Reddit post draft export, review snapshot export, submission readiness checklist, launch packet export, sample thread loading, comment thread route import with skip reasons, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
+Daily Phaser puzzle with seven verified board templates, objective progress, first-session guide, route replay, adapter-backed proposal consensus, community quality proof, top route ghosting, top route rationale, comment challenge prompts, Reddit post draft export, review snapshot export, submission readiness checklist, launch packet export, sample thread loading, comment thread route import with skip reasons, contributor recap, shareable route links, a compact archive/streak loop, explainable route feedback, and a Devvit-ready adapter boundary.
 
 ## Field Notes
 

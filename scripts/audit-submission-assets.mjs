@@ -107,6 +107,7 @@ const textExpectations = [
     file: "docs/demo-script.md",
     fragments: [
       "objective progress",
+      "first-session guide",
       "review link",
       "archive Review",
       "comment prompt",
