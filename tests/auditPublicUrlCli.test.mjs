@@ -36,7 +36,7 @@ const judgeHtml = [
   "<body>",
   "<main>",
   "<h1>Signal Garden Judge Desk</h1>",
-  "<a>Open sample route</a>",
+  "<a data-dynamic-sample-route>Open today's sample route</a>",
   "<section>Retention Mechanics</section>",
   "<section>User Contributions</section>",
   "<section>Developer Feedback</section>",

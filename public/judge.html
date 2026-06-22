@@ -219,7 +219,14 @@
         </p>
         <nav class="actions" aria-label="Primary review links">
           <a class="button primary" href="./">Play public app</a>
-          <a class="button" href="./?day=2026-06-22&amp;sample=1">Open sample route</a>
+          <a
+            class="button"
+            data-dynamic-sample-route
+            href="./?day=2026-06-22&amp;sample=1"
+            aria-label="Open today's sample route"
+          >
+            Open today's sample route
+          </a>
           <a class="button" href="https://github.com/OOYXLOO/signal-garden">Review source</a>
         </nav>
       </section>
@@ -340,5 +347,17 @@
         </article>
       </section>
     </main>
+    <script>
+      (() => {
+        const sampleRoute = document.querySelector("[data-dynamic-sample-route]");
+        if (!sampleRoute) return;
+        const day = new Date().toISOString().slice(0, 10);
+        const url = new URL("./", window.location.href);
+        url.searchParams.set("day", day);
+        url.searchParams.set("sample", "1");
+        sampleRoute.href = url.toString();
+        sampleRoute.textContent = `Open today's sample route (${day})`;
+      })();
+    </script>
   </body>
 </html>

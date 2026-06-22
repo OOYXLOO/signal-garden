@@ -37,7 +37,8 @@ const textExpectations = [
     fragments: [
       "Signal Garden Judge Desk",
       "Play public app",
-      "Open sample route",
+      "Open today's sample route",
+      "data-dynamic-sample-route",
       "Review source",
       "Retention Mechanics",
       "User Contributions",

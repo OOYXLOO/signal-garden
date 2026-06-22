@@ -134,7 +134,8 @@ function auditHtml(name, result) {
 const defaultJudgeFragments = [
   "Signal Garden",
   "Judge Desk",
-  "Open sample route",
+  "Open today's sample route",
+  "data-dynamic-sample-route",
   "Retention Mechanics",
   "User Contributions",
   "Developer Feedback",

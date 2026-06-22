@@ -56,12 +56,16 @@ if (!html.includes("./favicon.svg")) {
 }
 for (const fragment of [
   "Signal Garden Judge Desk",
-  "Open sample route",
+  "Open today's sample route",
+  "data-dynamic-sample-route",
   "Retention Mechanics",
   "User Contributions",
   "Developer Feedback",
+  "Media Evidence Kit",
   "Return pledge",
   "demo-final-captioned.webm",
+  "desktop-preview.png",
+  "mobile-preview.png",
   "submission-manifest.json",
   "criteria-fit.md",
   "devpost-field-pack.md",

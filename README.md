@@ -95,7 +95,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Platform feedback CLI export for preparing user-approved developer/platform feedback after the public app URL exists.
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
-- Public judge desk that links the playable app, sample route, source repository, final captioned demo, media evidence kit, manifest, and handoff docs from one static page.
+- Public judge desk that links the playable app, today's sample route, source repository, final captioned demo, media evidence kit, manifest, and handoff docs from one static page.
 - Criteria fit brief that maps public hackathon signals to concrete product evidence and remaining platform gates.
 - Devpost field pack export that turns the public app, source repository, judge desk, criteria brief, and current gate status into concise copyable form fields.
 - Release gate audit that reports local release readiness and marks public app, source repository, listing, demo post, and remote repository gates as ready, waiting, or blocked.
