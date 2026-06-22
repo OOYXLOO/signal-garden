@@ -17,6 +17,7 @@ Public app: https://ooyxloo.github.io/signal-garden/
 For a one-page public review desk, open `https://ooyxloo.github.io/signal-garden/judge.html`.
 
 See `docs/public-verification.md` for the current public deployment, source, and check status.
+See `docs/criteria-fit.md` for the public rules-to-evidence map used during submission review.
 
 ## Local Run
 
@@ -93,6 +94,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - GitHub Pages workflow and artifact audit for turning a pushed repository into a public static review surface.
 - Public URL audit for checking the deployed page and `sample=1` review link before a submission pass.
 - Public judge desk that links the playable app, sample route, source repository, final captioned demo, manifest, and handoff docs from one static page.
+- Criteria fit brief that maps public hackathon signals to concrete product evidence and remaining platform gates.
 - Release gate audit that reports local release readiness and marks public app, source repository, listing, demo post, and remote repository gates as ready, waiting, or blocked.
 - Submission pack export that combines public URL checks, source repository evidence, submission fields, media checklist, launch packet copy, and an optional built-in sample review route.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.

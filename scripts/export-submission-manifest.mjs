@@ -18,6 +18,7 @@ const evidenceFiles = [
   "docs/gallery_assets.md",
   "docs/launch-readiness.md",
   "docs/submission-field-pack.md",
+  "docs/criteria-fit.md",
   "docs/platform-feedback-pack.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",

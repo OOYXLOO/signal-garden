@@ -59,6 +59,7 @@ for (const fragment of [
   "Open sample route",
   "demo-final-captioned.webm",
   "submission-manifest.json",
+  "criteria-fit.md",
   "https://github.com/OOYXLOO/signal-garden",
 ]) {
   if (!judgeHtml.includes(fragment)) {

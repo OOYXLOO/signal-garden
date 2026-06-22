@@ -40,6 +40,7 @@ const judgeHtml = [
   "<a>https://github.com/OOYXLOO/signal-garden</a>",
   "<a>demo-final-captioned.webm</a>",
   "<a>submission-manifest.json</a>",
+  "<a>criteria-fit.md</a>",
   "</main>",
   "</body>",
   "</html>",

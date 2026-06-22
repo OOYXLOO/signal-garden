@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 9722,
-      "sha256": "647de4107428b95ba87e1411ce91a5fdeb48063dfe644c3a7e09b1b72d3df247"
+      "bytes": 9932,
+      "sha256": "09989e6e99d08f5855526e7819b7a1572cccb15fbd93a4d75981e5653e93a60d"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 6912,
-      "sha256": "9c6c3db2805d99700ac724ff72cbf996a80b7e352497934c770662ebfe83cd36"
+      "bytes": 7041,
+      "sha256": "aebbfad0448f4545cc633e475ed01956515f34d61b8ac9e89b07e1ab00e5f3a9"
     },
     {
       "path": "docs/cover.png",
@@ -58,8 +58,13 @@
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 13281,
-      "sha256": "075eae5ba0f6c99aba90f76ef9eac4ecd0ca08957abbf0276cfb51454767c164"
+      "bytes": 13695,
+      "sha256": "432d0605d1fce4767f44d77462689d3138f5bce35609d60daadd907cc7ada842"
+    },
+    {
+      "path": "docs/criteria-fit.md",
+      "bytes": 4829,
+      "sha256": "94ed25dd1a1461d329a9b25f1b9a5fa0fd8a6b3a15daeb09659a2e5e2e9db2ad"
     },
     {
       "path": "docs/platform-feedback-pack.md",
@@ -88,13 +93,13 @@
     },
     {
       "path": "scripts/audit-pages-build.mjs",
-      "bytes": 2062,
-      "sha256": "48bbce9950340ea623969b3457aa1ce496640938a71c00a482d4ae5246f12afd"
+      "bytes": 2083,
+      "sha256": "5d7470158981a99579562dc10c1e65dc0d54042498c68d15c7e97cac2a7bf5e1"
     },
     {
       "path": "scripts/audit-public-url.mjs",
-      "bytes": 6444,
-      "sha256": "093505dc7334e1d942828115c9d7a06e3a9066e9f070a1256147f026567b8417"
+      "bytes": 6467,
+      "sha256": "ce3f87244b6af52f8d6ed719735c8c443b6274db74c9868ed622a8c01dfd3f1d"
     },
     {
       "path": "scripts/audit-release-gates.mjs",

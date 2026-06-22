@@ -160,6 +160,7 @@ export async function auditPublicUrl(options) {
     "Open sample route",
     "demo-final-captioned.webm",
     "submission-manifest.json",
+    "criteria-fit.md",
     "https://github.com/OOYXLOO/signal-garden",
   ]) {
     if (!judge.text.includes(fragment)) {

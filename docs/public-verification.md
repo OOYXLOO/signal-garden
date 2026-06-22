@@ -7,6 +7,8 @@ Last checked: 2026-06-22
 - Source: https://github.com/OOYXLOO/signal-garden
 - GitHub Pages: https://ooyxloo.github.io/signal-garden/
 - Sample reviewer route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1
+- Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+- Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md
 
 ## Verified Source Baseline
 
