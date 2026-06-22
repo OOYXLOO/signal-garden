@@ -39,6 +39,44 @@ function rationaleSummary(consensus, puzzle) {
   return `Lead rationale: ${rationale.points.slice(0, 2).join(" ")}`;
 }
 
+function loopCheck(label, ready, detail, state = "ready") {
+  return {
+    label,
+    ready: Boolean(ready),
+    state: ready ? state : "todo",
+    detail,
+  };
+}
+
+export function createReviewerLoopChecks({
+  puzzle,
+  result,
+  plan = [],
+  sampleRouteUrl = "",
+  consensus = null,
+  launchPacket = "",
+} = {}) {
+  if (!puzzle) {
+    throw new Error("createReviewerLoopChecks requires a puzzle");
+  }
+  const routeStatus = result?.complete ? "complete" : result?.status || "draft";
+  const routeDetail = plan.length
+    ? `${routeStatus}, ${result?.score || 0} pts, ${result?.hitBeacons?.length || 0}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`
+    : "Trace a route or open the sample route before judging the live loop.";
+  const proposalDetail = consensus?.proposalCount
+    ? `${consensus.completed}/${consensus.proposalCount} ranked proposals; top route can be replayed and applied.`
+    : consensus?.preview
+      ? "Sample preview shows the ranked proposal loop without stored data."
+      : "Save or import a route to show comment replies becoming ranked proposals.";
+
+  return [
+    loopCheck("Open sample", Boolean(sampleRouteUrl), sampleRouteUrl ? "Labeled sample route link is ready." : "Use ?sample=1 to load a labeled route.", "preview"),
+    loopCheck("Trace route", Boolean(plan.length), routeDetail),
+    loopCheck("Rank proposal", Boolean(consensus?.proposalCount || consensus?.preview), proposalDetail, consensus?.preview ? "preview" : "ready"),
+    loopCheck("Copy packet", Boolean(launchPacket), launchPacket ? "Launch packet is generated for handoff." : "Render the board to generate a handoff packet."),
+  ];
+}
+
 export function createReviewerFastPath({
   puzzle,
   result,

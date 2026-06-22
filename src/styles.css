@@ -640,6 +640,76 @@ textarea.compact-textarea {
   overflow-wrap: anywhere;
 }
 
+.reviewer-loop-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.reviewer-loop-checks li {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  background: #fffdf8;
+}
+
+.reviewer-loop-checks li.ready {
+  border-color: rgba(31, 122, 115, 0.4);
+  background: var(--teal-soft);
+}
+
+.reviewer-loop-checks li.preview {
+  border-color: rgba(185, 133, 19, 0.38);
+  background: #fff1cf;
+}
+
+.reviewer-loop-checks li.todo {
+  border-color: rgba(198, 85, 63, 0.34);
+  background: var(--coral-soft);
+}
+
+.reviewer-loop-checks span,
+.reviewer-loop-checks strong,
+.reviewer-loop-checks em {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.reviewer-loop-checks span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.reviewer-loop-checks strong {
+  margin-top: 3px;
+  color: var(--teal);
+  font-size: 13px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.reviewer-loop-checks li.preview strong {
+  color: var(--amber);
+}
+
+.reviewer-loop-checks li.todo strong {
+  color: var(--coral);
+}
+
+.reviewer-loop-checks em {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.3;
+}
+
 .readiness-list {
   display: grid;
   gap: 8px;
@@ -790,6 +860,7 @@ textarea.launch-packet {
   .mission-list,
   .garden-log-list,
   .fast-path-grid,
+  .reviewer-loop-checks,
   .button-row {
     grid-template-columns: 1fr;
   }

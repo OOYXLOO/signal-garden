@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   buildSampleRouteUrl,
   createReviewerFastPath,
+  createReviewerLoopChecks,
   createSubmissionReadiness,
   formatSubmissionReadiness,
 } from "../src/reviewerGuide.js";
@@ -43,6 +44,36 @@ assert.match(fastPath, /Reddit loop:/);
 
 const emptyConsensus = createReviewerFastPath({ puzzle, result: null, plan: [], consensus: null });
 assert.match(emptyConsensus, /No saved proposals yet/);
+
+const loopChecks = createReviewerLoopChecks({
+  puzzle,
+  result,
+  plan: puzzle.solution,
+  sampleRouteUrl: sampleUrl,
+  consensus: {
+    completed: 1,
+    proposalCount: 1,
+    best: {
+      score: result.score,
+      beacons: 3,
+      moves: 2,
+    },
+  },
+  launchPacket: "Signal Garden launch packet",
+});
+assert.deepEqual(
+  loopChecks.map((check) => check.label),
+  ["Open sample", "Trace route", "Rank proposal", "Copy packet"],
+);
+assert.deepEqual(
+  loopChecks.map((check) => check.state),
+  ["preview", "ready", "ready", "ready"],
+);
+assert.match(loopChecks[2].detail, /1\/1 ranked proposals/);
+
+const draftLoopChecks = createReviewerLoopChecks({ puzzle, sampleRouteUrl: sampleUrl });
+assert.equal(draftLoopChecks.filter((check) => check.ready).length, 1);
+assert.match(draftLoopChecks[1].detail, /Trace a route/);
 
 const gardenLog = createGardenLog({
   currentPuzzleId: puzzle.id,

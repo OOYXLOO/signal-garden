@@ -3,7 +3,7 @@ import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import { createCommunityTarget, createDailyMissions, createDailyRecap, createPreviewConsensus, createRivalRouteGuide, createTopRouteRationale } from "./game/proposals.js";
 import { createLaunchPacket, formatLaunchPacket } from "./launchPacket.js";
-import { buildSampleRouteUrl, createReviewerFastPath, createSubmissionReadiness, formatSubmissionReadiness } from "./reviewerGuide.js";
+import { buildSampleRouteUrl, createReviewerFastPath, createReviewerLoopChecks, createSubmissionReadiness, formatSubmissionReadiness } from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute, wantsSampleWeek } from "./share.js";
 import { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
 
@@ -73,6 +73,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     copyReviewSnapshot: document.querySelector("#copy-review-snapshot"),
     reviewerFastPath: document.querySelector("#reviewer-fast-path"),
     copyReviewerFastPath: document.querySelector("#copy-reviewer-fast-path"),
+    reviewerLoopChecks: document.querySelector("#reviewer-loop-checks"),
     sampleRouteLink: document.querySelector("#sample-route-link"),
     fastPathRoute: document.querySelector("#fast-path-route"),
     fastPathConsensus: document.querySelector("#fast-path-consensus"),
@@ -476,6 +477,7 @@ function renderDeveloperFeedbackDraft(refs, latest, consensus) {
 function renderReviewerFastPath(refs, latest, consensus) {
   if (!latest) {
     refs.reviewerFastPath.value = "";
+    refs.reviewerLoopChecks.replaceChildren();
     refs.fastPathRoute.textContent = "Loading";
     refs.fastPathConsensus.textContent = "Loading";
     refs.fastPathLoop.textContent = "Loading";
@@ -484,6 +486,7 @@ function renderReviewerFastPath(refs, latest, consensus) {
   }
   const sampleRouteUrl = buildSampleRouteUrl(window.location.href, latest.puzzle);
   const shareUrl = buildShareUrl(window.location.href, latest.puzzle, latest.plan);
+  const launchPacket = createLaunchPacketText(latest, consensus);
   refs.sampleRouteLink.href = sampleRouteUrl;
   refs.sampleRouteLink.textContent = "Open sample route";
   refs.fastPathRoute.textContent = latest.result?.complete ? "Complete route" : latest.plan.length ? "Draft route" : "Open board";
@@ -493,6 +496,14 @@ function renderReviewerFastPath(refs, latest, consensus) {
       ? "Sample preview"
       : "Open board";
   refs.fastPathLoop.textContent = "Reply thread -> import -> ranked proposals";
+  renderReviewerLoopChecks(refs, createReviewerLoopChecks({
+    puzzle: latest.puzzle,
+    result: latest.result,
+    plan: latest.plan,
+    sampleRouteUrl,
+    consensus,
+    launchPacket,
+  }));
   refs.reviewerFastPath.value = createReviewerFastPath({
     puzzle: latest.puzzle,
     result: latest.result,
@@ -503,8 +514,26 @@ function renderReviewerFastPath(refs, latest, consensus) {
   });
 }
 
-function renderLaunchPacket(refs, latest, consensus) {
-  refs.launchPacket.value = latest
+function renderReviewerLoopChecks(refs, checks) {
+  refs.reviewerLoopChecks.replaceChildren(
+    ...checks.map((check) => {
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      const detail = document.createElement("em");
+      item.className = check.state;
+      item.setAttribute("aria-label", `${check.label}: ${check.state}, ${check.detail}`);
+      label.textContent = check.label;
+      value.textContent = check.state;
+      detail.textContent = check.detail;
+      item.append(label, value, detail);
+      return item;
+    }),
+  );
+}
+
+function createLaunchPacketText(latest, consensus) {
+  return latest
     ? formatLaunchPacket(
         createLaunchPacket({
           puzzle: latest.puzzle,
@@ -515,6 +544,10 @@ function renderLaunchPacket(refs, latest, consensus) {
         }),
       )
     : "";
+}
+
+function renderLaunchPacket(refs, latest, consensus) {
+  refs.launchPacket.value = createLaunchPacketText(latest, consensus);
 }
 
 function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview = false } = {}) {

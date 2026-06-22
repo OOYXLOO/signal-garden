@@ -80,6 +80,9 @@ if (!gameHtml.includes('id="comment-challenge"')) {
 if (!gameHtml.includes('id="copy-comment-challenge"')) {
   failures.push("devvit game shell must include the comment challenge copy control");
 }
+if (!gameHtml.includes('id="reviewer-loop-checks"')) {
+  failures.push("devvit game shell must include reviewer loop checks");
+}
 
 const splash = await readFile(join(root, "src/devvit/client/splash.html"), "utf8");
 if (!splash.includes("./splash.js")) {
