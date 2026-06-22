@@ -150,6 +150,7 @@ Do not automate account login, human verification, private console pages, billin
 - Demo discussion packet: copy the app launch packet after a complete route exists.
 - Reddit post draft: copy only after the user is ready to create a public demo post; the app generates text but does not post it.
 - Developer feedback draft: copy only after the user is ready to submit public platform feedback; the app generates text but does not submit it.
+- Feedback form eligibility: before submitting feedback, use `docs/developer-feedback-form-pack.md` to confirm the submitting account is registered for the hackathon, a Signal Garden Devpost project entry has been started, and the answers contain actionable comments tied to public evidence.
 - Platform feedback export: run `npm run export:platform-feedback` when the user wants field-specific answers and short/medium/long variants outside the app UI.
 - Final launch packet: use `npm run export:launch-packet -- --strict` with public app, source repository, app listing, and demo post URLs after real public URLs exist.
 - Final submission packet: use `npm run export:submission-pack` after the public app, source repository, app listing, and demo post exist; pass either a copied route token with `--plan` or the built-in complete review route with `--sample-route`.

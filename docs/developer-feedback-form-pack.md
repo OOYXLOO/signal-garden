@@ -9,10 +9,19 @@ This pack follows the public Google Form question order. It is copy-only and doe
 ## Submission Checklist
 
 - Open the public form and keep this pack side-by-side.
+- Before submitting feedback, confirm the account owner is registered for the hackathon and has started the Signal Garden project entry on Devpost.
 - Confirm the public app, sample route, judge desk, source repository, Devvit readiness report, and platform feedback pack are reachable before copying answers.
 - Use the Answer Index to spot long answers before pasting into constrained fields.
 - Replace the username field if the submitting Reddit username differs.
 - Do not paste credentials, cookies, OTPs, payment data, private account pages, or identity material into the form.
+
+## Eligibility Gate Checklist
+
+- Registered hackathon participant account is used for the feedback form.
+- A Signal Garden Devpost project entry has been started before the feedback form is submitted.
+- Feedback answers include concrete, actionable comments tied to public evidence links.
+- The username field matches the submitting Reddit/Devvit account owner.
+- No private credentials, tokens, payment data, or account-console details are included.
 
 ## Public Evidence Links
 

@@ -15,6 +15,9 @@ const pack = createFeedbackFormPackFromOptions({
 
 assert.equal(pack.formTitle, "Developer Feedback Survey");
 assert.ok(pack.submissionChecklist.length >= 5);
+assert.ok(pack.submissionChecklist.some((item) => item.includes("registered for the hackathon")));
+assert.ok(pack.eligibilityChecklist.some((item) => item.includes("Devpost project entry")));
+assert.ok(pack.eligibilityChecklist.some((item) => item.includes("actionable comments")));
 assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Judge desk"));
 assert.equal(pack.fields.length, 16);
 assert.equal(pack.fields[0].answer, "8");
@@ -30,6 +33,9 @@ assert.ok(pack.fields.some((field) => field.answer.includes("Concrete reproducti
 const markdown = formatDeveloperFeedbackSurveyPack(pack);
 assert.match(markdown, /Signal Garden Developer Feedback Form Pack/);
 assert.match(markdown, /Submission Checklist/);
+assert.match(markdown, /Eligibility Gate Checklist/);
+assert.match(markdown, /registered hackathon participant/i);
+assert.match(markdown, /Signal Garden Devpost project entry/);
 assert.match(markdown, /Public Evidence Links/);
 assert.match(markdown, /Answer Index/);
 assert.match(markdown, /\| # \| Question \| chars \| words \| note \|/);

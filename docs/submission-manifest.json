@@ -53,8 +53,8 @@
     },
     {
       "path": "docs/launch-readiness.md",
-      "bytes": 16514,
-      "sha256": "b9dec6d961b7a0e1ed0814e9820b5854bbe70b6b0b26a23ce333b7c663bec65b"
+      "bytes": 16806,
+      "sha256": "0c914a07dfcbb5fc146421343ff2b1570220c101841f1d80bc04f75ce56c36ee"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -78,8 +78,8 @@
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
-      "bytes": 9070,
-      "sha256": "83d2c68565eb128a0e725912041f09622b428ed5ef1b60d093a2ead801c63fa4"
+      "bytes": 9670,
+      "sha256": "257ed7865563c995682e574d8ac56c71a769140ae802213918ae08196f86d918"
     },
     {
       "path": "docs/submission-runbook.md",
@@ -108,8 +108,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 20593,
-      "sha256": "bf585b9a4f345488bb6ce44f15e82dd0c2f2abad0c620593820f1b3ac36f4b26"
+      "bytes": 21443,
+      "sha256": "229fb8fe0b60e4be41516c7742f24d195937ad3d6e513ec9c785d9457a86d2cd"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
