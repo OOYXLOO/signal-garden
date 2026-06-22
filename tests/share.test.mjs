@@ -160,6 +160,27 @@ assert.equal(parsedBriefing.ok, true);
 assert.equal(parsedBriefing.source, "briefing");
 assert.deepEqual(parsedBriefing.plan, puzzle.solution);
 
+const parsedRowColumn = parseSharedRoute(
+  [
+    "Signal Garden 2026-06-19",
+    "alice route: r3c3\\ r7c3\\",
+  ].join("\n"),
+  puzzle,
+);
+assert.equal(parsedRowColumn.ok, true);
+assert.equal(parsedRowColumn.source, "briefing");
+assert.deepEqual(parsedRowColumn.plan, puzzle.solution);
+
+const parsedColumnRow = parseSharedRoute(
+  [
+    "Signal Garden 2026-06-19",
+    "bob route: c3r3 backslash, c3r7 backslash",
+  ].join("\n"),
+  puzzle,
+);
+assert.equal(parsedColumnRow.ok, true);
+assert.deepEqual(parsedColumnRow.plan, puzzle.solution);
+
 const wrongDay = parseSharedRoute("https://example.test/play?day=2026-06-18&plan=2-2-b", puzzle);
 assert.equal(wrongDay.ok, false);
 assert.match(wrongDay.error, /2026-06-18/);
@@ -170,6 +191,7 @@ const threadRoutes = parseSharedRoutes(
   [
     `u/alice: ${shareUrl}`,
     `@bob - ${partialRouteUrl}`,
+    "charlie: r3c3\\ r7c3\\",
     `u/old: https://example.test/play?day=2026-06-18&plan=2-2-b`,
     `u/alice-again: ${shareUrl}`,
   ].join("\n"),
@@ -177,13 +199,13 @@ const threadRoutes = parseSharedRoutes(
 );
 assert.equal(threadRoutes.ok, true);
 assert.equal(threadRoutes.imported, 2);
-assert.equal(threadRoutes.skipped, 2);
-assert.equal(threadRoutes.candidates, 4);
+assert.equal(threadRoutes.skipped, 3);
+assert.equal(threadRoutes.candidates, 5);
 assert.deepEqual(threadRoutes.skippedByReason, {
   "cross-day": 1,
-  duplicate: 1,
+  duplicate: 2,
 });
-assert.equal(formatImportSkipReasons(threadRoutes.skippedByReason), "1 cross-day, 1 duplicate");
+assert.equal(formatImportSkipReasons(threadRoutes.skippedByReason), "1 cross-day, 2 duplicate");
 assert.deepEqual(
   threadRoutes.routes.map((route) => route.author),
   ["alice", "bob"],

@@ -23,7 +23,7 @@ The app now also includes a submission readiness checklist that keeps the playab
 - Each mirror route is a proposal.
 - Each route can be shared as a link that reopens the same plan.
 - Briefings include the exact review link for the current route.
-- Multiple routes pasted from a comment thread, individual comments, or briefings can be imported into the consensus list, with visible counts for imported, duplicate, and cross-day routes.
+- Multiple routes pasted from a comment thread, individual comments, briefings, or short coordinate replies can be imported into the consensus list, with visible counts for imported, duplicate, and cross-day routes.
 - A sample thread loader fills the import box with a complete route, a partial route, a cross-day route, and a duplicate route for an immediate review of the reply loop.
 - A comment challenge prompt gives players a ready reply format with their exact Review link and current score.
 - A Reddit post draft prepares a title, body, route review link, community target, and first-comment prompt for a later user-approved demo post.
@@ -54,7 +54,7 @@ The app now also includes a submission readiness checklist that keeps the playab
 - Status hints and board markers for complete, blocked, lost, and partial paths.
 - Optional progressive hints that avoid spoiling the board on first load.
 - Compact route encoding for share links.
-- Review link, briefing, sample thread loader, and comment-thread parser for community route import, including duplicate and cross-day skip summaries.
+- Review link, briefing, short coordinate reply parser, sample thread loader, and comment-thread parser for community route import, including duplicate and cross-day skip summaries.
 - Sample route query support with `?day=YYYY-MM-DD&sample=1` for first-minute review.
 - Sample preview consensus that shows the top-route loop without writing fake proposals to storage.
 - Comment challenge prompt generated from the current route, Review link, and top proposal.

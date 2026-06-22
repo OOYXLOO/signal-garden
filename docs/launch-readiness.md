@@ -93,7 +93,7 @@ For a quick reviewer walkthrough before a copied Review link exists, open the pu
 <public-app-url>?day=2026-06-21&sample=1
 ```
 
-The app turns that sample route into the same briefing, review snapshot, comment challenge, top route rationale, return map, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus and sample week preview without writing either preview to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs.
+The app turns that sample route into the same briefing, review snapshot, comment challenge, top route rationale, return map, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled sample preview consensus and sample week preview without writing either preview to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs. Short coordinate replies such as `r3c3\ r7c3\` can also be imported when a player replies without a full Review link.
 
 ## Static Review Surface
 
@@ -153,7 +153,7 @@ Do not automate account login, OTP, CAPTCHA, private console pages, billing, KYC
 - The briefing contains an exact review link.
 - `?day=YYYY-MM-DD&sample=1` loads a complete sample route without keeping the sample flag in copied Review links.
 - Empty local consensus plus `sample=1` shows a sample preview top route and contributor row without claiming live community data.
-- A pasted review link or briefing can be imported as a community proposal.
+- A pasted review link, briefing, or short coordinate reply can be imported as a community proposal.
 - The sample comment thread loader produces a visible import summary with duplicate and cross-day skip reasons.
 - The comment challenge prompt includes the current Review link and score context for a reply thread.
 - The Reddit post draft includes a title, body, route review link or sample route, community target, and first-comment prompt.

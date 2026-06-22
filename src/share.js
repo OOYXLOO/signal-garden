@@ -67,7 +67,7 @@ export function createCommentChallenge({ puzzle, result, plan = [], shareUrl = "
       ? `Current top: ${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves.`
       : "Current top: open.",
   );
-  lines.push("Reply with your Review link so it can join the community board.");
+  lines.push("Reply with your Review link or a short route like `r3c3\\ r7c3\\` so it can join the community board.");
   return lines.join("\n");
 }
 
@@ -104,10 +104,10 @@ export function createRedditPostDraft({
       : "Community target: open. First complete route sets the chase target.",
     reviewLine,
     "",
-    "Try it: place mirrors, copy your Review link, then reply with it so the route can join the daily board.",
+    "Try it: place mirrors, copy your Review link, then reply with it or a short coordinate route so the route can join the daily board.",
     "",
     "First comment prompt:",
-    "Reply with your Review link. The app can import a thread of links, skip duplicate or cross-day routes, and explain why the top route leads.",
+    "Reply with your Review link or a short route like `r3c3\\ r7c3\\`. The app can import a thread of routes, skip duplicate or cross-day routes, and explain why the top route leads.",
   ];
   return lines.join("\n");
 }
@@ -148,7 +148,7 @@ export function createDeveloperFeedbackDraft({
     "- Devvit Web setup would be easier with a compact Phaser/Vite starter that shows static asset paths, expanded post launch, and same-origin server routes together.",
     "- Interactive post review would benefit from a checklist that connects app listing URL, public demo post URL, and a playable review link in one flow.",
     "- Mobile WebView guidance should call out touch targets, fixed canvas sizing, audio unlock behavior, and safe-area constraints.",
-    "- Comment-driven games need clearer examples for importing public reply links, handling duplicates, and showing why one community result leads another.",
+    "- Comment-driven games need clearer examples for importing public reply links or short coordinate routes, handling duplicates, and showing why one community result leads another.",
     "- A local dry-run command that validates client bundle, server routes, and public review links before submission would reduce last-minute mistakes.",
     "",
     "What worked well:",
@@ -211,6 +211,47 @@ function parseBriefingPlan(input) {
       y: Number(match[3]) - 1,
     });
   }
+  moves.push(...parseCoordinatePlan(input));
+  return moves;
+}
+
+function mirrorFromText(value) {
+  const text = String(value || "").toLowerCase();
+  if (text === "/" || text === "slash") {
+    return "slash";
+  }
+  if (text === "\\" || text === "backslash") {
+    return "backslash";
+  }
+  return "";
+}
+
+function parseCoordinatePlan(input) {
+  const source = String(input || "");
+  const moves = [];
+  const patterns = [
+    /\br\s*(\d+)\s*c\s*(\d+)\s*(\/|\\|slash|backslash)(?=$|[\s,.;])/gi,
+    /\bc\s*(\d+)\s*r\s*(\d+)\s*(\/|\\|slash|backslash)(?=$|[\s,.;])/gi,
+    /\brow\s*(\d+)\s*,?\s*col(?:umn)?\s*(\d+)\s*(\/|\\|slash|backslash)(?=$|[\s,.;])/gi,
+  ];
+
+  for (const pattern of patterns) {
+    for (const match of source.matchAll(pattern)) {
+      const first = Number(match[1]) - 1;
+      const second = Number(match[2]) - 1;
+      const rowFirst = !pattern.source.startsWith("\\bc");
+      const mirror = mirrorFromText(match[3]);
+      if (!mirror) {
+        continue;
+      }
+      moves.push({
+        x: rowFirst ? second : first,
+        y: rowFirst ? first : second,
+        mirror,
+      });
+    }
+  }
+
   return moves;
 }
 
@@ -288,6 +329,13 @@ function inferThreadAuthor(text, index, routeIndex) {
   return `comment-${routeIndex + 1}`;
 }
 
+function inferBlockAuthor(block, routeIndex) {
+  const match = String(block || "").match(
+    /^\s*(u\/[A-Za-z0-9_-]{2,24}|@[A-Za-z0-9_-]{2,24}|[A-Za-z][A-Za-z0-9_-]{1,23})\s*[:>-]\s*/,
+  );
+  return normalizeThreadAuthor(match?.[1] || "", `comment-${routeIndex + 1}`);
+}
+
 export function parseSharedRoutes(input, puzzle) {
   const text = String(input || "").trim();
   if (!text) {
@@ -332,16 +380,29 @@ export function parseSharedRoutes(input, puzzle) {
   }
 
   const matches = urlMatches(text);
-  let candidates = matches.length;
+  let candidates = 0;
   if (matches.length) {
+    candidates += matches.length;
     matches.forEach((match, index) => {
       addRoute(parseSharedRoute(match.url, puzzle), inferThreadAuthor(text, match.index, index));
+    });
+
+    const urlLines = new Set(matches.map((match) => lineAround(text, match.index)));
+    const coordinateBlocks = text
+      .split(/\n+/)
+      .map((block) => block.trim())
+      .filter(Boolean)
+      .filter((block) => !urlLines.has(block))
+      .filter((block) => parseBriefingPlan(block).length > 0);
+    candidates += coordinateBlocks.length;
+    coordinateBlocks.forEach((block, index) => {
+      addRoute(parseSharedRoute(block, puzzle), inferBlockAuthor(block, matches.length + index));
     });
   } else {
     const blocks = text.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
     candidates = blocks.length;
     blocks.forEach((block, index) => {
-      addRoute(parseSharedRoute(block, puzzle), inferThreadAuthor(block, 0, index));
+      addRoute(parseSharedRoute(block, puzzle), inferBlockAuthor(block, index));
     });
   }
 
