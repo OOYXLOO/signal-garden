@@ -213,6 +213,61 @@ function publicAppReadiness(currentHref = "") {
   };
 }
 
+export function inferSourceRepoUrl(currentHref = "") {
+  if (!currentHref) {
+    return "";
+  }
+  try {
+    const url = new URL(currentHref);
+    const hostname = url.hostname.toLowerCase();
+    if (url.protocol !== "https:" || !hostname.endsWith(".github.io")) {
+      return "";
+    }
+    const owner = hostname.slice(0, -".github.io".length);
+    const repo = url.pathname.split("/").filter(Boolean)[0] || "";
+    if (!owner || !repo) {
+      return "";
+    }
+    return `https://github.com/${owner}/${repo}`;
+  } catch {
+    return "";
+  }
+}
+
+function sourceRepoReadiness(currentHref = "", sourceRepoUrl = "") {
+  const resolvedUrl = sourceRepoUrl || inferSourceRepoUrl(currentHref);
+  if (resolvedUrl) {
+    return readinessState("Source repository", true, `${resolvedUrl} is linked for public source review.`);
+  }
+  return {
+    label: "Source repository",
+    state: "waiting",
+    ready: false,
+    detail: "Add a public source repository before final submission.",
+  };
+}
+
+function platformUrlReadiness({ shareUrl = "", appListingUrl = "", demoPostUrl = "" } = {}) {
+  const missing = [];
+  if (!appListingUrl) {
+    missing.push("app listing");
+  }
+  if (!demoPostUrl) {
+    missing.push("public demo post");
+  }
+  if (!missing.length) {
+    return readinessState("Platform URLs", true, `${appListingUrl} and ${demoPostUrl} are linked.`);
+  }
+  return {
+    label: "Platform URLs",
+    state: shareUrl ? "waiting" : "todo",
+    ready: false,
+    detail: shareUrl
+      ? `Add ${missing.join(" and ")} URLs after platform gates.`
+      : `Needs a route plus ${missing.join(" and ")} URLs after platform gates.`,
+  };
+}
+
 export function createSubmissionReadiness({
   puzzle,
   result,
@@ -223,6 +278,9 @@ export function createSubmissionReadiness({
   gardenLog = null,
   launchPacket = "",
   currentHref = "",
+  sourceRepoUrl = "",
+  appListingUrl = "",
+  demoPostUrl = "",
 } = {}) {
   if (!puzzle) {
     throw new Error("createSubmissionReadiness requires a puzzle");
@@ -242,6 +300,7 @@ export function createSubmissionReadiness({
     ),
     routeReadiness(puzzle, result, plan),
     publicAppReadiness(currentHref),
+    sourceRepoReadiness(currentHref, sourceRepoUrl),
     retentionReadiness(gardenLog),
     consensusReadiness(puzzle, consensus),
     readinessState(
@@ -249,14 +308,7 @@ export function createSubmissionReadiness({
       Boolean(launchPacket),
       launchPacket ? "Copyable handoff is generated inside the app." : "Generate the launch packet after a board renders.",
     ),
-    {
-      label: "Platform URLs",
-      state: shareUrl ? "waiting" : "todo",
-      ready: false,
-      detail: shareUrl
-        ? "Add public source repository, app listing, and public demo post URLs after platform gates."
-        : "Needs a route plus public source repository, app listing, and demo post URLs after platform gates.",
-    },
+    platformUrlReadiness({ shareUrl, appListingUrl, demoPostUrl }),
   ];
 
   const readyCount = items.filter((item) => item.ready).length;

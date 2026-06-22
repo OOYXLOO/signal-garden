@@ -7,6 +7,7 @@ import {
   createSubmissionReadiness,
   formatEvidenceReceipt,
   formatSubmissionReadiness,
+  inferSourceRepoUrl,
 } from "../src/reviewerGuide.js";
 import { createDailyPuzzle, traceSignal } from "../src/game/puzzle.js";
 import { createGardenLog, createSampleGardenArchive } from "../src/state/store.js";
@@ -16,6 +17,12 @@ const result = traceSignal(puzzle, puzzle.solution);
 const sampleUrl = buildSampleRouteUrl("https://example.test/play?plan=old&sampleRoute=true&x=1", puzzle);
 
 assert.equal(sampleUrl, "https://example.test/play?x=1&day=2026-06-19&sample=1");
+assert.equal(
+  inferSourceRepoUrl("https://ooyxloo.github.io/signal-garden/?day=2026-06-19&sample=1"),
+  "https://github.com/ooyxloo/signal-garden",
+);
+assert.equal(inferSourceRepoUrl("https://example.com/signal-garden/"), "");
+assert.equal(inferSourceRepoUrl("http://127.0.0.1:8796/signal-garden/"), "");
 
 const fastPath = createReviewerFastPath({
   puzzle,
@@ -102,9 +109,9 @@ const readiness = createSubmissionReadiness({
   gardenLog,
   launchPacket: "Signal Garden launch packet",
 });
-assert.equal(readiness.total, 8);
-assert.equal(readiness.readyCount, 7);
-assert.match(readiness.summary, /7\/8 surfaces ready/);
+assert.equal(readiness.total, 9);
+assert.equal(readiness.readyCount, 8);
+assert.match(readiness.summary, /8\/9 surfaces ready/);
 assert.deepEqual(
   readiness.items.map((item) => item.label),
   [
@@ -112,6 +119,7 @@ assert.deepEqual(
     "Sample route",
     "Current Review link",
     "Public app URL",
+    "Source repository",
     "Retention loop",
     "Contribution loop",
     "Launch packet",
@@ -122,9 +130,11 @@ const readinessText = formatSubmissionReadiness(readiness);
 assert.match(readinessText, /Submission readiness/);
 assert.match(readinessText, /Sample route: preview/);
 assert.match(readinessText, /Public app URL: ready/);
+assert.match(readinessText, /Source repository: ready/);
+assert.match(readinessText, /github\.com\/ooyxloo\/signal-garden/);
 assert.match(readinessText, /80\/100 contribution quality/);
 assert.match(readinessText, /Platform URLs: waiting/);
-assert.match(readinessText, /public source repository/);
+assert.match(readinessText, /app listing and public demo post/);
 
 const draftReadiness = createSubmissionReadiness({
   puzzle,
@@ -134,9 +144,11 @@ const draftReadiness = createSubmissionReadiness({
   currentHref: "http://127.0.0.1:8796/?sample=1",
   gardenLog,
 });
+assert.equal(draftReadiness.total, 9);
 assert.equal(draftReadiness.readyCount, 3);
 assert.match(formatSubmissionReadiness(draftReadiness), /Trace a route before copying/);
 assert.match(formatSubmissionReadiness(draftReadiness), /Public app URL: waiting/);
+assert.match(formatSubmissionReadiness(draftReadiness), /Source repository: waiting/);
 
 const evidenceReceipt = createEvidenceReceipt({
   puzzle,

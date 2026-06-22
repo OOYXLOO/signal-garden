@@ -19,6 +19,7 @@ import {
   createSubmissionReadiness,
   formatEvidenceReceipt,
   formatSubmissionReadiness,
+  inferSourceRepoUrl,
 } from "./reviewerGuide.js";
 import { buildShareUrl, createCommentChallenge, createDeveloperFeedbackDraft, createRedditPostDraft, createReviewSnapshot, createShareBriefing, formatImportSkipReasons, parseSharedRoutes, wantsSampleRoute, wantsSampleWeek } from "./share.js";
 import { createGardenLog, createSampleGardenArchive, getLocalArchive, getLocalStreak, mergeGardenArchive, savePlan } from "./state/store.js";
@@ -575,6 +576,7 @@ function createLaunchPacketText(latest, consensus) {
           plan: latest.plan,
           shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
           consensus,
+          sourceRepoUrl: inferSourceRepoUrl(window.location.href),
         }),
       )
     : "";
@@ -611,6 +613,7 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
     gardenLog,
     launchPacket: refs.launchPacket.value,
     currentHref: window.location.href,
+    sourceRepoUrl: inferSourceRepoUrl(window.location.href),
   });
   refs.submissionReadinessTitle.textContent = readiness.summary;
   refs.submissionReadinessOutput.value = formatSubmissionReadiness(readiness);
@@ -625,6 +628,7 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
       gardenLog,
       launchPacket: refs.launchPacket.value,
       publicAppUrl: publicAppReadinessUrl(window.location.href),
+      sourceRepoUrl: inferSourceRepoUrl(window.location.href),
     }),
   );
   refs.submissionReadinessList.replaceChildren(
