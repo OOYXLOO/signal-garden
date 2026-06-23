@@ -93,8 +93,8 @@
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
-      "bytes": 1701,
-      "sha256": "bf4d61840fda2297cacb7e41611e073188089fe5bf9a6394851b73178f59d0e6"
+      "bytes": 2992,
+      "sha256": "87bb34e7be4d6a0d00539cc8f46e27179bf96e4b23a0b50da86e397f032daebd"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -168,8 +168,8 @@
     },
     {
       "path": "scripts/export-demo-post.mjs",
-      "bytes": 7378,
-      "sha256": "84d6b6690f5b04adc1fb723b7ae8e010c49bcd85fd79d6cad2989f80f907906e"
+      "bytes": 8866,
+      "sha256": "335bec8b5c0713743c16d254120f64627cf880becf51a36d0aa112fd40097c03"
     },
     {
       "path": "scripts/export-devvit-readiness.mjs",
