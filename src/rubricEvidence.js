@@ -1,3 +1,5 @@
+import { createSubmissionWindowStatus, formatSubmissionWindowStatus, submissionWindowGateStatus } from "./submissionWindow.js";
+
 const PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
 const SOURCE_REPO_URL = "https://github.com/OOYXLOO/signal-garden";
 const RAW_DOC_BASE = "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs";
@@ -15,9 +17,11 @@ export function sampleRouteUrl(day = todayUtcDay()) {
 
 export function createRubricEvidenceMatrix({ day = todayUtcDay() } = {}) {
   const sampleRoute = sampleRouteUrl(day);
+  const submissionWindow = createSubmissionWindowStatus({ now: `${day}T12:00:00.000Z` });
   return {
     projectName: "Signal Garden",
     checkedDay: day,
+    submissionWindow,
     publicLinks: [
       { label: "Public app", url: PUBLIC_APP_URL },
       { label: "Daily sample route", url: sampleRoute },
@@ -27,6 +31,11 @@ export function createRubricEvidenceMatrix({ day = todayUtcDay() } = {}) {
       { label: "Submission manifest", url: `${RAW_DOC_BASE}/submission-manifest.json` },
     ],
     requiredSubmissionSurfaces: [
+      {
+        requirement: "Submission window",
+        evidence: `${submissionWindow.detail} Rules source: ${submissionWindow.sourceUrl}`,
+        status: submissionWindowGateStatus(submissionWindow),
+      },
       {
         requirement: "Working project access",
         evidence: "Public GitHub Pages app, deterministic sample route, judge desk, and public URL audit.",
@@ -144,6 +153,10 @@ export function formatRubricEvidenceMatrix(matrix) {
     "## Public Links",
     "",
     ...matrix.publicLinks.map((link) => `- ${link.label}: ${link.url}`),
+    "",
+    "## Submission Window",
+    "",
+    formatSubmissionWindowStatus(matrix.submissionWindow),
     "",
     "## Required Submission Surfaces",
     "",

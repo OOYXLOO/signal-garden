@@ -3,6 +3,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { createSubmissionWindowStatus, submissionWindowGateStatus } from "../src/submissionWindow.js";
 
 const run = promisify(execFile);
 const root = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
@@ -41,6 +42,7 @@ function parseArgs(argv) {
     expectedRepo: "OOYXLOO/signal-garden",
     help: false,
     json: false,
+    now: "",
     publicAppUrl: "",
     sourceRepoUrl: "",
   };
@@ -135,6 +137,7 @@ async function auditReleaseGates(options = {}) {
     appListingUrl: "",
     demoPostUrl: "",
     expectedRepo: "OOYXLOO/signal-garden",
+    now: "",
     publicAppUrl: "",
     sourceRepoUrl: "",
     ...options,
@@ -194,6 +197,8 @@ async function auditReleaseGates(options = {}) {
   gates.push(createGate("app-listing-url", "App listing URL", listing.status, listing.detail));
   const demoPost = safePublicUrl(config.demoPostUrl);
   gates.push(createGate("demo-post-url", "Demo post URL", demoPost.status, demoPost.detail));
+  const submissionWindow = createSubmissionWindowStatus(config.now ? { now: config.now } : {});
+  gates.push(createGate("submission-window", "Submission window", submissionWindowGateStatus(submissionWindow), submissionWindow.detail));
 
   const blockedGates = gates.filter((gate) => gate.status === "blocked");
   for (const gate of blockedGates) failures.push(`${gate.label}: ${gate.detail}`);

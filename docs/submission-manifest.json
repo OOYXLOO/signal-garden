@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/rubric-evidence-matrix.md",
-      "bytes": 4333,
-      "sha256": "904a0fc30b663f22d483d9b8c05af3ebf474519100b3f4373e9e061cb4d16373"
+      "bytes": 4670,
+      "sha256": "355aa4d7196af34cfeaac5e18b6aaa0815908d65ca51a04d27eb8cb3d0bb7a77"
     },
     {
       "path": "docs/platform-feedback-pack.md",
@@ -118,8 +118,8 @@
     },
     {
       "path": "src/rubricEvidence.js",
-      "bytes": 7197,
-      "sha256": "326bdf72f15099823df6f838940d9608166e349f58460d22b75b75be2e3446a0"
+      "bytes": 7754,
+      "sha256": "0bf488ed8bb7fde67cc9d5ebd1e59f28323c9701ad75a57ddb0311eaa431c884"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -133,8 +133,8 @@
     },
     {
       "path": "scripts/audit-release-gates.mjs",
-      "bytes": 9847,
-      "sha256": "996b9a7bf3bd5e381d58b232a0c5e7e57a26727923e8281e400a86cab1c174c4"
+      "bytes": 10211,
+      "sha256": "728f35940b926eb9cfca46428c0d5afd55f813d5ec3689cc7716d44ab4d55a71"
     },
     {
       "path": "scripts/export-launch-packet.mjs",

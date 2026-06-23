@@ -10,6 +10,8 @@ const script = new URL("../scripts/export-rubric-evidence.mjs", import.meta.url)
 const matrix = createRubricEvidenceFromOptions({ day: "2026-06-26" });
 assert.equal(matrix.projectName, "Signal Garden");
 assert.equal(matrix.checkedDay, "2026-06-26");
+assert.equal(matrix.submissionWindow.phase, "open");
+assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Submission window" && item.status === "ready"));
 assert.equal(sampleRouteUrl("2026-06-26"), "https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1");
 assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Working project access" && item.status === "ready"));
 assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Public demo post URL" && item.status === "user-gated"));
@@ -22,6 +24,8 @@ const markdown = formatRubricEvidenceMatrix(matrix);
 assert.match(markdown, /Signal Garden Rubric Evidence Matrix/);
 assert.match(markdown, /day=2026-06-26&sample=1/);
 assert.match(markdown, /Required Submission Surfaces/);
+assert.match(markdown, /Submission Window/);
+assert.match(markdown, /Submissions close July 15, 2026/);
 assert.match(markdown, /Judging Angle Fit/);
 assert.match(markdown, /Delightful UX/);
 assert.match(markdown, /Most Reddity/);

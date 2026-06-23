@@ -1,22 +1,29 @@
 # Signal Garden Rubric Evidence Matrix
 
-Generated for day: 2026-06-22
+Generated for day: 2026-06-24
 
 This matrix maps public judging and submission expectations to concrete Signal Garden evidence. It is a review aid only; it does not submit forms, post to Reddit, or claim external-account actions are complete.
 
 ## Public Links
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Daily sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1
+- Daily sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-24&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Final captioned demo: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm
 - Submission manifest: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-manifest.json
 
+## Submission Window
+
+Submission window: open
+Submissions close July 15, 2026 at 6:00 PM Pacific; 22 days remain.
+Rules source: https://redditgameswithahook.devpost.com/rules
+
 ## Required Submission Surfaces
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
+| Submission window | Submissions close July 15, 2026 at 6:00 PM Pacific; 22 days remain. Rules source: https://redditgameswithahook.devpost.com/rules | ready |
 | Working project access | Public GitHub Pages app, deterministic sample route, judge desk, and public URL audit. | ready |
 | Testing instructions | Reviewer Quickstart, judge desk First Minute checklist, submission runbook, and launch readiness docs. | ready |
 | Source review | Public GitHub repository and submission manifest with hashes for media, docs, scripts, and generated packs. | ready |

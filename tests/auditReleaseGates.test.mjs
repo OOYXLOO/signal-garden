@@ -16,6 +16,7 @@ assert.equal(
 assert.equal(sourceRepoUrlFromOrigin("git@github.com:OOYXLOO/signal-garden.git"), "https://github.com/OOYXLOO/signal-garden");
 
 const result = await auditReleaseGates({
+  now: "2026-06-24T04:00:00.000Z",
   publicAppUrl: "https://ooyxloo.github.io/signal-garden/",
   sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
   appListingUrl: "https://developers.reddit.com/apps/signal-garden",
@@ -29,16 +30,19 @@ assert.ok(result.gates.some((gate) => gate.id === "public-app-url" && gate.statu
 assert.ok(result.gates.some((gate) => gate.id === "source-repo-url" && gate.status === "ready"));
 assert.ok(result.gates.some((gate) => gate.id === "app-listing-url" && gate.status === "ready"));
 assert.ok(result.gates.some((gate) => gate.id === "demo-post-url" && gate.status === "ready"));
+assert.ok(result.gates.some((gate) => gate.id === "submission-window" && gate.status === "ready"));
 assert.ok(result.nextCommands.some((command) => command.includes("export:submission-pack")));
 assert.ok(result.nextCommands.some((command) => command.includes("export:devpost-fields")));
 assert.ok(result.nextCommands.some((command) => command.includes("--sample-route")));
 assert.match(formatText(result), /PASS release gate audit/);
 
 const localResult = await auditReleaseGates({
+  now: "2026-07-16T02:00:00.000Z",
   publicAppUrl: "http://localhost:8796/",
 });
 assert.equal(localResult.ok, false);
 assert.ok(localResult.failures.some((failure) => failure.includes("Public app URL")));
+assert.ok(localResult.failures.some((failure) => failure.includes("Submission window")));
 
 const { stdout } = await run(process.execPath, [script, "--json"]);
 const cliResult = JSON.parse(stdout);
