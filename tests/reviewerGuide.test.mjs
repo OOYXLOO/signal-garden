@@ -11,11 +11,13 @@ import {
   inferSourceRepoUrl,
 } from "../src/reviewerGuide.js";
 import { createDailyPuzzle, traceSignal } from "../src/game/puzzle.js";
+import { createSubmissionWindowStatus } from "../src/submissionWindow.js";
 import { createGardenLog, createReturnPledge, createSampleGardenArchive } from "../src/state/store.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
 const result = traceSignal(puzzle, puzzle.solution);
 const sampleUrl = buildSampleRouteUrl("https://example.test/play?plan=old&sampleRoute=true&x=1", puzzle);
+const openSubmissionWindow = createSubmissionWindowStatus({ now: "2026-06-24T04:00:00.000Z" });
 
 assert.equal(sampleUrl, "https://example.test/play?x=1&day=2026-06-19&sample=1");
 assert.equal(
@@ -40,6 +42,7 @@ const fastPath = createReviewerFastPath({
       moves: 2,
     },
   },
+  submissionWindow: openSubmissionWindow,
 });
 
 assert.match(fastPath, /Signal Garden reviewer fast path/);
@@ -48,6 +51,8 @@ assert.match(fastPath, /Community state: 1\/1 saved routes complete/);
 assert.match(fastPath, /Lead rationale:/);
 assert.match(fastPath, /Completes all 3 beacons/);
 assert.match(fastPath, /Contribution quality: 80\/100/);
+assert.match(fastPath, /Submission window: open/);
+assert.match(fastPath, /Submissions close July 15, 2026/);
 assert.match(fastPath, /Sample route: https:\/\/example\.test\/play/);
 assert.match(fastPath, /Current review link:/);
 assert.match(fastPath, /1-minute check:/);
@@ -155,10 +160,11 @@ const readiness = createSubmissionReadiness({
   gardenLog,
   returnPledge,
   launchPacket: "Signal Garden launch packet",
+  submissionWindow: openSubmissionWindow,
 });
-assert.equal(readiness.total, 9);
-assert.equal(readiness.readyCount, 8);
-assert.match(readiness.summary, /8\/9 surfaces ready/);
+assert.equal(readiness.total, 10);
+assert.equal(readiness.readyCount, 9);
+assert.match(readiness.summary, /9\/10 surfaces ready/);
 assert.deepEqual(
   readiness.items.map((item) => item.label),
   [
@@ -169,6 +175,7 @@ assert.deepEqual(
     "Source repository",
     "Retention loop",
     "Contribution loop",
+    "Submission window",
     "Launch packet",
     "Platform URLs",
   ],
@@ -180,6 +187,8 @@ assert.match(readinessText, /Public app URL: ready/);
 assert.match(readinessText, /Source repository: ready/);
 assert.match(readinessText, /github\.com\/ooyxloo\/signal-garden/);
 assert.match(readinessText, /80\/100 contribution quality/);
+assert.match(readinessText, /Submission window: ready/);
+assert.match(readinessText, /Rules source: https:\/\/redditgameswithahook\.devpost\.com\/rules/);
 assert.match(readinessText, /Next-day pledge:/);
 assert.match(readinessText, /Platform URLs: waiting/);
 assert.match(readinessText, /app listing and public demo post/);
@@ -191,9 +200,10 @@ const draftReadiness = createSubmissionReadiness({
   sampleRouteUrl: sampleUrl,
   currentHref: "http://127.0.0.1:8796/?sample=1",
   gardenLog,
+  submissionWindow: openSubmissionWindow,
 });
-assert.equal(draftReadiness.total, 9);
-assert.equal(draftReadiness.readyCount, 3);
+assert.equal(draftReadiness.total, 10);
+assert.equal(draftReadiness.readyCount, 4);
 assert.match(formatSubmissionReadiness(draftReadiness), /Trace a route before copying/);
 assert.match(formatSubmissionReadiness(draftReadiness), /Public app URL: waiting/);
 assert.match(formatSubmissionReadiness(draftReadiness), /Source repository: waiting/);
@@ -220,6 +230,7 @@ const evidenceReceipt = createEvidenceReceipt({
   sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
   appListingUrl: "https://developers.reddit.com/apps/signal-garden",
   demoPostUrl: "https://www.reddit.com/r/test/comments/signal_garden/",
+  submissionWindow: openSubmissionWindow,
 });
 assert.equal(evidenceReceipt.summary, "6/6 public URL evidence slots ready");
 assert.match(evidenceReceipt.claims.join(" "), /Playable puzzle/);
@@ -227,6 +238,8 @@ assert.match(evidenceReceipt.claims.join(" "), /Community proof: 1\/1 saved rout
 assert.match(evidenceReceipt.claims.join(" "), /80\/100 contribution quality/);
 assert.match(evidenceReceipt.claims.join(" "), /Retention proof:/);
 assert.match(evidenceReceipt.claims.join(" "), /relay queued|return prompt/);
+assert.match(evidenceReceipt.claims.join(" "), /Submission window proof: Submission window: open/);
+assert.match(evidenceReceipt.claims.join(" "), /Rules source: https:\/\/redditgameswithahook\.devpost\.com\/rules/);
 const evidenceReceiptText = formatEvidenceReceipt(evidenceReceipt);
 assert.match(evidenceReceiptText, /Evidence claims/);
 assert.match(evidenceReceiptText, /Public URLs/);

@@ -1,4 +1,9 @@
 import { createContributionQuality, createTopRouteRationale } from "./game/proposals.js";
+import {
+  createSubmissionWindowStatus,
+  formatSubmissionWindowStatus,
+  submissionWindowGateStatus,
+} from "./submissionWindow.js";
 
 export function buildSampleRouteUrl(currentHref, puzzle) {
   if (!puzzle?.id) {
@@ -42,6 +47,10 @@ function rationaleSummary(consensus, puzzle) {
 function contributionQualitySummary(consensus, puzzle) {
   const quality = createContributionQuality(puzzle, consensus);
   return `Contribution quality: ${quality.score}/100 - ${quality.detail}`;
+}
+
+function submissionWindowSummary(status = createSubmissionWindowStatus()) {
+  return `Submission window: ${status.phase} - ${status.detail}`;
 }
 
 function loopCheck(label, ready, detail, state = "ready") {
@@ -91,6 +100,7 @@ export function createReviewerFastPath({
   shareUrl = "",
   sampleRouteUrl = "",
   consensus = null,
+  submissionWindow = createSubmissionWindowStatus(),
 } = {}) {
   if (!puzzle) {
     throw new Error("createReviewerFastPath requires a puzzle");
@@ -102,6 +112,7 @@ export function createReviewerFastPath({
     `Community state: ${consensusSummary(consensus, puzzle)}`,
     rationaleSummary(consensus, puzzle),
     contributionQualitySummary(consensus, puzzle),
+    submissionWindowSummary(submissionWindow),
     sampleRouteUrl
       ? `Sample route: ${sampleRouteUrl}`
       : "Sample route: open the app with day=<date>&sample=1 to load a complete labeled preview.",
@@ -277,6 +288,16 @@ function retentionReadiness(gardenLog, returnPledge = null) {
   );
 }
 
+function submissionWindowReadiness(status = createSubmissionWindowStatus()) {
+  const state = submissionWindowGateStatus(status);
+  return {
+    label: "Submission window",
+    state,
+    ready: state === "ready",
+    detail: `${status.detail} Rules source: ${status.sourceUrl}`,
+  };
+}
+
 function isPublicAppUrl(currentHref = "") {
   if (!currentHref) {
     return false;
@@ -380,6 +401,7 @@ export function createSubmissionReadiness({
   sourceRepoUrl = "",
   appListingUrl = "",
   demoPostUrl = "",
+  submissionWindow = createSubmissionWindowStatus(),
 } = {}) {
   if (!puzzle) {
     throw new Error("createSubmissionReadiness requires a puzzle");
@@ -402,6 +424,7 @@ export function createSubmissionReadiness({
     sourceRepoReadiness(currentHref, sourceRepoUrl),
     retentionReadiness(gardenLog, returnPledge),
     consensusReadiness(puzzle, consensus),
+    submissionWindowReadiness(submissionWindow),
     readinessState(
       "Launch packet",
       Boolean(launchPacket),
@@ -450,6 +473,7 @@ export function createEvidenceReceipt({
   sourceRepoUrl = "",
   appListingUrl = "",
   demoPostUrl = "",
+  submissionWindow = createSubmissionWindowStatus(),
 } = {}) {
   if (!puzzle) {
     throw new Error("createEvidenceReceipt requires a puzzle");
@@ -484,6 +508,7 @@ export function createEvidenceReceipt({
       ? `Retention proof: ${activeReturnSlots}/${gardenLog.slots.length} return-map slots show activity or preview state; ${returnPledge?.summary || "next-day pledge waiting"}.`
       : "Retention proof: waiting for return-map render.",
     launchPacket ? "Handoff proof: launch packet is generated from the current board state." : "Handoff proof: waiting for launch packet render.",
+    `Submission window proof: ${formatSubmissionWindowStatus(submissionWindow).replace(/\n/g, " ")}`,
     "Safety proof: public evidence avoids credentials, private data, billing, identity checks, and platform secrets.",
   ];
   const readyUrlCount = publicUrls.filter((item) => item.ready).length;
