@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 16723,
-      "sha256": "ddc3fbc092d84170e3d39b97cbe76eeb2ad8745bae5ec7c17595d674dbb29c03"
+      "bytes": 16682,
+      "sha256": "9d2fb21a40a56e05af881839c8f56b20246238f86697a71b5c3a892e292832df"
     },
     {
       "path": "docs/cover.png",
@@ -99,7 +99,7 @@
     {
       "path": "docs/submission-runbook.md",
       "bytes": 4918,
-      "sha256": "2060ab3690405459f6a19d8d83ddaafe519f1493dc727faf62576b5a4ec68790"
+      "sha256": "9d9789d0d1941e42f539986ca153d9eac1d6b6954d63df26087f8e2e869f82a1"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
@@ -208,8 +208,8 @@
     },
     {
       "path": "scripts/export-submission-runbook.mjs",
-      "bytes": 9661,
-      "sha256": "47f18f493fef47545f9aaf5c8fef2a4e8525fae5db00c98f09d0900a89fcdb0c"
+      "bytes": 9744,
+      "sha256": "918957c4323804425b1a74e48055aa52a9199e46a033e7c6228a2b08dbdf7bcd"
     }
   ],
   "requiredLocalChecks": [

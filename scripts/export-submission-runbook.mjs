@@ -15,10 +15,14 @@ const defaultDemoPostDraftUrl =
 const defaultDevvitReadinessUrl =
   "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md";
 
+export function todayUtcDay(now = new Date()) {
+  return now.toISOString().slice(0, 10);
+}
+
 function parseArgs(argv) {
   const options = {
     appListingUrl: "",
-    day: "2026-06-22",
+    day: "",
     demoPostUrl: "",
     feedbackConfirmationUrl: "",
     help: false,
@@ -88,7 +92,7 @@ function optionalLine(label, value, fallback) {
 }
 
 export function createSubmissionRunbook(options = {}) {
-  const day = options.day || "2026-06-22";
+  const day = options.day || todayUtcDay();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) {
     throw new Error("--day must be YYYY-MM-DD");
   }

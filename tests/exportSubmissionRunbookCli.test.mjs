@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { createSubmissionRunbook } from "../scripts/export-submission-runbook.mjs";
+import { createSubmissionRunbook, todayUtcDay } from "../scripts/export-submission-runbook.mjs";
 
 const run = promisify(execFile);
 const script = new URL("../scripts/export-submission-runbook.mjs", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
@@ -26,6 +26,10 @@ assert.match(runbook, /https:\/\/ooyxloo\.github\.io\/signal-garden\/\?day=2026-
 assert.match(runbook, /https:\/\/developers\.reddit\.com\/apps\/signal-garden/);
 assert.match(runbook, /https:\/\/www\.reddit\.com\/r\/test\/comments\/signal_garden_demo\//);
 
+const defaultRunbook = createSubmissionRunbook({});
+assert.match(defaultRunbook, new RegExp(`Generated for day: ${todayUtcDay()}`));
+assert.doesNotMatch(defaultRunbook, /day=2026-06-22&sample=1/);
+
 for (const forbidden of ["passwords, OTPs, cookies", "identity/KYC screens"]) {
   assert.match(runbook, new RegExp(forbidden.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 }
@@ -44,6 +48,10 @@ assert.throws(() => createSubmissionRunbook({ publicAppUrl: "http://localhost:87
 const { stdout } = await run(process.execPath, [script, "--day", "2026-06-22"]);
 assert.match(stdout, /Signal Garden Submission Runbook/);
 assert.match(stdout, /<fill after platform gate>/);
+
+const defaultCli = await run(process.execPath, [script]);
+assert.match(defaultCli.stdout, new RegExp(`Generated for day: ${todayUtcDay()}`));
+assert.doesNotMatch(defaultCli.stdout, /day=2026-06-22&sample=1/);
 
 const help = await run(process.execPath, [script, "--help"]);
 assert.match(help.stdout, /export:submission-runbook/);
