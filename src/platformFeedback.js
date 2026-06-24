@@ -143,6 +143,74 @@ export function countFeedbackText(value) {
   };
 }
 
+function auditCheck(checks, failures, id, ok, detail) {
+  checks.push({
+    id,
+    status: ok ? "ready" : "blocked",
+    detail,
+  });
+  if (!ok) failures.push(detail);
+}
+
+export function auditDeveloperFeedbackGate(surveyPack = {}) {
+  const checks = [];
+  const failures = [];
+  const evidence = surveyPack.feedbackAwardEvidence || {};
+  const linkLabels = new Set((surveyPack.publicEvidenceLinks || []).map((link) => link.label));
+  const requiredLinkLabels = [
+    "Public app",
+    "Sample route",
+    "Judge desk",
+    "Source repository",
+    "Devvit readiness report",
+    "Platform feedback pack",
+  ];
+  const missingLinks = requiredLinkLabels.filter((label) => !linkLabels.has(label));
+  const windowStatus = evidence.windowStatus || {};
+
+  auditCheck(
+    checks,
+    failures,
+    "submission-window",
+    windowStatus.open === true,
+    windowStatus.open ? windowStatus.detail : `Submission window is not open: ${windowStatus.phase || "unknown"}`,
+  );
+  auditCheck(
+    checks,
+    failures,
+    "public-evidence-links",
+    missingLinks.length === 0,
+    missingLinks.length === 0 ? "All required public evidence links are present." : `Missing public evidence links: ${missingLinks.join(", ")}`,
+  );
+  auditCheck(
+    checks,
+    failures,
+    "feedback-runbook",
+    (evidence.gateRunbook || []).length >= 5,
+    (evidence.gateRunbook || []).length >= 5 ? "Feedback submission runbook is present." : "Feedback submission runbook is incomplete.",
+  );
+  auditCheck(
+    checks,
+    failures,
+    "stop-conditions",
+    (evidence.stopConditions || []).length >= 3,
+    (evidence.stopConditions || []).length >= 3 ? "Stop conditions are present." : "Stop conditions are incomplete.",
+  );
+  auditCheck(
+    checks,
+    failures,
+    "form-fields",
+    (surveyPack.fields || []).length === 16,
+    (surveyPack.fields || []).length === 16 ? "All 16 feedback form fields are present." : `Expected 16 form fields, found ${(surveyPack.fields || []).length}.`,
+  );
+
+  return {
+    ok: failures.length === 0,
+    checks,
+    failures,
+  };
+}
+
 export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OOYXLOO", now = new Date() } = {}) {
   const fallbackDay = todayUtcDay();
   const pack = feedbackPack || createPlatformFeedbackPack({

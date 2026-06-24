@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 10666,
-      "sha256": "129e8d77039c657c3b06f236bcc6695f2b25c9bf9ad27fd4bcdf13c7712d8974"
+      "bytes": 10749,
+      "sha256": "784c2515ecf9b129380264bcd2275f1e31e50b84d560a1291bda19a7c7a02e80"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -113,8 +113,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 25578,
-      "sha256": "8e92ca6c78d3f2b6893df4c99ac0d2679a88909a8e55b7f6e8fc315e60f14a4b"
+      "bytes": 27630,
+      "sha256": "cf2445f753fb530d97964daa80e483c9017723bce82148b83cac89d935b732c7"
     },
     {
       "path": "src/rubricEvidence.js",

@@ -40,6 +40,7 @@ npm run audit:local
 npm run audit:devvit
 npm run audit:pages
 npm run audit:release
+npm run audit:feedback-gate -- --day <YYYY-MM-DD> --sample-route --username <name>
 npm run export:platform-feedback -- --day 2026-06-19 --sample-route --review-base-url <public-app-url>
 npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
