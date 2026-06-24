@@ -17,6 +17,11 @@ assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === 
 assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Public demo post URL" && item.status === "user-gated"));
 assert.ok(matrix.judgingAngles.some((item) => item.angle === "Most Reddity" && item.fit.includes("comment-sized proposals")));
 assert.ok(matrix.judgingAngles.some((item) => item.angle === "Developer Feedback" && item.proof.includes("developer-feedback-form-pack")));
+assert.deepEqual(
+  matrix.dailyLoopEvidence.map((item) => item.pillar),
+  ["Daily return", "Progression", "Daily challenge", "Community contribution", "Evolving content"],
+);
+assert.ok(matrix.dailyLoopEvidence.every((item) => item.evidence && item.proof));
 assert.ok(matrix.riskRegister.some((item) => item.risk.includes("generic puzzle demo")));
 assert.ok(matrix.nextExternalGates.some((item) => item.includes("Devvit app listing")));
 
@@ -31,6 +36,9 @@ assert.match(markdown, /Delightful UX/);
 assert.match(markdown, /Most Reddity/);
 assert.match(markdown, /Phaser Innovation/);
 assert.match(markdown, /Developer Feedback/);
+assert.match(markdown, /Reddit Daily Loop Evidence/);
+assert.match(markdown, /Daily return/);
+assert.match(markdown, /Evolving content/);
 assert.match(markdown, /user-gated/);
 assert.match(markdown, /review aid only/);
 for (const pattern of [
@@ -48,6 +56,7 @@ const { stdout } = await run(process.execPath, [script, "--day", "2026-06-27"]);
 assert.match(stdout, /Signal Garden Rubric Evidence Matrix/);
 assert.match(stdout, /day=2026-06-27&sample=1/);
 assert.match(stdout, /Public Reddit game surface/);
+assert.match(stdout, /Reddit Daily Loop Evidence/);
 assert.match(stdout, /Next External Gates/);
 
 const help = await run(process.execPath, [script, "--help"]);

@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 10749,
-      "sha256": "784c2515ecf9b129380264bcd2275f1e31e50b84d560a1291bda19a7c7a02e80"
+      "bytes": 10905,
+      "sha256": "eafea087f54851ebb443ae3fe037d2b573de63fb4ff213b969c8d4d6efefba69"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/rubric-evidence-matrix.md",
-      "bytes": 4670,
-      "sha256": "355aa4d7196af34cfeaac5e18b6aaa0815908d65ca51a04d27eb8cb3d0bb7a77"
+      "bytes": 5962,
+      "sha256": "7822cd996a87a78d77f5f0fb7ee5f6028d92e58313d5fd6ce80dc7d623acd375"
     },
     {
       "path": "docs/platform-feedback-pack.md",
@@ -118,8 +118,8 @@
     },
     {
       "path": "src/rubricEvidence.js",
-      "bytes": 7754,
-      "sha256": "0bf488ed8bb7fde67cc9d5ebd1e59f28323c9701ad75a57ddb0311eaa431c884"
+      "bytes": 9479,
+      "sha256": "a4951edc0ee7fa4128029ecf9a67700d68ea996085be9f1714bd0a0d3fa00f25"
     },
     {
       "path": "scripts/audit-pages-build.mjs",

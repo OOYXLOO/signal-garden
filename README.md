@@ -91,6 +91,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Comment thread import that parses multiple pasted Review links or short coordinate routes into ranked community proposals while preserving lightweight author labels.
 - Sample comment thread loader for instantly previewing the reply-thread import loop without manual URL assembly.
 - Review snapshot export that packages the current route, community consensus, top saved route, and judge checks.
+- Rubric evidence matrix that maps the daily return, progression, daily challenge, community contribution, and evolving-content loop to public proof files.
 - Launch packet export that combines the demo post setup, Reddit fit checks, comment challenge, Reddit post draft, developer feedback draft, top route rationale, review snapshot, daily recap, and developer platform feedback notes in one copyable block.
 - Launch packet CLI export for injecting user-approved public app listing, demo post, and review URLs after platform gates.
 - Platform feedback CLI export for preparing user-approved developer/platform feedback after the public app URL exists.

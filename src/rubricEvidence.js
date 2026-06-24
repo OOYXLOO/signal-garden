@@ -99,6 +99,33 @@ export function createRubricEvidenceMatrix({ day = todayUtcDay() } = {}) {
         proof: "docs/platform-feedback-pack.md, docs/developer-feedback-form-pack.md, src/platformFeedback.js",
       },
     ],
+    dailyLoopEvidence: [
+      {
+        pillar: "Daily return",
+        evidence: "Day-specific puzzles, seven-day return map, next-day pledge copy, and sample route links give players a clear reason to come back tomorrow.",
+        proof: "src/state/store.js, src/reviewerGuide.js, public/judge.html",
+      },
+      {
+        pillar: "Progression",
+        evidence: "The contributor board, route score, beacon count, move limit, and top-route ghost turn each reply into visible progress for the thread.",
+        proof: "src/game/proposals.js, src/game/puzzle.js, src/game/SignalGardenScene.js",
+      },
+      {
+        pillar: "Daily challenge",
+        evidence: "Each date resolves to a deterministic puzzle and a shareable sample route, so a subreddit can play one compact challenge per day.",
+        proof: `${sampleRoute}, src/game/puzzle.js, docs/demo-script.md`,
+      },
+      {
+        pillar: "Community contribution",
+        evidence: "Comment-sized route links can be imported, ranked, replayed, summarized, and promoted as the lead route without requiring private account data.",
+        proof: "src/share.js, src/game/proposals.js, docs/reddit-demo-post-draft.md",
+      },
+      {
+        pillar: "Evolving content",
+        evidence: "The daily archive, route proposals, launch packet, and feedback packs make each thread state exportable for recap posts and follow-up prompts.",
+        proof: "src/launchPacket.js, docs/submission-field-pack.md, docs/developer-feedback-form-pack.md",
+      },
+    ],
     riskRegister: [
       {
         risk: "A judge opens the app before the Reddit demo post exists.",
@@ -170,6 +197,13 @@ export function formatRubricEvidenceMatrix(matrix) {
     table(
       ["Angle", "Signal Garden fit", "Proof"],
       matrix.judgingAngles.map((item) => [item.angle, item.fit, item.proof]),
+    ),
+    "",
+    "## Reddit Daily Loop Evidence",
+    "",
+    table(
+      ["Pillar", "Evidence", "Proof"],
+      matrix.dailyLoopEvidence.map((item) => [item.pillar, item.evidence, item.proof]),
     ),
     "",
     "## Risk Register",

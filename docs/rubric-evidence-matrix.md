@@ -42,6 +42,16 @@ Rules source: https://redditgameswithahook.devpost.com/rules
 | Phaser Innovation | The Phaser board is paired with deterministic review links, replay state, contribution import, and Devvit-shaped packaging boundaries. | src/game/SignalGardenScene.js, src/share.js, docs/devvit-readiness-report.md |
 | Developer Feedback | The feedback pack ties concrete Phaser/Vite/Devvit integration gaps to public evidence, reproduction steps, and answer-field order. | docs/platform-feedback-pack.md, docs/developer-feedback-form-pack.md, src/platformFeedback.js |
 
+## Reddit Daily Loop Evidence
+
+| Pillar | Evidence | Proof |
+| --- | --- | --- |
+| Daily return | Day-specific puzzles, seven-day return map, next-day pledge copy, and sample route links give players a clear reason to come back tomorrow. | src/state/store.js, src/reviewerGuide.js, public/judge.html |
+| Progression | The contributor board, route score, beacon count, move limit, and top-route ghost turn each reply into visible progress for the thread. | src/game/proposals.js, src/game/puzzle.js, src/game/SignalGardenScene.js |
+| Daily challenge | Each date resolves to a deterministic puzzle and a shareable sample route, so a subreddit can play one compact challenge per day. | https://ooyxloo.github.io/signal-garden/?day=2026-06-24&sample=1, src/game/puzzle.js, docs/demo-script.md |
+| Community contribution | Comment-sized route links can be imported, ranked, replayed, summarized, and promoted as the lead route without requiring private account data. | src/share.js, src/game/proposals.js, docs/reddit-demo-post-draft.md |
+| Evolving content | The daily archive, route proposals, launch packet, and feedback packs make each thread state exportable for recap posts and follow-up prompts. | src/launchPacket.js, docs/submission-field-pack.md, docs/developer-feedback-form-pack.md |
+
 ## Risk Register
 
 | Risk | Mitigation |
