@@ -1,3 +1,5 @@
+import { createSubmissionWindowStatus } from "./submissionWindow.js";
+
 const SIGNAL_GARDEN_PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
 
 function todayUtcDay(date = new Date()) {
@@ -141,7 +143,7 @@ export function countFeedbackText(value) {
   };
 }
 
-export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OOYXLOO" } = {}) {
+export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OOYXLOO", now = new Date() } = {}) {
   const fallbackDay = todayUtcDay();
   const pack = feedbackPack || createPlatformFeedbackPack({
     puzzle: {
@@ -204,6 +206,7 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OO
       source: "Reddit Games with a Hook Hackathon Devpost page",
       sourceUrl: "https://redditgameswithahook.devpost.com/",
       deadline: "2026-07-15 18:00 PDT",
+      windowStatus: createSubmissionWindowStatus({ now }),
       prerequisites: [
         "Registered hackathon participant account is used for the feedback form.",
         "Signal Garden Devpost project entry has been started before submitting the feedback form.",
@@ -353,6 +356,10 @@ export function formatDeveloperFeedbackSurveyPack(surveyPack) {
       `Source URL: ${evidence.sourceUrl}`,
       "",
       `Deadline: ${evidence.deadline}`,
+      "",
+      `Submission window: ${evidence.windowStatus?.phase || "unknown"}`,
+      "",
+      evidence.windowStatus?.detail || "Submission window status is unavailable.",
       "",
       "Prerequisites:",
       "",

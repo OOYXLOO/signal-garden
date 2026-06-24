@@ -41,6 +41,10 @@ Source URL: https://redditgameswithahook.devpost.com/
 
 Deadline: 2026-07-15 18:00 PDT
 
+Submission window: open
+
+Submissions close July 15, 2026 at 6:00 PM Pacific; 22 days remain.
+
 Prerequisites:
 
 - Registered hackathon participant account is used for the feedback form.

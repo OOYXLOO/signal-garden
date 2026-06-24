@@ -79,6 +79,7 @@ function assertPublicHttpUrl(name, value) {
 
 export function createFeedbackFormPackFromOptions(options) {
   const day = options.day || todayUtcDay();
+  const now = options.now || new Date();
   const puzzle = createPuzzleForDayKey(day);
   if (!puzzle) {
     throw new Error("--day must be a real date in YYYY-MM-DD format");
@@ -115,6 +116,7 @@ export function createFeedbackFormPackFromOptions(options) {
   return createDeveloperFeedbackSurveyPack({
     feedbackPack,
     username: options.username,
+    now,
   });
 }
 

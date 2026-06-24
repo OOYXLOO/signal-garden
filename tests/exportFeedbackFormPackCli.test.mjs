@@ -9,6 +9,7 @@ const script = new URL("../scripts/export-feedback-form-pack.mjs", import.meta.u
 
 const pack = createFeedbackFormPackFromOptions({
   day: "2026-06-24",
+  now: "2026-07-14T18:30:00-07:00",
   sampleRoute: true,
   username: "OOYXLOO",
 });
@@ -23,6 +24,9 @@ assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Sample route" 
 assert.ok(!pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-22")));
 assert.equal(pack.feedbackAwardEvidence.source, "Reddit Games with a Hook Hackathon Devpost page");
 assert.equal(pack.feedbackAwardEvidence.deadline, "2026-07-15 18:00 PDT");
+assert.equal(pack.feedbackAwardEvidence.windowStatus.phase, "closing-soon");
+assert.equal(pack.feedbackAwardEvidence.windowStatus.open, true);
+assert.equal(pack.feedbackAwardEvidence.windowStatus.daysRemaining, 1);
 assert.ok(pack.feedbackAwardEvidence.prerequisites.some((item) => item.includes("Devpost project entry")));
 assert.ok(pack.feedbackAwardEvidence.publicProof.some((item) => item.includes("Public app")));
 assert.doesNotMatch(JSON.stringify(pack.feedbackAwardEvidence), /\$|USD|cash|prize/i);
@@ -45,6 +49,8 @@ assert.match(markdown, /registered hackathon participant/i);
 assert.match(markdown, /Signal Garden Devpost project entry/);
 assert.match(markdown, /Public Evidence Links/);
 assert.match(markdown, /Feedback Award Evidence Receipt/);
+assert.match(markdown, /Submission window: closing-soon/);
+assert.match(markdown, /1 day remain/);
 assert.match(markdown, /2026-07-15 18:00 PDT/);
 assert.match(markdown, /Answer Index/);
 assert.match(markdown, /\| # \| Question \| chars \| words \| note \|/);

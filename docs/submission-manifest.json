@@ -83,8 +83,8 @@
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
-      "bytes": 10707,
-      "sha256": "5a0f47176b975724a85fe1a00be4d8b00cc4bd1cf7d0bb4ef17e70768c0cf5f4"
+      "bytes": 10801,
+      "sha256": "53254c7f953fba18522acd50bdc1d9a68a25fa18cd246b0e3aa4a4d796659fb9"
     },
     {
       "path": "docs/submission-runbook.md",
@@ -113,8 +113,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 23694,
-      "sha256": "47b185fe53c94c5b5234c8d578d6df7079c975d584934650e226c33c7b9054b4"
+      "bytes": 24018,
+      "sha256": "04d3e7b9df2a319e5a70538092baa99be8f9a05ca9b349c1883a90579c57e634"
     },
     {
       "path": "src/rubricEvidence.js",
@@ -158,8 +158,8 @@
     },
     {
       "path": "scripts/export-feedback-form-pack.mjs",
-      "bytes": 4293,
-      "sha256": "aeddbd6fe8f5a1a62b76ab52724fa20a788dc555c9528dd0d553ff7ea798db9a"
+      "bytes": 4343,
+      "sha256": "07045dfe65175ef3eb0fa1c204a11a961561af43551b60fd0fa7dcb303de4540"
     },
     {
       "path": "scripts/export-rubric-evidence.mjs",
