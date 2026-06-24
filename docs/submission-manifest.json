@@ -92,6 +92,11 @@
       "sha256": "80b4916fa62558c83ca4c7d4f89ef54dc09e1c8e9b075217df8af2c49eebf033"
     },
     {
+      "path": "docs/public-proof-checklist.md",
+      "bytes": 5835,
+      "sha256": "50894e527b3da1e54e076b2e5c305658d6742a04cf6a87dee0b599bee9557b0e"
+    },
+    {
       "path": "docs/submission-runbook.md",
       "bytes": 4918,
       "sha256": "2060ab3690405459f6a19d8d83ddaafe519f1493dc727faf62576b5a4ec68790"
@@ -125,6 +130,11 @@
       "path": "src/rubricEvidence.js",
       "bytes": 9479,
       "sha256": "a4951edc0ee7fa4128029ecf9a67700d68ea996085be9f1714bd0a0d3fa00f25"
+    },
+    {
+      "path": "src/publicProofChecklist.js",
+      "bytes": 8979,
+      "sha256": "a187bddb199c6c6811228c32e72eee1a5bb752d53c4d539a88bee5ce4dc4d09b"
     },
     {
       "path": "src/batchSubmissionDesk.js",
@@ -182,6 +192,11 @@
       "sha256": "719f9982e05758cb1b730739c7978e4ea54b02d4376ed50d157376f0fba35067"
     },
     {
+      "path": "scripts/export-public-proof-checklist.mjs",
+      "bytes": 2154,
+      "sha256": "58b2f5b54a658d231741d7c6ef1dc028bda2e0fbc8fe1c2e55a816ffb709f302"
+    },
+    {
       "path": "scripts/export-demo-post.mjs",
       "bytes": 8866,
       "sha256": "335bec8b5c0713743c16d254120f64627cf880becf51a36d0aa112fd40097c03"
@@ -213,6 +228,7 @@
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
   "feedbackFormPackCommand": "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
   "batchSubmissionDeskCommand": "npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md",
+  "publicProofChecklistCommand": "npm run export:public-proof-checklist -- --day <YYYY-MM-DD> --output docs/public-proof-checklist.md",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
   "submissionRunbookCommand": "npm run export:submission-runbook -- --output docs/submission-runbook.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
