@@ -207,6 +207,19 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OO
       sourceUrl: "https://redditgameswithahook.devpost.com/",
       deadline: "2026-07-15 18:00 PDT",
       windowStatus: createSubmissionWindowStatus({ now }),
+      gateRunbook: [
+        "Start or open the Signal Garden Devpost project entry before the feedback form, so the feedback remains eligible and attributable.",
+        "Open the Developer Feedback Survey and keep this pack next to it.",
+        "Confirm the username field matches the submitting Reddit or Devvit account owner.",
+        "Paste answers in the form order shown in the Answer Index; use the long final answer only if the form accepts it.",
+        "Before submitting, re-open the public app, sample route, judge desk, source repository, Devvit readiness report, and platform feedback pack links.",
+        "Submit the feedback form only from the account owner session, then record only the public confirmation URL or non-sensitive completion note.",
+      ],
+      stopConditions: [
+        "Do not submit if the account owner has not joined the hackathon or started the Signal Garden Devpost project entry.",
+        "Do not submit if any required public proof link is down.",
+        "Do not paste credentials, cookies, OTPs, payment data, private account pages, or identity material into the form or this repository.",
+      ],
       prerequisites: [
         "Registered hackathon participant account is used for the feedback form.",
         "Signal Garden Devpost project entry has been started before submitting the feedback form.",
@@ -369,6 +382,22 @@ export function formatDeveloperFeedbackSurveyPack(surveyPack) {
       "",
       ...(evidence.publicProof || []).map((item) => `- ${item}`),
     );
+    if (evidence.gateRunbook?.length) {
+      lines.push(
+        "",
+        "## Feedback Submission Runbook",
+        "",
+        ...evidence.gateRunbook.map((item, index) => `${index + 1}. ${item}`),
+      );
+    }
+    if (evidence.stopConditions?.length) {
+      lines.push(
+        "",
+        "## Stop Conditions",
+        "",
+        ...evidence.stopConditions.map((item) => `- ${item}`),
+      );
+    }
   }
 
   lines.push("", "## Answer Index", "", "| # | Question | chars | words | note |", "| --- | --- | ---: | ---: | --- |");

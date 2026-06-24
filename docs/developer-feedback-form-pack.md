@@ -61,6 +61,21 @@ Public proof:
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
 - Platform feedback pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md
 
+## Feedback Submission Runbook
+
+1. Start or open the Signal Garden Devpost project entry before the feedback form, so the feedback remains eligible and attributable.
+2. Open the Developer Feedback Survey and keep this pack next to it.
+3. Confirm the username field matches the submitting Reddit or Devvit account owner.
+4. Paste answers in the form order shown in the Answer Index; use the long final answer only if the form accepts it.
+5. Before submitting, re-open the public app, sample route, judge desk, source repository, Devvit readiness report, and platform feedback pack links.
+6. Submit the feedback form only from the account owner session, then record only the public confirmation URL or non-sensitive completion note.
+
+## Stop Conditions
+
+- Do not submit if the account owner has not joined the hackathon or started the Signal Garden Devpost project entry.
+- Do not submit if any required public proof link is down.
+- Do not paste credentials, cookies, OTPs, payment data, private account pages, or identity material into the form or this repository.
+
 ## Answer Index
 
 | # | Question | chars | words | note |
