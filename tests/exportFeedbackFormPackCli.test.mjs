@@ -21,6 +21,11 @@ assert.ok(pack.eligibilityChecklist.some((item) => item.includes("actionable com
 assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Judge desk"));
 assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-24")));
 assert.ok(!pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-22")));
+assert.equal(pack.feedbackAwardEvidence.source, "Reddit Games with a Hook Hackathon Devpost page");
+assert.equal(pack.feedbackAwardEvidence.deadline, "2026-07-15 18:00 PDT");
+assert.ok(pack.feedbackAwardEvidence.prerequisites.some((item) => item.includes("Devpost project entry")));
+assert.ok(pack.feedbackAwardEvidence.publicProof.some((item) => item.includes("Public app")));
+assert.doesNotMatch(JSON.stringify(pack.feedbackAwardEvidence), /\$|USD|cash|prize/i);
 assert.equal(pack.fields.length, 16);
 assert.equal(pack.fields[0].answer, "8");
 assert.equal(pack.fields[4].answer, "4");
@@ -39,6 +44,8 @@ assert.match(markdown, /Eligibility Gate Checklist/);
 assert.match(markdown, /registered hackathon participant/i);
 assert.match(markdown, /Signal Garden Devpost project entry/);
 assert.match(markdown, /Public Evidence Links/);
+assert.match(markdown, /Feedback Award Evidence Receipt/);
+assert.match(markdown, /2026-07-15 18:00 PDT/);
 assert.match(markdown, /Answer Index/);
 assert.match(markdown, /\| # \| Question \| chars \| words \| note \|/);
 assert.match(markdown, /How likely are you to recommend/);
@@ -50,6 +57,7 @@ assert.doesNotMatch(markdown, /password\s*[:=]|otp\s*[:=]|sk-[a-z0-9]{20,}|AKIA[
 
 const { stdout } = await run(process.execPath, [script, "--day", "2026-06-25", "--sample-route", "--username", "OOYXLOO"]);
 assert.match(stdout, /Developer Feedback Survey/);
+assert.match(stdout, /Feedback Award Evidence Receipt/);
 assert.match(stdout, /How satisfied are you with the developer experience/);
 assert.match(stdout, /Concrete reproduction notes/);
 assert.match(stdout, /OOYXLOO/);

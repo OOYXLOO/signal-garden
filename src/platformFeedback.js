@@ -200,6 +200,25 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OO
         url: "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-runbook.md",
       },
     ],
+    feedbackAwardEvidence: {
+      source: "Reddit Games with a Hook Hackathon Devpost page",
+      sourceUrl: "https://redditgameswithahook.devpost.com/",
+      deadline: "2026-07-15 18:00 PDT",
+      prerequisites: [
+        "Registered hackathon participant account is used for the feedback form.",
+        "Signal Garden Devpost project entry has been started before submitting the feedback form.",
+        "Feedback answers are concrete, actionable, and tied to public evidence links.",
+        "The username field matches the submitting Reddit/Devvit account owner.",
+      ],
+      publicProof: [
+        "Public app: https://ooyxloo.github.io/signal-garden/",
+        `Sample route: ${publicSampleRouteUrl}`,
+        "Judge desk: https://ooyxloo.github.io/signal-garden/judge.html",
+        "Source repository: https://github.com/OOYXLOO/signal-garden",
+        "Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md",
+        "Platform feedback pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md",
+      ],
+    },
     fields: [
       {
         question: "How likely are you to recommend Reddit's Developer Platform to another dev?",
@@ -320,6 +339,28 @@ export function formatDeveloperFeedbackSurveyPack(surveyPack) {
       "## Public Evidence Links",
       "",
       ...surveyPack.publicEvidenceLinks.map((item) => `- ${item.label}: ${item.url}`),
+    );
+  }
+
+  if (surveyPack.feedbackAwardEvidence) {
+    const evidence = surveyPack.feedbackAwardEvidence;
+    lines.push(
+      "",
+      "## Feedback Award Evidence Receipt",
+      "",
+      `Source: ${evidence.source}`,
+      "",
+      `Source URL: ${evidence.sourceUrl}`,
+      "",
+      `Deadline: ${evidence.deadline}`,
+      "",
+      "Prerequisites:",
+      "",
+      ...(evidence.prerequisites || []).map((item) => `- ${item}`),
+      "",
+      "Public proof:",
+      "",
+      ...(evidence.publicProof || []).map((item) => `- ${item}`),
     );
   }
 
