@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 16329,
-      "sha256": "542b44a38516188e0784106517b4719bfcbf24740b1b2e22ba943501ec5369a3"
+      "bytes": 16723,
+      "sha256": "ddc3fbc092d84170e3d39b97cbe76eeb2ad8745bae5ec7c17595d674dbb29c03"
     },
     {
       "path": "docs/cover.png",
@@ -143,8 +143,8 @@
     },
     {
       "path": "scripts/audit-pages-build.mjs",
-      "bytes": 2394,
-      "sha256": "6ab0946eafd028e9f4d9ba9c8b2c20f2f637156e3b90f5bc46c26d4e30c9be7e"
+      "bytes": 2425,
+      "sha256": "066ecc8108fcfc07bbce875d882d97613b2014377b2000bff702798dfeeee4dd"
     },
     {
       "path": "scripts/audit-public-url.mjs",

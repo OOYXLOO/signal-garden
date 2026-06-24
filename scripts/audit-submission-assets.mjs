@@ -56,6 +56,7 @@ const textExpectations = [
       "desktop-preview.png",
       "mobile-preview.png",
       "submission-manifest.json",
+      "public-proof-checklist.md",
       "criteria-fit.md",
       "rubric-evidence-matrix.md",
       "devpost-field-pack.md",
@@ -64,6 +65,7 @@ const textExpectations = [
       "platform-feedback-pack.md",
       "developer-feedback-form-pack.md",
       "submission-runbook.md",
+      "Public proof checklist",
     ],
   },
   {

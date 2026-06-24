@@ -70,6 +70,7 @@ for (const fragment of [
   "desktop-preview.png",
   "mobile-preview.png",
   "submission-manifest.json",
+  "public-proof-checklist.md",
   "criteria-fit.md",
   "devpost-field-pack.md",
   "https://github.com/OOYXLOO/signal-garden",
