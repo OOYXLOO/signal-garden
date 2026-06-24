@@ -14,6 +14,7 @@ const root = resolve(dirname(scriptPath), "..");
 function parseArgs(argv) {
   const options = {
     allowLocal: false,
+    allowPendingPlatformGates: false,
     appListingUrl: "",
     day: "",
     demoPostUrl: "",
@@ -34,6 +35,8 @@ function parseArgs(argv) {
       options.allowLocal = true;
     } else if (arg === "--sample-route") {
       options.sampleRoute = true;
+    } else if (arg === "--allow-pending-platform-gates") {
+      options.allowPendingPlatformGates = true;
     } else if (arg.startsWith("--")) {
       const key = arg.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
       if (!(key in options)) throw new Error(`Unknown option: ${arg}`);
@@ -52,6 +55,7 @@ function helpText() {
     "Usage:",
     "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --plan <token> --source-repo-url https://... --app-listing-url https://... --demo-post-url https://...",
     "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --sample-route --source-repo-url https://... --app-listing-url https://... --demo-post-url https://...",
+    "  npm run export:submission-pack -- --public-app-url https://... --day 2026-06-19 --sample-route --source-repo-url https://... --allow-pending-platform-gates",
     "",
     "Creates a copyable public submission packet after the public app URL exists.",
     "The command audits the public app URL and sample route before writing output.",
@@ -113,6 +117,10 @@ function psArg(value) {
   return `'${String(value).replaceAll("'", "''")}'`;
 }
 
+function finalCommandValue(value, placeholder) {
+  return psArg(value || placeholder);
+}
+
 function createGateRunbook({
   publicAppUrl,
   sampleRouteUrl,
@@ -135,9 +143,9 @@ function createGateRunbook({
     "--source-repo-url",
     psArg(sourceRepoUrl),
     "--app-listing-url",
-    psArg(appListingUrl),
+    finalCommandValue(appListingUrl, "<public-app-listing-url>"),
     "--demo-post-url",
-    psArg(demoPostUrl),
+    finalCommandValue(demoPostUrl, "<public-demo-post-url>"),
     ...(feedbackUrl ? ["--feedback-url", psArg(feedbackUrl)] : []),
   ].join(" ");
   return [
@@ -150,9 +158,9 @@ function createGateRunbook({
     "4. Open the source repository and confirm the README, docs, demo media, and verification scripts are public or intentionally visible to reviewers.",
     `   Evidence: ${sourceRepoUrl}`,
     "5. Paste the app listing URL only after the user-approved Devvit listing is public.",
-    `   Evidence: ${appListingUrl}`,
+    `   Evidence: ${appListingUrl || "pending user gate: public app listing URL"}`,
     "6. Paste the public demo post URL only after the user-approved Reddit demo post is public.",
-    `   Evidence: ${demoPostUrl}`,
+    `   Evidence: ${demoPostUrl || "pending user gate: public demo post URL"}`,
     feedbackUrl
       ? `7. Paste the platform feedback URL only if that target flow asks for it: ${feedbackUrl}`
       : "7. Leave the feedback URL blank unless the target flow asks for a public platform feedback form.",
@@ -183,9 +191,11 @@ async function createSubmissionPack(options) {
   });
   const appListingUrl = assertPublicHttpUrl("app listing URL", options.appListingUrl, {
     allowLocal: options.allowLocal,
+    required: !options.allowPendingPlatformGates,
   });
   const demoPostUrl = assertPublicHttpUrl("demo post URL", options.demoPostUrl, {
     allowLocal: options.allowLocal,
+    required: !options.allowPendingPlatformGates,
   });
   const feedbackUrl = assertPublicHttpUrl("feedback URL", options.feedbackUrl, {
     allowLocal: options.allowLocal,
@@ -276,8 +286,8 @@ async function createSubmissionPack(options) {
     `- Sample route: ${publicAudit.sampleRouteUrl}`,
     `- Review link: ${reviewUrl}`,
     `- Source repository: ${sourceRepoUrl}`,
-    `- App listing: ${appListingUrl}`,
-    `- Demo post: ${demoPostUrl}`,
+    `- App listing: ${appListingUrl || "pending user gate: add after the public Devvit app listing exists."}`,
+    `- Demo post: ${demoPostUrl || "pending user gate: add after the public Reddit demo post exists."}`,
     feedbackUrl ? `- Feedback form: ${feedbackUrl}` : "- Feedback form: add only if the target platform asks for it.",
     "",
     "## Public URL Audit",

@@ -143,8 +143,8 @@
     },
     {
       "path": "scripts/export-submission-pack.mjs",
-      "bytes": 12098,
-      "sha256": "e42c5e91b9c21247c202a2453043617d12cdc94bf24d20c0f1d60f053f7b9ba1"
+      "bytes": 12910,
+      "sha256": "0163b5c8cb2550cd82a95e512b18a5f050b0f3f053049deb843384aedf661dd4"
     },
     {
       "path": "scripts/export-devpost-fields.mjs",

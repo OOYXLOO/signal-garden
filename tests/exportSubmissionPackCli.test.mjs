@@ -172,6 +172,26 @@ try {
   assert.match(sampleRoutePack.stdout, /day=2026-06-19/);
   assert.match(sampleRoutePack.stdout, /plan=2-2-b\.2-6-b/);
   assert.match(sampleRoutePack.stdout, /--plan '2-2-b\.2-6-b'/);
+
+  const preGatePack = await run(process.execPath, [
+    script,
+    "--public-app-url",
+    baseUrl,
+    "--day",
+    "2026-06-19",
+    "--sample-route",
+    "--source-repo-url",
+    "https://github.com/OOYXLOO/signal-garden",
+    "--allow-pending-platform-gates",
+    "--allow-local",
+  ]);
+  assert.match(preGatePack.stdout, /# Signal Garden Public Submission Pack/);
+  assert.match(preGatePack.stdout, /App listing: pending user gate/);
+  assert.match(preGatePack.stdout, /Demo post: pending user gate/);
+  assert.match(preGatePack.stdout, /waiting for app listing/);
+  assert.match(preGatePack.stdout, /waiting for public demo post/);
+  assert.match(preGatePack.stdout, /--app-listing-url '<public-app-listing-url>'/);
+  assert.match(preGatePack.stdout, /--demo-post-url '<public-demo-post-url>'/);
 } finally {
   server.close();
 }
