@@ -23,6 +23,7 @@ const evidenceFiles = [
   "docs/rubric-evidence-matrix.md",
   "docs/platform-feedback-pack.md",
   "docs/developer-feedback-form-pack.md",
+  "docs/batch-submission-desk.md",
   "docs/submission-runbook.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
@@ -30,6 +31,7 @@ const evidenceFiles = [
   "docs/devvit_dependency_watch.md",
   "src/platformFeedback.js",
   "src/rubricEvidence.js",
+  "src/batchSubmissionDesk.js",
   "scripts/audit-pages-build.mjs",
   "scripts/audit-public-url.mjs",
   "scripts/audit-release-gates.mjs",
@@ -39,6 +41,7 @@ const evidenceFiles = [
   "scripts/export-platform-feedback.mjs",
   "scripts/export-feedback-form-pack.mjs",
   "scripts/export-rubric-evidence.mjs",
+  "scripts/export-batch-submission-desk.mjs",
   "scripts/export-demo-post.mjs",
   "scripts/export-devvit-readiness.mjs",
   "scripts/export-submission-runbook.mjs",
@@ -116,6 +119,8 @@ export async function createSubmissionManifest() {
       "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
     feedbackFormPackCommand:
       "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
+    batchSubmissionDeskCommand:
+      "npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md",
     devvitReadinessCommand:
       "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
     submissionRunbookCommand: "npm run export:submission-runbook -- --output docs/submission-runbook.md",

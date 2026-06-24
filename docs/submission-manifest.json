@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 10905,
-      "sha256": "eafea087f54851ebb443ae3fe037d2b573de63fb4ff213b969c8d4d6efefba69"
+      "bytes": 11260,
+      "sha256": "6c7f973737c1696453557c023bf4bec7bee2a78c8a779f61903489ab78b8daea"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -87,6 +87,11 @@
       "sha256": "55d1af04ae0450a558d984b13dc72ede449d822d1b84547104654d273e876df3"
     },
     {
+      "path": "docs/batch-submission-desk.md",
+      "bytes": 2806,
+      "sha256": "80b4916fa62558c83ca4c7d4f89ef54dc09e1c8e9b075217df8af2c49eebf033"
+    },
+    {
       "path": "docs/submission-runbook.md",
       "bytes": 4918,
       "sha256": "2060ab3690405459f6a19d8d83ddaafe519f1493dc727faf62576b5a4ec68790"
@@ -120,6 +125,11 @@
       "path": "src/rubricEvidence.js",
       "bytes": 9479,
       "sha256": "a4951edc0ee7fa4128029ecf9a67700d68ea996085be9f1714bd0a0d3fa00f25"
+    },
+    {
+      "path": "src/batchSubmissionDesk.js",
+      "bytes": 6307,
+      "sha256": "69afd9c508103c12ea744815f7b5b80eacb6143f6a9af35ebb14f944c9b79e84"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -167,6 +177,11 @@
       "sha256": "747a7df9e6ad35b71b47eba6d997aa5b99d01b153ad4d1bedfafdc4693db27e2"
     },
     {
+      "path": "scripts/export-batch-submission-desk.mjs",
+      "bytes": 1841,
+      "sha256": "719f9982e05758cb1b730739c7978e4ea54b02d4376ed50d157376f0fba35067"
+    },
+    {
       "path": "scripts/export-demo-post.mjs",
       "bytes": 8866,
       "sha256": "335bec8b5c0713743c16d254120f64627cf880becf51a36d0aa112fd40097c03"
@@ -197,6 +212,7 @@
   "publicUrlAuditCommand": "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
   "platformFeedbackCommand": "npm run export:platform-feedback -- --day <YYYY-MM-DD> --sample-route --review-base-url <public-app-url>",
   "feedbackFormPackCommand": "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
+  "batchSubmissionDeskCommand": "npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
   "submissionRunbookCommand": "npm run export:submission-runbook -- --output docs/submission-runbook.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
