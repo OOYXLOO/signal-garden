@@ -82,6 +82,7 @@ export function createPublicProofChecklist(options = {}) {
       proof("Comment challenge", "ready", "The app exports a comment prompt with a Review link.", publicAppUrl),
       proof("Route import", "ready", "Review links and short coordinate replies can be parsed into ranked proposals.", raw("docs/submission-field-pack.md")),
       proof("Top route ghost", "ready", "The board can replay or apply the leading community route.", raw("docs/demo-script.md")),
+      proof("Community launch plan", "ready", "Route proof, reply depth, return hook, and first action are packaged for a demo-post launch.", raw("src/communityLaunchPlan.js")),
       proof("Daily recap", "ready", "A copyable recap summarizes routes, contributors, and next-day return cue.", raw("docs/reddit-demo-post-draft.md")),
     ]),
     group("Return loop", "Shows why a player has a reason to come back after the first solve.", [

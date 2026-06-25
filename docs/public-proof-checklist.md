@@ -14,7 +14,7 @@ This checklist is a public review aid. It does not submit forms, post to Reddit,
 ## Status Counts
 
 - optional: 1
-- ready: 21
+- ready: 22
 - user-gated: 2
 
 ## Public access
@@ -48,6 +48,7 @@ Proves the Reddit-style hook: replies can become ranked game state.
 | Comment challenge | ready | The app exports a comment prompt with a Review link. | https://ooyxloo.github.io/signal-garden/ |
 | Route import | ready | Review links and short coordinate replies can be parsed into ranked proposals. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-field-pack.md |
 | Top route ghost | ready | The board can replay or apply the leading community route. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-script.md |
+| Community launch plan | ready | Route proof, reply depth, return hook, and first action are packaged for a demo-post launch. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/src/communityLaunchPlan.js |
 | Daily recap | ready | A copyable recap summarizes routes, contributors, and next-day return cue. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/reddit-demo-post-draft.md |
 
 ## Return loop

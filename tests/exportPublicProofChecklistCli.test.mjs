@@ -13,7 +13,7 @@ assert.equal(checklist.projectName, "Signal Garden");
 assert.equal(checklist.day, "2026-06-24");
 assert.equal(checklist.sampleRouteUrl, "https://ooyxloo.github.io/signal-garden/?day=2026-06-24&sample=1");
 assert.equal(checklist.groups.length, 6);
-assert.equal(checklist.statusCounts.ready, 21);
+assert.equal(checklist.statusCounts.ready, 22);
 assert.equal(checklist.statusCounts["user-gated"], 2);
 assert.equal(checklist.statusCounts.optional, 1);
 assert.ok(checklist.groups.some((group) => group.title === "Community loop"));
@@ -31,7 +31,7 @@ const withUrls = createPublicProofChecklistFromOptions({
   demoPostUrl: "https://www.reddit.com/r/test/comments/signal_garden_demo/",
   feedbackConfirmationUrl: "https://example.com/public-feedback-confirmation",
 });
-assert.equal(withUrls.statusCounts.ready, 24);
+assert.equal(withUrls.statusCounts.ready, 25);
 assert.equal(withUrls.statusCounts.optional, undefined);
 assert.equal(withUrls.statusCounts["user-gated"], undefined);
 
@@ -40,6 +40,7 @@ assert.match(markdown, /Signal Garden Public Proof Checklist/);
 assert.match(markdown, /Public access/);
 assert.match(markdown, /Gameplay proof/);
 assert.match(markdown, /Community loop/);
+assert.match(markdown, /Community launch plan/);
 assert.match(markdown, /Return loop/);
 assert.match(markdown, /Platform handoff/);
 assert.match(markdown, /Final submission guard/);

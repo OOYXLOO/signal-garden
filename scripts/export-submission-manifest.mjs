@@ -31,6 +31,7 @@ const evidenceFiles = [
   "docs/devvit-readiness-report.md",
   "docs/devvit_dependency_watch.md",
   "src/platformFeedback.js",
+  "src/communityLaunchPlan.js",
   "src/rubricEvidence.js",
   "src/publicProofChecklist.js",
   "src/batchSubmissionDesk.js",

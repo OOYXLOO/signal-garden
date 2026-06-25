@@ -93,8 +93,8 @@
     },
     {
       "path": "docs/public-proof-checklist.md",
-      "bytes": 5835,
-      "sha256": "6a68ea2c5f868a87827aba4f4aee2820219919d302fa944d472e7d7e93a23cd6"
+      "bytes": 6056,
+      "sha256": "398d43e13869b6245e9fa0460ffba6a681b6b1bbd77c3f11c6539e9d8be2c024"
     },
     {
       "path": "docs/submission-runbook.md",
@@ -127,14 +127,19 @@
       "sha256": "cf2445f753fb530d97964daa80e483c9017723bce82148b83cac89d935b732c7"
     },
     {
+      "path": "src/communityLaunchPlan.js",
+      "bytes": 3980,
+      "sha256": "d0948e4904a2797cca1bddd84a4e0ed91ba121864b820ab50b5ec99ea7575225"
+    },
+    {
       "path": "src/rubricEvidence.js",
       "bytes": 9479,
       "sha256": "a4951edc0ee7fa4128029ecf9a67700d68ea996085be9f1714bd0a0d3fa00f25"
     },
     {
       "path": "src/publicProofChecklist.js",
-      "bytes": 8979,
-      "sha256": "a187bddb199c6c6811228c32e72eee1a5bb752d53c4d539a88bee5ce4dc4d09b"
+      "bytes": 9157,
+      "sha256": "c00847ed01d71609a8319f2ea50e2b5f3cb0dfd49abf4cd8f81374fddec48852"
     },
     {
       "path": "src/batchSubmissionDesk.js",
