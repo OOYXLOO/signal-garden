@@ -1,4 +1,5 @@
 import { createCommunityClient } from "./client/communityClient.js";
+import { createCommunityLaunchPlan } from "./communityLaunchPlan.js";
 import { createGameAudio } from "./audio.js";
 import { createObjectiveList, createRouteInsight, describeResult } from "./game/puzzle.js";
 import {
@@ -60,6 +61,10 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     returnPledgeValue: document.querySelector("#return-pledge-value"),
     returnPledgeDetail: document.querySelector("#return-pledge-detail"),
     returnPledgePrompt: document.querySelector("#return-pledge-prompt"),
+    communityLaunchTitle: document.querySelector("#community-launch-title"),
+    communityLaunchList: document.querySelector("#community-launch-list"),
+    communityLaunchOutput: document.querySelector("#community-launch-output"),
+    copyCommunityLaunch: document.querySelector("#copy-community-launch"),
     targetCard: document.querySelector("#target-card"),
     targetLabel: document.querySelector("#target-label"),
     targetValue: document.querySelector("#target-value"),
@@ -275,6 +280,18 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
       document.execCommand("copy");
     }
   });
+  refs.copyCommunityLaunch.addEventListener("click", async () => {
+    refs.communityLaunchOutput.select();
+    try {
+      await navigator.clipboard.writeText(refs.communityLaunchOutput.value);
+      refs.copyCommunityLaunch.textContent = "Launch copied";
+      window.setTimeout(() => {
+        refs.copyCommunityLaunch.textContent = "Copy launch plan";
+      }, 1200);
+    } catch {
+      document.execCommand("copy");
+    }
+  });
   refs.copyLaunchPacket.addEventListener("click", async () => {
     refs.launchPacket.select();
     try {
@@ -426,6 +443,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
     savePlan(puzzle.id, plan, result);
     renderArchive(refs, puzzle.id);
     renderGardenLog(refs, puzzle.id, { preview: sampleWeekPreview });
+    renderCommunityLaunchPlan(refs, latest, latestConsensus, { sampleWeekPreview });
     if (latestDay !== puzzle.id) {
       latestDay = puzzle.id;
       latestConsensus = null;
@@ -447,6 +465,7 @@ export function bindUi(scene, { communityClient = createCommunityClient(), audio
         renderReviewSnapshot(refs, latest, latestConsensus);
         renderLaunchPacket(refs, latest, latestConsensus);
         renderSubmissionReadiness(refs, latest, latestConsensus, { sampleWeekPreview });
+        renderCommunityLaunchPlan(refs, latest, latestConsensus, { sampleWeekPreview });
       });
     }
   });
@@ -696,6 +715,55 @@ function renderSubmissionReadiness(refs, latest, consensus, { sampleWeekPreview 
       label.textContent = check.label;
       value.textContent = check.state;
       detail.textContent = check.detail;
+      item.append(label, value, detail);
+      return item;
+    }),
+  );
+}
+
+function renderCommunityLaunchPlan(refs, latest, consensus, { sampleWeekPreview = false } = {}) {
+  if (!latest) {
+    refs.communityLaunchTitle.textContent = "Loading";
+    refs.communityLaunchList.replaceChildren();
+    refs.communityLaunchOutput.value = "";
+    return;
+  }
+
+  const archive = sampleWeekPreview
+    ? mergeGardenArchive(getLocalArchive(latest.puzzle.id), createSampleGardenArchive(latest.puzzle.id))
+    : getLocalArchive(latest.puzzle.id);
+  const gardenLog = createGardenLog({
+    currentPuzzleId: latest.puzzle.id,
+    archive,
+    streak: sampleWeekPreview ? undefined : getLocalStreak(latest.puzzle.id),
+  });
+  const returnPledge = createReturnPledge({
+    currentPuzzleId: latest.puzzle.id,
+    archive,
+    streak: sampleWeekPreview ? undefined : getLocalStreak(latest.puzzle.id),
+  });
+  const plan = createCommunityLaunchPlan({
+    puzzle: latest.puzzle,
+    result: latest.result,
+    plan: latest.plan,
+    shareUrl: buildShareUrl(window.location.href, latest.puzzle, latest.plan),
+    sampleRouteUrl: buildSampleRouteUrl(window.location.href, latest.puzzle),
+    consensus,
+    gardenLog,
+    returnPledge,
+  });
+  refs.communityLaunchTitle.textContent = plan.summary;
+  refs.communityLaunchOutput.value = plan.copy;
+  refs.communityLaunchList.replaceChildren(
+    ...plan.metrics.map((metric) => {
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      const value = document.createElement("strong");
+      const detail = document.createElement("em");
+      item.className = metric.state;
+      label.textContent = metric.label;
+      value.textContent = metric.value;
+      detail.textContent = metric.detail;
       item.append(label, value, detail);
       return item;
     }),
