@@ -26,7 +26,7 @@ This pack follows the public Google Form question order. It is copy-only and doe
 ## Public Evidence Links
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-24&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
@@ -43,7 +43,7 @@ Deadline: 2026-07-15 18:00 PDT
 
 Submission window: open
 
-Submissions close July 15, 2026 at 6:00 PM Pacific; 22 days remain.
+Submissions close July 15, 2026 at 6:00 PM Pacific; 21 days remain.
 
 Prerequisites:
 
@@ -55,7 +55,7 @@ Prerequisites:
 Public proof:
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-24&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
@@ -93,7 +93,7 @@ Public proof:
 | 11 | Do you plan on continuing to develop your project? | 3 | 1 |  |
 | 12 | Why or why not? | 338 | 57 |  |
 | 13 | Would you be open to joining us for a feedback session? (If yes, please make sure to submit your username in the next question) | 2 | 1 | Choose Yes instead only if the account owner is personally willing to attend or schedule a session. |
-| 14 | What is your username (please share this to be eligible for the feedback award) | 7 | 1 | Replace with the submitting Reddit username if different. |
+| 14 | What is your username (please share this to be eligible for the feedback award) | 20 | 1 | Replace with the submitting Reddit username if different. |
 | 15 | What would get you most excited to start working on a new app? | 313 | 37 |  |
 | 16 | Please share anything else you would like for the team to know | 1716 | 257 |  |
 
@@ -161,7 +161,7 @@ Note: Choose Yes instead only if the account owner is personally willing to atte
 
 ## 14. What is your username (please share this to be eligible for the feedback award)
 
-OOYXLOO
+TODO_REDDIT_USERNAME
 
 Note: Replace with the submitting Reddit username if different.
 

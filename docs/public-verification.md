@@ -1,12 +1,12 @@
 # Public Verification
 
-Last checked: 2026-06-22
+Last checked: 2026-06-26
 
 ## Public Links
 
 - Source: https://github.com/OOYXLOO/signal-garden
 - GitHub Pages: https://ooyxloo.github.io/signal-garden/
-- Sample reviewer route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1
+- Sample reviewer route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md
 - Devpost field pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devpost-field-pack.md
@@ -28,7 +28,7 @@ The latest repository head is intentionally left to GitHub's commit history so t
 - `npm run audit:devvit`
 - `npm run audit:pages`
 - `npm run audit:submission`
-- `npm run audit:public -- --base-url https://ooyxloo.github.io/signal-garden/ --day 2026-06-22`
+- `npm run audit:public -- --base-url https://ooyxloo.github.io/signal-garden/ --day 2026-06-26`
 - `npm audit --audit-level=moderate`
 
 ## Notes

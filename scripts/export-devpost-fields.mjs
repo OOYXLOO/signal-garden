@@ -159,7 +159,7 @@ async function createDevpostFields(options) {
     judgeFragments: [
       "Signal Garden",
       "Judge Desk",
-      "Open sample route",
+      "Open today's sample route",
       "demo-final-captioned.webm",
       "submission-manifest.json",
       "criteria-fit.md",

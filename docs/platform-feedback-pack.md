@@ -7,7 +7,7 @@ Signal Garden
 Signal Garden is a daily Phaser relay puzzle for Reddit-style interactive posts. Players place mirrors to route one signal through three beacons, save each route as a proposal, import route links from comments, compare community proposals, and export a launch packet for demo-post discussion and review.
 
 ## Current Stage
-Local prototype and Devvit shell validation. Current local board: 2026-06-22 North arcade. Route state: complete, 1008 pts, 3/3 beacons, 2/5 moves. Community loop: 1/1 saved routes complete. Review path: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&plan=3-4-s.3-1-s
+Local prototype and Devvit shell validation. Current local board: 2026-06-26 North arcade. Route state: complete, 1008 pts, 3/3 beacons, 2/5 moves. Community loop: 1/1 saved routes complete. Review path: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&plan=3-4-s.3-1-s
 
 ## Survey Handoff Checklist
 - Use the public app URL and one sample route so reviewers can reproduce the exact game state before reading the feedback.
@@ -71,6 +71,6 @@ chars=1427 words=194
 
 Signal Garden is a daily Phaser relay puzzle for Reddit-style interactive posts. Players place mirrors to route one signal through three beacons, save each route as a proposal, import route links from comments, compare community proposals, and export a launch packet for demo-post discussion and review.
 
-Local prototype and Devvit shell validation. Current local board: 2026-06-22 North arcade. Route state: complete, 1008 pts, 3/3 beacons, 2/5 moves. Community loop: 1/1 saved routes complete. Review path: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&plan=3-4-s.3-1-s
+Local prototype and Devvit shell validation. Current local board: 2026-06-26 North arcade. Route state: complete, 1008 pts, 3/3 beacons, 2/5 moves. Community loop: 1/1 saved routes complete. Review path: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&plan=3-4-s.3-1-s
 
 The Devvit game path would benefit from one clearer end-to-end workflow. First, add a Phaser + Vite asset checklist for WebView/static hosting, especially relative asset paths instead of root /assets assumptions. Second, document the splash-to-expanded-game lifecycle with the expected message shape, entrypoint transition, token/context handoff, and local fallback. Third, add a comment-to-game-state example: parse a reply, validate it server-side, rank it, and reflect the recap back into the post. Fourth, provide a game-specific persistence example for daily seeds, proposal lists, archive rows, and server-side score recomputation. Finally, publish a sample final submission packet that maps app listing, public demo post, source repository, media assets, and Devpost fields so builders know what evidence must be live before claiming it.

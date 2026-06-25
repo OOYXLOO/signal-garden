@@ -1,10 +1,10 @@
 # Signal Garden Criteria Fit Brief
 
-Last checked: 2026-06-22
+Last checked: 2026-06-26
 
 Public review desk: https://ooyxloo.github.io/signal-garden/judge.html  
 Public app: https://ooyxloo.github.io/signal-garden/  
-Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-22&sample=1  
+Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
 Source repository: https://github.com/OOYXLOO/signal-garden
 Rubric evidence matrix: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/rubric-evidence-matrix.md
 

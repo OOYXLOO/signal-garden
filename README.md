@@ -9,7 +9,7 @@ Players place a small number of mirrors on a shared board, guide a signal throug
 Public app: https://ooyxloo.github.io/signal-garden/
 
 1. Open the deployed app, or run the local dev server below.
-2. Use a sample route URL such as `?day=2026-06-19&sample=1` to load a complete review path without manual moves.
+2. Use a current sample route URL such as `?day=YYYY-MM-DD&sample=1` to load a complete review path without manual moves.
 3. Check the Reviewer loop panel for sample route, current review link, proposal ranking, and launch packet readiness.
 4. Load the sample comment thread to see linked routes and coordinate-only route comments become ranked proposals.
 5. Copy the Launch packet or Evidence receipt when a platform submission needs the public app, source repository, app listing, and demo post fields.
@@ -135,6 +135,6 @@ No production account setup, hosting configuration, or platform submission is pe
 
 The repository intentionally keeps official Devvit CLI packages out of normal dependencies until a live platform playtest is performed in an isolated, user-approved environment. The local shell is designed to keep the app buildable and testable without storing account tokens or platform credentials.
 
-See `docs/devvit_dependency_watch.md` for the current npm package snapshot and isolated audit rationale. As of 2026-06-22, `devvit@0.13.4` still brings a vulnerable CLI dependency chain, while `devvit@1.0.0` is a deprecated placeholder and does not provide a matching `@devvit/public-api@1.0.0`.
+See `docs/devvit_dependency_watch.md` for the current npm package snapshot and isolated audit rationale. As of 2026-06-26, `devvit@0.13.5` still brings a vulnerable CLI dependency chain, while `devvit@1.0.0` is a deprecated placeholder and does not provide a matching `@devvit/public-api@1.0.0`.
 
 `npm run record:demo`, `npm run record:demo:captioned`, and `npm run record:demo:final` are optional and require Playwright to be available in the local Node environment. They record only the local app at `127.0.0.1`; they do not access platform accounts.

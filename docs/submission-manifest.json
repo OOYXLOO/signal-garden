@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 11260,
-      "sha256": "6c7f973737c1696453557c023bf4bec7bee2a78c8a779f61903489ab78b8daea"
+      "bytes": 11268,
+      "sha256": "f6ab045856d34835f515b5f716961a753eae7dd024575f1c9591c703f572a823"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -54,7 +54,7 @@
     {
       "path": "docs/launch-readiness.md",
       "bytes": 16806,
-      "sha256": "0c914a07dfcbb5fc146421343ff2b1570220c101841f1d80bc04f75ce56c36ee"
+      "sha256": "d4e13853997d594f4828d4f5f5ced919a9164cc39022b7d57cb778357eaa62bc"
     },
     {
       "path": "docs/submission-field-pack.md",
@@ -63,63 +63,63 @@
     },
     {
       "path": "docs/devpost-field-pack.md",
-      "bytes": 13350,
-      "sha256": "daa80af4effaedf498957fec5016b5d087c8c77c8e102f33989107c555bfe315"
+      "bytes": 13368,
+      "sha256": "65a4a9884687ba7deed60546f6a8b0e4998ca400e27258171e19cade473f4fef"
     },
     {
       "path": "docs/criteria-fit.md",
-      "bytes": 5115,
-      "sha256": "73fff63a981d2aa30a5983ce204b941fac83328de34d0865a7ecb3d6c0f39f11"
+      "bytes": 5113,
+      "sha256": "7a8f375ae93ccd3cd927c6655f380f4eb2d9032864f4235711a8671ed575d267"
     },
     {
       "path": "docs/rubric-evidence-matrix.md",
       "bytes": 5962,
-      "sha256": "7822cd996a87a78d77f5f0fb7ee5f6028d92e58313d5fd6ce80dc7d623acd375"
+      "sha256": "f39472b498d727032e4866d10e922bf879751696154ba3ef96a98db0e4a9168b"
     },
     {
       "path": "docs/platform-feedback-pack.md",
       "bytes": 9358,
-      "sha256": "85acd55f07863a397ac90e4b7456fdd62b082749199f7d68ecc55f93efd5606c"
+      "sha256": "0e9a12167c8e434e14ff8cea9608bfedd59c066f7f553553a298502abf909ae8"
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
-      "bytes": 11866,
-      "sha256": "55d1af04ae0450a558d984b13dc72ede449d822d1b84547104654d273e876df3"
+      "bytes": 11880,
+      "sha256": "1eb90b6f0685f3ad959815db7e11bf335fb602c502fd8f5ec6cda9332d358266"
     },
     {
       "path": "docs/batch-submission-desk.md",
       "bytes": 2806,
-      "sha256": "80b4916fa62558c83ca4c7d4f89ef54dc09e1c8e9b075217df8af2c49eebf033"
+      "sha256": "c1034c540e1238dd49445f0fcf5cfd561aebfff2ac1313ab9765a898c0f67a33"
     },
     {
       "path": "docs/public-proof-checklist.md",
       "bytes": 5835,
-      "sha256": "50894e527b3da1e54e076b2e5c305658d6742a04cf6a87dee0b599bee9557b0e"
+      "sha256": "6a68ea2c5f868a87827aba4f4aee2820219919d302fa944d472e7d7e93a23cd6"
     },
     {
       "path": "docs/submission-runbook.md",
       "bytes": 4918,
-      "sha256": "9d9789d0d1941e42f539986ca153d9eac1d6b6954d63df26087f8e2e869f82a1"
+      "sha256": "c91fe64e31944d0d6011b88d9a81fe73aa00fead51cc78194ada7aef4e8f4037"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
-      "bytes": 2992,
-      "sha256": "87bb34e7be4d6a0d00539cc8f46e27179bf96e4b23a0b50da86e397f032daebd"
+      "bytes": 2996,
+      "sha256": "27d4c8e05334780b3022195f43b17b57c89c609fa5852066c66c82b36e8cd8eb"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
-      "bytes": 4725,
-      "sha256": "53ca7b1101f72f52407b19d1aa1e8a0592113ebbc4d3032f8c69ab31ffae3451"
+      "bytes": 4722,
+      "sha256": "f3c0bacd2f3626ca22192be6a61269aa5e4cf1fea581d9ede9695ff911dee7a2"
     },
     {
       "path": "docs/devvit-readiness-report.md",
       "bytes": 2248,
-      "sha256": "3baf365b9d8b154bb03a7ca2fc5ea53db775ef2a90fc3f50b74c9e6071dc30af"
+      "sha256": "abc567f6e96a3b992fd40bd032fecfa4baad81b8b2cbde1e45e317ffb01631d1"
     },
     {
       "path": "docs/devvit_dependency_watch.md",
-      "bytes": 1761,
-      "sha256": "7a7ad29e4f1126af7d3abc8bc881681ebaecce8092d93d7bccc9834e786f4ca2"
+      "bytes": 1768,
+      "sha256": "7525dcaa48f8bec82d6f756ce69152269d184721227ed1c157cd657495ed8580"
     },
     {
       "path": "src/platformFeedback.js",
@@ -168,8 +168,8 @@
     },
     {
       "path": "scripts/export-devpost-fields.mjs",
-      "bytes": 10050,
-      "sha256": "605292f5ab4a35d49067d7e33ffd4366dc52d44602209b3b05e05ab8b1a2e9ed"
+      "bytes": 10058,
+      "sha256": "9b66e0c8396c404edad86a7394dbc1a0b23c091727847dac7a8e5193d08053fe"
     },
     {
       "path": "scripts/export-platform-feedback.mjs",

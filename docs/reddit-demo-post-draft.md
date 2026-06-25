@@ -7,9 +7,9 @@ Signal Garden: a daily co-op route puzzle where comments shape tomorrow's board
 Signal Garden is a lightweight daily puzzle about keeping a signal alive through a tiny network of relays. Each day has a fixed board, a route token, and a shareable Review link so players can compare routes without needing accounts or private data.
 
 Play the public build: https://ooyxloo.github.io/signal-garden/
-Open today's review route: https://ooyxloo.github.io/signal-garden/?day=2026-06-24&plan=5-1-b.5-6-s.2-6-s
+Open today's review route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&plan=3-4-s.3-1-s
 Source and evidence: https://github.com/OOYXLOO/signal-garden
-Developer platform feedback pack: https://github.com/OOYXLOO/signal-garden/blob/master/docs/platform-feedback-pack.md
+Developer platform feedback pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md
 
 How to try the community loop from this post:
 1. Open the Review link and press Replay route to watch the beam.
@@ -25,8 +25,8 @@ What I would love feedback on:
 - Does the top-route ghost make the community target obvious without spoiling the puzzle?
 - Is the Devvit splash-to-expanded-game flow understandable from the public demo materials?
 
-Today sample: 2026-06-24
-Route receipt: complete; 3 moves; 3/3 beacons
+Today sample: 2026-06-26
+Route receipt: complete; 2 moves; 3/3 beacons
 
 ## Suggested First Comment
 Today's sample route is ready in the Review link above. Try beating the beacon count or leaving a route idea that would make a good next-day challenge.

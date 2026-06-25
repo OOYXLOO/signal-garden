@@ -101,7 +101,7 @@ powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 
 For a quick reviewer walkthrough before a copied Review link exists, open the public app with a sample route:
 
 ```text
-<public-app-url>?day=2026-06-21&sample=1
+<public-app-url>?day=YYYY-MM-DD&sample=1
 ```
 
 The app turns that sample route into the same briefing, review snapshot, comment challenge, top route rationale, return map, and launch packet surfaces as a manually traced route. If no community proposal exists yet, the page shows a clearly labeled multi-contributor sample preview consensus and sample week preview without writing either preview to saved proposal storage. The `Load sample thread` control also fills the comment import box with a complete route, a partial route, a cross-day route, and a duplicate route so a reviewer can preview the reply-thread import loop without manually assembling URLs. Short coordinate replies such as `r3c3\ r7c3\` can also be imported when a player replies without a full Review link.

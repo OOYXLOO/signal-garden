@@ -269,8 +269,8 @@ const textExpectations = [
     file: "docs/devvit_dependency_watch.md",
     fragments: [
       "Devvit Dependency Watch",
-      "devvit@0.13.4",
-      "@devvit/public-api@0.13.4",
+      "devvit@0.13.5",
+      "@devvit/public-api@0.13.5",
       "23",
       "4",
       "devvit@1.0.0",

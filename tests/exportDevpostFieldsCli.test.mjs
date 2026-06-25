@@ -36,7 +36,7 @@ const judgeHtml = [
   "<body>",
   "<main>",
   "<h1>Signal Garden Judge Desk</h1>",
-  "<a>Open sample route</a>",
+  "<a>Open today's sample route</a>",
   "<a>https://github.com/OOYXLOO/signal-garden</a>",
   "<a>demo-final-captioned.webm</a>",
   "<a>submission-manifest.json</a>",
