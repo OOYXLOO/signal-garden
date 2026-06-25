@@ -19,6 +19,7 @@ For a one-page public review desk, open `https://ooyxloo.github.io/signal-garden
 See `docs/public-verification.md` for the current public deployment, source, and check status.
 See `docs/criteria-fit.md` for the public rules-to-evidence map used during submission review.
 See `docs/devpost-field-pack.md` for a concise copyable field pack generated from the current public URLs.
+See `docs/launch-proof-template.md` for the public evidence template used to turn the demo into a reviewer-ready launch proof pack.
 See `docs/batch-submission-desk.md` for the account-owner gate order, copy blocks, and safety boundaries.
 
 ## Local Run
@@ -106,6 +107,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Submission pack export that combines public URL checks, source repository evidence, submission fields, media checklist, launch packet copy, and an optional built-in sample review route.
 - Batch submission desk export that puts account-owner open order, copy blocks, remaining platform gates, and no-secret safety boundaries on one page.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
+- Launch proof template for turning the playable app, judge desk, source, media, and remaining public gates into a reviewer-ready evidence pack.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled multi-contributor sample preview consensus and sample week preview when no proposal or archive exists yet.

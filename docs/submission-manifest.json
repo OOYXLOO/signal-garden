@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 11268,
-      "sha256": "f6ab045856d34835f515b5f716961a753eae7dd024575f1c9591c703f572a823"
+      "bytes": 11545,
+      "sha256": "34d2faa12b1bf4777664642ff60f1040c7590ecce583cd4b5952944227d6e6de"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -95,6 +95,11 @@
       "path": "docs/public-proof-checklist.md",
       "bytes": 6056,
       "sha256": "398d43e13869b6245e9fa0460ffba6a681b6b1bbd77c3f11c6539e9d8be2c024"
+    },
+    {
+      "path": "docs/launch-proof-template.md",
+      "bytes": 3995,
+      "sha256": "4416623c1908d49a1d84b73f2157065d7146ce702253ab52645ea7c00e23e5a1"
     },
     {
       "path": "docs/submission-runbook.md",

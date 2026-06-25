@@ -25,6 +25,7 @@ const evidenceFiles = [
   "docs/developer-feedback-form-pack.md",
   "docs/batch-submission-desk.md",
   "docs/public-proof-checklist.md",
+  "docs/launch-proof-template.md",
   "docs/submission-runbook.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
