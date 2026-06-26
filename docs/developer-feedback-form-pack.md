@@ -26,7 +26,7 @@ This pack follows the public Google Form question order. It is copy-only and doe
 ## Public Evidence Links
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
@@ -55,7 +55,7 @@ Prerequisites:
 Public proof:
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
