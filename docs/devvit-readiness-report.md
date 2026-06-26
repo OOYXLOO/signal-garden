@@ -10,7 +10,7 @@ This report is generated from repository config, source files, and public handof
 
 | Status | Check | Evidence |
 | --- | --- | --- |
-| PASS | Devvit app config has a stable public name | devvit.json name is signal-garden |
+| PASS | Devvit app config has the reserved listing slug | devvit.json name is signalgardenyxl |
 | PASS | Client has splash and game entrypoints | default=splash.html, game=game.html |
 | PASS | Server entry is built to the configured path | server dir dist/server, entry index.cjs |
 | PASS | Moderator menu creates a daily relay post | subreddit moderator endpoint /internal/menu/post-create |

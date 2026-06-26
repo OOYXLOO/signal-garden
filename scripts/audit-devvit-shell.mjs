@@ -32,8 +32,8 @@ for (const file of requiredFiles) {
 }
 
 const config = JSON.parse(await readFile(join(root, "devvit.json"), "utf8"));
-if (config.name !== "signal-garden") {
-  failures.push("devvit.json name must be signal-garden");
+if (config.name !== "signalgardenyxl") {
+  failures.push("devvit.json name must be signalgardenyxl");
 }
 if (config.post?.dir !== "dist/client") {
   failures.push("devvit client dir must be dist/client");

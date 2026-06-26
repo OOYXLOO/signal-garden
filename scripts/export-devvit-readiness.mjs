@@ -129,7 +129,7 @@ export async function createDevvitReadinessReport({ date } = {}) {
   }
 
   const checks = [
-    check("config-name", "Devvit app config has a stable public name", config.name === "signal-garden", "devvit.json name is signal-garden"),
+    check("config-name", "Devvit app config has the reserved listing slug", config.name === accountOwnerHandoff.appSlug, `devvit.json name is ${config.name}`),
     check("client-entrypoints", "Client has splash and game entrypoints", config.post?.entrypoints?.default?.entry === "splash.html" && config.post?.entrypoints?.game?.entry === "game.html", "default=splash.html, game=game.html"),
     check("server-entry", "Server entry is built to the configured path", config.server?.dir === "dist/server" && config.server?.entry === "index.cjs", "server dir dist/server, entry index.cjs"),
     check("menu-endpoint", "Moderator menu creates a daily relay post", config.menu?.items?.some((item) => item.endpoint === "/internal/menu/post-create" && item.location === "subreddit" && item.forUserType === "moderator"), "subreddit moderator endpoint /internal/menu/post-create"),

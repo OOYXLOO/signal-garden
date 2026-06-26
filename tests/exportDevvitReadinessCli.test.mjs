@@ -11,6 +11,7 @@ const report = await createDevvitReadinessReport({ date: "2026-06-22" });
 assert.equal(report.schemaVersion, "signal-garden-devvit-readiness/v1");
 assert.equal(report.verdict, "READY_FOR_ACCOUNT_OWNER_PLAYTEST");
 assert.ok(report.checks.every((item) => item.ok));
+assert.ok(report.checks.some((item) => item.id === "config-name" && item.evidence === "devvit.json name is signalgardenyxl"));
 assert.ok(report.checks.some((item) => item.id === "menu-endpoint"));
 assert.ok(report.checks.some((item) => item.id === "redis-boundary"));
 assert.ok(report.checks.some((item) => item.id === "listing-pack"));
