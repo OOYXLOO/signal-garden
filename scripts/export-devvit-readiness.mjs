@@ -30,6 +30,30 @@ const accountOwnerGates = [
   "Submit the final Devpost or platform form with public URLs.",
 ];
 
+const accountOwnerHandoff = {
+  appSlug: "signalgardenyxl",
+  humanityGateUrl: "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true",
+  afterHumanityCommands: [
+    "npx devvit upload --verbose",
+    "npx devvit list apps",
+    "npm run audit:release -- --json",
+  ],
+  requiredPublicUrls: [
+    {
+      label: "Devvit app listing URL",
+      placeholder: "<public-app-listing-url>",
+    },
+    {
+      label: "public Reddit demo post URL",
+      placeholder: "<public-reddit-demo-post-url>",
+    },
+  ],
+  sensitiveBoundaries: [
+    "Do not paste passwords, OTPs, cookies, private account pages, payment settings, KYC screens, or platform secrets into the repository.",
+    "Use public URLs only after the account owner creates the listing, playtest, demo post, or submission record.",
+  ],
+};
+
 function parseArgs(argv) {
   const options = {
     date: new Date().toISOString().slice(0, 10),
@@ -132,6 +156,7 @@ export async function createDevvitReadinessReport({ date } = {}) {
     verdict: ready ? "READY_FOR_ACCOUNT_OWNER_PLAYTEST" : "NEEDS_LOCAL_FIX",
     checks,
     accountOwnerGates,
+    accountOwnerHandoff,
     recommendedCommands: [
       "npm run build:devvit",
       "npm run audit:devvit",
@@ -145,6 +170,11 @@ export function formatDevvitReadinessReport(report) {
     .map((item) => `| ${item.ok ? "PASS" : "FAIL"} | ${item.label} | ${item.evidence} |`)
     .join("\n");
   const gates = report.accountOwnerGates.map((gate) => `- ${gate}`).join("\n");
+  const handoffCommands = report.accountOwnerHandoff.afterHumanityCommands.map((command) => `- \`${command}\``).join("\n");
+  const handoffUrls = report.accountOwnerHandoff.requiredPublicUrls
+    .map((item) => `- ${item.label}: \`${item.placeholder}\``)
+    .join("\n");
+  const handoffBoundaries = report.accountOwnerHandoff.sensitiveBoundaries.map((item) => `- ${item}`).join("\n");
   const commands = report.recommendedCommands.map((command) => `- \`${command}\``).join("\n");
   return [
     "# Devvit Readiness Report",
@@ -164,6 +194,23 @@ export function formatDevvitReadinessReport(report) {
     "## Account-Owner Gates",
     "",
     gates,
+    "",
+    "## Post-Humanity Handoff",
+    "",
+    `App slug: \`${report.accountOwnerHandoff.appSlug}\``,
+    `Current humanity gate: ${report.accountOwnerHandoff.humanityGateUrl}`,
+    "",
+    "After the account owner completes the humanity check, run:",
+    "",
+    handoffCommands,
+    "",
+    "Record these public URLs before final submission:",
+    "",
+    handoffUrls,
+    "",
+    "Do not include these in public handoff material:",
+    "",
+    handoffBoundaries,
     "",
     "## Recommended Local Commands",
     "",

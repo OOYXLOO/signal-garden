@@ -30,6 +30,27 @@ This report is generated from repository config, source files, and public handof
 - Create the public Reddit demo post.
 - Submit the final Devpost or platform form with public URLs.
 
+## Post-Humanity Handoff
+
+App slug: `signalgardenyxl`
+Current humanity gate: https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true
+
+After the account owner completes the humanity check, run:
+
+- `npx devvit upload --verbose`
+- `npx devvit list apps`
+- `npm run audit:release -- --json`
+
+Record these public URLs before final submission:
+
+- Devvit app listing URL: `<public-app-listing-url>`
+- public Reddit demo post URL: `<public-reddit-demo-post-url>`
+
+Do not include these in public handoff material:
+
+- Do not paste passwords, OTPs, cookies, private account pages, payment settings, KYC screens, or platform secrets into the repository.
+- Use public URLs only after the account owner creates the listing, playtest, demo post, or submission record.
+
 ## Recommended Local Commands
 
 - `npm run build:devvit`
