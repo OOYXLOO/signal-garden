@@ -17,6 +17,10 @@ assert.match(pack.listingFields.shortDescription, /daily community relay puzzle/
 assert.match(pack.listingFields.longDescription, /Devvit/i);
 assert.ok(pack.publicEvidence.some((item) => item.label === "Playable public app"));
 assert.ok(pack.publicEvidence.some((item) => item.url === "https://github.com/OOYXLOO/signal-garden"));
+assert.equal(
+  pack.humanityGateUrl,
+  "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true&template=phaser",
+);
 assert.ok(pack.postHumanityChecklist.commands.includes("npx devvit upload --verbose"));
 assert.ok(pack.postHumanityChecklist.recordPublicUrls.some((item) => item.placeholder === "<public-app-listing-url>"));
 assert.ok(pack.boundaries.some((item) => item.includes("passwords")));
@@ -27,6 +31,7 @@ assert.match(markdown, /signalgardenyxl/);
 assert.match(markdown, /Display name/);
 assert.match(markdown, /Public Evidence/);
 assert.match(markdown, /Post-Humanity Checklist/);
+assert.match(markdown, /template=phaser/);
 assert.match(markdown, /npx devvit upload --verbose/);
 assert.match(markdown, /No passwords/);
 

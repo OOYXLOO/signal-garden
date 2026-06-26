@@ -58,7 +58,8 @@ export async function createDevvitListingPack({ date } = {}) {
     appSlug: "signalgardenyxl",
     template: "phaser",
     developerPortalStartUrl: "https://developers.reddit.com/new/app?template=phaser",
-    humanityGateUrl: "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true",
+    humanityGateUrl:
+      "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true&template=phaser",
     listingFields: {
       displayName: "Signal Garden",
       tagline: "A daily community relay puzzle that turns each solved route into tomorrow's challenge.",

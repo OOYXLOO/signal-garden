@@ -31,7 +31,7 @@ Signal Garden is a Phaser puzzle prototype prepared for a Devvit shell. Each day
 ## Post-Humanity Checklist
 
 Start URL: https://developers.reddit.com/new/app?template=phaser
-Humanity gate: https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true
+Humanity gate: https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true&template=phaser
 
 Run after the app owner completes the humanity check:
 
