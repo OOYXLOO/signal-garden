@@ -84,7 +84,7 @@
     {
       "path": "docs/developer-feedback-form-pack.md",
       "bytes": 11880,
-      "sha256": "1eb90b6f0685f3ad959815db7e11bf335fb602c502fd8f5ec6cda9332d358266"
+      "sha256": "80c228cbf09f442d1a34905e00d5bf787f37835d80c9e5371fcdbf72ffefa450"
     },
     {
       "path": "docs/batch-submission-desk.md",
@@ -153,8 +153,8 @@
     },
     {
       "path": "docs/devvit_dependency_watch.md",
-      "bytes": 1768,
-      "sha256": "7525dcaa48f8bec82d6f756ce69152269d184721227ed1c157cd657495ed8580"
+      "bytes": 1735,
+      "sha256": "2adc1c2d4a3b54489c02452ca8726a9f08eb4c41c99ddaa700b88336467c8b43"
     },
     {
       "path": "src/platformFeedback.js",

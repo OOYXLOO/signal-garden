@@ -43,7 +43,7 @@ Deadline: 2026-07-15 18:00 PDT
 
 Submission window: open
 
-Submissions close July 15, 2026 at 6:00 PM Pacific; 21 days remain.
+Submissions close July 15, 2026 at 6:00 PM Pacific; 20 days remain.
 
 Prerequisites:
 
