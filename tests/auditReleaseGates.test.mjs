@@ -68,5 +68,17 @@ assert.ok(
 );
 assert.ok(cliResult.gates.some((gate) => gate.id === "origin" && ["ready", "waiting"].includes(gate.status)));
 assert.ok(cliResult.gates.some((gate) => gate.id === "source-repo-url" && ["ready", "waiting"].includes(gate.status)));
+assert.ok(
+  cliResult.nextCommands.some((command) =>
+    command.includes("npm run audit:public -- --base-url https://ooyxloo.github.io/signal-garden/"),
+  ),
+);
+assert.ok(
+  cliResult.nextCommands.some((command) =>
+    command.includes(
+      "npm run export:devpost-fields -- --public-app-url https://ooyxloo.github.io/signal-garden/ --source-repo-url https://github.com/OOYXLOO/signal-garden",
+    ),
+  ),
+);
 
 console.log("signal garden release gate audit tests passed");

@@ -231,6 +231,9 @@ async function auditReleaseGates(options = {}) {
   const submissionWindow = createSubmissionWindowStatus(config.now ? { now: config.now } : {});
   gates.push(createGate("submission-window", "Submission window", submissionWindowGateStatus(submissionWindow), submissionWindow.detail));
 
+  const publicAppCommandUrl = publicApp.status === "ready" ? new URL(inferredPublicAppUrl).toString() : "<public-app-url>";
+  const sourceRepoCommandUrl = sourceRepo.status === "ready" ? new URL(inferredSourceRepoUrl).toString() : "<public-source-repo-url>";
+
   const blockedGates = gates.filter((gate) => gate.status === "blocked");
   for (const gate of blockedGates) failures.push(`${gate.label}: ${gate.detail}`);
 
@@ -252,10 +255,10 @@ async function auditReleaseGates(options = {}) {
       "npm run audit:submission",
       "npm audit --audit-level=moderate",
       "powershell -ExecutionPolicy Bypass -File scripts/github-pages-release-check.ps1 -SetOrigin -Push",
-      "npm run audit:public -- --base-url <public-app-url> --day <YYYY-MM-DD>",
-      "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
-      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
-      "npm run export:submission-pack -- --public-app-url <public-app-url> --day <YYYY-MM-DD> --sample-route --source-repo-url <public-source-repo-url> --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>",
+      `npm run audit:public -- --base-url ${publicAppCommandUrl} --day <YYYY-MM-DD>`,
+      `npm run export:devpost-fields -- --public-app-url ${publicAppCommandUrl} --source-repo-url ${sourceRepoCommandUrl} --day <YYYY-MM-DD>`,
+      `npm run export:submission-pack -- --public-app-url ${publicAppCommandUrl} --day <YYYY-MM-DD> --plan <review-plan-token> --source-repo-url ${sourceRepoCommandUrl} --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>`,
+      `npm run export:submission-pack -- --public-app-url ${publicAppCommandUrl} --day <YYYY-MM-DD> --sample-route --source-repo-url ${sourceRepoCommandUrl} --app-listing-url <public-app-listing-url> --demo-post-url <public-demo-post-url>`,
     ],
   };
 }

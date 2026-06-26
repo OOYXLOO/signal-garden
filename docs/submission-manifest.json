@@ -163,8 +163,8 @@
     },
     {
       "path": "scripts/audit-release-gates.mjs",
-      "bytes": 11231,
-      "sha256": "8d062b0c2187caff70512ebd8c4dcfd66e497e0ee2c6385c64a35f82111117ad"
+      "bytes": 11512,
+      "sha256": "bf4b2d015dc4ca1b97de531d7364f3beb117e3ea67f8fd3911ce990746c2731f"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
