@@ -1,12 +1,12 @@
 # Signal Garden Batch Submission Desk
 
-Day: `2026-06-26`
+Day: `2026-06-27`
 
 ## Open In Order
 
 1. Public app: https://ooyxloo.github.io/signal-garden/
    Purpose: Confirm the board, reviewer panel, submission readiness, and evidence receipt render.
-2. Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
+2. Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
    Purpose: Use this for first-minute review when no final route token has been copied.
 3. Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
    Purpose: Copy the evidence packet and inspect media, manifest, rubric, and source links.
@@ -26,12 +26,12 @@ Day: `2026-06-26`
 ### Pre-gate pack command
 
 ```text
-npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-26' --sample-route --allow-pending-platform-gates --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
+npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-27' --sample-route --allow-pending-platform-gates --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
 ```
 ### Final pack command
 
 ```text
-npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-26' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
+npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-27' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
 ```
 ### App listing placeholder
 

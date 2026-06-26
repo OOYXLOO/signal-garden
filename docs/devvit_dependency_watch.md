@@ -14,9 +14,7 @@ Signal Garden keeps the official Devvit CLI and SDK packages out of the default 
 
 ## Isolated Audit Result
 
-The dependency check was run outside the repository in:
-
-`C:\Users\YXL\.codex\tmp\signal-garden\devvit-audit-20260626-0508`
+The dependency check was run outside the repository in a short-lived local temp directory.
 
 Command shape:
 
