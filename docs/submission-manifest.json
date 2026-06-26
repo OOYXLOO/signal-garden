@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 12128,
-      "sha256": "4fc9ede99e00534fb74734abfd827f11ac908d3c4d6eaad92aa71eccaeda609f"
+      "bytes": 12229,
+      "sha256": "8ee6f6f400710580cc686efff5c01c8d63fc3f8f078f7bacf3e8d2f75d5929a5"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 17200,
-      "sha256": "85a44ff307460af914defd0fdc9b50ac12cb837c6ab85b17c19d483665480a45"
+      "bytes": 18016,
+      "sha256": "a9852484ae0686de4a798e1b3a1519946ff82bd8b236e39c15d04a87678301b3"
     },
     {
       "path": "docs/cover.png",
@@ -143,8 +143,8 @@
     },
     {
       "path": "docs/devvit-listing-pack.md",
-      "bytes": 2940,
-      "sha256": "ae1e4eb01d1f080af724790c11c26a1632119f70874a8627253d963469181e15"
+      "bytes": 2956,
+      "sha256": "40fd0aa3102e7f088b91cc4e42580e182f26f85dfe20c615eb5fc46885b03140"
     },
     {
       "path": "docs/devvit-listing-pack.json",
@@ -258,8 +258,8 @@
     },
     {
       "path": "scripts/export-devvit-listing-pack.mjs",
-      "bytes": 7434,
-      "sha256": "9a67cdd76bab1f74168e5b07be5a3279ea0df23fec168d951346fb48ea5a08e0"
+      "bytes": 7456,
+      "sha256": "62d20b23d11fefe90c1275dad51b1b5b0974748284be0d6b709cb7d3b1203c19"
     },
     {
       "path": "scripts/export-submission-runbook.mjs",
