@@ -23,6 +23,7 @@ See `docs/launch-proof-template.md` for the public evidence template used to tur
 See `docs/reviewer-share-card.md` for a compact share card, captions, first-comment CTA, and public review links for demo posts.
 See `docs/frontend-reviewer-handoff.md` for the frontend handoff pattern behind deterministic sample routes, reviewer UI, public proof links, and artifact audits.
 See `docs/batch-submission-desk.md` for the account-owner gate order, copy blocks, and safety boundaries.
+See `docs/public-status-2026-06-27.md` for the latest public link receipt and verification commands.
 
 ## Local Run
 
