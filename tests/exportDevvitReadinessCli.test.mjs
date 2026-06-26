@@ -13,6 +13,7 @@ assert.equal(report.verdict, "READY_FOR_ACCOUNT_OWNER_PLAYTEST");
 assert.ok(report.checks.every((item) => item.ok));
 assert.ok(report.checks.some((item) => item.id === "menu-endpoint"));
 assert.ok(report.checks.some((item) => item.id === "redis-boundary"));
+assert.ok(report.checks.some((item) => item.id === "listing-pack"));
 assert.ok(report.accountOwnerGates.some((gate) => gate.includes("devvit login")));
 assert.equal(report.accountOwnerHandoff.appSlug, "signalgardenyxl");
 assert.ok(report.accountOwnerHandoff.humanityGateUrl.includes("app_name=signalgardenyxl"));
@@ -20,6 +21,7 @@ assert.ok(report.accountOwnerHandoff.afterHumanityCommands.includes("npx devvit 
 assert.ok(report.accountOwnerHandoff.requiredPublicUrls.some((item) => item.label === "Devvit app listing URL"));
 assert.ok(report.accountOwnerHandoff.sensitiveBoundaries.some((item) => item.includes("OTP")));
 assert.ok(report.recommendedCommands.includes("npm run audit:devvit"));
+assert.ok(report.recommendedCommands.includes("npm run export:devvit-listing-pack -- --output docs/devvit-listing-pack.md"));
 
 const markdown = formatDevvitReadinessReport(report);
 assert.match(markdown, /# Devvit Readiness Report/);
@@ -27,6 +29,7 @@ assert.match(markdown, /READY_FOR_ACCOUNT_OWNER_PLAYTEST/);
 assert.match(markdown, /subreddit moderator endpoint/);
 assert.match(markdown, /Post-Humanity Handoff/);
 assert.match(markdown, /signalgardenyxl/);
+assert.match(markdown, /Devvit listing field pack/);
 assert.match(markdown, /npx devvit upload --verbose/);
 assert.match(markdown, /public Reddit demo post URL/);
 assert.match(markdown, /private account pages/);

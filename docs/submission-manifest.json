@@ -88,8 +88,8 @@
     },
     {
       "path": "docs/batch-submission-desk.md",
-      "bytes": 2806,
-      "sha256": "c1034c540e1238dd49445f0fcf5cfd561aebfff2ac1313ab9765a898c0f67a33"
+      "bytes": 3013,
+      "sha256": "bdad595eb286e18924f831fffed8c307cbf3f44588fd01e21d088c303dd4fe58"
     },
     {
       "path": "docs/public-proof-checklist.md",
@@ -133,8 +133,18 @@
     },
     {
       "path": "docs/devvit-readiness-report.md",
-      "bytes": 3043,
-      "sha256": "4f493f518802cc9e4f5d626427ede87d7259be440ca288260f7d6d7a87b4e0f1"
+      "bytes": 3352,
+      "sha256": "4bcad830042282a08dfd60bb11fd82405dcee35f3868a6971d2e00ea0e24bda0"
+    },
+    {
+      "path": "docs/devvit-listing-pack.md",
+      "bytes": 2940,
+      "sha256": "4eae99b5bdae09ad672bf07056d32a122fac004d8feb9fc0e5b6415025da1273"
+    },
+    {
+      "path": "docs/devvit-listing-pack.json",
+      "bytes": 3226,
+      "sha256": "fe4e91e3cb18cdd40fce19179e7dc4f4501b6bc882f1cba10e282ab4f257ad02"
     },
     {
       "path": "docs/devvit_dependency_watch.md",
@@ -168,8 +178,8 @@
     },
     {
       "path": "src/batchSubmissionDesk.js",
-      "bytes": 6307,
-      "sha256": "69afd9c508103c12ea744815f7b5b80eacb6143f6a9af35ebb14f944c9b79e84"
+      "bytes": 6517,
+      "sha256": "7308b55c8ef8a02e931cd5a1147dd0203007810a3637dfdc5100e5dc82ce45ee"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -238,8 +248,13 @@
     },
     {
       "path": "scripts/export-devvit-readiness.mjs",
-      "bytes": 10089,
-      "sha256": "3e1596e2d743f0ea0f0d51ae78eddf547b69daca5a87b6a14d91c1472ee2bdf7"
+      "bytes": 10689,
+      "sha256": "b3c84ab6fc94430c6ac3be2840fd3cf78a0d9b0cda800b0d98e677a998eca2cb"
+    },
+    {
+      "path": "scripts/export-devvit-listing-pack.mjs",
+      "bytes": 7434,
+      "sha256": "9a67cdd76bab1f74168e5b07be5a3279ea0df23fec168d951346fb48ea5a08e0"
     },
     {
       "path": "scripts/export-submission-runbook.mjs",
@@ -266,6 +281,7 @@
   "publicProofChecklistCommand": "npm run export:public-proof-checklist -- --day <YYYY-MM-DD> --output docs/public-proof-checklist.md",
   "reviewerShareCardCommand": "npm run export:reviewer-share-card -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url>",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
+  "devvitListingPackCommand": "npm run export:devvit-listing-pack -- --output docs/devvit-listing-pack.md",
   "submissionRunbookCommand": "npm run export:submission-runbook -- --output docs/submission-runbook.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",
   "demoPostCommand": "npm run export:demo-post -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --feedback-pack-url <public-feedback-pack-url>",

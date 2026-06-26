@@ -33,6 +33,8 @@ const evidenceFiles = [
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",
   "docs/devvit-readiness-report.md",
+  "docs/devvit-listing-pack.md",
+  "docs/devvit-listing-pack.json",
   "docs/devvit_dependency_watch.md",
   "src/platformFeedback.js",
   "src/reviewerShareCard.js",
@@ -54,6 +56,7 @@ const evidenceFiles = [
   "scripts/export-demo-post.mjs",
   "scripts/export-reviewer-share-card.mjs",
   "scripts/export-devvit-readiness.mjs",
+  "scripts/export-devvit-listing-pack.mjs",
   "scripts/export-submission-runbook.mjs",
 ];
 
@@ -137,6 +140,8 @@ export async function createSubmissionManifest() {
       "npm run export:reviewer-share-card -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url>",
     devvitReadinessCommand:
       "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
+    devvitListingPackCommand:
+      "npm run export:devvit-listing-pack -- --output docs/devvit-listing-pack.md",
     submissionRunbookCommand: "npm run export:submission-runbook -- --output docs/submission-runbook.md",
     devpostFieldsCommand:
       "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",

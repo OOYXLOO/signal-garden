@@ -22,6 +22,7 @@ assert.ok(desk.openOrder.some((item) => item.label === "Public app"));
 assert.ok(desk.openOrder.some((item) => item.label === "Sample route"));
 assert.ok(desk.openOrder.some((item) => item.label === "Judge desk"));
 assert.ok(desk.openOrder.some((item) => item.label === "Source repository"));
+assert.ok(desk.openOrder.some((item) => item.label === "Devvit listing pack"));
 assert.ok(desk.openOrder.some((item) => item.label === "Feedback form"));
 assert.ok(desk.copyBlocks.some((item) => item.label === "Final pack command"));
 assert.ok(desk.copyBlocks.some((item) => item.label === "Pre-gate pack command"));
@@ -59,6 +60,7 @@ assert.match(stdout, /Signal Garden Batch Submission Desk/);
 assert.match(stdout, /Open In Order/);
 assert.match(stdout, /Copy Blocks/);
 assert.match(stdout, /Feedback form/);
+assert.match(stdout, /Devvit listing pack/);
 assert.match(stdout, /Do not paste passwords/);
 assert.doesNotMatch(stdout, privateRoutePattern);
 

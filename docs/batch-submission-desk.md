@@ -14,9 +14,11 @@ Day: `2026-06-26`
    Purpose: Give reviewers public source, docs, media, and verification scripts.
 5. Reddit demo post draft: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/reddit-demo-post-draft.md
    Purpose: Copy only after the account owner creates the public demo post.
-6. Developer feedback form pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md
+6. Devvit listing pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-listing-pack.md
+   Purpose: Copy app listing fields and post-humanity commands during the Devvit app setup.
+7. Developer feedback form pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md
    Purpose: Use for the user-approved feedback form pass.
-7. Feedback form: https://forms.gle/YByxxCneDsn174qb9
+8. Feedback form: https://forms.gle/YByxxCneDsn174qb9
    Purpose: Submit only through the account-owner flow.
 
 ## Copy Blocks

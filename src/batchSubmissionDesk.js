@@ -117,6 +117,11 @@ function createBatchSubmissionDesk({
         purpose: "Copy only after the account owner creates the public demo post.",
       },
       {
+        label: "Devvit listing pack",
+        url: rawDocUrl("docs/devvit-listing-pack.md"),
+        purpose: "Copy app listing fields and post-humanity commands during the Devvit app setup.",
+      },
+      {
         label: "Developer feedback form pack",
         url: rawDocUrl("docs/developer-feedback-form-pack.md"),
         purpose: "Use for the user-approved feedback form pass.",

@@ -20,6 +20,8 @@ const requiredPaths = [
   "docs/reddit-demo-post-draft.md",
   "docs/platform-feedback-pack.md",
   "docs/devpost-field-pack.md",
+  "docs/devvit-listing-pack.md",
+  "docs/devvit-listing-pack.json",
 ];
 
 const accountOwnerGates = [
@@ -137,6 +139,12 @@ export async function createDevvitReadinessReport({ date } = {}) {
     check("fetch-client", "Game entry uses same-origin community API calls", gameEntry.includes("SIGNAL_GARDEN_MANUAL_START") && gameEntry.includes("createFetchCommunityClient") && gameEntry.includes("window.location.origin"), "manual startup with same-origin fetch client"),
     check("server-routes", "Server shell exposes init, proposal, archive, and menu routes", server.includes("createSignalGardenApi") && server.includes("/internal/menu/post-create") && server.includes("submitCustomPost"), "shared API plus menu post-create route"),
     check(
+      "listing-pack",
+      "Devvit listing field pack is ready for account-owner copy/paste",
+      missingPaths.includes("docs/devvit-listing-pack.md") === false && missingPaths.includes("docs/devvit-listing-pack.json") === false,
+      "Devvit listing field pack Markdown and JSON are generated",
+    ),
+    check(
       "custom-post-payload",
       "Menu-created custom posts include Devvit-ready entry, fallback, post data, and styles",
       server.includes('entry: DEFAULT_POST_ENTRY') &&
@@ -160,6 +168,7 @@ export async function createDevvitReadinessReport({ date } = {}) {
     recommendedCommands: [
       "npm run build:devvit",
       "npm run audit:devvit",
+      "npm run export:devvit-listing-pack -- --output docs/devvit-listing-pack.md",
       "npm run export:submission-manifest -- --output docs/submission-manifest.json",
     ],
   };
@@ -203,6 +212,11 @@ export function formatDevvitReadinessReport(report) {
     "After the account owner completes the humanity check, run:",
     "",
     handoffCommands,
+    "",
+    "Devvit listing field pack:",
+    "",
+    "- `docs/devvit-listing-pack.md`",
+    "- `docs/devvit-listing-pack.json`",
     "",
     "Record these public URLs before final submission:",
     "",
