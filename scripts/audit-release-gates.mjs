@@ -114,6 +114,25 @@ function sourceRepoUrlFromOrigin(origin, expectedRepo = "") {
   return "";
 }
 
+function githubRepoFromOrigin(origin, expectedRepo = "") {
+  const sourceRepoUrl = sourceRepoUrlFromOrigin(origin, expectedRepo);
+  if (!sourceRepoUrl) return "";
+  try {
+    return new URL(sourceRepoUrl).pathname.replace(/^\/+|\/+$/g, "");
+  } catch {
+    return "";
+  }
+}
+
+function githubPagesUrlFromOrigin(origin, expectedRepo = "") {
+  const repo = githubRepoFromOrigin(origin, expectedRepo);
+  if (!repo || !repo.includes("/")) return "";
+  const [owner, name] = repo.split("/");
+  const ownerHost = owner.toLowerCase();
+  if (name.toLowerCase() === `${ownerHost}.github.io`) return `https://${ownerHost}.github.io/`;
+  return `https://${ownerHost}.github.io/${name}/`;
+}
+
 async function gitValue(args) {
   try {
     const { stdout } = await run("git", args, { cwd: root });
@@ -181,8 +200,20 @@ async function auditReleaseGates(options = {}) {
     gates.push(createGate("origin", "Git origin remote", "ready", origin));
   }
 
-  const publicApp = safePublicUrl(config.publicAppUrl);
-  gates.push(createGate("public-app-url", "Public app URL", publicApp.status, publicApp.detail));
+  const inferredPublicAppUrl = config.publicAppUrl || githubPagesUrlFromOrigin(origin, config.expectedRepo);
+  const publicApp = safePublicUrl(inferredPublicAppUrl);
+  gates.push(
+    createGate(
+      "public-app-url",
+      "Public app URL",
+      publicApp.status,
+      config.publicAppUrl
+        ? publicApp.detail
+        : publicApp.detail === "not supplied yet"
+          ? publicApp.detail
+          : `${publicApp.detail} (inferred from origin)`,
+    ),
+  );
   const inferredSourceRepoUrl = config.sourceRepoUrl || sourceRepoUrlFromOrigin(origin, config.expectedRepo);
   const sourceRepo = safePublicUrl(inferredSourceRepoUrl);
   gates.push(
@@ -267,7 +298,7 @@ async function main() {
   if (!result.ok) process.exit(1);
 }
 
-export { auditReleaseGates, formatText, safePublicUrl, sourceRepoUrlFromOrigin };
+export { auditReleaseGates, formatText, githubPagesUrlFromOrigin, safePublicUrl, sourceRepoUrlFromOrigin };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((error) => {

@@ -103,7 +103,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Public judge desk that links the playable app, today's sample route, source repository, final captioned demo, media evidence kit, copyable evidence packet, manifest, and handoff docs from one static page.
 - Criteria fit brief that maps public hackathon signals to concrete product evidence and remaining platform gates.
 - Devpost field pack export that turns the public app, source repository, judge desk, criteria brief, and current gate status into concise copyable form fields.
-- Release gate audit that reports local release readiness and marks public app, source repository, listing, demo post, and remote repository gates as ready, waiting, or blocked.
+- Release gate audit that reports local release readiness, infers the GitHub Pages app URL and source repository from `origin`, and marks listing/demo post gates as ready, waiting, or blocked.
 - Submission pack export that combines public URL checks, source repository evidence, submission fields, media checklist, launch packet copy, and an optional built-in sample review route.
 - Batch submission desk export that puts account-owner open order, copy blocks, remaining platform gates, and no-secret safety boundaries on one page.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.

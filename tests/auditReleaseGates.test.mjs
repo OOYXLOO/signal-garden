@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { auditReleaseGates, formatText, safePublicUrl, sourceRepoUrlFromOrigin } from "../scripts/audit-release-gates.mjs";
+import {
+  auditReleaseGates,
+  formatText,
+  githubPagesUrlFromOrigin,
+  safePublicUrl,
+  sourceRepoUrlFromOrigin,
+} from "../scripts/audit-release-gates.mjs";
 
 const run = promisify(execFile);
 const script = new URL("../scripts/audit-release-gates.mjs", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
@@ -14,6 +20,10 @@ assert.equal(
   "https://github.com/OOYXLOO/signal-garden",
 );
 assert.equal(sourceRepoUrlFromOrigin("git@github.com:OOYXLOO/signal-garden.git"), "https://github.com/OOYXLOO/signal-garden");
+assert.equal(
+  githubPagesUrlFromOrigin("https://github.com/OOYXLOO/signal-garden.git", "OOYXLOO/signal-garden"),
+  "https://ooyxloo.github.io/signal-garden/",
+);
 
 const result = await auditReleaseGates({
   now: "2026-06-24T04:00:00.000Z",
@@ -48,7 +58,14 @@ const { stdout } = await run(process.execPath, [script, "--json"]);
 const cliResult = JSON.parse(stdout);
 assert.equal(cliResult.project, "signal-garden");
 assert.equal(cliResult.ok, true);
-assert.ok(cliResult.gates.some((gate) => gate.id === "public-app-url" && gate.status === "waiting"));
+assert.ok(
+  cliResult.gates.some(
+    (gate) =>
+      gate.id === "public-app-url" &&
+      gate.status === "ready" &&
+      gate.detail === "https://ooyxloo.github.io/signal-garden/ (inferred from origin)",
+  ),
+);
 assert.ok(cliResult.gates.some((gate) => gate.id === "origin" && ["ready", "waiting"].includes(gate.status)));
 assert.ok(cliResult.gates.some((gate) => gate.id === "source-repo-url" && ["ready", "waiting"].includes(gate.status)));
 

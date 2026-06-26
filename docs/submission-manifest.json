@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 11545,
-      "sha256": "34d2faa12b1bf4777664642ff60f1040c7590ecce583cd4b5952944227d6e6de"
+      "bytes": 11560,
+      "sha256": "5d98673ecb3f10643dfae2d63fa593af739e5a7bc93271b8b905eede1897cfd1"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -163,8 +163,8 @@
     },
     {
       "path": "scripts/audit-release-gates.mjs",
-      "bytes": 10211,
-      "sha256": "728f35940b926eb9cfca46428c0d5afd55f813d5ec3689cc7716d44ab4d55a71"
+      "bytes": 11231,
+      "sha256": "8d062b0c2187caff70512ebd8c4dcfd66e497e0ee2c6385c64a35f82111117ad"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
