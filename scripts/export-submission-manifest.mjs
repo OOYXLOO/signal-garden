@@ -29,6 +29,7 @@ const evidenceFiles = [
   "docs/reviewer-share-card.md",
   "docs/reviewer-share-card.json",
   "docs/reviewer-share-card.svg",
+  "docs/frontend-reviewer-handoff.md",
   "docs/submission-runbook.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_shell_readiness.md",

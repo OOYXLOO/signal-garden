@@ -34,6 +34,7 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "docs/public-proof-ch
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.json"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.svg"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "docs/frontend-reviewer-handoff.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reddit-demo-post-draft.md"));
 assert.ok(manifest.evidence.every((entry) => typeof entry.bytes === "number" && entry.bytes > 0));
 assert.ok(manifest.evidence.every((entry) => /^[a-f0-9]{64}$/.test(entry.sha256)));
