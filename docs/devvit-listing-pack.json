@@ -1,6 +1,6 @@
 {
   "schemaVersion": "signal-garden-devvit-listing-pack/v1",
-  "date": "2026-06-26",
+  "date": "2026-06-27",
   "appSlug": "signalgardenyxl",
   "template": "phaser",
   "developerPortalStartUrl": "https://developers.reddit.com/new/app?template=phaser",
@@ -20,7 +20,7 @@
     },
     {
       "label": "Sample first-minute review route",
-      "url": "https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1"
+      "url": "https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1"
     },
     {
       "label": "Judge desk",

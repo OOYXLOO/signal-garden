@@ -144,12 +144,12 @@
     {
       "path": "docs/devvit-listing-pack.md",
       "bytes": 2940,
-      "sha256": "4eae99b5bdae09ad672bf07056d32a122fac004d8feb9fc0e5b6415025da1273"
+      "sha256": "ae1e4eb01d1f080af724790c11c26a1632119f70874a8627253d963469181e15"
     },
     {
       "path": "docs/devvit-listing-pack.json",
       "bytes": 3226,
-      "sha256": "fe4e91e3cb18cdd40fce19179e7dc4f4501b6bc882f1cba10e282ab4f257ad02"
+      "sha256": "a9b450cec85b1421bd483d26e7b87be40b0df87d1d9f6bcf2e52608ccda08594"
     },
     {
       "path": "docs/devvit_dependency_watch.md",

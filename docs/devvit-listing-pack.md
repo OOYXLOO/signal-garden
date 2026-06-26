@@ -1,6 +1,6 @@
 # Devvit Listing Pack
 
-Generated: 2026-06-26
+Generated: 2026-06-27
 
 This copy-ready pack keeps the account-owner listing flow short after the Reddit humanity check. It only contains public project material.
 
@@ -23,7 +23,7 @@ Signal Garden is a Phaser puzzle prototype prepared for a Devvit shell. Each day
 ## Public Evidence
 
 - Playable public app: https://ooyxloo.github.io/signal-garden/
-- Sample first-minute review route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
+- Sample first-minute review route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Developer feedback field pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md
