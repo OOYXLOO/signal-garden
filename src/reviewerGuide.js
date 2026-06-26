@@ -298,6 +298,32 @@ function submissionWindowReadiness(status = createSubmissionWindowStatus()) {
   };
 }
 
+function hookProofReadiness({ sampleRouteUrl = "", consensus = null, gardenLog = null, returnPledge = null } = {}) {
+  const hasCommunityLoop = Boolean(consensus?.proposalCount || consensus?.preview);
+  const hasReturnLoop = Boolean(gardenLog?.slots?.some((slot) => slot.state !== "open" || slot.preview));
+  const hasPledge = Boolean(returnPledge?.prompt);
+  if (sampleRouteUrl && hasCommunityLoop && hasReturnLoop && hasPledge) {
+    return readinessState(
+      "Hook proof",
+      true,
+      "Daily puzzle, reply-thread route ranking, top-route ghosting, and next-day return prompt are visible in one review path.",
+    );
+  }
+  if (sampleRouteUrl || hasCommunityLoop || hasReturnLoop) {
+    return readinessState(
+      "Hook proof",
+      true,
+      "Partial hook proof is visible; open the sample route and sample week preview to show the full daily-return loop.",
+      "preview",
+    );
+  }
+  return readinessState(
+    "Hook proof",
+    false,
+    "Load a sample route or import comment routes so the hook is visible before submission.",
+  );
+}
+
 function isPublicAppUrl(currentHref = "") {
   if (!currentHref) {
     return false;
@@ -413,6 +439,7 @@ export function createSubmissionReadiness({
       true,
       `${puzzle.beacons.length} beacons, ${puzzle.moveLimit} mirror limit, deterministic day ${puzzle.id}.`,
     ),
+    hookProofReadiness({ sampleRouteUrl, consensus, gardenLog, returnPledge }),
     readinessState(
       "Sample route",
       Boolean(sampleRouteUrl),
@@ -498,6 +525,9 @@ export function createEvidenceReceipt({
   ];
   const claims = [
     `Playable puzzle: ${puzzle.beacons.length} beacons, ${puzzle.moveLimit} mirrors, deterministic day ${puzzle.id}.`,
+    sampleRouteUrl && (proposalCount || consensus?.preview) && activeReturnSlots
+      ? "Hook proof: the review path shows a daily puzzle, shareable route, reply-thread ranking, top-route ghosting, and next-day return prompt."
+      : "Hook proof: waiting for the full daily puzzle, reply ranking, and next-day return path to be visible together.",
     `Route proof: ${routeStatus}, ${routeScore} pts, ${routeBeacons}/${puzzle.beacons.length} beacons, ${plan.length}/${puzzle.moveLimit} moves.`,
     proposalCount
       ? `Community proof: ${completed}/${proposalCount} saved routes complete, with a ranked top route and ${contributionQuality.score}/100 contribution quality.`

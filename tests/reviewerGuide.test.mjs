@@ -162,13 +162,14 @@ const readiness = createSubmissionReadiness({
   launchPacket: "Signal Garden launch packet",
   submissionWindow: openSubmissionWindow,
 });
-assert.equal(readiness.total, 10);
-assert.equal(readiness.readyCount, 9);
-assert.match(readiness.summary, /9\/10 surfaces ready/);
+assert.equal(readiness.total, 11);
+assert.equal(readiness.readyCount, 10);
+assert.match(readiness.summary, /10\/11 surfaces ready/);
 assert.deepEqual(
   readiness.items.map((item) => item.label),
   [
     "Playable board",
+    "Hook proof",
     "Sample route",
     "Current Review link",
     "Public app URL",
@@ -182,6 +183,8 @@ assert.deepEqual(
 );
 const readinessText = formatSubmissionReadiness(readiness);
 assert.match(readinessText, /Submission readiness/);
+assert.match(readinessText, /Hook proof: ready/);
+assert.match(readinessText, /reply-thread route ranking/);
 assert.match(readinessText, /Sample route: preview/);
 assert.match(readinessText, /Public app URL: ready/);
 assert.match(readinessText, /Source repository: ready/);
@@ -202,9 +205,10 @@ const draftReadiness = createSubmissionReadiness({
   gardenLog,
   submissionWindow: openSubmissionWindow,
 });
-assert.equal(draftReadiness.total, 10);
-assert.equal(draftReadiness.readyCount, 4);
+assert.equal(draftReadiness.total, 11);
+assert.equal(draftReadiness.readyCount, 5);
 assert.match(formatSubmissionReadiness(draftReadiness), /Trace a route before copying/);
+assert.match(formatSubmissionReadiness(draftReadiness), /Hook proof: preview/);
 assert.match(formatSubmissionReadiness(draftReadiness), /Public app URL: waiting/);
 assert.match(formatSubmissionReadiness(draftReadiness), /Source repository: waiting/);
 
@@ -234,6 +238,7 @@ const evidenceReceipt = createEvidenceReceipt({
 });
 assert.equal(evidenceReceipt.summary, "6/6 public URL evidence slots ready");
 assert.match(evidenceReceipt.claims.join(" "), /Playable puzzle/);
+assert.match(evidenceReceipt.claims.join(" "), /Hook proof: the review path shows a daily puzzle/);
 assert.match(evidenceReceipt.claims.join(" "), /Community proof: 1\/1 saved routes complete/);
 assert.match(evidenceReceipt.claims.join(" "), /80\/100 contribution quality/);
 assert.match(evidenceReceipt.claims.join(" "), /Retention proof:/);
