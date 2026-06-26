@@ -20,6 +20,7 @@ See `docs/public-verification.md` for the current public deployment, source, and
 See `docs/criteria-fit.md` for the public rules-to-evidence map used during submission review.
 See `docs/devpost-field-pack.md` for a concise copyable field pack generated from the current public URLs.
 See `docs/launch-proof-template.md` for the public evidence template used to turn the demo into a reviewer-ready launch proof pack.
+See `docs/reviewer-share-card.md` for a compact share card, captions, first-comment CTA, and public review links for demo posts.
 See `docs/batch-submission-desk.md` for the account-owner gate order, copy blocks, and safety boundaries.
 
 ## Local Run
@@ -46,6 +47,7 @@ npm run audit:feedback-gate -- --day <YYYY-MM-DD> --sample-route --username <nam
 npm run export:platform-feedback -- --day 2026-06-19 --sample-route --review-base-url <public-app-url>
 npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md
 npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>
+npm run export:reviewer-share-card -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url>
 npm run export:submission-manifest -- --output docs/submission-manifest.json
 npm run record:demo
 npm run export:launch-packet -- --help
@@ -108,6 +110,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Batch submission desk export that puts account-owner open order, copy blocks, remaining platform gates, and no-secret safety boundaries on one page.
 - Submission evidence manifest export with byte counts and SHA-256 hashes for public assets and source notes.
 - Launch proof template for turning the playable app, judge desk, source, media, and remaining public gates into a reviewer-ready evidence pack.
+- Reviewer share card export that produces Markdown, JSON, and SVG share assets for public demo posts and first-minute review.
 - A real "apply top proposal" flow: the UI applies the best saved community plan, not a hidden answer.
 - Share links that reopen the same daily route for review or discussion, even after the default daily board changes.
 - Sample route URLs with `?day=YYYY-MM-DD&sample=1` for first-minute reviewer walkthroughs before a final public Review link exists, including a labeled multi-contributor sample preview consensus and sample week preview when no proposal or archive exists yet.

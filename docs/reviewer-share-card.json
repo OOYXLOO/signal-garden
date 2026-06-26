@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "signal-garden-reviewer-share-card/v1",
+  "title": "Signal Garden 2026-06-26",
+  "subtitle": "Daily community relay puzzle for route sharing and comment-driven play.",
+  "metrics": {
+    "status": "complete",
+    "score": 1008,
+    "beacons": "3/3",
+    "moves": "2/5"
+  },
+  "links": {
+    "play": "https://ooyxloo.github.io/signal-garden/",
+    "review": "https://ooyxloo.github.io/signal-garden/?day=2026-06-26&plan=3-4-s.3-1-s",
+    "judge": "https://ooyxloo.github.io/signal-garden/judge.html",
+    "source": "https://github.com/OOYXLOO/signal-garden"
+  },
+  "copy": {
+    "shortCaption": "Daily community relay puzzle: 3/3 beacons, 2/5 mirrors, 1008 points. Open the Review link, replay the route, then reply with your own path.",
+    "longCaption": "Signal Garden 2026-06-26 turns a tiny mirror-route puzzle into a public community loop. Review in under a minute: open the route, replay the beam, import sample comments, and compare the top route rationale. The build is static, source-visible, and designed to be checked without private account data.",
+    "firstCommentCta": "Reply with a Review link or a short coordinate route like `r3c3\\ r7c3\\`; Signal Garden can import routes, skip duplicates, and explain the current leader.",
+    "altText": "Signal Garden share card for 2026-06-26: 3/3 beacons, 2/5 mirrors, 1008 points, public review links included."
+  }
+}

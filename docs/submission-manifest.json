@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 11560,
-      "sha256": "5d98673ecb3f10643dfae2d63fa593af739e5a7bc93271b8b905eede1897cfd1"
+      "bytes": 11965,
+      "sha256": "134d0d6ed1ce9d87d6cbf045598fd5308e930bd40e3b43639f5d8d26e11c13c8"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 16682,
-      "sha256": "9d2fb21a40a56e05af881839c8f56b20246238f86697a71b5c3a892e292832df"
+      "bytes": 17200,
+      "sha256": "85a44ff307460af914defd0fdc9b50ac12cb837c6ab85b17c19d483665480a45"
     },
     {
       "path": "docs/cover.png",
@@ -102,6 +102,21 @@
       "sha256": "4416623c1908d49a1d84b73f2157065d7146ce702253ab52645ea7c00e23e5a1"
     },
     {
+      "path": "docs/reviewer-share-card.md",
+      "bytes": 1473,
+      "sha256": "137970aa70a2423b0fe8c3aeccdd7999d7122e8753bb699a11aa741239cd3548"
+    },
+    {
+      "path": "docs/reviewer-share-card.json",
+      "bytes": 1398,
+      "sha256": "35d319bed2b36a5fc23da1b6eac16482b98f5baa7b23a518a3206781a93e35ab"
+    },
+    {
+      "path": "docs/reviewer-share-card.svg",
+      "bytes": 2423,
+      "sha256": "56565721f7b9051fd759eb3848711faa79863defbd9cf1ca7f1163551626fc72"
+    },
+    {
       "path": "docs/submission-runbook.md",
       "bytes": 4918,
       "sha256": "c91fe64e31944d0d6011b88d9a81fe73aa00fead51cc78194ada7aef4e8f4037"
@@ -130,6 +145,11 @@
       "path": "src/platformFeedback.js",
       "bytes": 27630,
       "sha256": "cf2445f753fb530d97964daa80e483c9017723bce82148b83cac89d935b732c7"
+    },
+    {
+      "path": "src/reviewerShareCard.js",
+      "bytes": 8793,
+      "sha256": "f29f0d161067723cf79df6d98992d6d42b645baf4a6103d1602d6cb3d553941c"
     },
     {
       "path": "src/communityLaunchPlan.js",
@@ -212,6 +232,11 @@
       "sha256": "335bec8b5c0713743c16d254120f64627cf880becf51a36d0aa112fd40097c03"
     },
     {
+      "path": "scripts/export-reviewer-share-card.mjs",
+      "bytes": 3689,
+      "sha256": "635e60fe6564db924a449614c5fab208e77456bf22c525b63280180c7d67d6f0"
+    },
+    {
       "path": "scripts/export-devvit-readiness.mjs",
       "bytes": 8366,
       "sha256": "4deb4cb072d299bd8b9d4dfb307d909bace1877dace74f3c2521b56e18e7706b"
@@ -239,6 +264,7 @@
   "feedbackFormPackCommand": "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
   "batchSubmissionDeskCommand": "npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md",
   "publicProofChecklistCommand": "npm run export:public-proof-checklist -- --day <YYYY-MM-DD> --output docs/public-proof-checklist.md",
+  "reviewerShareCardCommand": "npm run export:reviewer-share-card -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url>",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
   "submissionRunbookCommand": "npm run export:submission-runbook -- --output docs/submission-runbook.md",
   "devpostFieldsCommand": "npm run export:devpost-fields -- --public-app-url <public-app-url> --source-repo-url <public-source-repo-url> --day <YYYY-MM-DD>",

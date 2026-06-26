@@ -23,6 +23,9 @@ const requiredFiles = [
   "docs/batch-submission-desk.md",
   "docs/public-proof-checklist.md",
   "docs/launch-proof-template.md",
+  "docs/reviewer-share-card.md",
+  "docs/reviewer-share-card.json",
+  "docs/reviewer-share-card.svg",
   "docs/submission-runbook.md",
   "docs/reddit-demo-post-draft.md",
   "docs/devvit_dependency_watch.md",
@@ -63,6 +66,7 @@ const textExpectations = [
       "devpost-field-pack.md",
       "launch-readiness.md",
       "reddit-demo-post-draft.md",
+      "reviewer-share-card.md",
       "platform-feedback-pack.md",
       "developer-feedback-form-pack.md",
       "submission-runbook.md",
@@ -149,6 +153,20 @@ const textExpectations = [
       "public judge desk",
       "sample route",
       "Submission manifest",
+    ],
+  },
+  {
+    file: "docs/reviewer-share-card.md",
+    fragments: [
+      "Signal Garden Reviewer Share Card",
+      "Share Copy",
+      "Quick Links",
+      "Review route",
+      "Judge desk",
+      "Route Metrics",
+      "First Comment CTA",
+      "Alt Text",
+      "Safety Boundary",
     ],
   },
   {
@@ -467,6 +485,9 @@ async function auditSubmissionManifest() {
   }
   if (!String(manifest.demoPostCommand || "").includes("export:demo-post")) {
     failures.push(`${manifestPath} missing demo post command`);
+  }
+  if (!String(manifest.reviewerShareCardCommand || "").includes("export:reviewer-share-card")) {
+    failures.push(`${manifestPath} missing reviewer share card command`);
   }
   if (!String(manifest.submissionPackCommand || "").includes("export:submission-pack")) {
     failures.push(`${manifestPath} missing submission pack command`);

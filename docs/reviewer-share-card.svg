@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Signal Garden 2026-06-26</title>
+<desc id="desc">Signal Garden share card for 2026-06-26: 3/3 beacons, 2/5 mirrors, 1008 points, public review links included.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#102018"/>
+<stop offset="52%" stop-color="#18343b"/>
+<stop offset="100%" stop-color="#4a3322"/>
+</linearGradient>
+<filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#020805" flood-opacity="0.32"/>
+</filter>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<rect x="64" y="58" width="1072" height="514" rx="28" fill="#f7f3e8" filter="url(#soft)"/>
+<rect x="96" y="90" width="1008" height="450" rx="18" fill="#163329"/>
+<path d="M126 415 C236 332 310 370 407 292 S596 160 714 242 S888 376 1070 206" fill="none" stroke="#f0b35d" stroke-width="14" stroke-linecap="round"/>
+<circle cx="126" cy="415" r="18" fill="#78d5a0"/>
+<circle cx="407" cy="292" r="18" fill="#78d5a0"/>
+<circle cx="714" cy="242" r="18" fill="#78d5a0"/>
+<circle cx="1070" cy="206" r="18" fill="#ff7a6a"/>
+<text x="126" y="162" fill="#f7f3e8" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="700">Signal Garden</text>
+<text x="126" y="222" fill="#dbe8dd" font-family="Arial, Helvetica, sans-serif" font-size="34">2026-06-26 daily board</text>
+<text x="126" y="292" fill="#f0b35d" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700">Review in 60 seconds</text>
+<text x="126" y="350" fill="#f7f3e8" font-family="Arial, Helvetica, sans-serif" font-size="32">3/3 beacons</text>
+<text x="354" y="350" fill="#f7f3e8" font-family="Arial, Helvetica, sans-serif" font-size="32">2/5 mirrors</text>
+<text x="572" y="350" fill="#f7f3e8" font-family="Arial, Helvetica, sans-serif" font-size="32">1008 pts</text>
+<text x="126" y="468" fill="#dbe8dd" font-family="Arial, Helvetica, sans-serif" font-size="28">Review link restores the exact route</text>
+<text x="126" y="510" fill="#dbe8dd" font-family="Arial, Helvetica, sans-serif" font-size="28">Source and judge desk linked</text>
+<text x="822" y="510" fill="#f0b35d" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Comment routes shape the board</text>
+</svg>
