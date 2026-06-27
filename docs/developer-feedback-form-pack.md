@@ -26,7 +26,7 @@ This pack follows the public Google Form question order. It is copy-only and doe
 ## Public Evidence Links
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-28&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
@@ -43,7 +43,7 @@ Deadline: 2026-07-15 18:00 PDT
 
 Submission window: open
 
-Submissions close July 15, 2026 at 6:00 PM Pacific; 20 days remain.
+Submissions close July 15, 2026 at 6:00 PM Pacific; 19 days remain.
 
 Prerequisites:
 
@@ -55,7 +55,7 @@ Prerequisites:
 Public proof:
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-28&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md

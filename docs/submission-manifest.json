@@ -78,13 +78,13 @@
     },
     {
       "path": "docs/platform-feedback-pack.md",
-      "bytes": 9358,
-      "sha256": "0e9a12167c8e434e14ff8cea9608bfedd59c066f7f553553a298502abf909ae8"
+      "bytes": 9360,
+      "sha256": "918563b915d1370d8e0b6e216e1f60b0d91a98a0f792b560f5106d25749eea72"
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
       "bytes": 11880,
-      "sha256": "5ed079e7bf57b2fb0453dcce10010397283fdfe2ce7012991f7a0b1ed8583cd5"
+      "sha256": "61d1a694ea71b0b161c112fbe0ebea8bd2edfc081d030017be43395f8b3e4f2f"
     },
     {
       "path": "docs/batch-submission-desk.md",
