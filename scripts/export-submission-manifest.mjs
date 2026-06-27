@@ -10,6 +10,7 @@ const evidenceFiles = [
   "README.md",
   ".github/workflows/deploy-pages.yml",
   "public/judge.html",
+  "public/demo-video.html",
   "docs/cover.png",
   "docs/desktop-preview.png",
   "docs/mobile-preview.png",

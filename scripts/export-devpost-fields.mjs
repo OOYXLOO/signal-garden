@@ -144,7 +144,7 @@ async function createDevpostFields(options) {
     allowLocal: options.allowLocal,
     required: options.strict,
   });
-  const videoUrl = assertHttpUrl("video URL", options.videoUrl, {
+  const videoUrl = assertHttpUrl("video URL", options.videoUrl || defaultFromBase(publicAppUrl, "demo-video.html"), {
     allowLocal: options.allowLocal,
     required: false,
   });

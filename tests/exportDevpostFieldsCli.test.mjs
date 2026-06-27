@@ -115,6 +115,8 @@ try {
   assert.match(stdout, /Pending External Gates/);
   assert.match(stdout, /Devvit app listing URL/);
   assert.match(stdout, /public Reddit demo post URL/);
+  assert.match(stdout, /Video: http:\/\/127\.0\.0\.1:\d+\/signal-garden\/demo-video\.html/);
+  assert.doesNotMatch(stdout, /uploaded Devpost video or final public video URL/);
   assert.match(stdout, /Final Pre-Submit Commands/);
 
   const strictReady = await run(process.execPath, [

@@ -19,7 +19,7 @@ Signal Garden is a daily Phaser relay puzzle where players place mirrors, guide 
 - Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md
 - Devvit app listing: <add after platform gate>
 - Public demo post: <add after user-approved Reddit post>
-- Video: attach `docs/demo-final-captioned.webm` or add final public video URL
+- Video: https://signal-garden.vercel.app/demo-video.html
 
 ## Short Description
 
@@ -137,12 +137,11 @@ Signal Garden should be framed as a daily community relay puzzle: players solve 
 
 - Devvit app listing URL
 - public Reddit demo post URL
-- uploaded Devpost video or final public video URL
 
 ## Final Pre-Submit Commands
 
 ```powershell
 npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-28'
-npm run export:devpost-fields -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28'
+npm run export:devpost-fields -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28' --video-url 'https://signal-garden.vercel.app/demo-video.html'
 npm run audit:submission
 ```
