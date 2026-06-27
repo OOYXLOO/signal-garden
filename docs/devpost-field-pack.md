@@ -1,6 +1,6 @@
 # Signal Garden Devpost Field Pack
 
-Generated for day: 2026-06-26
+Generated for day: 2026-06-28
 
 ## Project Name
 
@@ -12,9 +12,9 @@ Signal Garden is a daily Phaser relay puzzle where players place mirrors, guide 
 
 ## Project URL Fields
 
-- Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
-- Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+- Public app: https://signal-garden.vercel.app/
+- Sample route: https://signal-garden.vercel.app/?day=2026-06-28&sample=1
+- Judge desk: https://signal-garden.vercel.app/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md
 - Devvit app listing: <add after platform gate>
@@ -142,7 +142,7 @@ Signal Garden should be framed as a daily community relay puzzle: players solve 
 ## Final Pre-Submit Commands
 
 ```powershell
-npm run audit:public -- --base-url 'https://ooyxloo.github.io/signal-garden/' --day '2026-06-26'
-npm run export:devpost-fields -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-26'
+npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-28'
+npm run export:devpost-fields -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28'
 npm run audit:submission
 ```

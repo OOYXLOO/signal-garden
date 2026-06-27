@@ -8,7 +8,7 @@ import {
   formatDeveloperFeedbackSurveyPack,
 } from "../src/platformFeedback.js";
 
-const PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
+const PUBLIC_APP_URL = "https://signal-garden.vercel.app/";
 
 export function todayUtcDay(date = new Date()) {
   return date.toISOString().slice(0, 10);

@@ -27,6 +27,9 @@ assert.ok(pack.eligibilityChecklist.some((item) => item.includes("Devpost projec
 assert.ok(pack.eligibilityChecklist.some((item) => item.includes("actionable comments")));
 assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Judge desk"));
 assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-24")));
+assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Public app" && link.url === "https://signal-garden.vercel.app/"));
+assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Judge desk" && link.url === "https://signal-garden.vercel.app/judge.html"));
+assert.ok(pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.startsWith("https://signal-garden.vercel.app/")));
 assert.ok(!pack.publicEvidenceLinks.some((link) => link.label === "Sample route" && link.url.includes("day=2026-06-22")));
 assert.equal(pack.feedbackAwardEvidence.source, "Reddit Games with a Hook Hackathon Devpost page");
 assert.equal(pack.feedbackAwardEvidence.deadline, "2026-07-15 18:00 PDT");
@@ -81,6 +84,8 @@ assert.match(stdout, /How satisfied are you with the developer experience/);
 assert.match(stdout, /Concrete reproduction notes/);
 assert.match(stdout, /OOYXLOO/);
 assert.match(stdout, /day=2026-06-25&sample=1/);
+assert.match(stdout, /https:\/\/signal-garden\.vercel\.app\/\?day=2026-06-25&sample=1/);
+assert.match(stdout, /https:\/\/signal-garden\.vercel\.app\/judge\.html/);
 assert.doesNotMatch(stdout, /day=2026-06-22&sample=1/);
 
 const defaultUsernameCli = await run(process.execPath, [script, "--day", "2026-06-25", "--sample-route"]);

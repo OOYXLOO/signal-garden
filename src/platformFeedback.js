@@ -1,6 +1,6 @@
 import { createSubmissionWindowStatus } from "./submissionWindow.js";
 
-const SIGNAL_GARDEN_PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
+const SIGNAL_GARDEN_PUBLIC_APP_URL = "https://signal-garden.vercel.app/";
 
 function todayUtcDay(date = new Date()) {
   return date.toISOString().slice(0, 10);
@@ -253,9 +253,9 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "C4
       "No private credentials, tokens, payment data, or account-console details are included.",
     ],
     publicEvidenceLinks: [
-      { label: "Public app", url: "https://ooyxloo.github.io/signal-garden/" },
+      { label: "Public app", url: SIGNAL_GARDEN_PUBLIC_APP_URL },
       { label: "Sample route", url: publicSampleRouteUrl },
-      { label: "Judge desk", url: "https://ooyxloo.github.io/signal-garden/judge.html" },
+      { label: "Judge desk", url: "https://signal-garden.vercel.app/judge.html" },
       { label: "Source repository", url: "https://github.com/OOYXLOO/signal-garden" },
       {
         label: "Devvit readiness report",
@@ -295,9 +295,9 @@ export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "C4
         "The username field matches the submitting Reddit/Devvit account owner.",
       ],
       publicProof: [
-        "Public app: https://ooyxloo.github.io/signal-garden/",
+        `Public app: ${SIGNAL_GARDEN_PUBLIC_APP_URL}`,
         `Sample route: ${publicSampleRouteUrl}`,
-        "Judge desk: https://ooyxloo.github.io/signal-garden/judge.html",
+        "Judge desk: https://signal-garden.vercel.app/judge.html",
         "Source repository: https://github.com/OOYXLOO/signal-garden",
         "Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md",
         "Platform feedback pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md",

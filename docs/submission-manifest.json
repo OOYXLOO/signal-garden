@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/devpost-field-pack.md",
-      "bytes": 13368,
-      "sha256": "65a4a9884687ba7deed60546f6a8b0e4998ca400e27258171e19cade473f4fef"
+      "bytes": 13333,
+      "sha256": "eaf5d31c234fa3171fc3d27fd091b47a1ad5ca74fbe9b5fe0ed0476f62ddd7dd"
     },
     {
       "path": "docs/criteria-fit.md",
@@ -78,13 +78,13 @@
     },
     {
       "path": "docs/platform-feedback-pack.md",
-      "bytes": 9360,
-      "sha256": "918563b915d1370d8e0b6e216e1f60b0d91a98a0f792b560f5106d25749eea72"
+      "bytes": 9346,
+      "sha256": "dd72a662b0d17ccc1d46389f809389ca258b892284fcbeb75643715f8bbba154"
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
-      "bytes": 11880,
-      "sha256": "61d1a694ea71b0b161c112fbe0ebea8bd2edfc081d030017be43395f8b3e4f2f"
+      "bytes": 11822,
+      "sha256": "22f43fd8a0ac8e71f4efc7caa5aa50f8a7bfe3d7f71e66eb2a90267730d770ac"
     },
     {
       "path": "docs/batch-submission-desk.md",
@@ -158,8 +158,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 27630,
-      "sha256": "cf2445f753fb530d97964daa80e483c9017723bce82148b83cac89d935b732c7"
+      "bytes": 27584,
+      "sha256": "98105a7d19c8ffee709e54bac8cce304e851d3b74cdbdaccbf97bad14e1d77f5"
     },
     {
       "path": "src/reviewerShareCard.js",
@@ -223,8 +223,8 @@
     },
     {
       "path": "scripts/export-feedback-form-pack.mjs",
-      "bytes": 4343,
-      "sha256": "07045dfe65175ef3eb0fa1c204a11a961561af43551b60fd0fa7dcb303de4540"
+      "bytes": 4332,
+      "sha256": "53491f4ae397780cf79bf9e17a71f6e313a2fd9040492fb55439ec72dda82875"
     },
     {
       "path": "scripts/export-rubric-evidence.mjs",
