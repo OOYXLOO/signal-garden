@@ -107,6 +107,11 @@
       "sha256": "08d84b3c3cb28811c706bde52d3a131bfd6914a10814cc80054d164843806ca2"
     },
     {
+      "path": "docs/public-playtest-2026-06-28.md",
+      "bytes": 2589,
+      "sha256": "534abdebc8533b12749d18a599101a5ddf90efc512735f9889af3039b75c468d"
+    },
+    {
       "path": "docs/launch-proof-template.md",
       "bytes": 3995,
       "sha256": "4416623c1908d49a1d84b73f2157065d7146ce702253ab52645ea7c00e23e5a1"

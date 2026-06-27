@@ -34,6 +34,7 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "docs/developer-feedb
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/submission-runbook.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/public-proof-checklist.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/example-post-proof-pack.md"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "docs/public-playtest-2026-06-28.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.json"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.svg"));
