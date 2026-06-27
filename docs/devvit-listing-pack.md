@@ -1,6 +1,6 @@
 # Devvit Listing Pack
 
-Generated: 2026-06-27
+Generated: 2026-06-28
 
 This copy-ready pack keeps the account-owner listing flow short after the Reddit humanity check. It only contains public project material.
 
@@ -22,9 +22,9 @@ Signal Garden is a Phaser puzzle prototype prepared for a Devvit shell. Each day
 
 ## Public Evidence
 
-- Playable public app: https://ooyxloo.github.io/signal-garden/
-- Sample first-minute review route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
-- Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+- Playable public app: https://signal-garden.vercel.app/
+- Sample first-minute review route: https://signal-garden.vercel.app/?day=2026-06-28&sample=1
+- Judge desk: https://signal-garden.vercel.app/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Developer feedback field pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md
 
@@ -38,7 +38,7 @@ Run after the app owner completes the humanity check:
 - `npx devvit upload --verbose`
 - `npx devvit list apps`
 - `npm run audit:release -- --json`
-- `npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '<YYYY-MM-DD>' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'`
+- `npm run export:submission-pack -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '<YYYY-MM-DD>' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'`
 
 Record public URLs:
 

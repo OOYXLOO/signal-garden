@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const scriptPath = fileURLToPath(import.meta.url);
 const root = resolve(dirname(scriptPath), "..");
 
-const publicAppUrl = "https://ooyxloo.github.io/signal-garden/";
+const publicAppUrl = "https://signal-garden.vercel.app/";
 const sourceRepoUrl = "https://github.com/OOYXLOO/signal-garden";
 const feedbackPackUrl = "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md";
 
@@ -99,7 +99,7 @@ export async function createDevvitListingPack({ date } = {}) {
         "npx devvit upload --verbose",
         "npx devvit list apps",
         "npm run audit:release -- --json",
-        "npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '<YYYY-MM-DD>' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'",
+        "npm run export:submission-pack -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '<YYYY-MM-DD>' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'",
       ],
       recordPublicUrls: [
         {

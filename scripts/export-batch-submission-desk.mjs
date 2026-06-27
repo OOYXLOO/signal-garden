@@ -13,7 +13,7 @@ function parseArgs(argv) {
     feedbackFormUrl: "https://forms.gle/YByxxCneDsn174qb9",
     help: false,
     output: "",
-    publicAppUrl: "https://ooyxloo.github.io/signal-garden/",
+    publicAppUrl: "https://signal-garden.vercel.app/",
     sourceRepoUrl: "https://github.com/OOYXLOO/signal-garden",
   };
   for (let index = 0; index < argv.length; index += 1) {

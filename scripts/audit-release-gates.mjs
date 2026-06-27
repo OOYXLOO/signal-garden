@@ -35,6 +35,8 @@ const requiredFiles = [
   "scripts/github-pages-release-check.ps1",
 ];
 
+const defaultPublicAppUrl = "https://signal-garden.vercel.app/";
+
 function parseArgs(argv) {
   const options = {
     appListingUrl: "",
@@ -200,7 +202,7 @@ async function auditReleaseGates(options = {}) {
     gates.push(createGate("origin", "Git origin remote", "ready", origin));
   }
 
-  const inferredPublicAppUrl = config.publicAppUrl || githubPagesUrlFromOrigin(origin, config.expectedRepo);
+  const inferredPublicAppUrl = config.publicAppUrl || defaultPublicAppUrl || githubPagesUrlFromOrigin(origin, config.expectedRepo);
   const publicApp = safePublicUrl(inferredPublicAppUrl);
   gates.push(
     createGate(
@@ -211,7 +213,7 @@ async function auditReleaseGates(options = {}) {
         ? publicApp.detail
         : publicApp.detail === "not supplied yet"
           ? publicApp.detail
-          : `${publicApp.detail} (inferred from origin)`,
+        : `${publicApp.detail} (default public app)`,
     ),
   );
   const inferredSourceRepoUrl = config.sourceRepoUrl || sourceRepoUrlFromOrigin(origin, config.expectedRepo);

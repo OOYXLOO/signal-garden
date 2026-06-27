@@ -1,6 +1,6 @@
 const DEFAULT_FEEDBACK_FORM_URL = "https://forms.gle/YByxxCneDsn174qb9";
 const DEFAULT_SOURCE_REPO_URL = "https://github.com/OOYXLOO/signal-garden";
-const DEFAULT_PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
+const DEFAULT_PUBLIC_APP_URL = "https://signal-garden.vercel.app/";
 
 function assertDay(day) {
   const value = String(day || "").trim();

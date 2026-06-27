@@ -1,10 +1,10 @@
 {
   "schemaVersion": "signal-garden-devvit-listing-pack/v1",
-  "date": "2026-06-27",
+  "date": "2026-06-28",
   "appSlug": "sigardenyxl",
   "template": "phaser",
   "developerPortalStartUrl": "https://developers.reddit.com/new/app?template=phaser",
-  "humanityGateUrl": "https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true",
+  "humanityGateUrl": "https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true&template=phaser",
   "listingFields": {
     "displayName": "Signal Garden",
     "tagline": "A daily community relay puzzle that turns each solved route into tomorrow's challenge.",
@@ -16,15 +16,15 @@
   "publicEvidence": [
     {
       "label": "Playable public app",
-      "url": "https://ooyxloo.github.io/signal-garden/"
+      "url": "https://signal-garden.vercel.app/"
     },
     {
       "label": "Sample first-minute review route",
-      "url": "https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1"
+      "url": "https://signal-garden.vercel.app/?day=2026-06-28&sample=1"
     },
     {
       "label": "Judge desk",
-      "url": "https://ooyxloo.github.io/signal-garden/judge.html"
+      "url": "https://signal-garden.vercel.app/judge.html"
     },
     {
       "label": "Source repository",
@@ -40,7 +40,7 @@
       "npx devvit upload --verbose",
       "npx devvit list apps",
       "npm run audit:release -- --json",
-      "npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '<YYYY-MM-DD>' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'"
+      "npm run export:submission-pack -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '<YYYY-MM-DD>' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'"
     ],
     "recordPublicUrls": [
       {

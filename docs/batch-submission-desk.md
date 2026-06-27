@@ -1,14 +1,14 @@
 # Signal Garden Batch Submission Desk
 
-Day: `2026-06-27`
+Day: `2026-06-28`
 
 ## Open In Order
 
-1. Public app: https://ooyxloo.github.io/signal-garden/
+1. Public app: https://signal-garden.vercel.app/
    Purpose: Confirm the board, reviewer panel, submission readiness, and evidence receipt render.
-2. Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
+2. Sample route: https://signal-garden.vercel.app/?day=2026-06-28&sample=1
    Purpose: Use this for first-minute review when no final route token has been copied.
-3. Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+3. Judge desk: https://signal-garden.vercel.app/judge.html
    Purpose: Copy the evidence packet and inspect media, manifest, rubric, and source links.
 4. Source repository: https://github.com/OOYXLOO/signal-garden
    Purpose: Give reviewers public source, docs, media, and verification scripts.
@@ -26,12 +26,12 @@ Day: `2026-06-27`
 ### Pre-gate pack command
 
 ```text
-npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-27' --sample-route --allow-pending-platform-gates --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
+npm run export:submission-pack -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28' --sample-route --allow-pending-platform-gates --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
 ```
 ### Final pack command
 
 ```text
-npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-27' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
+npm run export:submission-pack -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28' --sample-route --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>' --feedback-url 'https://forms.gle/YByxxCneDsn174qb9'
 ```
 ### App listing placeholder
 

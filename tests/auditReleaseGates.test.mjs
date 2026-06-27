@@ -63,20 +63,20 @@ assert.ok(
     (gate) =>
       gate.id === "public-app-url" &&
       gate.status === "ready" &&
-      gate.detail === "https://ooyxloo.github.io/signal-garden/ (inferred from origin)",
+      gate.detail === "https://signal-garden.vercel.app/ (default public app)",
   ),
 );
 assert.ok(cliResult.gates.some((gate) => gate.id === "origin" && ["ready", "waiting"].includes(gate.status)));
 assert.ok(cliResult.gates.some((gate) => gate.id === "source-repo-url" && ["ready", "waiting"].includes(gate.status)));
 assert.ok(
   cliResult.nextCommands.some((command) =>
-    command.includes("npm run audit:public -- --base-url https://ooyxloo.github.io/signal-garden/"),
+    command.includes("npm run audit:public -- --base-url https://signal-garden.vercel.app/"),
   ),
 );
 assert.ok(
   cliResult.nextCommands.some((command) =>
     command.includes(
-      "npm run export:devpost-fields -- --public-app-url https://ooyxloo.github.io/signal-garden/ --source-repo-url https://github.com/OOYXLOO/signal-garden",
+      "npm run export:devpost-fields -- --public-app-url https://signal-garden.vercel.app/ --source-repo-url https://github.com/OOYXLOO/signal-garden",
     ),
   ),
 );
