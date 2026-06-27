@@ -14,6 +14,12 @@ const pack = createFeedbackFormPackFromOptions({
   username: "OOYXLOO",
 });
 
+const defaultUsernamePack = createFeedbackFormPackFromOptions({
+  day: "2026-06-24",
+  now: "2026-07-14T18:30:00-07:00",
+  sampleRoute: true,
+});
+
 assert.equal(pack.formTitle, "Developer Feedback Survey");
 assert.ok(pack.submissionChecklist.length >= 5);
 assert.ok(pack.submissionChecklist.some((item) => item.includes("registered for the hackathon")));
@@ -40,6 +46,7 @@ assert.equal(pack.fields[6].answer, "3");
 assert.equal(pack.fields[10].answer, "Yes");
 assert.equal(pack.fields[12].answer, "No");
 assert.equal(pack.fields[13].answer, "OOYXLOO");
+assert.equal(defaultUsernamePack.fields[13].answer, "C4PPP");
 assert.ok(pack.fields.some((field) => field.question.includes("What would get you most excited")));
 assert.ok(pack.fields.some((field) => field.answer.includes("Phaser/Vite config")));
 assert.ok(pack.fields.some((field) => field.answer.includes("Concrete reproduction notes")));
@@ -75,6 +82,10 @@ assert.match(stdout, /Concrete reproduction notes/);
 assert.match(stdout, /OOYXLOO/);
 assert.match(stdout, /day=2026-06-25&sample=1/);
 assert.doesNotMatch(stdout, /day=2026-06-22&sample=1/);
+
+const defaultUsernameCli = await run(process.execPath, [script, "--day", "2026-06-25", "--sample-route"]);
+assert.match(defaultUsernameCli.stdout, /C4PPP/);
+assert.doesNotMatch(defaultUsernameCli.stdout, /TODO_REDDIT_USERNAME/);
 
 const help = await run(process.execPath, [script, "--help"]);
 assert.match(help.stdout, /export:feedback-form-pack/);

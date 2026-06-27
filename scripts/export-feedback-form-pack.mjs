@@ -29,7 +29,7 @@ function parseArgs(argv) {
     plan: "",
     reviewUrl: "",
     sampleRoute: false,
-    username: "OOYXLOO",
+    username: "C4PPP",
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -57,7 +57,7 @@ function parseArgs(argv) {
 function helpText() {
   return [
     "Usage:",
-    "  npm run export:feedback-form-pack -- --sample-route --username OOYXLOO --output docs/developer-feedback-form-pack.md",
+    "  npm run export:feedback-form-pack -- --sample-route --username C4PPP --output docs/developer-feedback-form-pack.md",
     "",
     "Creates a copy-only answer pack for the public Developer Feedback Survey. It never submits the form.",
   ].join("\n");

@@ -211,7 +211,7 @@ export function auditDeveloperFeedbackGate(surveyPack = {}) {
   };
 }
 
-export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "OOYXLOO", now = new Date() } = {}) {
+export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "C4PPP", now = new Date() } = {}) {
   const fallbackDay = todayUtcDay();
   const pack = feedbackPack || createPlatformFeedbackPack({
     puzzle: {

@@ -93,7 +93,7 @@ Public proof:
 | 11 | Do you plan on continuing to develop your project? | 3 | 1 |  |
 | 12 | Why or why not? | 338 | 57 |  |
 | 13 | Would you be open to joining us for a feedback session? (If yes, please make sure to submit your username in the next question) | 2 | 1 | Choose Yes instead only if the account owner is personally willing to attend or schedule a session. |
-| 14 | What is your username (please share this to be eligible for the feedback award) | 20 | 1 | Replace with the submitting Reddit username if different. |
+| 14 | What is your username (please share this to be eligible for the feedback award) | 5 | 1 | Replace with the submitting Reddit username if different. |
 | 15 | What would get you most excited to start working on a new app? | 313 | 37 |  |
 | 16 | Please share anything else you would like for the team to know | 1716 | 257 |  |
 
@@ -161,7 +161,7 @@ Note: Choose Yes instead only if the account owner is personally willing to atte
 
 ## 14. What is your username (please share this to be eligible for the feedback award)
 
-TODO_REDDIT_USERNAME
+C4PPP
 
 Note: Replace with the submitting Reddit username if different.
 
