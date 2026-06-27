@@ -93,8 +93,8 @@
     },
     {
       "path": "docs/public-proof-checklist.md",
-      "bytes": 6056,
-      "sha256": "398d43e13869b6245e9fa0460ffba6a681b6b1bbd77c3f11c6539e9d8be2c024"
+      "bytes": 7018,
+      "sha256": "2b24f027dc14cc2975221b1c3acc0e96220f986f1618c054d3710b80d1558799"
     },
     {
       "path": "docs/launch-proof-template.md",
@@ -178,8 +178,8 @@
     },
     {
       "path": "src/publicProofChecklist.js",
-      "bytes": 9157,
-      "sha256": "c00847ed01d71609a8319f2ea50e2b5f3cb0dfd49abf4cd8f81374fddec48852"
+      "bytes": 9955,
+      "sha256": "6d4b973753e171d3b2ffa9902e89d14681fd3a7b26a50940242bba55ae958b27"
     },
     {
       "path": "src/batchSubmissionDesk.js",

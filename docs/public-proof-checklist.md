@@ -1,20 +1,20 @@
 # Signal Garden Public Proof Checklist
 
-Generated for day: 2026-06-26
+Generated for day: 2026-06-27
 
 This checklist is a public review aid. It does not submit forms, post to Reddit, access private account pages, or include credentials.
 
 ## Quick Links
 
 - Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
+- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
 - Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 
 ## Status Counts
 
 - optional: 1
-- ready: 22
+- ready: 25
 - user-gated: 2
 
 ## Public access
@@ -24,7 +24,7 @@ Links a reviewer can open without private account data.
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
 | Playable app | ready | GitHub Pages app surface is public. | https://ooyxloo.github.io/signal-garden/ |
-| Sample route | ready | Day-specific route opens a complete review loop. | https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1 |
+| Sample route | ready | Day-specific route opens a complete review loop. | https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1 |
 | Judge desk | ready | Static review desk links media, manifests, docs, and copy packet. | https://ooyxloo.github.io/signal-garden/judge.html |
 | Source repository | ready | Public source and verification scripts are available. | https://github.com/OOYXLOO/signal-garden |
 
@@ -73,21 +73,31 @@ Keeps account-owner actions separate from public, reusable evidence.
 | Batch submission desk | ready | Copy blocks and links are ordered for user-present platform gates. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/batch-submission-desk.md |
 | Public demo post | user-gated | Account owner posts later; draft is prepared. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/reddit-demo-post-draft.md |
 
+## Feedback award readiness
+
+Shows that the optional developer feedback route is evidence-backed and account-owner gated.
+
+| Item | Status | Evidence | Link |
+|---|---:|---|---|
+| Survey answer pack | ready | Prepared answers follow the public form order and include character counts for constrained fields. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md |
+| Eligibility gate | ready | Checklist names the required participant account, project entry, username match, and public proof checks before submission. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md |
+| Actionable platform feedback | ready | Feedback is tied to concrete Devvit game-building gaps: WebView assets, expanded-mode lifecycle, comment-to-state flow, and evidence handoff. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md |
+| Feedback confirmation | optional | Only record this after the account owner submits the survey. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/developer-feedback-form-pack.md |
+
 ## Final submission guard
 
 Names what must be true immediately before pressing a platform submit button.
 
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
-| Submission window | ready | Submission window: open Submissions close July 15, 2026 at 6:00 PM Pacific; 20 days remain. Rules source: https://redditgameswithahook.devpost.com/rules | https://redditgameswithahook.devpost.com/rules |
+| Submission window | ready | Submission window: open Submissions close July 15, 2026 at 6:00 PM Pacific; 19 days remain. Rules source: https://redditgameswithahook.devpost.com/rules | https://redditgameswithahook.devpost.com/rules |
 | App listing | user-gated | Account owner creates listing later. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-runbook.md |
-| Feedback confirmation | optional | Only record this when a public confirmation URL exists. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md |
 | Local verification | ready | Run check, tests, builds, local/devvit/pages/submission audits, public URL audit, and npm audit. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/public-verification.md |
 
 ## Final Pre-Submit Command
 
 ```powershell
-npm run audit:public -- --base-url 'https://ooyxloo.github.io/signal-garden/' --day '2026-06-26'
+npm run audit:public -- --base-url 'https://ooyxloo.github.io/signal-garden/' --day '2026-06-27'
 npm run audit:submission
 npm audit --audit-level=moderate
 ```

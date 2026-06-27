@@ -97,10 +97,15 @@ export function createPublicProofChecklist(options = {}) {
       proof("Batch submission desk", "ready", "Copy blocks and links are ordered for user-present platform gates.", raw("docs/batch-submission-desk.md")),
       proof("Public demo post", demoPostUrl ? "ready" : "user-gated", demoPostUrl ? "Public Reddit demo post URL is available." : "Account owner posts later; draft is prepared.", demoPostUrl || raw("docs/reddit-demo-post-draft.md")),
     ]),
+    group("Feedback award readiness", "Shows that the optional developer feedback route is evidence-backed and account-owner gated.", [
+      proof("Survey answer pack", "ready", "Prepared answers follow the public form order and include character counts for constrained fields.", raw("docs/developer-feedback-form-pack.md")),
+      proof("Eligibility gate", "ready", "Checklist names the required participant account, project entry, username match, and public proof checks before submission.", raw("docs/developer-feedback-form-pack.md")),
+      proof("Actionable platform feedback", "ready", "Feedback is tied to concrete Devvit game-building gaps: WebView assets, expanded-mode lifecycle, comment-to-state flow, and evidence handoff.", raw("docs/platform-feedback-pack.md")),
+      proof("Feedback confirmation", feedbackConfirmationUrl ? "ready" : "optional", feedbackConfirmationUrl ? "Public feedback confirmation URL is available." : "Only record this after the account owner submits the survey.", feedbackConfirmationUrl || raw("docs/developer-feedback-form-pack.md")),
+    ]),
     group("Final submission guard", "Names what must be true immediately before pressing a platform submit button.", [
       proof("Submission window", submissionWindowGateStatus(submissionWindow), formatSubmissionWindowStatus(submissionWindow), submissionWindow.sourceUrl),
       proof("App listing", appListingUrl ? "ready" : "user-gated", appListingUrl ? "Public app listing URL is available." : "Account owner creates listing later.", appListingUrl || raw("docs/submission-runbook.md")),
-      proof("Feedback confirmation", feedbackConfirmationUrl ? "ready" : "optional", feedbackConfirmationUrl ? "Public feedback confirmation URL is available." : "Only record this when a public confirmation URL exists.", feedbackConfirmationUrl || raw("docs/platform-feedback-pack.md")),
       proof("Local verification", "ready", "Run check, tests, builds, local/devvit/pages/submission audits, public URL audit, and npm audit.", raw("docs/public-verification.md")),
     ]),
   ];
