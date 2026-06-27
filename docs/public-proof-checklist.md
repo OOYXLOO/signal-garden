@@ -6,9 +6,9 @@ This checklist is a public review aid. It does not submit forms, post to Reddit,
 
 ## Quick Links
 
-- Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1
-- Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+- Public app: https://signal-garden.vercel.app/
+- Sample route: https://signal-garden.vercel.app/?day=2026-06-27&sample=1
+- Judge desk: https://signal-garden.vercel.app/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 
 ## Status Counts
@@ -23,9 +23,9 @@ Links a reviewer can open without private account data.
 
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
-| Playable app | ready | GitHub Pages app surface is public. | https://ooyxloo.github.io/signal-garden/ |
-| Sample route | ready | Day-specific route opens a complete review loop. | https://ooyxloo.github.io/signal-garden/?day=2026-06-27&sample=1 |
-| Judge desk | ready | Static review desk links media, manifests, docs, and copy packet. | https://ooyxloo.github.io/signal-garden/judge.html |
+| Playable app | ready | Production app surface is public. | https://signal-garden.vercel.app/ |
+| Sample route | ready | Day-specific route opens a complete review loop. | https://signal-garden.vercel.app/?day=2026-06-27&sample=1 |
+| Judge desk | ready | Static review desk links media, manifests, docs, and copy packet. | https://signal-garden.vercel.app/judge.html |
 | Source repository | ready | Public source and verification scripts are available. | https://github.com/OOYXLOO/signal-garden |
 
 ## Gameplay proof
@@ -34,7 +34,7 @@ Shows that the project is a playable daily puzzle, not only a pitch deck.
 
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
-| Deterministic board | ready | Daily Phaser board with beacons, mirror limit, route replay, and objective chips. | https://ooyxloo.github.io/signal-garden/ |
+| Deterministic board | ready | Daily Phaser board with beacons, mirror limit, route replay, and objective chips. | https://signal-garden.vercel.app/ |
 | Final captioned demo | ready | Under-one-minute WebM demo is included in the committed evidence set. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-final-captioned.webm |
 | Media kit | ready | Cover, desktop, mobile, demo script, and gallery asset index are committed. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/gallery_assets.md |
 | Submission manifest | ready | Manifest records byte counts and hashes for public evidence files. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-manifest.json |
@@ -45,7 +45,7 @@ Proves the Reddit-style hook: replies can become ranked game state.
 
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
-| Comment challenge | ready | The app exports a comment prompt with a Review link. | https://ooyxloo.github.io/signal-garden/ |
+| Comment challenge | ready | The app exports a comment prompt with a Review link. | https://signal-garden.vercel.app/ |
 | Route import | ready | Review links and short coordinate replies can be parsed into ranked proposals. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-field-pack.md |
 | Top route ghost | ready | The board can replay or apply the leading community route. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/demo-script.md |
 | Community launch plan | ready | Route proof, reply depth, return hook, and first action are packaged for a demo-post launch. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/src/communityLaunchPlan.js |
@@ -57,9 +57,9 @@ Shows why a player has a reason to come back after the first solve.
 
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
-| Return map | ready | Seven-day archive surface shows completed, preview, partial, and open slots. | https://ooyxloo.github.io/signal-garden/ |
-| Daily missions | ready | Daily objectives and contribution checks create short-session progression. | https://ooyxloo.github.io/signal-garden/ |
-| Sample week | ready | Sample week preview demonstrates retention surface without stored private data. | https://ooyxloo.github.io/signal-garden/?sampleWeek=1 |
+| Return map | ready | Seven-day archive surface shows completed, preview, partial, and open slots. | https://signal-garden.vercel.app/ |
+| Daily missions | ready | Daily objectives and contribution checks create short-session progression. | https://signal-garden.vercel.app/ |
+| Sample week | ready | Sample week preview demonstrates retention surface without stored private data. | https://signal-garden.vercel.app/?sampleWeek=1 |
 | Return pledge | ready | App exports a next-day prompt that can be used in the demo post or recap. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/launch-readiness.md |
 
 ## Platform handoff
@@ -97,7 +97,7 @@ Names what must be true immediately before pressing a platform submit button.
 ## Final Pre-Submit Command
 
 ```powershell
-npm run audit:public -- --base-url 'https://ooyxloo.github.io/signal-garden/' --day '2026-06-27'
+npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-27'
 npm run audit:submission
 npm audit --audit-level=moderate
 ```

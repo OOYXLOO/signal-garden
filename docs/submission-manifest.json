@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 12229,
-      "sha256": "8ee6f6f400710580cc686efff5c01c8d63fc3f8f078f7bacf3e8d2f75d5929a5"
+      "bytes": 12276,
+      "sha256": "6b39bde53250f2b970974381556a36dcb843b15a81d3b8b6a6c342a4ae90fd7e"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -93,8 +93,8 @@
     },
     {
       "path": "docs/public-proof-checklist.md",
-      "bytes": 7018,
-      "sha256": "2b24f027dc14cc2975221b1c3acc0e96220f986f1618c054d3710b80d1558799"
+      "bytes": 6932,
+      "sha256": "290b09ba311ebb2d48fe5ec4b899313608b89475f27f066636c3fa5063cbc373"
     },
     {
       "path": "docs/launch-proof-template.md",
@@ -178,8 +178,8 @@
     },
     {
       "path": "src/publicProofChecklist.js",
-      "bytes": 9955,
-      "sha256": "6d4b973753e171d3b2ffa9902e89d14681fd3a7b26a50940242bba55ae958b27"
+      "bytes": 9939,
+      "sha256": "94ad418503fdc94d756356606b08a87d8d8eb012db01fe72ce9201742def48e7"
     },
     {
       "path": "src/batchSubmissionDesk.js",

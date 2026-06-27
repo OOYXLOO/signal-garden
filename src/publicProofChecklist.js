@@ -1,8 +1,8 @@
 import { createSubmissionWindowStatus, formatSubmissionWindowStatus, submissionWindowGateStatus } from "./submissionWindow.js";
 
-export const defaultPublicAppUrl = "https://ooyxloo.github.io/signal-garden/";
+export const defaultPublicAppUrl = "https://signal-garden.vercel.app/";
 export const defaultSourceRepoUrl = "https://github.com/OOYXLOO/signal-garden";
-export const defaultJudgeDeskUrl = "https://ooyxloo.github.io/signal-garden/judge.html";
+export const defaultJudgeDeskUrl = "https://signal-garden.vercel.app/judge.html";
 export const defaultRawBase = "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master";
 
 export function todayUtcDay(now = new Date()) {
@@ -67,7 +67,7 @@ export function createPublicProofChecklist(options = {}) {
 
   const groups = [
     group("Public access", "Links a reviewer can open without private account data.", [
-      proof("Playable app", "ready", "GitHub Pages app surface is public.", publicAppUrl),
+      proof("Playable app", "ready", "Production app surface is public.", publicAppUrl),
       proof("Sample route", "ready", "Day-specific route opens a complete review loop.", sampleUrl),
       proof("Judge desk", "ready", "Static review desk links media, manifests, docs, and copy packet.", judgeDeskUrl),
       proof("Source repository", "ready", "Public source and verification scripts are available.", sourceRepoUrl),

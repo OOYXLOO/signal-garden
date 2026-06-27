@@ -6,7 +6,9 @@ Players place a small number of mirrors on a shared board, guide a signal throug
 
 ## Reviewer Quickstart
 
-Public app: https://ooyxloo.github.io/signal-garden/
+Public app: https://signal-garden.vercel.app/
+
+Backup public app: https://ooyxloo.github.io/signal-garden/
 
 1. Open the deployed app, or run the local dev server below.
 2. Use a current sample route URL such as `?day=YYYY-MM-DD&sample=1` to load a complete review path without manual moves.
@@ -14,7 +16,7 @@ Public app: https://ooyxloo.github.io/signal-garden/
 4. Load the sample comment thread to see linked routes and coordinate-only route comments become ranked proposals.
 5. Copy the Launch packet or Evidence receipt when a platform submission needs the public app, source repository, app listing, and demo post fields.
 
-For a one-page public review desk, open `https://ooyxloo.github.io/signal-garden/judge.html`.
+For a one-page public review desk, open `https://signal-garden.vercel.app/judge.html`.
 
 See `docs/public-verification.md` for the current public deployment, source, and check status.
 See `docs/criteria-fit.md` for the public rules-to-evidence map used during submission review.

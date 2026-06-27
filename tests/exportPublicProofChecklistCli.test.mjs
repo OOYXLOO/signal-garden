@@ -11,7 +11,7 @@ const checklist = createPublicProofChecklistFromOptions({ day: "2026-06-24" });
 assert.equal(checklist.schemaVersion, "signal-garden-public-proof-checklist/v1");
 assert.equal(checklist.projectName, "Signal Garden");
 assert.equal(checklist.day, "2026-06-24");
-assert.equal(checklist.sampleRouteUrl, "https://ooyxloo.github.io/signal-garden/?day=2026-06-24&sample=1");
+assert.equal(checklist.sampleRouteUrl, "https://signal-garden.vercel.app/?day=2026-06-24&sample=1");
 assert.equal(checklist.groups.length, 7);
 assert.equal(checklist.statusCounts.ready, 25);
 assert.equal(checklist.statusCounts["user-gated"], 2);
