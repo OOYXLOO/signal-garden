@@ -10,7 +10,7 @@ This report is generated from repository config, source files, and public handof
 
 | Status | Check | Evidence |
 | --- | --- | --- |
-| PASS | Devvit app config has the reserved listing slug | devvit.json name is signalgardenyxl |
+| PASS | Devvit app config has the reserved listing slug | devvit.json name is sigardenyxl |
 | PASS | Client has splash and game entrypoints | default=splash.html, game=game.html |
 | PASS | Server entry is built to the configured path | server dir dist/server, entry index.cjs |
 | PASS | Moderator menu creates a daily relay post | subreddit moderator endpoint /internal/menu/post-create |
@@ -33,8 +33,8 @@ This report is generated from repository config, source files, and public handof
 
 ## Post-Humanity Handoff
 
-App slug: `signalgardenyxl`
-Current humanity gate: https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true
+App slug: `sigardenyxl`
+Current humanity gate: https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true
 
 After the account owner completes the humanity check, run:
 

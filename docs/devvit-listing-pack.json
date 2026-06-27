@@ -1,10 +1,10 @@
 {
   "schemaVersion": "signal-garden-devvit-listing-pack/v1",
   "date": "2026-06-27",
-  "appSlug": "signalgardenyxl",
+  "appSlug": "sigardenyxl",
   "template": "phaser",
   "developerPortalStartUrl": "https://developers.reddit.com/new/app?template=phaser",
-  "humanityGateUrl": "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true",
+  "humanityGateUrl": "https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true",
   "listingFields": {
     "displayName": "Signal Garden",
     "tagline": "A daily community relay puzzle that turns each solved route into tomorrow's challenge.",

@@ -55,11 +55,11 @@ export async function createDevvitListingPack({ date } = {}) {
   return {
     schemaVersion: "signal-garden-devvit-listing-pack/v1",
     date: date || new Date().toISOString().slice(0, 10),
-    appSlug: "signalgardenyxl",
+    appSlug: "sigardenyxl",
     template: "phaser",
     developerPortalStartUrl: "https://developers.reddit.com/new/app?template=phaser",
     humanityGateUrl:
-      "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true&template=phaser",
+      "https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true&template=phaser",
     listingFields: {
       displayName: "Signal Garden",
       tagline: "A daily community relay puzzle that turns each solved route into tomorrow's challenge.",

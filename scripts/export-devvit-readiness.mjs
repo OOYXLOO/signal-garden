@@ -33,8 +33,8 @@ const accountOwnerGates = [
 ];
 
 const accountOwnerHandoff = {
-  appSlug: "signalgardenyxl",
-  humanityGateUrl: "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true",
+  appSlug: "sigardenyxl",
+  humanityGateUrl: "https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true",
   afterHumanityCommands: [
     "npx devvit upload --verbose",
     "npx devvit list apps",

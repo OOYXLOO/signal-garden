@@ -9,7 +9,7 @@ This copy-ready pack keeps the account-owner listing flow short after the Reddit
 | Field | Copy |
 | --- | --- |
 | Display name | Signal Garden |
-| App slug | signalgardenyxl |
+| App slug | sigardenyxl |
 | Template | phaser |
 | Tagline | A daily community relay puzzle that turns each solved route into tomorrow's challenge. |
 | Short description | Signal Garden is a daily community relay puzzle: players solve a route, leave a rationale, and seed the next day's board. |
@@ -31,7 +31,7 @@ Signal Garden is a Phaser puzzle prototype prepared for a Devvit shell. Each day
 ## Post-Humanity Checklist
 
 Start URL: https://developers.reddit.com/new/app?template=phaser
-Humanity gate: https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true&template=phaser
+Humanity gate: https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true&template=phaser
 
 Run after the app owner completes the humanity check:
 

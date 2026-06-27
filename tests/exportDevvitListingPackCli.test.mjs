@@ -10,7 +10,7 @@ const pack = await createDevvitListingPack({ date: "2026-06-26" });
 
 assert.equal(pack.schemaVersion, "signal-garden-devvit-listing-pack/v1");
 assert.equal(pack.date, "2026-06-26");
-assert.equal(pack.appSlug, "signalgardenyxl");
+assert.equal(pack.appSlug, "sigardenyxl");
 assert.equal(pack.listingFields.displayName, "Signal Garden");
 assert.ok(pack.listingFields.tagline.length <= 120);
 assert.match(pack.listingFields.shortDescription, /daily community relay puzzle/i);
@@ -19,7 +19,7 @@ assert.ok(pack.publicEvidence.some((item) => item.label === "Playable public app
 assert.ok(pack.publicEvidence.some((item) => item.url === "https://github.com/OOYXLOO/signal-garden"));
 assert.equal(
   pack.humanityGateUrl,
-  "https://developers.reddit.com/new/humanity-check?app_name=signalgardenyxl&app_name_verified=true&template=phaser",
+  "https://developers.reddit.com/new/humanity-check?app_name=sigardenyxl&app_name_verified=true&template=phaser",
 );
 assert.ok(pack.postHumanityChecklist.commands.includes("npx devvit upload --verbose"));
 assert.ok(pack.postHumanityChecklist.recordPublicUrls.some((item) => item.placeholder === "<public-app-listing-url>"));
@@ -27,7 +27,7 @@ assert.ok(pack.boundaries.some((item) => item.includes("passwords")));
 
 const markdown = formatDevvitListingPack(pack);
 assert.match(markdown, /# Devvit Listing Pack/);
-assert.match(markdown, /signalgardenyxl/);
+assert.match(markdown, /sigardenyxl/);
 assert.match(markdown, /Display name/);
 assert.match(markdown, /Public Evidence/);
 assert.match(markdown, /Post-Humanity Checklist/);
@@ -38,7 +38,7 @@ assert.match(markdown, /No passwords/);
 const { stdout } = await run(process.execPath, [script, "--json", "--date", "2026-06-26"]);
 const cliPack = JSON.parse(stdout);
 assert.equal(cliPack.schemaVersion, "signal-garden-devvit-listing-pack/v1");
-assert.equal(cliPack.appSlug, "signalgardenyxl");
+assert.equal(cliPack.appSlug, "sigardenyxl");
 assert.equal(cliPack.listingFields.displayName, "Signal Garden");
 
 const help = await run(process.execPath, [script, "--help"]);
