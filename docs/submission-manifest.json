@@ -93,13 +93,18 @@
     },
     {
       "path": "docs/batch-submission-desk.md",
-      "bytes": 3013,
-      "sha256": "04ffcc0273dc9e215869e29c3156a353fe5e21a204c623a3953c021ab9d72366"
+      "bytes": 2978,
+      "sha256": "49d78f90f90bd2e73946854e9db8871ec4c5dca662dc41f3b57b629a702f97ef"
     },
     {
       "path": "docs/public-proof-checklist.md",
       "bytes": 6932,
       "sha256": "290b09ba311ebb2d48fe5ec4b899313608b89475f27f066636c3fa5063cbc373"
+    },
+    {
+      "path": "docs/example-post-proof-pack.md",
+      "bytes": 3378,
+      "sha256": "08d84b3c3cb28811c706bde52d3a131bfd6914a10814cc80054d164843806ca2"
     },
     {
       "path": "docs/launch-proof-template.md",
@@ -143,18 +148,18 @@
     },
     {
       "path": "docs/devvit-readiness-report.md",
-      "bytes": 3359,
-      "sha256": "a163abf2dd0ea883e9b2f39d3629b0b99d3534a655b488d9597f56988e93d053"
+      "bytes": 3347,
+      "sha256": "682e4b43b6d1818278a090376387982e5b990cf5d89d138117fb442617c4c170"
     },
     {
       "path": "docs/devvit-listing-pack.md",
-      "bytes": 2956,
-      "sha256": "40fd0aa3102e7f088b91cc4e42580e182f26f85dfe20c615eb5fc46885b03140"
+      "bytes": 2920,
+      "sha256": "7c8db841fcf4d499f57a29da3b0053da415618bb403ee0404051db7adb704f3d"
     },
     {
       "path": "docs/devvit-listing-pack.json",
-      "bytes": 3226,
-      "sha256": "a9b450cec85b1421bd483d26e7b87be40b0df87d1d9f6bcf2e52608ccda08594"
+      "bytes": 3206,
+      "sha256": "4af0a55c94602a3bd3161a9adde651fdea7b4351aa3422ede9aa5ce4ec248e9e"
     },
     {
       "path": "docs/devvit_dependency_watch.md",
@@ -187,9 +192,14 @@
       "sha256": "94ad418503fdc94d756356606b08a87d8d8eb012db01fe72ce9201742def48e7"
     },
     {
+      "path": "src/examplePostProof.js",
+      "bytes": 7403,
+      "sha256": "381bf757e5835881cb27763a8cd222bbe8f611aa635d786069bd4821e7c78310"
+    },
+    {
       "path": "src/batchSubmissionDesk.js",
-      "bytes": 6517,
-      "sha256": "7308b55c8ef8a02e931cd5a1147dd0203007810a3637dfdc5100e5dc82ce45ee"
+      "bytes": 6510,
+      "sha256": "062d071571df64c693a27db866e577687ae8746c351abe602616bb4a7a6b134b"
     },
     {
       "path": "scripts/audit-pages-build.mjs",
@@ -203,8 +213,8 @@
     },
     {
       "path": "scripts/audit-release-gates.mjs",
-      "bytes": 11512,
-      "sha256": "bf4b2d015dc4ca1b97de531d7364f3beb117e3ea67f8fd3911ce990746c2731f"
+      "bytes": 11597,
+      "sha256": "55ba53b751a56963e735615b0aa11c4cf674a14ea9ca46cb61ff1805533c8d5d"
     },
     {
       "path": "scripts/export-launch-packet.mjs",
@@ -238,13 +248,18 @@
     },
     {
       "path": "scripts/export-batch-submission-desk.mjs",
-      "bytes": 1841,
-      "sha256": "719f9982e05758cb1b730739c7978e4ea54b02d4376ed50d157376f0fba35067"
+      "bytes": 1834,
+      "sha256": "244d098d4382d310b4e0434569544250a7fbf0bddcd6f66b22230b14060e58e8"
     },
     {
       "path": "scripts/export-public-proof-checklist.mjs",
       "bytes": 2154,
       "sha256": "58b2f5b54a658d231741d7c6ef1dc028bda2e0fbc8fe1c2e55a816ffb709f302"
+    },
+    {
+      "path": "scripts/export-example-post-proof.mjs",
+      "bytes": 2040,
+      "sha256": "e5d0c4e62aa6213f37671c2ecf7d6a2fc73046e857414e92608bacc082b12b17"
     },
     {
       "path": "scripts/export-demo-post.mjs",
@@ -258,13 +273,13 @@
     },
     {
       "path": "scripts/export-devvit-readiness.mjs",
-      "bytes": 10707,
-      "sha256": "4772c1dbca366413f091ed329aa5ffd0706091fad30cffc5c4d5a33b6b84e60a"
+      "bytes": 10699,
+      "sha256": "7d3239093da900209253ca23aca6ef7b68fbf35b63d4e0808426749f06367617"
     },
     {
       "path": "scripts/export-devvit-listing-pack.mjs",
-      "bytes": 7456,
-      "sha256": "62d20b23d11fefe90c1275dad51b1b5b0974748284be0d6b709cb7d3b1203c19"
+      "bytes": 7434,
+      "sha256": "b543178467516d45548548715337d2655b194dde971b1119c1dd0cf3380b1852"
     },
     {
       "path": "scripts/export-submission-runbook.mjs",
@@ -289,6 +304,7 @@
   "feedbackFormPackCommand": "npm run export:feedback-form-pack -- --sample-route --username <reddit-username> --output docs/developer-feedback-form-pack.md",
   "batchSubmissionDeskCommand": "npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md",
   "publicProofChecklistCommand": "npm run export:public-proof-checklist -- --day <YYYY-MM-DD> --output docs/public-proof-checklist.md",
+  "examplePostProofCommand": "npm run export:example-post-proof -- --day <YYYY-MM-DD> --output docs/example-post-proof-pack.md",
   "reviewerShareCardCommand": "npm run export:reviewer-share-card -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url>",
   "devvitReadinessCommand": "npm run export:devvit-readiness -- --output docs/devvit-readiness-report.md",
   "devvitListingPackCommand": "npm run export:devvit-listing-pack -- --output docs/devvit-listing-pack.md",

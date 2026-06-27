@@ -26,6 +26,7 @@ const evidenceFiles = [
   "docs/developer-feedback-form-pack.md",
   "docs/batch-submission-desk.md",
   "docs/public-proof-checklist.md",
+  "docs/example-post-proof-pack.md",
   "docs/launch-proof-template.md",
   "docs/reviewer-share-card.md",
   "docs/reviewer-share-card.json",
@@ -43,6 +44,7 @@ const evidenceFiles = [
   "src/communityLaunchPlan.js",
   "src/rubricEvidence.js",
   "src/publicProofChecklist.js",
+  "src/examplePostProof.js",
   "src/batchSubmissionDesk.js",
   "scripts/audit-pages-build.mjs",
   "scripts/audit-public-url.mjs",
@@ -55,6 +57,7 @@ const evidenceFiles = [
   "scripts/export-rubric-evidence.mjs",
   "scripts/export-batch-submission-desk.mjs",
   "scripts/export-public-proof-checklist.mjs",
+  "scripts/export-example-post-proof.mjs",
   "scripts/export-demo-post.mjs",
   "scripts/export-reviewer-share-card.mjs",
   "scripts/export-devvit-readiness.mjs",
@@ -138,6 +141,8 @@ export async function createSubmissionManifest() {
       "npm run export:batch-submission-desk -- --day <YYYY-MM-DD> --output docs/batch-submission-desk.md",
     publicProofChecklistCommand:
       "npm run export:public-proof-checklist -- --day <YYYY-MM-DD> --output docs/public-proof-checklist.md",
+    examplePostProofCommand:
+      "npm run export:example-post-proof -- --day <YYYY-MM-DD> --output docs/example-post-proof-pack.md",
     reviewerShareCardCommand:
       "npm run export:reviewer-share-card -- --day <YYYY-MM-DD> --sample-route --public-app-url <public-app-url> --source-repo-url <public-source-repo-url>",
     devvitReadinessCommand:

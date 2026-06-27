@@ -23,7 +23,9 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-devvi
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-devvit-listing-pack.mjs"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-submission-runbook.mjs"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-public-proof-checklist.mjs"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "scripts/export-example-post-proof.mjs"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "src/publicProofChecklist.js"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "src/examplePostProof.js"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "src/reviewerShareCard.js"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-readiness-report.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-listing-pack.md"));
@@ -31,6 +33,7 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-listing-
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/developer-feedback-form-pack.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/submission-runbook.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/public-proof-checklist.md"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "docs/example-post-proof-pack.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.json"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/reviewer-share-card.svg"));
@@ -47,6 +50,7 @@ assert.match(manifest.devvitReadinessCommand, /export:devvit-readiness/);
 assert.match(manifest.devvitListingPackCommand, /export:devvit-listing-pack/);
 assert.match(manifest.submissionRunbookCommand, /export:submission-runbook/);
 assert.match(manifest.publicProofChecklistCommand, /export:public-proof-checklist/);
+assert.match(manifest.examplePostProofCommand, /export:example-post-proof/);
 assert.match(manifest.reviewerShareCardCommand, /export:reviewer-share-card/);
 assert.match(manifest.submissionPackCommand, /export:submission-pack/);
 assert.ok(manifest.requiredLocalChecks.includes("npm run audit:submission"));
