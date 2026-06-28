@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 17988,
-      "sha256": "dd678387be9b472c17b52c35f3b7cfbb6f4c8205f9d5cfa10e5b2b4624892030"
+      "bytes": 18533,
+      "sha256": "6e8f1c8f5dcc20e85bd0b68efad61dfaa92e777e512810d87d1fe4c59023900b"
     },
     {
       "path": "public/demo-video.html",
@@ -90,6 +90,11 @@
       "path": "docs/developer-feedback-form-pack.md",
       "bytes": 11859,
       "sha256": "fbeb60f5a76a3ad7ec5225b6db70af01f4e94fba86e65d31d54b201f975e8ba4"
+    },
+    {
+      "path": "docs/feedback-award-submission-brief.md",
+      "bytes": 4358,
+      "sha256": "0c166079f0b69192ecc0e9582364df604051d3a8acd811629a895966ff3bd5b6"
     },
     {
       "path": "docs/batch-submission-desk.md",

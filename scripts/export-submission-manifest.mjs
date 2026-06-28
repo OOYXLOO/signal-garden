@@ -24,6 +24,7 @@ const evidenceFiles = [
   "docs/rubric-evidence-matrix.md",
   "docs/platform-feedback-pack.md",
   "docs/developer-feedback-form-pack.md",
+  "docs/feedback-award-submission-brief.md",
   "docs/batch-submission-desk.md",
   "docs/public-proof-checklist.md",
   "docs/example-post-proof-pack.md",

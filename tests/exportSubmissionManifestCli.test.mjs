@@ -31,6 +31,7 @@ assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-readines
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-listing-pack.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/devvit-listing-pack.json"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/developer-feedback-form-pack.md"));
+assert.ok(manifest.evidence.some((entry) => entry.path === "docs/feedback-award-submission-brief.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/submission-runbook.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/public-proof-checklist.md"));
 assert.ok(manifest.evidence.some((entry) => entry.path === "docs/example-post-proof-pack.md"));
