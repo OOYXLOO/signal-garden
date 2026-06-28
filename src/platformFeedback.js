@@ -211,7 +211,11 @@ export function auditDeveloperFeedbackGate(surveyPack = {}) {
   };
 }
 
-export function createDeveloperFeedbackSurveyPack({ feedbackPack, username = "C4PPP", now = new Date() } = {}) {
+export function createDeveloperFeedbackSurveyPack({
+  feedbackPack,
+  username = "<replace-with-submitting-Reddit-username>",
+  now = new Date(),
+} = {}) {
   const fallbackDay = todayUtcDay();
   const pack = feedbackPack || createPlatformFeedbackPack({
     puzzle: {

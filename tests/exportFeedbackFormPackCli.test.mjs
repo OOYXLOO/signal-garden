@@ -49,7 +49,7 @@ assert.equal(pack.fields[6].answer, "3");
 assert.equal(pack.fields[10].answer, "Yes");
 assert.equal(pack.fields[12].answer, "No");
 assert.equal(pack.fields[13].answer, "OOYXLOO");
-assert.equal(defaultUsernamePack.fields[13].answer, "C4PPP");
+assert.equal(defaultUsernamePack.fields[13].answer, "<replace-with-submitting-Reddit-username>");
 assert.ok(pack.fields.some((field) => field.question.includes("What would get you most excited")));
 assert.ok(pack.fields.some((field) => field.answer.includes("Phaser/Vite config")));
 assert.ok(pack.fields.some((field) => field.answer.includes("Concrete reproduction notes")));
@@ -89,7 +89,7 @@ assert.match(stdout, /https:\/\/signal-garden\.vercel\.app\/judge\.html/);
 assert.doesNotMatch(stdout, /day=2026-06-22&sample=1/);
 
 const defaultUsernameCli = await run(process.execPath, [script, "--day", "2026-06-25", "--sample-route"]);
-assert.match(defaultUsernameCli.stdout, /C4PPP/);
+assert.match(defaultUsernameCli.stdout, /<replace-with-submitting-Reddit-username>/);
 assert.doesNotMatch(defaultUsernameCli.stdout, /TODO_REDDIT_USERNAME/);
 
 const help = await run(process.execPath, [script, "--help"]);

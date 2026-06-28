@@ -18,7 +18,7 @@ function parseArgs(argv) {
     plan: "",
     reviewUrl: "",
     sampleRoute: false,
-    username: "C4PPP",
+    username: "<replace-with-submitting-Reddit-username>",
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];

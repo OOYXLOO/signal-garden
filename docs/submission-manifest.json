@@ -88,8 +88,8 @@
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
-      "bytes": 11822,
-      "sha256": "22f43fd8a0ac8e71f4efc7caa5aa50f8a7bfe3d7f71e66eb2a90267730d770ac"
+      "bytes": 11859,
+      "sha256": "fbeb60f5a76a3ad7ec5225b6db70af01f4e94fba86e65d31d54b201f975e8ba4"
     },
     {
       "path": "docs/batch-submission-desk.md",
@@ -178,8 +178,8 @@
     },
     {
       "path": "src/platformFeedback.js",
-      "bytes": 27584,
-      "sha256": "98105a7d19c8ffee709e54bac8cce304e851d3b74cdbdaccbf97bad14e1d77f5"
+      "bytes": 27627,
+      "sha256": "d7a103bd32327ce60c5b346ef7d6700a2c76bf7b5ee4492b643aa8f49c598331"
     },
     {
       "path": "src/reviewerShareCard.js",
@@ -248,8 +248,8 @@
     },
     {
       "path": "scripts/export-feedback-form-pack.mjs",
-      "bytes": 4332,
-      "sha256": "53491f4ae397780cf79bf9e17a71f6e313a2fd9040492fb55439ec72dda82875"
+      "bytes": 4380,
+      "sha256": "5cb09cc46873ad1b475608828cbe0e04033302a4a7178abe7a948aede1a75dec"
     },
     {
       "path": "scripts/export-rubric-evidence.mjs",
