@@ -104,7 +104,7 @@
     {
       "path": "docs/public-proof-checklist.md",
       "bytes": 6932,
-      "sha256": "290b09ba311ebb2d48fe5ec4b899313608b89475f27f066636c3fa5063cbc373"
+      "sha256": "648adc1edb9c64ce20df120067a608e29961000a9788c534c671801a49b72472"
     },
     {
       "path": "docs/example-post-proof-pack.md",
@@ -149,12 +149,12 @@
     {
       "path": "docs/submission-runbook.md",
       "bytes": 4876,
-      "sha256": "6c9800b21d5ccfef3f280ada8b709ec85b94b5da4ddb964776ab96f51baee7a6"
+      "sha256": "afc60e38274fd75c8a9c9c7ba697a681f109c3e51dd48912b5d1b4cef44fd97a"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
       "bytes": 2982,
-      "sha256": "d76b7cebe767ac290c2e0d06691209242998c6da6d6f048aaeb1bcadf0beab51"
+      "sha256": "2115218eaeb68bccf8a2e4ec283dae04691eb9285e177cc1d4eb6ee211905651"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -169,7 +169,7 @@
     {
       "path": "docs/devvit-listing-pack.md",
       "bytes": 2920,
-      "sha256": "7c8db841fcf4d499f57a29da3b0053da415618bb403ee0404051db7adb704f3d"
+      "sha256": "7e805bda153b48a9f79d9c47abe95cfce5248ddb5d0fb54528895758d9e4ea72"
     },
     {
       "path": "docs/devvit-listing-pack.json",

@@ -1,13 +1,13 @@
 # Signal Garden Public Proof Checklist
 
-Generated for day: 2026-06-27
+Generated for day: 2026-06-29
 
 This checklist is a public review aid. It does not submit forms, post to Reddit, access private account pages, or include credentials.
 
 ## Quick Links
 
 - Public app: https://signal-garden.vercel.app/
-- Sample route: https://signal-garden.vercel.app/?day=2026-06-27&sample=1
+- Sample route: https://signal-garden.vercel.app/?day=2026-06-29&sample=1
 - Judge desk: https://signal-garden.vercel.app/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 
@@ -24,7 +24,7 @@ Links a reviewer can open without private account data.
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
 | Playable app | ready | Production app surface is public. | https://signal-garden.vercel.app/ |
-| Sample route | ready | Day-specific route opens a complete review loop. | https://signal-garden.vercel.app/?day=2026-06-27&sample=1 |
+| Sample route | ready | Day-specific route opens a complete review loop. | https://signal-garden.vercel.app/?day=2026-06-29&sample=1 |
 | Judge desk | ready | Static review desk links media, manifests, docs, and copy packet. | https://signal-garden.vercel.app/judge.html |
 | Source repository | ready | Public source and verification scripts are available. | https://github.com/OOYXLOO/signal-garden |
 
@@ -90,14 +90,14 @@ Names what must be true immediately before pressing a platform submit button.
 
 | Item | Status | Evidence | Link |
 |---|---:|---|---|
-| Submission window | ready | Submission window: open Submissions close July 15, 2026 at 6:00 PM Pacific; 19 days remain. Rules source: https://redditgameswithahook.devpost.com/rules | https://redditgameswithahook.devpost.com/rules |
+| Submission window | ready | Submission window: open Submissions close July 15, 2026 at 6:00 PM Pacific; 17 days remain. Rules source: https://redditgameswithahook.devpost.com/rules | https://redditgameswithahook.devpost.com/rules |
 | App listing | user-gated | Account owner creates listing later. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/submission-runbook.md |
 | Local verification | ready | Run check, tests, builds, local/devvit/pages/submission audits, public URL audit, and npm audit. | https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/public-verification.md |
 
 ## Final Pre-Submit Command
 
 ```powershell
-npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-27'
+npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-29'
 npm run audit:submission
 npm audit --audit-level=moderate
 ```
