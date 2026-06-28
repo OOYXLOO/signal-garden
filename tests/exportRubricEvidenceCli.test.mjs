@@ -12,7 +12,7 @@ assert.equal(matrix.projectName, "Signal Garden");
 assert.equal(matrix.checkedDay, "2026-06-26");
 assert.equal(matrix.submissionWindow.phase, "open");
 assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Submission window" && item.status === "ready"));
-assert.equal(sampleRouteUrl("2026-06-26"), "https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1");
+assert.equal(sampleRouteUrl("2026-06-26"), "https://signal-garden.vercel.app/?day=2026-06-26&sample=1");
 assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Working project access" && item.status === "ready"));
 assert.ok(matrix.requiredSubmissionSurfaces.some((item) => item.requirement === "Public demo post URL" && item.status === "user-gated"));
 assert.ok(matrix.judgingAngles.some((item) => item.angle === "Most Reddity" && item.fit.includes("comment-sized proposals")));

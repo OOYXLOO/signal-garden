@@ -1,10 +1,10 @@
 # Signal Garden Criteria Fit Brief
 
-Last checked: 2026-06-26
+Last checked: 2026-06-28
 
-Public review desk: https://ooyxloo.github.io/signal-garden/judge.html  
-Public app: https://ooyxloo.github.io/signal-garden/  
-Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
+Public review desk: https://signal-garden.vercel.app/judge.html
+Public app: https://signal-garden.vercel.app/
+Sample route: https://signal-garden.vercel.app/?day=2026-06-28&sample=1
 Source repository: https://github.com/OOYXLOO/signal-garden
 Rubric evidence matrix: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/rubric-evidence-matrix.md
 
@@ -52,7 +52,7 @@ why the top proposal leads.
 
 ## Current Weaknesses
 
-- The public app is hosted on GitHub Pages, not inside a live Reddit post yet.
+- The public app is hosted on Vercel, not inside a live Reddit post yet.
 - The Devvit shell is built and audited, but the real Devvit app listing and playtest still require platform account actions.
 - The demo post is exported as a handoff draft, not published yet.
 - Real multi-user community data is represented through sample route and sample thread flows until a public post exists.

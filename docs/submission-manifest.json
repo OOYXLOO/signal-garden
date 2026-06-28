@@ -18,8 +18,8 @@
     },
     {
       "path": "public/judge.html",
-      "bytes": 18016,
-      "sha256": "a9852484ae0686de4a798e1b3a1519946ff82bd8b236e39c15d04a87678301b3"
+      "bytes": 17988,
+      "sha256": "dd678387be9b472c17b52c35f3b7cfbb6f4c8205f9d5cfa10e5b2b4624892030"
     },
     {
       "path": "public/demo-video.html",
@@ -73,13 +73,13 @@
     },
     {
       "path": "docs/criteria-fit.md",
-      "bytes": 5113,
-      "sha256": "7a8f375ae93ccd3cd927c6655f380f4eb2d9032864f4235711a8671ed575d267"
+      "bytes": 5082,
+      "sha256": "c313d67bd3e8303a36b56aa7bc1f683dd93fdcb5171436f569985b649d98565f"
     },
     {
       "path": "docs/rubric-evidence-matrix.md",
-      "bytes": 5962,
-      "sha256": "f39472b498d727032e4866d10e922bf879751696154ba3ef96a98db0e4a9168b"
+      "bytes": 5939,
+      "sha256": "a01034ac638739ae25855baf9ea389ff227869233304a7b46ce0b4d90b66771a"
     },
     {
       "path": "docs/platform-feedback-pack.md",
@@ -112,39 +112,44 @@
       "sha256": "534abdebc8533b12749d18a599101a5ddf90efc512735f9889af3039b75c468d"
     },
     {
+      "path": "docs/vercel-production-proof-2026-06-28.md",
+      "bytes": 1193,
+      "sha256": "b3a421cdfe7b840b218c217454888508e877e8b50d48dde69cf443fcc943d0e2"
+    },
+    {
       "path": "docs/launch-proof-template.md",
       "bytes": 3995,
       "sha256": "4416623c1908d49a1d84b73f2157065d7146ce702253ab52645ea7c00e23e5a1"
     },
     {
       "path": "docs/reviewer-share-card.md",
-      "bytes": 1473,
-      "sha256": "137970aa70a2423b0fe8c3aeccdd7999d7122e8753bb699a11aa741239cd3548"
+      "bytes": 1452,
+      "sha256": "141fc846181c6f5685731e891accba9b132b0d624fee173043a991fbfd1d7b65"
     },
     {
       "path": "docs/reviewer-share-card.json",
-      "bytes": 1398,
-      "sha256": "35d319bed2b36a5fc23da1b6eac16482b98f5baa7b23a518a3206781a93e35ab"
+      "bytes": 1377,
+      "sha256": "762c9cc88edd46c3ffbdca7106506ab78731944c0f883abdf60a90bfd935a7ae"
     },
     {
       "path": "docs/reviewer-share-card.svg",
       "bytes": 2423,
-      "sha256": "56565721f7b9051fd759eb3848711faa79863defbd9cf1ca7f1163551626fc72"
+      "sha256": "9304cf24e3c13732b24daf71235cb94ba2cfb74b20489ea83960f14c3d98c27a"
     },
     {
       "path": "docs/frontend-reviewer-handoff.md",
-      "bytes": 5628,
-      "sha256": "789abe6800a8f80f793551cf385bd55a871df3deb23252683b83df508f5c4ab8"
+      "bytes": 5614,
+      "sha256": "3a463b5ddebe8faea63683f17c1b4b6bbda83b4b5194351814b5d0c1da15699e"
     },
     {
       "path": "docs/submission-runbook.md",
-      "bytes": 4918,
-      "sha256": "c91fe64e31944d0d6011b88d9a81fe73aa00fead51cc78194ada7aef4e8f4037"
+      "bytes": 4876,
+      "sha256": "6c9800b21d5ccfef3f280ada8b709ec85b94b5da4ddb964776ab96f51baee7a6"
     },
     {
       "path": "docs/reddit-demo-post-draft.md",
-      "bytes": 2996,
-      "sha256": "bc6b9c8a1c67c50cd56c0fb6f837383e6c4f4ceda2d3709fae5a3d193346e4a6"
+      "bytes": 2982,
+      "sha256": "d76b7cebe767ac290c2e0d06691209242998c6da6d6f048aaeb1bcadf0beab51"
     },
     {
       "path": "docs/devvit_shell_readiness.md",
@@ -188,8 +193,8 @@
     },
     {
       "path": "src/rubricEvidence.js",
-      "bytes": 9479,
-      "sha256": "a4951edc0ee7fa4128029ecf9a67700d68ea996085be9f1714bd0a0d3fa00f25"
+      "bytes": 9477,
+      "sha256": "8eaf43ab03dbdf4eeb13aa97c45502fda32e834e39f6fd6c09101c12fe5f116c"
     },
     {
       "path": "src/publicProofChecklist.js",
@@ -288,8 +293,8 @@
     },
     {
       "path": "scripts/export-submission-runbook.mjs",
-      "bytes": 9744,
-      "sha256": "918957c4323804425b1a74e48055aa52a9199e46a033e7c6228a2b08dbdf7bcd"
+      "bytes": 9730,
+      "sha256": "144153e156d36b7ce5431a88d252e464c07021e98ed8086064f2bb490fa34f34"
     }
   ],
   "requiredLocalChecks": [

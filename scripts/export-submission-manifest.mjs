@@ -28,6 +28,7 @@ const evidenceFiles = [
   "docs/public-proof-checklist.md",
   "docs/example-post-proof-pack.md",
   "docs/public-playtest-2026-06-28.md",
+  "docs/vercel-production-proof-2026-06-28.md",
   "docs/launch-proof-template.md",
   "docs/reviewer-share-card.md",
   "docs/reviewer-share-card.json",

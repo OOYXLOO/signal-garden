@@ -1,6 +1,6 @@
 import { createSubmissionWindowStatus, formatSubmissionWindowStatus, submissionWindowGateStatus } from "./submissionWindow.js";
 
-const PUBLIC_APP_URL = "https://ooyxloo.github.io/signal-garden/";
+const PUBLIC_APP_URL = "https://signal-garden.vercel.app/";
 const SOURCE_REPO_URL = "https://github.com/OOYXLOO/signal-garden";
 const RAW_DOC_BASE = "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs";
 
@@ -38,7 +38,7 @@ export function createRubricEvidenceMatrix({ day = todayUtcDay() } = {}) {
       },
       {
         requirement: "Working project access",
-        evidence: "Public GitHub Pages app, deterministic sample route, judge desk, and public URL audit.",
+        evidence: "Public Vercel production app, deterministic sample route, judge desk, and public URL audit.",
         status: "ready",
       },
       {

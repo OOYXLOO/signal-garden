@@ -1,14 +1,14 @@
 # Signal Garden Submission Runbook
 
-Generated for day: 2026-06-26
+Generated for day: 2026-06-28
 
 This runbook orders the public handoff steps for the account owner. It does not contain credentials, cookies, private account pages, payment data, or identity material.
 
 ## Public Evidence Pack
 
-- Public app: https://ooyxloo.github.io/signal-garden/
-- Sample route: https://ooyxloo.github.io/signal-garden/?day=2026-06-26&sample=1
-- Judge desk: https://ooyxloo.github.io/signal-garden/judge.html
+- Public app: https://signal-garden.vercel.app/
+- Sample route: https://signal-garden.vercel.app/?day=2026-06-28&sample=1
+- Judge desk: https://signal-garden.vercel.app/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Devvit readiness report: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devvit-readiness-report.md
 - Devpost-style field pack: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/devpost-field-pack.md
@@ -29,7 +29,7 @@ This runbook orders the public handoff steps for the account owner. It does not 
 Expected local check:
 
 ```powershell
-npm run audit:public -- --base-url 'https://ooyxloo.github.io/signal-garden/' --day '2026-06-26'
+npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-28'
 npm run audit:submission
 ```
 
@@ -76,7 +76,7 @@ Account-owner action:
 Command after app listing and demo post exist:
 
 ```powershell
-npm run export:devpost-fields -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-26' --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>'
+npm run export:devpost-fields -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28' --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>'
 ```
 
 ## Stage 4 - Platform Feedback Form
@@ -102,6 +102,6 @@ After the account-owner gates, the only values needed back in this repository or
 Then regenerate the final submission pack:
 
 ```powershell
-npm run export:submission-pack -- --public-app-url 'https://ooyxloo.github.io/signal-garden/' --day '2026-06-26' --sample-route --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>'
+npm run export:submission-pack -- --public-app-url 'https://signal-garden.vercel.app/' --day '2026-06-28' --sample-route --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --app-listing-url '<public-app-listing-url>' --demo-post-url '<public-demo-post-url>'
 npm run audit:submission
 ```

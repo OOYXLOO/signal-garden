@@ -22,7 +22,7 @@ assert.match(runbook, /Final Evidence Return/);
 assert.match(runbook, /Devvit readiness report/);
 assert.match(runbook, /Platform feedback pack/);
 assert.match(runbook, /npm run export:submission-pack/);
-assert.match(runbook, /https:\/\/ooyxloo\.github\.io\/signal-garden\/\?day=2026-06-22&sample=1/);
+assert.match(runbook, /https:\/\/signal-garden\.vercel\.app\/\?day=2026-06-22&sample=1/);
 assert.match(runbook, /https:\/\/developers\.reddit\.com\/apps\/signal-garden/);
 assert.match(runbook, /https:\/\/www\.reddit\.com\/r\/test\/comments\/signal_garden_demo\//);
 

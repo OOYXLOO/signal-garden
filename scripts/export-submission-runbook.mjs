@@ -1,9 +1,9 @@
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const defaultPublicAppUrl = "https://ooyxloo.github.io/signal-garden/";
+const defaultPublicAppUrl = "https://signal-garden.vercel.app/";
 const defaultSourceRepoUrl = "https://github.com/OOYXLOO/signal-garden";
-const defaultJudgeUrl = "https://ooyxloo.github.io/signal-garden/judge.html";
+const defaultJudgeUrl = "https://signal-garden.vercel.app/judge.html";
 const defaultFeedbackPackUrl =
   "https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/platform-feedback-pack.md";
 const defaultFeedbackFormPackUrl =

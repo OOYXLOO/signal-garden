@@ -25,7 +25,7 @@ Daily puzzle games usually depend on today's seed. That is good for players, but
 Signal Garden keeps the daily seed, but also supports review URLs such as:
 
 ```text
-https://ooyxloo.github.io/signal-garden/?day=YYYY-MM-DD&sample=1
+https://signal-garden.vercel.app/?day=YYYY-MM-DD&sample=1
 ```
 
 The `day` value selects the puzzle seed. The `sample=1` value loads a known complete review route without pretending it is real user data.
@@ -67,7 +67,7 @@ That boundary keeps the implementation easier to audit:
 A public reviewer should not have to infer where the evidence lives. Signal Garden keeps a small static judge desk:
 
 ```text
-https://ooyxloo.github.io/signal-garden/judge.html
+https://signal-garden.vercel.app/judge.html
 ```
 
 The judge desk links the playable app, a sample route, media files, proof checklists, field packs, and source repository evidence. It functions like a table of contents for the public review.
