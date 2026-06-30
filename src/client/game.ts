@@ -8,8 +8,10 @@ const boardPadding = 28;
 class GardenScene extends Phaser.Scene {
   private board: BoardState = createBoard();
   private tiles: Phaser.GameObjects.Container[][] = [];
+  private seedEl: HTMLElement | null = null;
   private movesEl: HTMLElement | null = null;
   private scoreEl: HTMLElement | null = null;
+  private bestEl: HTMLElement | null = null;
   private messageEl: HTMLElement | null = null;
 
   constructor() {
@@ -18,11 +20,14 @@ class GardenScene extends Phaser.Scene {
 
   create(): void {
     this.cameras.main.setBackgroundColor('#193323');
+    this.seedEl = document.querySelector('#seed');
     this.movesEl = document.querySelector('#moves');
     this.scoreEl = document.querySelector('#score');
+    this.bestEl = document.querySelector('#best');
     this.messageEl = document.querySelector('#message');
     document.querySelector('#new-board')?.addEventListener('click', () => this.newBoard());
     document.querySelector('#hint')?.addEventListener('click', () => this.setMessage(hintFor(this.board)));
+    document.querySelector('#share')?.addEventListener('click', () => void this.copyResult());
     this.drawBoard();
     this.syncHud();
   }
@@ -70,10 +75,15 @@ class GardenScene extends Phaser.Scene {
   }
 
   private rotate(x: number, y: number): void {
+    const wasSolved = this.board.solved;
     rotateTile(this.board, x, y);
     this.renderTiles();
     this.syncHud();
-    this.setMessage(this.board.solved ? 'Bloom connected. The thread has a route worth sharing.' : 'Signal updated.');
+    if (!wasSolved && this.board.solved) {
+      this.recordBest();
+      this.syncHud();
+    }
+    this.setMessage(this.board.solved ? 'Bloom connected. Copy your result and compare routes in the thread.' : 'Signal updated.');
   }
 
   private renderTiles(): void {
@@ -120,11 +130,18 @@ class GardenScene extends Phaser.Scene {
   }
 
   private syncHud(): void {
+    if (this.seedEl) {
+      this.seedEl.textContent = `Seed ${this.board.seed}`;
+    }
     if (this.movesEl) {
       this.movesEl.textContent = `Moves ${this.board.moves}`;
     }
     if (this.scoreEl) {
       this.scoreEl.textContent = `Score ${this.board.score}`;
+    }
+    if (this.bestEl) {
+      const best = this.readBest();
+      this.bestEl.textContent = best ? `Best ${best.score} / ${best.moves} moves` : 'Best --';
     }
   }
 
@@ -132,6 +149,48 @@ class GardenScene extends Phaser.Scene {
     if (this.messageEl) {
       this.messageEl.textContent = message;
     }
+  }
+
+  private async copyResult(): Promise<void> {
+    const text = this.board.solved
+      ? `Signal Garden ${this.board.seed}: connected the bloom in ${this.board.moves} moves for ${this.board.score} points.`
+      : `Signal Garden ${this.board.seed}: I am still routing the signal. Current score ${this.board.score} after ${this.board.moves} moves.`;
+
+    this.setMessage(text);
+    try {
+      await navigator.clipboard.writeText(text);
+      this.setMessage('Result copied. Paste it into the thread and compare routes.');
+    } catch {
+      this.setMessage(text);
+    }
+  }
+
+  private recordBest(): void {
+    const best = this.readBest();
+    if (!best || this.board.score > best.score || (this.board.score === best.score && this.board.moves < best.moves)) {
+      localStorage.setItem(this.bestKey(), JSON.stringify({ score: this.board.score, moves: this.board.moves }));
+    }
+  }
+
+  private readBest(): { score: number; moves: number } | null {
+    const raw = localStorage.getItem(this.bestKey());
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      const parsed = JSON.parse(raw) as { score?: unknown; moves?: unknown };
+      if (typeof parsed.score === 'number' && typeof parsed.moves === 'number') {
+        return { score: parsed.score, moves: parsed.moves };
+      }
+    } catch {
+      return null;
+    }
+    return null;
+  }
+
+  private bestKey(): string {
+    return `signal-garden-best-${this.board.seed}`;
   }
 }
 
