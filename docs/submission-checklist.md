@@ -22,7 +22,7 @@
 ## Public Repo
 
 - Push neutral repository to `OOYXLOO/signal-garden`
-- Confirm README contains no local paths or internal planning notes
+- Confirm README contains no local paths or private notes
 - Confirm `.env`, `node_modules`, `dist`, and build info are absent
 - Confirm no credentials, cookies, tokens, payment data, or private account details are committed
 
