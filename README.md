@@ -72,3 +72,7 @@ Screenshots:
 
 - `docs/screenshots/signal-garden-splash.png`
 - `docs/screenshots/signal-garden-game.png`
+
+Demo video:
+
+- `docs/demo/signal-garden-demo.webm`

@@ -31,6 +31,7 @@
 - Project name: `Signal Garden`
 - Add public repository URL
 - Add demo video URL
+  - Local source: `docs/demo/signal-garden-demo.webm`
 - Add screenshots
   - `docs/screenshots/signal-garden-splash.png`
   - `docs/screenshots/signal-garden-game.png`

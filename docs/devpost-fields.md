@@ -55,6 +55,14 @@ Use `docs/demo-script.md` for a 45-60 second walkthrough focused on:
 - Copy result
 - Reddit comment comparison loop
 
+Local demo video:
+
+```text
+docs/demo/signal-garden-demo.webm
+```
+
+For final submission, upload the video to a public judge-accessible URL if Devpost requires a link rather than a file upload.
+
 ## Screenshots
 
 ```text
