@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { AUTO, Game } from 'phaser';
+import { resolveInitSeed, shouldRequestInit } from '../shared/api';
 import { BoardState, connections, createBoard, formatResultText, hintFor, rotateTile } from '../shared/sim';
 
 const tileSize = 86;
@@ -30,6 +31,30 @@ class GardenScene extends Phaser.Scene {
     document.querySelector('#share')?.addEventListener('click', () => void this.copyResult());
     this.drawBoard();
     this.syncHud();
+    void this.loadRedditSeed();
+  }
+
+  private async loadRedditSeed(): Promise<void> {
+    if (!shouldRequestInit(window.location.hostname)) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/init');
+      if (!response.ok) {
+        return;
+      }
+      const payload = (await response.json()) as unknown;
+      const seed = resolveInitSeed(payload, this.board.seed);
+      if (seed !== this.board.seed) {
+        this.board = createBoard(seed);
+        this.drawBoard();
+        this.syncHud();
+        this.setMessage('Loaded the shared Reddit board for this post.');
+      }
+    } catch {
+      // Static previews do not expose the Devvit server API.
+    }
   }
 
   private newBoard(): void {
