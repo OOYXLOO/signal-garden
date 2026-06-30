@@ -65,6 +65,7 @@ Last verified: 2026-06-30 16:55 +08
 Useful submission files:
 
 - `docs/devpost-fields.md`
+- `docs/devpost-final-fields-20260630.md`
 - `docs/demo-script.md`
 - `docs/submission-checklist.md`
 
@@ -76,3 +77,4 @@ Screenshots:
 Demo video:
 
 - `docs/demo/signal-garden-demo.webm`
+- `https://ooyxloo.github.io/oid-knowledge-lab/signal-garden-demo.html`

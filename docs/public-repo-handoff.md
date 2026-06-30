@@ -22,7 +22,7 @@ git push -u origin main
 
 Before pushing, confirm that:
 
-- `README.md` does not contain local paths or private notes.
+- `README.md` does not contain local paths or non-public notes.
 - `.env` files are absent.
 - `node_modules`, `dist`, and build info files are ignored.
 - Devpost draft fields are in `docs/devpost-fields.md`.

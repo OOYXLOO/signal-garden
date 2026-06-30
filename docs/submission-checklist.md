@@ -22,21 +22,25 @@
 ## Public Repo
 
 - Push neutral repository to `OOYXLOO/signal-garden`
-- Confirm README contains no local paths or private notes
+- Confirm README contains no local paths or non-public notes
 - Confirm `.env`, `node_modules`, `dist`, and build info are absent
 - Confirm no credentials, cookies, tokens, payment data, or private account details are committed
 
 ## Devpost
 
 - Project name: `Signal Garden`
-- Add public repository URL
-- Add demo video URL
-  - Local source: `docs/demo/signal-garden-demo.webm`
-- Add screenshots
-  - `docs/screenshots/signal-garden-splash.png`
-  - `docs/screenshots/signal-garden-game.png`
+- Add public repository URL:
+  - `https://github.com/OOYXLOO/signal-garden/tree/codex/devvit-phaser-prototype`
+- Add public demo video page:
+  - `https://ooyxloo.github.io/oid-knowledge-lab/signal-garden-demo.html`
+- Add direct demo video URL if needed:
+  - `https://ooyxloo.github.io/oid-knowledge-lab/assets/signal-garden-demo.webm`
+- Add screenshots:
+  - `https://ooyxloo.github.io/oid-knowledge-lab/assets/signal-garden-splash.png`
+  - `https://ooyxloo.github.io/oid-knowledge-lab/assets/signal-garden-game.png`
 - Add built-with tags: Devvit, Phaser, TypeScript, Vite, Hono
 - Explain the hook: daily seeded board, comments compare routes, return tomorrow
+- Use `docs/devpost-final-fields-20260630.md` as the current field pack.
 
 ## Before Final Submit
 
