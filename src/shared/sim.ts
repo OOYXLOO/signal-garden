@@ -153,6 +153,12 @@ export function hintFor(board: BoardState): string {
   return 'Look for a powered tile whose open side faces an unpowered neighbor. Rotate that neighbor first.';
 }
 
+export function formatResultText(board: BoardState): string {
+  return board.solved
+    ? `Signal Garden ${board.seed}: connected the bloom in ${board.moves} moves for ${board.score} points.`
+    : `Signal Garden ${board.seed}: I am still routing the signal. Current score ${board.score} after ${board.moves} moves.`;
+}
+
 function rotateDirection(direction: Direction, rotation: number): Direction {
   const directions: Direction[] = ['north', 'east', 'south', 'west'];
   return directions[(directionIndex[direction] + rotation) % 4];

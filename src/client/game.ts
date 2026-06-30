@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 import { AUTO, Game } from 'phaser';
-import { BoardState, connections, createBoard, hintFor, rotateTile } from '../shared/sim';
+import { BoardState, connections, createBoard, formatResultText, hintFor, rotateTile } from '../shared/sim';
 
 const tileSize = 86;
 const boardPadding = 28;
@@ -152,9 +152,7 @@ class GardenScene extends Phaser.Scene {
   }
 
   private async copyResult(): Promise<void> {
-    const text = this.board.solved
-      ? `Signal Garden ${this.board.seed}: connected the bloom in ${this.board.moves} moves for ${this.board.score} points.`
-      : `Signal Garden ${this.board.seed}: I am still routing the signal. Current score ${this.board.score} after ${this.board.moves} moves.`;
+    const text = formatResultText(this.board);
 
     this.setMessage(text);
     try {
