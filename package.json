@@ -1,0 +1,31 @@
+{
+  "name": "signal-garden",
+  "version": "0.1.0",
+  "private": true,
+  "license": "BSD-3-Clause",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "deploy": "npm run type-check && devvit upload",
+    "dev": "devvit playtest",
+    "launch": "npm run deploy && devvit publish",
+    "login": "devvit login",
+    "preview": "vite preview --host 127.0.0.1",
+    "type-check": "tsc --build"
+  },
+  "engines": {
+    "node": ">=22.2.0"
+  },
+  "dependencies": {
+    "@devvit/start": "0.13.5",
+    "@devvit/web": "0.13.5",
+    "@hono/node-server": "2.0.6",
+    "devvit": "0.13.5",
+    "hono": "4.12.27",
+    "phaser": "4.2.0"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "8.1.0"
+  }
+}

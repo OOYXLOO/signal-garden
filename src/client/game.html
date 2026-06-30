@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="game.css" />
+    <title>Signal Garden</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="shell">
+        <header class="hud">
+          <div>
+            <p class="eyebrow">Daily Reddit puzzle prototype</p>
+            <h1>Signal Garden</h1>
+          </div>
+          <div class="stats">
+            <span id="moves">Moves 0</span>
+            <span id="score">Score 0</span>
+          </div>
+        </header>
+        <main id="game-container"></main>
+        <footer class="controls">
+          <button id="new-board" type="button">New board</button>
+          <button id="hint" type="button">Hint</button>
+          <p id="message">Rotate tiles to guide the signal from the left root to the glowing bloom.</p>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="game.ts"></script>
+  </body>
+</html>
