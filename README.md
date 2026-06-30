@@ -43,12 +43,14 @@ npm run preview -- --port 4177
 Last verified: 2026-06-30 16:55 +08
 
 - `npm run type-check`: passed.
+- `npm test`: passed.
 - `npm run build`: passed with Devvit/Vite warnings from the official plugin output.
 - Browser smoke test against `dist/client/game.html` with local Chrome: passed.
 - Canvas rendered at 868 x 628 in a 900 x 720 viewport.
 - Buttons found: `New board`, `Hint`, `Copy result`.
 - HUD found: daily seed, moves, score, best score.
 - Copy result feedback was verified through browser DOM event dispatch.
+- Share text formatter has unit coverage in `src/shared/sim.test.ts`.
 - Console errors: 0.
 - `npm audit fix` cannot clear all findings without breaking Devvit template compatibility. Remaining audit findings are in the Devvit 0.13.5 dependency chain and require upstream fixes or a future controlled Devvit 1.0 migration.
 
