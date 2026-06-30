@@ -66,6 +66,7 @@ Useful submission files:
 
 - `docs/devpost-fields.md`
 - `docs/devpost-final-fields-20260630.md`
+- `docs/devvit-playtest-runbook-20260630.md`
 - `docs/demo-script.md`
 - `docs/submission-checklist.md`
 

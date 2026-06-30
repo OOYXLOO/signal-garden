@@ -11,6 +11,7 @@
 
 ## Reddit Developer Playtest
 
+- Use `docs/devvit-playtest-runbook-20260630.md`.
 - `npm run login`
 - `npm run dev`
 - Confirm splash entrypoint opens
