@@ -1,5 +1,32 @@
 import { describe, expect, it } from 'vitest';
-import { createBoard, formatResultText } from './sim';
+import { applyRotations, createBoard, formatResultText, rotateTile } from './sim';
+
+describe('board simulation', () => {
+  it('can apply a known route and solve the daily board shape', () => {
+    const board = createBoard(20260701);
+
+    applyRotations(board, [
+      [0, 0, 1, 1, 1],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0]
+    ]);
+
+    expect(board.solved).toBe(true);
+    expect(board.tiles[2][4].powered).toBe(true);
+  });
+
+  it('rotating a tile increments moves and changes score', () => {
+    const board = createBoard(20260701);
+    const initialScore = board.score;
+
+    rotateTile(board, 0, 0);
+
+    expect(board.moves).toBe(1);
+    expect(board.score).not.toBe(initialScore);
+  });
+});
 
 describe('formatResultText', () => {
   it('formats an unsolved board as a comment-ready progress line', () => {

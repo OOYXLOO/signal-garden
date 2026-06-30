@@ -61,3 +61,9 @@ Last verified: 2026-06-30 16:55 +08
 3. Persist daily seed and score data through the Reddit app surface.
 4. Add a short demo video and Devpost field pack.
 5. Keep public repo text focused on the product, implementation, and player experience.
+
+Useful submission files:
+
+- `docs/devpost-fields.md`
+- `docs/demo-script.md`
+- `docs/submission-checklist.md`

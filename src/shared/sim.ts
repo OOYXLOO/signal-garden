@@ -87,6 +87,20 @@ export function rotateTile(board: BoardState, x: number, y: number): BoardState 
   return board;
 }
 
+export function applyRotations(board: BoardState, rotations: number[][]): BoardState {
+  for (let y = 0; y < board.size; y += 1) {
+    for (let x = 0; x < board.size; x += 1) {
+      const rotation = rotations[y]?.[x];
+      if (typeof rotation === 'number') {
+        board.tiles[y][x].rotation = ((rotation % 4) + 4) % 4;
+      }
+    }
+  }
+
+  evaluateBoard(board);
+  return board;
+}
+
 export function connections(tile: Tile): Direction[] {
   return baseConnections[tile.kind].map((direction) => rotateDirection(direction, tile.rotation));
 }

@@ -41,9 +41,19 @@ The main design challenge was keeping the game readable inside a compact Reddit 
 
 - Run a Reddit developer playtest.
 - Persist daily board seed and score data.
-- Add a compact share/result message.
 - Record a short demo video.
 - Tune puzzle generation for more reliable daily difficulty.
+
+## Demo Video Plan
+
+Use `docs/demo-script.md` for a 45-60 second walkthrough focused on:
+
+- Daily seed
+- Rotating tiles
+- Score and moves
+- Hint
+- Copy result
+- Reddit comment comparison loop
 
 ## Built With
 
