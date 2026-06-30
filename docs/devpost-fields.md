@@ -55,6 +55,13 @@ Use `docs/demo-script.md` for a 45-60 second walkthrough focused on:
 - Copy result
 - Reddit comment comparison loop
 
+## Screenshots
+
+```text
+docs/screenshots/signal-garden-splash.png
+docs/screenshots/signal-garden-game.png
+```
+
 ## Built With
 
 Devvit, Phaser, TypeScript, Vite, Hono.

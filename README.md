@@ -67,3 +67,8 @@ Useful submission files:
 - `docs/devpost-fields.md`
 - `docs/demo-script.md`
 - `docs/submission-checklist.md`
+
+Screenshots:
+
+- `docs/screenshots/signal-garden-splash.png`
+- `docs/screenshots/signal-garden-game.png`

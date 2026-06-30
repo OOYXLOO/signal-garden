@@ -32,6 +32,8 @@
 - Add public repository URL
 - Add demo video URL
 - Add screenshots
+  - `docs/screenshots/signal-garden-splash.png`
+  - `docs/screenshots/signal-garden-game.png`
 - Add built-with tags: Devvit, Phaser, TypeScript, Vite, Hono
 - Explain the hook: daily seeded board, comments compare routes, return tomorrow
 
