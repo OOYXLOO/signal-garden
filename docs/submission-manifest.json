@@ -8,8 +8,8 @@
   "evidence": [
     {
       "path": "README.md",
-      "bytes": 12276,
-      "sha256": "6b39bde53250f2b970974381556a36dcb843b15a81d3b8b6a6c342a4ae90fd7e"
+      "bytes": 12446,
+      "sha256": "c20809b6dbca30f550d596e7aec79fdd5b4ba5e2f5875284ac9ccbdf0d8cfeb6"
     },
     {
       "path": ".github/workflows/deploy-pages.yml",
@@ -63,13 +63,13 @@
     },
     {
       "path": "docs/submission-field-pack.md",
-      "bytes": 14063,
-      "sha256": "5988124cee195d216b9fa1b4cf6e084d53425fee5c89d15c4e8ec2d6a8efbc50"
+      "bytes": 14335,
+      "sha256": "7582acefd5c58fdd11d518d6f3c3ad0e089bc627e78bdbd24c0a8ea7f7312263"
     },
     {
       "path": "docs/devpost-field-pack.md",
-      "bytes": 13324,
-      "sha256": "f01d1f137a141edbdbbc98ce00ee7c9ebd2fb3424757849bddec264fa00e8796"
+      "bytes": 13596,
+      "sha256": "d648c6f98b1012d146516f99d9f12e3774b879ccddf6fbdb0573c86f9d9cd803"
     },
     {
       "path": "docs/criteria-fit.md",
@@ -79,17 +79,17 @@
     {
       "path": "docs/rubric-evidence-matrix.md",
       "bytes": 5939,
-      "sha256": "a01034ac638739ae25855baf9ea389ff227869233304a7b46ce0b4d90b66771a"
+      "sha256": "7adb683c7c730829b5399ae6c40dbcfaa3c94cb6aef05576e7edfbbec0807580"
     },
     {
       "path": "docs/platform-feedback-pack.md",
-      "bytes": 9346,
-      "sha256": "dd72a662b0d17ccc1d46389f809389ca258b892284fcbeb75643715f8bbba154"
+      "bytes": 9406,
+      "sha256": "46e99f1564ba59546070139fb0d8b5e7d54fe940c4f93a2f80a21788e8f3f949"
     },
     {
       "path": "docs/developer-feedback-form-pack.md",
       "bytes": 11859,
-      "sha256": "fbeb60f5a76a3ad7ec5225b6db70af01f4e94fba86e65d31d54b201f975e8ba4"
+      "sha256": "cbacf11784d9414ad5d1023cad83bb01e15354c3c1385794df458e71eb3f2cd3"
     },
     {
       "path": "docs/feedback-award-submission-brief.md",
@@ -164,17 +164,17 @@
     {
       "path": "docs/devvit-readiness-report.md",
       "bytes": 3347,
-      "sha256": "682e4b43b6d1818278a090376387982e5b990cf5d89d138117fb442617c4c170"
+      "sha256": "69181c90516e109b0de0df01821df4876c45b7150ac3e4d042e873db05aeb5d0"
     },
     {
       "path": "docs/devvit-listing-pack.md",
       "bytes": 2920,
-      "sha256": "7e805bda153b48a9f79d9c47abe95cfce5248ddb5d0fb54528895758d9e4ea72"
+      "sha256": "8e3e3cc51780a756fb318d93c3b51d4f495f90f15783d149dd75d16d9c47d7ff"
     },
     {
       "path": "docs/devvit-listing-pack.json",
       "bytes": 3206,
-      "sha256": "4af0a55c94602a3bd3161a9adde651fdea7b4351aa3422ede9aa5ce4ec248e9e"
+      "sha256": "dbaea1b4f8f58e9e8afad10c0f09df66a840b3987ed62c561def756e2c4cbd0c"
     },
     {
       "path": "docs/devvit_dependency_watch.md",

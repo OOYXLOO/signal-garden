@@ -1,6 +1,6 @@
 # Signal Garden Devpost Field Pack
 
-Generated for day: 2026-06-28
+Generated for day: 2026-07-01
 
 ## Project Name
 
@@ -13,7 +13,7 @@ Signal Garden is a daily Phaser relay puzzle where players place mirrors, guide 
 ## Project URL Fields
 
 - Public app: https://signal-garden.vercel.app/
-- Sample route: https://signal-garden.vercel.app/?day=2026-06-28&sample=1
+- Sample route: https://signal-garden.vercel.app/?day=2026-07-01&sample=1
 - Judge desk: https://signal-garden.vercel.app/judge.html
 - Source repository: https://github.com/OOYXLOO/signal-garden
 - Criteria fit brief: https://raw.githubusercontent.com/OOYXLOO/signal-garden/master/docs/criteria-fit.md
@@ -32,7 +32,7 @@ Signal Garden explores a daily community puzzle loop for Reddit-style surfaces. 
 The proposal layer recomputes scores from the shared puzzle rules instead of trusting client-provided values. Saved proposals are ranked by completion, score, and move count, contributors are grouped into a small daily board, and the player can apply the current top proposal back onto the puzzle. Share links reopen a specific route on the same daily board, the briefing output includes an exact review link, and a compact archive/streak panel gives the experience a reason to return on the next daily board.
 The current interface also includes a seven-day return map that shows complete, draft, and open days from the local archive, plus a clearly labeled sample week preview for first-minute review when no real archive exists yet. That turns the retention loop into a visible product surface rather than a note in the README.
 
-The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, sample route URLs with labeled multi-contributor sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, dependency hygiene notes, and a Devvit shell for pre-account validation.
+The current build includes seven verified puzzle templates, objective progress chips, daily missions, top route ghosting, top route rationale, thread awards for the daily recap, sample route URLs with labeled multi-contributor sample preview consensus for reviewer walkthroughs, a sample comment thread loader, comment thread route import with skip reasons, a comment challenge prompt, a Reddit post draft, a reviewer fast path, Phaser rendering, local persistence, a server-shaped proposal adapter, a Redis-shaped store, a launch packet CLI export, dependency hygiene notes, and a Devvit shell for pre-account validation.
 The project also includes a platform feedback export that turns the real integration lessons into copyable field answers plus short, medium, and long single-field versions.
 The submission packet also has a deterministic manifest that records byte counts and SHA-256 hashes for the public evidence files.
 The app also includes a copyable reviewer fast path that points to the sample route, current review link, top-route ghost, lead rationale, comment challenge, and import loop for a one-minute evaluation pass.
@@ -72,6 +72,7 @@ Phaser, Vite, JavaScript, Devvit-shaped client/server shell, GitHub Pages, Web A
 - The top route can be applied by the community.
 - The top route appears as a low-contrast board ghost so players can see what the community is chasing before applying it.
 - The top route rationale explains the leader by completion, score, move count, tie-breaks, and contributor record.
+- The daily recap includes thread awards such as Beacon Sweep, Fewest Moves, and First Solver so contributors have named reasons to return and compare routes.
 - The briefing output is short enough to fit in a post or comment.
 - Daily boards and archive rows support recurring discussion.
 - The seven-day return map and sample week preview make streak and recent-day progress visible at a glance.
@@ -109,6 +110,7 @@ Phaser, Vite, JavaScript, Devvit-shaped client/server shell, GitHub Pages, Web A
 - Gate runbook export that turns the user-approved public publishing steps into an ordered evidence checklist.
 - Submission evidence manifest export for checking that media and source notes are current before a submission pass.
 - Contributor aggregation and Reddit-ready daily recap text.
+- Thread awards generated from the current consensus for named recap moments.
 - Briefing export with exact review link.
 - Server-shaped `init`, `proposal`, and `archive` adapter.
 - Score recomputation on proposal submission.
@@ -141,7 +143,7 @@ Signal Garden should be framed as a daily community relay puzzle: players solve 
 ## Final Pre-Submit Commands
 
 ```powershell
-npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-06-28'
-npm run export:devpost-fields -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-06-28' --video-url 'https://signal-garden.vercel.app/demo-video.html'
+npm run audit:public -- --base-url 'https://signal-garden.vercel.app/' --day '2026-07-01'
+npm run export:devpost-fields -- --public-app-url 'https://signal-garden.vercel.app/' --source-repo-url 'https://github.com/OOYXLOO/signal-garden' --day '2026-07-01' --video-url 'https://signal-garden.vercel.app/demo-video.html'
 npm run audit:submission
 ```
