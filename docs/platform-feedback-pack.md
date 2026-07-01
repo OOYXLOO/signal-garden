@@ -4,7 +4,7 @@
 Signal Garden
 
 ## What I Built
-Signal Garden is a daily Phaser relay puzzle for Reddit-style interactive posts. Players place mirrors to route one signal through three beacons, save each route as a proposal, import route links from comments, compare community proposals, and export a launch packet for demo-post discussion and review.
+Signal Garden is a daily Phaser relay puzzle for Reddit-style interactive posts. Players place mirrors to route one signal through three beacons, save each route as a proposal, import route links from comments, compare community proposals, generate thread awards for the daily recap, and export a launch packet for demo-post discussion and review.
 
 ## Current Stage
 Local prototype and Devvit shell validation. Current local board: 2026-07-01 South lantern. Route state: complete, 1016 pts, 3/3 beacons, 2/5 moves. Community loop: 1/1 saved routes complete. Review path: https://signal-garden.vercel.app/?day=2026-07-01&plan=6-3-s.1-3-s
@@ -54,7 +54,7 @@ The confusing parts were mostly between local web development and the final Redd
 Add one official end-to-end Phaser game example that includes Vite config, Devvit client/server output shape, splash-to-game transition, a comment-driven game-state loop, Redis-backed daily persistence, mobile WebView checks, and a final submission packet with app listing/demo post/source/media fields.
 
 ## Anything Else
-The strongest Devvit games will probably feel less like embedded websites and more like Reddit-native rituals: daily posts, comment challenges, route sharing, contributor recaps, and reasons to come back tomorrow. More examples around those community mechanics would help builders create games that fit Reddit rather than only run on Reddit.
+The strongest Devvit games will probably feel less like embedded websites and more like Reddit-native rituals: daily posts, comment challenges, route sharing, contributor recaps, thread awards, and reasons to come back tomorrow. More examples around those community mechanics would help builders create games that fit Reddit rather than only run on Reddit.
 
 ## Short Single-Field Version
 chars=473 words=65

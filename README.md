@@ -93,6 +93,7 @@ After GitHub Pages is live, add `-PublicAudit` to verify the public page and sam
 - Top route rationale that explains why the current community route leads by completion, score, move count, tie-breaks, and contributor record.
 - Contributor board that aggregates completed routes and best scores by author.
 - Daily community recap copy for discussion posts or comment follow-ups.
+- Thread awards inside the daily recap so a Reddit comment thread can celebrate the top signal, shortest complete route, and repeat route builder without manual scoring.
 - Comment challenge prompt that packages the current score, Review link, and top route context for reply threads.
 - Reddit post draft export that prepares a title, body, route review link, community target, and first-comment prompt without posting.
 - Developer feedback draft export that packages Devvit Web setup notes, Phaser static asset notes, mobile WebView checks, and comment-loop feedback without posting.
