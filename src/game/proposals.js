@@ -326,6 +326,7 @@ export function createDailyRecap(puzzle, consensus) {
   const leader = consensus.contributors?.[0] || null;
   const best = consensus.best || null;
   const preview = Boolean(consensus.preview);
+  const awards = createThreadAwards(puzzle, consensus);
   const lines = [
     `Signal Garden ${puzzle.id} recap`,
     `Board: ${puzzle.title}`,
@@ -347,8 +348,55 @@ export function createDailyRecap(puzzle, consensus) {
     lines.push("Contributor lead: open");
   }
 
+  if (awards.length) {
+    lines.push("Thread awards:");
+    for (const award of awards) {
+      lines.push(`- ${award.label}: ${award.value}`);
+    }
+  }
+
   lines.push("Try a route, paste a review link, and help the garden choose today's best signal.");
   return lines.join("\n");
+}
+
+export function createThreadAwards(puzzle, consensus = {}) {
+  const top = Array.isArray(consensus.top) ? consensus.top : [];
+  if (!top.length) {
+    return [];
+  }
+
+  const completeRoutes = top.filter((proposal) => proposal.complete || proposal.beacons >= puzzle.beacons.length);
+  const awards = [];
+  const best = consensus.best || top[0];
+  if (best) {
+    awards.push({
+      label: "Top signal",
+      value: `${best.author} (${best.score} pts, ${best.beacons}/${puzzle.beacons.length} beacons, ${best.moves} moves)`,
+    });
+  }
+
+  const shortest = [...completeRoutes].sort((left, right) => {
+    if (left.moves !== right.moves) {
+      return left.moves - right.moves;
+    }
+    return right.score - left.score;
+  })[0];
+  if (shortest && shortest.id !== best?.id) {
+    awards.push({
+      label: "Shortest complete",
+      value: `${shortest.author} (${shortest.moves} moves, ${shortest.score} pts)`,
+    });
+  }
+
+  const builder = consensus.contributors?.find((entry) => entry.proposals > 1);
+  if (builder) {
+    awards.push({
+      label: "Signal builder",
+      value: `${builder.author} (${builder.proposals} routes, ${builder.completed} complete)`,
+    });
+  }
+
+  return awards.slice(0, 3);
 }
 
 export function createContributionQuality(puzzle, consensus = null) {

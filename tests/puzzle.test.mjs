@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createCommunityTarget, createContributionQuality, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, createTopRouteRationale, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
+import { createCommunityTarget, createContributionQuality, createDailyMissions, createDailyRecap, createPreviewConsensus, createProposal, createRivalRouteGuide, createThreadAwards, createTopRouteRationale, rankProposals, summarizeConsensus, summarizeContributors, toCommunityPayload } from "../src/game/proposals.js";
 import { PUZZLE_TEMPLATES, createDailyPuzzle, createBriefing, createObjectiveList, createPuzzleForDayKey, createRouteCues, createRouteInsight, decodePlanToken, describeResult, encodePlanToken, traceSignal } from "../src/game/puzzle.js";
 
 const puzzle = createDailyPuzzle(new Date("2026-06-19T00:00:00.000Z"));
@@ -124,6 +124,9 @@ assert.equal(consensus.contributors[0].completed, 1);
 assert.equal(summarizeContributors([weakProposal, solvedProposal]).length, 2);
 assert.match(createDailyRecap(puzzle, consensus), /Contributor lead: reader-b/);
 assert.match(createDailyRecap(puzzle, consensus), /Lead rationale: Completes all 3 beacons/);
+assert.match(createDailyRecap(puzzle, consensus), /Thread awards:/);
+assert.match(createDailyRecap(puzzle, consensus), /Top signal: reader-b/);
+assert.equal(createThreadAwards(puzzle, consensus)[0].label, "Top signal");
 const quality = createContributionQuality(puzzle, consensus);
 assert.equal(quality.score, 100);
 assert.equal(quality.state, "ready");
